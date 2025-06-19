@@ -1,0 +1,92 @@
+{
+  "user_stories": [
+    {
+      "description": "As a restaurant manager, I want to complete a guided onboarding process to set up my restaurant profile (hours, tables, menus, staff) so I can start managing operations",
+      "acceptance_criteria": [
+        "Can follow step-by-step setup wizard with progress indicators",
+        "Can input restaurant details, operating hours, and table layout",
+        "Can create initial menu items and categories",
+        "Can set up staff roles and initial accounts",
+        "Can customize settings based on restaurant type (fine dining/casual)"
+      ],
+      "priority": "High"
+    },
+    {
+      "description": "As a host/manager, I want to manage real-time table reservations and waitlists so I can optimize seating capacity",
+      "acceptance_criteria": [
+        "Can handle up to 200 concurrent users during peak times",
+        "Can process reservations within 2 seconds",
+        "Can manage waitlists during peak hours",
+        "Can handle overbooking scenarios",
+        "Can sync across multiple devices for real-time updates"
+      ],
+      "priority": "High"
+    },
+    {
+      "description": "As a server, I want to manage orders and payments for my assigned tables so I can provide efficient service",
+      "acceptance_criteria": [
+        "Can process orders within 2 seconds",
+        "Can handle offline operations for up to 24 hours",
+        "Can integrate with various POS terminals and receipt printers",
+        "Can process secure payments following PCI DSS standards",
+        "Can transfer tables and split bills when needed"
+      ],
+      "priority": "High"
+    },
+    {
+      "description": "As a kitchen staff member, I want to manage incoming orders and update their status so I can coordinate food preparation efficiently",
+      "acceptance_criteria": [
+        "Can integrate with kitchen display systems",
+        "Can update order status in real-time",
+        "Can view and manage order queue offline",
+        "Can estimate and update preparation times",
+        "Can prioritize orders during peak times"
+      ],
+      "priority": "High"
+    },
+    {
+      "description": "As a customer, I want to make reservations and place orders online so I can conveniently access restaurant services",
+      "acceptance_criteria": [
+        "Can book tables and receive immediate confirmation",
+        "Can place orders for pickup or delivery",
+        "Can access interface in preferred language",
+        "Can use the system across different devices",
+        "Can manage reservations and orders independently"
+      ],
+      "priority": "High"
+    },
+    {
+      "description": "As a restaurant manager, I want to access comprehensive business analytics so I can make data-driven decisions",
+      "acceptance_criteria": [
+        "Can view reports for minimum past 1 year of data",
+        "Can analyze sales, inventory, and staff performance",
+        "Can export data for external analysis",
+        "Can track peak hours and table turnover",
+        "Can generate tax and compliance reports"
+      ],
+      "priority": "Medium"
+    },
+    {
+      "description": "As a system administrator, I want to manage security and compliance so I can protect sensitive data",
+      "acceptance_criteria": [
+        "Can enforce PCI DSS compliance for payments",
+        "Can implement GDPR/CCPA data protection measures",
+        "Can manage user roles and permissions",
+        "Can maintain audit logs for 7 years",
+        "Can execute regular automated backups"
+      ],
+      "priority": "High"
+    },
+    {
+      "description": "As a user with accessibility needs, I want to access all system features so I can use the service independently",
+      "acceptance_criteria": [
+        "Meets WCAG 2.1 AA compliance standards",
+        "Can use screen readers effectively",
+        "Can navigate via keyboard only",
+        "Can adjust visual display settings",
+        "Can access all features through assistive technologies"
+      ],
+      "priority": "High"
+    }
+  ]
+}
