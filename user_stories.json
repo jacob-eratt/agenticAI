@@ -1,92 +1,1022 @@
-{
-  "user_stories": [
-    {
-      "description": "As a restaurant manager, I want to complete a guided onboarding process to set up my restaurant profile (hours, tables, menus, staff) so I can start managing operations",
-      "acceptance_criteria": [
-        "Can follow step-by-step setup wizard with progress indicators",
-        "Can input restaurant details, operating hours, and table layout",
-        "Can create initial menu items and categories",
-        "Can set up staff roles and initial accounts",
-        "Can customize settings based on restaurant type (fine dining/casual)"
-      ],
-      "priority": "High"
-    },
-    {
-      "description": "As a host/manager, I want to manage real-time table reservations and waitlists so I can optimize seating capacity",
-      "acceptance_criteria": [
-        "Can handle up to 200 concurrent users during peak times",
-        "Can process reservations within 2 seconds",
-        "Can manage waitlists during peak hours",
-        "Can handle overbooking scenarios",
-        "Can sync across multiple devices for real-time updates"
-      ],
-      "priority": "High"
-    },
-    {
-      "description": "As a server, I want to manage orders and payments for my assigned tables so I can provide efficient service",
-      "acceptance_criteria": [
-        "Can process orders within 2 seconds",
-        "Can handle offline operations for up to 24 hours",
-        "Can integrate with various POS terminals and receipt printers",
-        "Can process secure payments following PCI DSS standards",
-        "Can transfer tables and split bills when needed"
-      ],
-      "priority": "High"
-    },
-    {
-      "description": "As a kitchen staff member, I want to manage incoming orders and update their status so I can coordinate food preparation efficiently",
-      "acceptance_criteria": [
-        "Can integrate with kitchen display systems",
-        "Can update order status in real-time",
-        "Can view and manage order queue offline",
-        "Can estimate and update preparation times",
-        "Can prioritize orders during peak times"
-      ],
-      "priority": "High"
-    },
-    {
-      "description": "As a customer, I want to make reservations and place orders online so I can conveniently access restaurant services",
-      "acceptance_criteria": [
-        "Can book tables and receive immediate confirmation",
-        "Can place orders for pickup or delivery",
-        "Can access interface in preferred language",
-        "Can use the system across different devices",
-        "Can manage reservations and orders independently"
-      ],
-      "priority": "High"
-    },
-    {
-      "description": "As a restaurant manager, I want to access comprehensive business analytics so I can make data-driven decisions",
-      "acceptance_criteria": [
-        "Can view reports for minimum past 1 year of data",
-        "Can analyze sales, inventory, and staff performance",
-        "Can export data for external analysis",
-        "Can track peak hours and table turnover",
-        "Can generate tax and compliance reports"
-      ],
-      "priority": "Medium"
-    },
-    {
-      "description": "As a system administrator, I want to manage security and compliance so I can protect sensitive data",
-      "acceptance_criteria": [
-        "Can enforce PCI DSS compliance for payments",
-        "Can implement GDPR/CCPA data protection measures",
-        "Can manage user roles and permissions",
-        "Can maintain audit logs for 7 years",
-        "Can execute regular automated backups"
-      ],
-      "priority": "High"
-    },
-    {
-      "description": "As a user with accessibility needs, I want to access all system features so I can use the service independently",
-      "acceptance_criteria": [
-        "Meets WCAG 2.1 AA compliance standards",
-        "Can use screen readers effectively",
-        "Can navigate via keyboard only",
-        "Can adjust visual display settings",
-        "Can access all features through assistive technologies"
-      ],
-      "priority": "High"
-    }
-  ]
-}
+[
+  {
+    "description": "As a restaurant customer, I want to view available tables for a specific date and time, so that I can see my dining options at a glance",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant customer, I want to specify the size of my party when booking, so that I can be assigned an appropriately sized table",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant customer, I want to select a specific time slot for my reservation, so that I can dine at my preferred time",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant customer, I want to view a calendar interface for selecting dates, so that I can easily navigate to my desired reservation date",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant customer, I want to receive immediate confirmation of my reservation, so that I know my booking was successful",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant customer, I want to modify or cancel my existing reservation, so that I can adjust my plans if needed",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant customer, I want to see a visual indicator of table availability (e.g., green/red), so that I can quickly identify available time slots",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant customer, I want to receive an email confirmation of my reservation, so that I have a record of my booking",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant customer, I want to add special requests or notes to my reservation, so that the restaurant can accommodate my specific needs",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant customer, I want to view the restaurant's booking policy and cancellation terms, so that I understand the reservation rules",
+    "priority": 4
+  },
+  {
+    "description": "As a host, I want to see a real-time visual layout of all restaurant tables with their current status (occupied, reserved, available), so that I can quickly understand the dining room situation.",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to update table status (seated, ordered, paid) with a single click, so that all staff members have accurate information about table progress.",
+    "priority": 1
+  },
+  {
+    "description": "As a host, I want to assign walk-in customers to available tables based on party size, so that I can efficiently accommodate guests without reservations.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to view current occupancy rates and table turnover metrics, so that I can optimize seating arrangements and staffing levels.",
+    "priority": 2
+  },
+  {
+    "description": "As a host, I want to see estimated wait times for occupied tables, so that I can provide accurate wait time estimates to waiting customers.",
+    "priority": 3
+  },
+  {
+    "description": "As a server, I want to receive notifications when my assigned tables' status changes, so that I can provide timely service to my customers.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to view historical table usage patterns, so that I can make informed decisions about table arrangements and staffing schedules.",
+    "priority": 4
+  },
+  {
+    "description": "As a host, I want to mark tables as unavailable for maintenance or special events, so that these tables won't be included in available seating options.",
+    "priority": 4
+  },
+  {
+    "description": "As a server, I want to add notes to specific tables (such as dietary restrictions or special occasions), so that all staff can provide better customized service.",
+    "priority": 5
+  },
+  {
+    "description": "As a restaurant manager, I want to set up and modify time slots for reservations, so that I can control when customers can book tables",
+    "priority": 1
+  },
+  {
+    "description": "As an administrator, I want to configure table layouts and seating arrangements, so that the system accurately reflects our restaurant's physical setup",
+    "priority": 1
+  },
+  {
+    "description": "As a host, I want to modify existing reservations (date, time, party size), so that I can accommodate customer requests for changes",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to set up reservation policies (minimum/maximum party size, advance booking window), so that I can enforce our business rules",
+    "priority": 2
+  },
+  {
+    "description": "As a host, I want to cancel reservations and automatically notify affected customers, so that I can manage unexpected changes efficiently",
+    "priority": 2
+  },
+  {
+    "description": "As a host, I want to add customers to a waiting list when desired times are fully booked, so that I can fill cancellations and maximize table utilization",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to view and manage the waiting list, so that I can make informed decisions about special accommodations",
+    "priority": 3
+  },
+  {
+    "description": "As an administrator, I want to set up automatic waiting list notifications, so that customers can be informed when a table becomes available",
+    "priority": 4
+  },
+  {
+    "description": "As a manager, I want to generate reports on reservation patterns and cancellation rates, so that I can optimize our booking policies",
+    "priority": 4
+  },
+  {
+    "description": "As an administrator, I want to configure booking blackout dates and special hours, so that I can manage reservations during holidays or special events",
+    "priority": 5
+  },
+  {
+    "description": "As a restaurant manager, I want to set up my restaurant's table inventory with details like table numbers, capacity, and sections, so that the system has accurate table data to manage",
+    "priority": 1
+  },
+  {
+    "description": "As a host/hostess, I want to see real-time table availability status, so that I can quickly identify which tables are available for seating guests",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to mark tables as occupied, available, or in cleanup status, so that the system maintains accurate real-time availability information",
+    "priority": 2
+  },
+  {
+    "description": "As a booking system, I want to handle multiple concurrent reservation requests for the same time slot, so that double-bookings are prevented",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to set table turn-time estimates for different meal periods, so that the system can accurately predict future table availability",
+    "priority": 2
+  },
+  {
+    "description": "As a host/hostess, I want the system to automatically resolve conflicts when multiple staff members try to seat different parties at the same table, so that double-seating is prevented",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant manager, I want to view historical table utilization data, so that I can optimize table assignments and seating arrangements",
+    "priority": 3
+  },
+  {
+    "description": "As a booking system, I want to optimize table assignments based on party size and available tables, so that we maximize seating efficiency",
+    "priority": 2
+  },
+  {
+    "description": "As a server, I want to receive notifications when my tables' status needs to be updated, so that availability information stays current and accurate",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant manager, I want to set custom rules for table combinations and splitting, so that the system can accurately represent flexible seating arrangements",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to receive an immediate email confirmation when my reservation is confirmed, so that I have written proof of my booking",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive SMS notifications about changes to my reservation status, so that I'm immediately aware of any updates",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive reminder notifications 24 hours before my reservation, so that I don't forget my booking",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to be able to choose my preferred communication method (email or SMS), so that I receive notifications in the way that works best for me",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive notifications when I move up on the wait list, so that I know my current position and status",
+    "priority": 2
+  },
+  {
+    "description": "As a system administrator, I want to be able to configure notification templates, so that I can maintain consistent and professional communication with customers",
+    "priority": 3
+  },
+  {
+    "description": "As a system administrator, I want to view delivery status of notifications, so that I can ensure customers are receiving their communications",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to be able to unsubscribe from notifications, so that I can control what communications I receive",
+    "priority": 3
+  },
+  {
+    "description": "As a system administrator, I want to schedule automated reminder notifications, so that customers are consistently notified about their upcoming reservations",
+    "priority": 4
+  },
+  {
+    "description": "As a customer service representative, I want to see a history of all notifications sent to a customer, so that I can better assist with any communication-related inquiries",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant manager, I want to add new menu items with descriptions, prices, and images, so that I can keep the digital menu up to date with our offerings",
+    "priority": 1
+  },
+  {
+    "description": "As a kitchen staff member, I want to mark menu items as unavailable in real-time, so that customers don't order items we can't prepare",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to create and schedule seasonal menus in advance, so that menu changes can be automatically applied at specific dates",
+    "priority": 2
+  },
+  {
+    "description": "As a server, I want to quickly add or remove daily specials, so that customers can see current promotional items",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant manager, I want to update item prices across multiple menu categories, so that I can efficiently manage pricing changes",
+    "priority": 2
+  },
+  {
+    "description": "As a nutritionist, I want to add and update dietary information for menu items, so that customers can make informed choices about their meals",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant manager, I want to categorize menu items and arrange their display order, so that customers can easily navigate our menu",
+    "priority": 3
+  },
+  {
+    "description": "As a server, I want to view the revision history of menu changes, so that I can track when items or prices were last updated",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant manager, I want to export menu data in different formats, so that I can use it for printing or marketing purposes",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant manager, I want to clone and modify existing menu items, so that I can quickly create variations of popular dishes",
+    "priority": 5
+  },
+  {
+    "description": "As a host/hostess, I want to assign customers to specific tables, so that I can manage seating and track order locations efficiently",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to create new orders for specific tables, so that I can begin the order fulfillment process for my customers",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to modify existing orders by adding, removing, or updating items, so that I can accommodate customer requests and corrections",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to add special instructions or dietary requirements to individual items, so that I can communicate specific customer needs to the kitchen",
+    "priority": 2
+  },
+  {
+    "description": "As a kitchen staff member, I want to view incoming orders on a kitchen display system, so that I can prepare meals efficiently and in the correct order",
+    "priority": 1
+  },
+  {
+    "description": "As a kitchen staff member, I want to mark orders as 'in preparation' and 'completed', so that servers know when to pick up and deliver orders",
+    "priority": 2
+  },
+  {
+    "description": "As a server, I want to split bills for a table, so that I can accommodate separate payment requests from customers",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to view real-time table status and order progress, so that I can monitor service efficiency and restaurant operations",
+    "priority": 3
+  },
+  {
+    "description": "As a server, I want to process different payment methods for orders, so that I can complete transactions according to customer preferences",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to void or comp items with manager approval, so that I can handle customer complaints and special situations appropriately",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to browse the complete menu with categories and items, so that I can see all available food options",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to customize ingredients and portions for menu items, so that my order matches my preferences",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to select between pickup and delivery options, so that I can choose how to receive my order",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to save my delivery addresses, so that I don't have to re-enter them for future orders",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view my order history, so that I can easily reorder my favorite items",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to save my favorite orders and customizations, so that I can quickly place repeat orders",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive real-time updates on my order status, so that I know when it will be ready",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to securely save my payment information, so that I can check out faster in the future",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to rate and review my past orders, so that I can provide feedback on my experience",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to easily search and filter menu items by dietary preferences, so that I can find suitable options quickly",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to view the real-time status of my current order, so that I know when my food will be ready",
+    "priority": 1
+  },
+  {
+    "description": "As a kitchen staff member, I want to update the status of orders (received, preparing, ready), so that customers and other staff are informed of progress",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive notifications when my order status changes, so that I stay informed without constantly checking the app",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant manager, I want to view the status of all active orders in real-time, so that I can manage kitchen operations efficiently",
+    "priority": 2
+  },
+  {
+    "description": "As a delivery driver, I want to see orders that are ready for pickup, so that I can efficiently collect and deliver them",
+    "priority": 2
+  },
+  {
+    "description": "As a system administrator, I want to configure status update triggers and notification rules, so that the right people receive the right updates at the right time",
+    "priority": 3
+  },
+  {
+    "description": "As a customer service representative, I want to access order status history, so that I can assist customers with their inquiries",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to view the estimated completion time for my order, so that I can plan my pickup or delivery time accordingly",
+    "priority": 3
+  },
+  {
+    "description": "As a kitchen staff member, I want to see how long each order has been in its current status, so that I can prioritize orders effectively",
+    "priority": 4
+  },
+  {
+    "description": "As a system administrator, I want to access tracking system analytics and metrics, so that I can monitor system performance and identify areas for improvement",
+    "priority": 5
+  },
+  {
+    "description": "As a kitchen manager, I want to view all incoming orders in real-time, so that I can maintain awareness of upcoming preparation needs",
+    "priority": 1
+  },
+  {
+    "description": "As a chef, I want to see orders organized by preparation station (grill, salad, fryer, etc.), so that I can efficiently manage my station's workload",
+    "priority": 1
+  },
+  {
+    "description": "As a line cook, I want to mark items as 'in preparation' and 'completed', so that other kitchen staff know the status of each order",
+    "priority": 2
+  },
+  {
+    "description": "As a kitchen manager, I want to set preparation priority levels for orders, so that we can handle VIP customers, dietary restrictions, or urgent requests appropriately",
+    "priority": 2
+  },
+  {
+    "description": "As a chef, I want to see estimated preparation times for each dish, so that I can coordinate timing across multiple orders",
+    "priority": 2
+  },
+  {
+    "description": "As a kitchen manager, I want to receive alerts for orders that are taking longer than expected, so that I can investigate and address delays",
+    "priority": 3
+  },
+  {
+    "description": "As a line cook, I want to see a countdown timer for each item I'm preparing, so that I can ensure dishes are completed on time",
+    "priority": 3
+  },
+  {
+    "description": "As a kitchen manager, I want to view historical order completion times, so that I can optimize kitchen performance and staffing",
+    "priority": 4
+  },
+  {
+    "description": "As a chef, I want to be able to communicate special instructions or modifications across stations, so that all requirements are met accurately",
+    "priority": 3
+  },
+  {
+    "description": "As a kitchen manager, I want to generate reports on station efficiency and timing, so that I can identify areas for improvement",
+    "priority": 5
+  },
+  {
+    "description": "As a manager, I want to create and edit staff schedules using a drag-and-drop calendar interface, so that I can efficiently plan work shifts.",
+    "priority": 1
+  },
+  {
+    "description": "As a manager, I want to view conflicts when scheduling shifts, so that I can avoid double-booking staff or creating overlapping shifts.",
+    "priority": 1
+  },
+  {
+    "description": "As a manager, I want to set staff skills and qualifications, so that I can ensure appropriate coverage for each shift.",
+    "priority": 2
+  },
+  {
+    "description": "As a staff member, I want to input my availability preferences, so that managers can consider them when creating schedules.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to publish finalized schedules to all staff members, so that everyone knows when they are working.",
+    "priority": 1
+  },
+  {
+    "description": "As a staff member, I want to receive notifications when the schedule is published or updated, so that I'm aware of my upcoming shifts.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to view staff availability and time-off requests in the calendar, so that I can make informed scheduling decisions.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to create recurring shift patterns, so that I can quickly generate schedules for multiple weeks.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to track total scheduled hours per employee, so that I can maintain appropriate work distributions and avoid overtime.",
+    "priority": 2
+  },
+  {
+    "description": "As a staff member, I want to view my scheduled shifts on a mobile-friendly interface, so that I can check my schedule from anywhere.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to export schedule data to common formats (PDF, Excel), so that I can use the information in other systems or print schedules.",
+    "priority": 4
+  },
+  {
+    "description": "As a manager, I want to set minimum staffing requirements for different shifts, so that I can ensure adequate coverage at all times.",
+    "priority": 2
+  },
+  {
+    "description": "As an employee, I want to create and edit my professional profile, so that I can keep my information up to date in the system",
+    "priority": 1
+  },
+  {
+    "description": "As an employee, I want to upload and update my certifications with expiration dates, so that my qualifications are properly tracked and maintained",
+    "priority": 1
+  },
+  {
+    "description": "As an HR manager, I want to view and verify employee certifications, so that I can ensure compliance with role requirements",
+    "priority": 2
+  },
+  {
+    "description": "As an employee, I want to specify my skill sets and expertise levels, so that my capabilities are accurately represented",
+    "priority": 2
+  },
+  {
+    "description": "As a team leader, I want to search for employees based on specific skills and certifications, so that I can find suitable team members for projects",
+    "priority": 2
+  },
+  {
+    "description": "As an employee, I want to set my availability preferences and working hours, so that managers can consider my schedule when making assignments",
+    "priority": 3
+  },
+  {
+    "description": "As an HR manager, I want to generate reports on staff qualifications and certifications, so that I can identify training needs and compliance requirements",
+    "priority": 3
+  },
+  {
+    "description": "As a department manager, I want to view role assignments and skill distribution within my team, so that I can identify gaps and plan resource allocation",
+    "priority": 3
+  },
+  {
+    "description": "As an employee, I want to receive notifications when my certifications are approaching expiration, so that I can take timely action to renew them",
+    "priority": 4
+  },
+  {
+    "description": "As an HR manager, I want to maintain historical records of employee roles and qualifications, so that I can track professional development over time",
+    "priority": 5
+  },
+  {
+    "description": "As a shift manager, I want to view real-time staff coverage levels on a dashboard, so that I can quickly identify current staffing status across all departments",
+    "priority": 1
+  },
+  {
+    "description": "As a department supervisor, I want to receive immediate alerts for understaffed periods, so that I can take prompt action to address staffing gaps",
+    "priority": 1
+  },
+  {
+    "description": "As a workforce planner, I want to see predicted staffing requirements based on historical data, so that I can optimize future staff scheduling",
+    "priority": 2
+  },
+  {
+    "description": "As a HR manager, I want to view historical coverage patterns and trends, so that I can make informed decisions about hiring needs",
+    "priority": 2
+  },
+  {
+    "description": "As a shift manager, I want to visualize coverage gaps in an intuitive timeline view, so that I can easily identify and address scheduling conflicts",
+    "priority": 2
+  },
+  {
+    "description": "As an operations manager, I want to compare actual staffing levels against business requirements, so that I can ensure optimal resource allocation",
+    "priority": 3
+  },
+  {
+    "description": "As a department supervisor, I want to export coverage analytics reports, so that I can share insights with stakeholders and create documentation",
+    "priority": 3
+  },
+  {
+    "description": "As a workforce planner, I want to set custom staffing level thresholds, so that I can define appropriate coverage requirements for different shifts and departments",
+    "priority": 3
+  },
+  {
+    "description": "As a HR manager, I want to access predictive analytics for seasonal staffing needs, so that I can plan recruitment efforts in advance",
+    "priority": 4
+  },
+  {
+    "description": "As an operations manager, I want to customize the dashboard view based on my department's specific needs, so that I can focus on relevant metrics",
+    "priority": 4
+  },
+  {
+    "description": "As an employee, I want to submit a time-off request with specific dates and type (vacation, sick leave, personal), so that I can formally request time away from work",
+    "priority": 1
+  },
+  {
+    "description": "As a manager, I want to review and approve/deny time-off requests from my team members, so that I can maintain appropriate staffing levels",
+    "priority": 1
+  },
+  {
+    "description": "As an employee, I want to view my remaining time-off balance by category (vacation, sick leave, etc.), so that I can plan my time off accordingly",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to view a calendar showing all approved time-off requests for my team, so that I can manage team coverage effectively",
+    "priority": 2
+  },
+  {
+    "description": "As an employee, I want to receive automatic notifications about the status of my time-off requests, so that I can plan accordingly",
+    "priority": 2
+  },
+  {
+    "description": "As an HR administrator, I want to configure time-off policies and approval workflows, so that the system enforces company policies correctly",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to delegate my approval authority when I'm away, so that time-off requests can be processed in my absence",
+    "priority": 3
+  },
+  {
+    "description": "As an employee, I want to cancel or modify a pending time-off request, so that I can adjust my plans if needed",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to receive alerts when multiple team members request the same days off, so that I can prevent understaffing",
+    "priority": 4
+  },
+  {
+    "description": "As an HR administrator, I want to generate reports on time-off usage and patterns, so that I can analyze leave trends and plan accordingly",
+    "priority": 4
+  },
+  {
+    "description": "As an employee, I want to set up automatic out-of-office notifications when my time-off is approved, so that colleagues are informed of my absence",
+    "priority": 5
+  },
+  {
+    "description": "As a team manager, I want to define and create custom roles with required skills and responsibilities, so that I can establish clear position requirements.",
+    "priority": 1
+  },
+  {
+    "description": "As a HR manager, I want to view and match employee skill profiles with role requirements, so that I can make data-driven staffing decisions.",
+    "priority": 1
+  },
+  {
+    "description": "As a team lead, I want to assign staff members to specific roles based on their skills and availability, so that I can optimize team composition.",
+    "priority": 2
+  },
+  {
+    "description": "As a resource manager, I want to set up role rotation schedules, so that team members can gain diverse experience while maintaining operational consistency.",
+    "priority": 2
+  },
+  {
+    "description": "As a team member, I want to view my current role assignments and upcoming rotations, so that I can prepare for transitions effectively.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to monitor workload distribution across team members, so that I can prevent burnout and ensure balanced assignments.",
+    "priority": 2
+  },
+  {
+    "description": "As an employee, I want to update my skills and preferences profile, so that I can be matched with appropriate role opportunities.",
+    "priority": 3
+  },
+  {
+    "description": "As a project manager, I want to receive notifications about upcoming role rotations, so that I can plan for knowledge transfer and training.",
+    "priority": 3
+  },
+  {
+    "description": "As a team lead, I want to track skill gaps in my team, so that I can plan training or recruitment to meet role requirements.",
+    "priority": 4
+  },
+  {
+    "description": "As a HR manager, I want to generate reports on role assignments and rotations, so that I can analyze staffing patterns and improve resource allocation.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to browse a visually appealing digital menu with food images, so that I can see what the dishes look like before ordering",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to filter menu items by dietary restrictions (vegetarian, vegan, gluten-free), so that I can quickly find suitable options for my needs",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to see real-time availability of menu items, so that I don't try to order something that's out of stock",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to update item availability in real-time, so that customers only see what's currently available",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to sort menu items by price, popularity, or categories, so that I can easily find dishes that match my preferences",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to upload high-quality photos and descriptions for menu items, so that customers can make informed decisions",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view detailed ingredient lists and nutritional information for each dish, so that I can make health-conscious choices",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to see special tags for spicy items, house specialties, or seasonal dishes, so that I can discover featured items",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant manager, I want to highlight daily specials and promotional items, so that I can drive sales of specific menu items",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to save my favorite menu items for quick access on future visits, so that I can easily reorder preferred dishes",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to search for available reservation slots by date and time, so that I can find a suitable dining time",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to select the number of guests for my reservation, so that I can ensure appropriate seating arrangements",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive immediate confirmation of my reservation via email, so that I have a record of my booking",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to modify my reservation date, time, or party size, so that I can adjust my plans when needed",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to cancel my reservation and receive a cancellation confirmation, so that I can free up the slot for others",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive reminder notifications before my reservation, so that I don't forget my booking",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to specify special requests or dietary requirements with my reservation, so that the restaurant can accommodate my needs",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to view my reservation history, so that I can track my past and upcoming bookings",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant staff member, I want to set available time slots and table configurations, so that customers can book based on actual availability",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to configure automatic reminder settings, so that customers receive timely notifications",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant staff member, I want to receive notifications of new, modified, or cancelled reservations, so that I can manage seating arrangements effectively",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to create an account to save my preferences and contact information, so that I can book future reservations more easily",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant manager, I want to access reservation analytics and reports, so that I can optimize table availability and staffing",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to join a waitlist when my desired time slot is unavailable, so that I can be notified if a table becomes available",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to see my current order status in real-time, so that I know exactly where my order is in the preparation and delivery process",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view the estimated preparation time for my order, so that I can plan accordingly",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to see the delivery progress on a map, so that I can track my order's physical location",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive real-time notifications when my order status changes, so that I stay informed without checking the dashboard",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view my order details including items, quantities, and prices while tracking, so that I can verify my order information",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to see the delivery driver's estimated arrival time, so that I can be ready to receive my order",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to access my order tracking information through a unique order ID, so that I can quickly find my specific order",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to view my order history with past tracking details, so that I can reference previous orders and their delivery performance",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want the tracking interface to be mobile-responsive, so that I can monitor my order from any device",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to share my order tracking link with others, so that they can also monitor the order progress",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to create a secure account with email and password, so that I can access my personal portal safely",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to log in to my account using secure authentication, so that I can access my personal information",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view and edit my profile information (name, contact details, address), so that I can keep my information up to date",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view my complete order history, so that I can track all my past purchases",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to save products to my favorites list, so that I can quickly find and purchase them later",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to add and save multiple payment methods securely, so that I can choose how to pay during checkout",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view the details of individual past orders, so that I can review what I purchased and when",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to manage my saved payment methods (add, edit, delete), so that I can keep my payment information current",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to reset my password through a secure process, so that I can regain access if I forget my credentials",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to enable two-factor authentication, so that I can add an extra layer of security to my account",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to manage my communication preferences, so that I can control what notifications and updates I receive",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to delete my account and associated data, so that I can remove my information from the system if needed",
+    "priority": 4
+  },
+  {
+    "description": "As a system administrator, I want to set up and configure different communication channels (email, SMS, in-app) from a central dashboard, so that I can manage all customer communication methods in one place",
+    "priority": 1
+  },
+  {
+    "description": "As a marketing manager, I want to create and schedule notification templates across multiple channels, so that I can ensure consistent messaging across all communication platforms",
+    "priority": 1
+  },
+  {
+    "description": "As a customer service representative, I want to view a unified history of all communications with a specific customer, so that I can provide more informed and contextual support",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to set my communication preferences for different types of notifications, so that I can receive information through my preferred channels",
+    "priority": 2
+  },
+  {
+    "description": "As a system administrator, I want to monitor delivery status and engagement metrics for all communications, so that I can ensure effective message delivery and track customer engagement",
+    "priority": 3
+  },
+  {
+    "description": "As a content manager, I want to A/B test different message variations, so that I can optimize communication effectiveness and engagement rates",
+    "priority": 3
+  },
+  {
+    "description": "As a customer service manager, I want to collect and analyze customer feedback from all channels, so that I can identify areas for improvement in our communication strategy",
+    "priority": 3
+  },
+  {
+    "description": "As a system administrator, I want to set up automated triggers for specific customer actions or events, so that relevant notifications are sent automatically",
+    "priority": 4
+  },
+  {
+    "description": "As a compliance officer, I want to ensure all communications are archived and searchable, so that we maintain regulatory compliance and audit trails",
+    "priority": 4
+  },
+  {
+    "description": "As a developer, I want to access a comprehensive API for the communication hub, so that I can integrate it with other business systems and applications",
+    "priority": 5
+  },
+  {
+    "description": "As an IT administrator, I want to create new user accounts for employees, so that they can access the restaurant system with appropriate credentials",
+    "priority": 1
+  },
+  {
+    "description": "As an IT administrator, I want to assign predefined roles to users, so that they automatically receive the correct set of permissions for their job function",
+    "priority": 1
+  },
+  {
+    "description": "As an IT administrator, I want to modify individual user permissions, so that I can customize access levels based on specific job requirements",
+    "priority": 2
+  },
+  {
+    "description": "As an IT administrator, I want to deactivate user accounts, so that I can quickly remove system access for former employees",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to view all active user accounts in my location, so that I can monitor who has access to the system",
+    "priority": 2
+  },
+  {
+    "description": "As an IT administrator, I want to create and modify role templates, so that I can standardize permission sets for different job positions",
+    "priority": 2
+  },
+  {
+    "description": "As a system user, I want to reset my password, so that I can maintain secure access to my account",
+    "priority": 2
+  },
+  {
+    "description": "As an IT administrator, I want to audit user access logs, so that I can track system usage and identify potential security issues",
+    "priority": 3
+  },
+  {
+    "description": "As an IT administrator, I want to set password policies, so that user accounts maintain a minimum security standard",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant manager, I want to request permission changes for my staff, so that their access levels can be updated as their responsibilities change",
+    "priority": 3
+  },
+  {
+    "description": "As an administrator, I want to set and modify restaurant operating hours, so that the system accurately reflects when we are open for business",
+    "priority": 1
+  },
+  {
+    "description": "As an administrator, I want to define and update service areas (dine-in, takeout, delivery zones), so that orders are only accepted for valid service locations",
+    "priority": 1
+  },
+  {
+    "description": "As an administrator, I want to configure accepted payment methods, so that customers can pay using our supported payment options",
+    "priority": 2
+  },
+  {
+    "description": "As an administrator, I want to manage third-party integration settings (POS, payment processors, delivery services), so that all external systems work seamlessly with our platform",
+    "priority": 2
+  },
+  {
+    "description": "As an administrator, I want to save and apply configuration changes in real-time, so that system updates take effect immediately without service interruption",
+    "priority": 3
+  },
+  {
+    "description": "As an administrator, I want to view a log of configuration changes, so that I can track who made what changes and when",
+    "priority": 3
+  },
+  {
+    "description": "As an administrator, I want to backup and restore system configurations, so that I can quickly recover from configuration errors or issues",
+    "priority": 4
+  },
+  {
+    "description": "As an administrator, I want to configure system-wide notifications and alerts, so that relevant staff are informed of important system events",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to create and edit my restaurant's basic profile information (name, cuisine type, description) so that I can establish my restaurant's identity in the system",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to input and update my restaurant's location details (address, coordinates, service area) so that customers can find my establishment",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to upload and manage my restaurant's brand assets (logo, photos, menu design) so that I can maintain consistent branding across the platform",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant administrator, I want to configure my tax settings and rates so that I can ensure compliance with local tax regulations",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to set and update my restaurant's operating hours so that customers know when we are open for business",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to manage my business contact information (phone, email, website) so that customers can reach us through their preferred communication channel",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant administrator, I want to input and update my business registration and license information so that I can prove my legitimate business status",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to set up multiple location profiles under the same brand so that I can manage all my restaurant branches efficiently",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant manager, I want to preview my restaurant's profile as it appears to customers so that I can ensure all information is displayed correctly",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant administrator, I want to export my restaurant's profile data so that I can use it for other business purposes or reporting",
+    "priority": 5
+  },
+  {
+    "description": "As a restaurant administrator, I want to configure reservation rules (including party size limits, time slots, and booking windows), so that I can manage booking capacity effectively",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to set up cancellation policies with specific time windows and penalties, so that I can reduce the impact of last-minute cancellations",
+    "priority": 1
+  },
+  {
+    "description": "As an operations manager, I want to define special event handling procedures and requirements, so that staff can properly prepare for and execute special occasions",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to establish service protocols for different dining areas, so that staff can maintain consistent service standards",
+    "priority": 2
+  },
+  {
+    "description": "As an administrator, I want to update existing operational policies, so that I can adapt to changing business needs",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to view a history of policy changes, so that I can track modifications and their impacts",
+    "priority": 3
+  },
+  {
+    "description": "As an operations manager, I want to set up different policy templates for different seasons or events, so that I can quickly switch between predetermined configurations",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant administrator, I want to export policy configurations as documents, so that I can share them with staff and stakeholders",
+    "priority": 4
+  },
+  {
+    "description": "As a manager, I want to set up approval workflows for policy changes, so that all modifications are properly reviewed before implementation",
+    "priority": 4
+  },
+  {
+    "description": "As a system administrator, I want to view a real-time dashboard of system usage metrics, so that I can monitor system performance and resource utilization",
+    "priority": 1
+  },
+  {
+    "description": "As a security officer, I want to access detailed security logs with filtering capabilities, so that I can investigate potential security incidents",
+    "priority": 1
+  },
+  {
+    "description": "As an IT auditor, I want to generate comprehensive reports of all administrative changes made within a specified time period, so that I can ensure compliance with security policies",
+    "priority": 2
+  },
+  {
+    "description": "As a system administrator, I want to receive automatic notifications for critical system events, so that I can respond quickly to potential issues",
+    "priority": 2
+  },
+  {
+    "description": "As a compliance manager, I want to export audit logs in various formats (CSV, PDF, JSON), so that I can include them in compliance reports",
+    "priority": 3
+  },
+  {
+    "description": "As an IT manager, I want to view user access patterns and authentication attempts, so that I can identify unusual behavior patterns",
+    "priority": 2
+  },
+  {
+    "description": "As a system administrator, I want to track and log all configuration changes with user attribution, so that we maintain accountability for system modifications",
+    "priority": 1
+  },
+  {
+    "description": "As an IT auditor, I want to see the correlation between system events across different components, so that I can perform comprehensive security analysis",
+    "priority": 3
+  },
+  {
+    "description": "As a security officer, I want to set up custom alerts based on specific log patterns or events, so that I can proactively monitor for security threats",
+    "priority": 2
+  },
+  {
+    "description": "As a compliance manager, I want to archive audit logs for a configurable retention period, so that we meet regulatory requirements for data preservation",
+    "priority": 3
+  }
+]

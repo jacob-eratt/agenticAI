@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Customer Booking Interface",
+    "description": "A user-friendly web interface allowing customers to view available tables and make online reservations. Includes calendar views, time slot selection, and party size specification."
+  },
+  {
+    "name": "Staff Table Management Dashboard",
+    "description": "A comprehensive dashboard for staff to manage table assignments, view current occupancy, and handle walk-in customers. Includes real-time updates and table status visualization."
+  },
+  {
+    "name": "Reservation Administration System",
+    "description": "Backend system for managing reservation policies, modifying bookings, handling cancellations, and maintaining waiting lists. Includes tools for setting up time slots and table configurations."
+  },
+  {
+    "name": "Table Availability Engine",
+    "description": "Core system component that handles table inventory, tracks availability in real-time, and manages concurrent booking requests. Includes conflict resolution and optimization algorithms."
+  },
+  {
+    "name": "Customer Communication Module",
+    "description": "System for sending reservation confirmations, reminders, and updates to customers. Includes email and SMS notifications for booking status changes and wait list updates."
+  },
+  {
+    "name": "Digital Menu Management System",
+    "description": "Create a comprehensive digital menu management system that allows staff to update menu items, prices, and availability in real-time. Include support for seasonal menus, specials, and dietary information."
+  },
+  {
+    "name": "In-Restaurant Order Workflow",
+    "description": "Develop a streamlined point-of-sale system for processing in-restaurant orders, including table management, order modifications, and integration with kitchen display systems."
+  },
+  {
+    "name": "Online Ordering Platform",
+    "description": "Build a user-friendly online ordering system that allows customers to browse the menu, customize items, and place orders for pickup or delivery. Include features for saved preferences and order history."
+  },
+  {
+    "name": "Order Tracking and Status Updates",
+    "description": "Implement a real-time order tracking system that provides status updates to both customers and staff throughout the order lifecycle, from receipt to preparation to completion."
+  },
+  {
+    "name": "Kitchen Order Management",
+    "description": "Create a robust kitchen management system that organizes incoming orders, prioritizes preparation, and manages timing for multiple simultaneous orders across different preparation stations."
+  },
+  {
+    "name": "Shift Schedule Builder",
+    "description": "Create and manage staff schedules with an interactive calendar interface, including drag-and-drop functionality and conflict detection. Enables managers to plan and publish weekly/monthly schedules while considering staff availability and skills."
+  },
+  {
+    "name": "Staff Profile Management",
+    "description": "Comprehensive system for maintaining employee profiles including qualifications, certifications, skill sets, and availability preferences. Provides tools for updating and tracking staff information and role assignments."
+  },
+  {
+    "name": "Coverage Analytics Dashboard",
+    "description": "Real-time analytics dashboard showing staff coverage levels, highlighting understaffed periods and potential scheduling gaps. Includes predictive analytics for optimal staffing levels based on historical data and business requirements."
+  },
+  {
+    "name": "Time-Off Management",
+    "description": "Streamlined system for managing employee time-off requests, sick leave, and availability updates. Includes approval workflows and automatic schedule adjustment capabilities."
+  },
+  {
+    "name": "Role Assignment and Rotation",
+    "description": "Tools for defining roles, assigning staff to appropriate positions, and managing role rotations. Includes skill-matching functionality and workload distribution features."
+  },
+  {
+    "name": "Digital Menu Platform",
+    "description": "Create an interactive digital menu system that allows customers to browse restaurant offerings with rich media, filtering options, and real-time availability updates."
+  },
+  {
+    "name": "Online Reservation System",
+    "description": "Develop a comprehensive booking interface that enables customers to make, modify, and cancel restaurant reservations with automated confirmation and reminder features."
+  },
+  {
+    "name": "Order Tracking Dashboard",
+    "description": "Implement a real-time order tracking system that allows customers to monitor their order status, estimated preparation time, and delivery progress through an intuitive interface."
+  },
+  {
+    "name": "Customer Account Management",
+    "description": "Create a secure customer portal where users can manage their profiles, view order history, save favorites, and maintain payment information."
+  },
+  {
+    "name": "Digital Communication Hub",
+    "description": "Establish a centralized system for managing customer notifications, feedback, and communications across various digital channels including email, SMS, and in-app messaging."
+  },
+  {
+    "name": "User Access Management",
+    "description": "Comprehensive system for managing employee accounts, roles, and permissions across the restaurant system. Includes user creation, role assignment, and access level configuration."
+  },
+  {
+    "name": "System Configuration Hub",
+    "description": "Central interface for configuring restaurant-wide system settings including operating hours, service areas, payment methods, and integration settings. Enables administrators to customize system behavior to match restaurant operations."
+  },
+  {
+    "name": "Restaurant Profile Management",
+    "description": "Tools for managing core restaurant information including location details, business information, tax settings, and brand assets. Serves as the source of truth for restaurant identity and business parameters."
+  },
+  {
+    "name": "Operational Policies Configuration",
+    "description": "Interface for setting up and managing restaurant policies including reservation rules, cancellation policies, special event handling, and service protocols. Allows administrators to define and update operational guidelines."
+  },
+  {
+    "name": "Administrative Reporting & Audit",
+    "description": "Tools for monitoring system usage, tracking administrative changes, and reviewing security logs. Provides oversight of system activities and configuration changes for accountability."
+  }
+]
