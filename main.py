@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, ValidationError, Field 
+from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
@@ -11,7 +12,7 @@ from tools import *
 from prompts import *
 from chroma_db import *
 import re 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Union
 import logging
 import json
 import argparse
@@ -86,8 +87,7 @@ def parse_json_or_log(output_text, model_cls):
         raise
 
 
-def call_agent(prompt_template: ChatPromptTemplate, input_text: str, tools: list, verbose: bool = True) -> str:
-    llm = ChatAnthropic(model="claude-3-5-sonnet-20241022")
+def call_agent( llm: Union[ChatOpenAI, ChatAnthropic], prompt_template: ChatPromptTemplate, input_text: str, tools: list, verbose: bool = True) -> str:
     agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose)
     result = agent_executor.invoke({"input": input_text})
@@ -100,8 +100,20 @@ def call_agent(prompt_template: ChatPromptTemplate, input_text: str, tools: list
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--add-new", action="store_true", help="Add new documents to the vectorstore")
+    parser.add_argument("--add-new", action="store_true")
+    parser.add_argument("--llm", choices=["anthropic","openai"], default="openai")
     args = parser.parse_args()
+
+    if args.llm == "anthropic":
+        llm = ChatAnthropic(model="claude-3-5-sonnet-20241022", temperature=0)
+        theme_file = "themes_anthropic.json"
+        epics_file = "epics_anthropic.json"
+        user_stories = "user_stories_anthropic.json"
+    else:
+        llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
+        theme_file = "themes_gpt4o_mini.json"
+        epics_file = "epics_gpt4o_mini.json"
+        user_stories_file = "user_stories_gpt4o_mini.json"
 
     embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     vectorstore = prepare_vectorstore(embedding, config, args.add_new)
@@ -112,10 +124,10 @@ def main():
 
     # === Generate Themes ===
     theme_prompt_template = build_prompt(theme_generator_prompt)
-    theme_response = call_agent(theme_prompt_template, query, tools)
+    theme_response = call_agent(llm, theme_prompt_template, query, tools)
     themes_response = parse_json_or_log(theme_response, ThemeResponse)
     all_themes = themes_response.theme
-    with open("themes.json", "w") as f:
+    with open(theme_file, "w") as f:
         f.write(stories_to_json(all_themes))
 
     # === Generate Epics ===
@@ -123,12 +135,12 @@ def main():
     for theme in all_themes:
         epic_prompt_template = build_prompt(epic_generator_prompt)
         input_theme = f"{theme.name}: {theme.description}"
-        epic_response = call_agent(epic_prompt_template, input_theme, tools)
+        epic_response = call_agent(llm,epic_prompt_template, input_theme, tools)
         epics_response = parse_json_or_log(epic_response, EpicsResponse)
         print(epics_response)
         all_epics.extend(epics_response.epics)
         print(all_epics)
-    with open("epics.json", "w") as f:
+    with open(epics_file, "w") as f:
         f.write(stories_to_json(all_epics))
 
     # === Generate User Stories ===
@@ -136,12 +148,12 @@ def main():
     for epic in all_epics:
         story_prompt_template = build_prompt(story_generator_prompt)
         input_epic = f"{epic.name}: {epic.description}"
-        story_response = call_agent(story_prompt_template, input_epic, tools)
+        story_response = call_agent(llm, story_prompt_template, input_epic, tools)
         stories_data = parse_json_or_log(story_response, UserStoryResponse)
         print(stories_data)
         all_stories.extend(stories_data.user_stories)
 
-    with open("user_stories.json", "w") as f:
+    with open(user_stories_file, "w") as f:
         f.write(stories_to_json(all_stories))
 
     print("\n=== Final Comprehensive User Stories ===")

@@ -1,0 +1,834 @@
+[
+  {
+    "description": "As a customer, I want to select my desired date for a reservation, so that I can ensure my preferred time is available.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to choose a specific time for my reservation, so that I can plan my schedule accordingly.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to select the type of service I want to book, so that I can receive the specific service I need.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view available services and their descriptions, so that I can make an informed decision about my booking.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive a confirmation of my booking via email, so that I have a record of my reservation.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to easily modify or cancel my reservation, so that I can adjust my plans if necessary.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to see a summary of my booking details before finalizing, so that I can verify that everything is correct.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to have a user-friendly interface that is easy to navigate, so that I can complete my booking quickly and without confusion.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to change the date of my reservation, so that I can accommodate my schedule.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to modify the time of my reservation, so that I can arrive at a more convenient hour.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to update the service details of my reservation, so that I can ensure I receive the correct services.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive a confirmation of my modified reservation, so that I can have peace of mind about my changes.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to easily access my reservation history, so that I can quickly find and modify past reservations.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to easily access the cancellation option for my reservation, so that I can quickly cancel if my plans change.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive a confirmation notification after I cancel my reservation, so that I have assurance that my cancellation was successful.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view the cancellation policy before I cancel my reservation, so that I understand any potential fees or conditions.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to be able to cancel my reservation through both the website and mobile app, so that I can choose the most convenient method for me.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive an email confirmation of my cancellation, so that I have a record of the transaction.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to be able to provide feedback on my cancellation experience, so that I can help improve the process for future users.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to see a summary of my reservation details before confirming the cancellation, so that I can double-check that I am canceling the correct reservation.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to receive a confirmation email after booking a reservation, so that I can have a record of my booking details.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive notifications when my reservation is modified, so that I am always aware of any changes to my booking.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive a cancellation confirmation email when I cancel my reservation, so that I have proof of the cancellation.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive reminders about my upcoming reservation, so that I do not forget about it.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to be able to opt-in or opt-out of receiving notifications, so that I can control my communication preferences.",
+    "priority": 4
+  },
+  {
+    "description": "As an admin, I want to view all customer reservations in a single dashboard, so that I can easily manage and oversee the reservations.",
+    "priority": 1
+  },
+  {
+    "description": "As an admin, I want to filter reservations by date and status, so that I can quickly find specific reservations.",
+    "priority": 2
+  },
+  {
+    "description": "As an admin, I want to receive notifications for upcoming reservations, so that I can prepare in advance.",
+    "priority": 2
+  },
+  {
+    "description": "As an admin, I want to generate reports on reservation trends, so that I can analyze customer behavior and improve services.",
+    "priority": 3
+  },
+  {
+    "description": "As an admin, I want to edit or cancel reservations directly from the dashboard, so that I can manage changes efficiently.",
+    "priority": 3
+  },
+  {
+    "description": "As an admin, I want to view analytics on reservation data, so that I can make informed decisions based on performance metrics.",
+    "priority": 4
+  },
+  {
+    "description": "As an admin, I want to access customer contact information from the dashboard, so that I can reach out to customers if needed.",
+    "priority": 4
+  },
+  {
+    "description": "As an admin, I want to customize the dashboard layout, so that I can prioritize the information that is most relevant to me.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to securely enter my payment information during the reservation process, so that I can complete my booking with confidence.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive a confirmation email after my payment is processed, so that I have a record of my reservation.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to see a summary of my payment details before finalizing my reservation, so that I can verify the accuracy of the charges.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to have multiple payment options available (credit card, PayPal, etc.), so that I can choose the method that is most convenient for me.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to be able to save my payment information for future reservations, so that I can book more quickly next time.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant manager, I want to view real-time customer flow data, so that I can make informed decisions about table allocations.",
+    "priority": 1
+  },
+  {
+    "description": "As a host, I want to receive notifications about incoming reservations, so that I can prepare tables in advance for guests.",
+    "priority": 2
+  },
+  {
+    "description": "As a server, I want to see the current seating arrangement on a digital interface, so that I can efficiently manage my tables during peak hours.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to be able to make a reservation online, so that I can ensure a table is available when I arrive.",
+    "priority": 3
+  },
+  {
+    "description": "As a data analyst, I want to analyze historical reservation data, so that I can identify trends and optimize future table allocations.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to see estimated wait times for services, so that I can plan my visit accordingly.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive notifications when my wait time changes, so that I can adjust my plans in real-time.",
+    "priority": 2
+  },
+  {
+    "description": "As a business owner, I want to analyze wait time data, so that I can improve service efficiency and customer satisfaction.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to provide feedback on my wait experience, so that the business can improve its services.",
+    "priority": 4
+  },
+  {
+    "description": "As a staff member, I want to update wait times manually, so that the displayed information is always accurate.",
+    "priority": 5
+  },
+  {
+    "description": "As a restaurant manager, I want to integrate the reservation system with table assignments, so that I can minimize conflicts and ensure that all booked reservations are honored.",
+    "priority": 1
+  },
+  {
+    "description": "As a server, I want to receive real-time updates on table assignments based on reservations, so that I can efficiently manage customer seating and reduce wait times.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive confirmation of my reservation along with my assigned table, so that I can have peace of mind knowing my seating is secured.",
+    "priority": 2
+  },
+  {
+    "description": "As a system administrator, I want to ensure that the integration is secure and compliant with data protection regulations, so that customer information is protected.",
+    "priority": 3
+  },
+  {
+    "description": "As a developer, I want to create an API endpoint for the reservation system, so that other applications can access and manage reservations programmatically.",
+    "priority": 4
+  },
+  {
+    "description": "As a staff member, I want to see real-time updates on table availability, so that I can efficiently manage customer seating.",
+    "priority": 1
+  },
+  {
+    "description": "As a staff member, I want to receive notifications when a table's status changes, so that I can respond quickly to customer needs.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to generate reports on table occupancy trends, so that I can make informed decisions about staffing and table arrangements.",
+    "priority": 3
+  },
+  {
+    "description": "As a staff member, I want to filter tables by status (available, occupied, reserved), so that I can easily find the right table for customers.",
+    "priority": 4
+  },
+  {
+    "description": "As a staff member, I want to manually update a table's status, so that I can correct any discrepancies in real-time.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to specify my seating preferences, so that I can enjoy a more comfortable dining experience.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to view customer seating preferences, so that I can make informed table assignments.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to update my seating preferences, so that I can change my choices based on my current needs.",
+    "priority": 3
+  },
+  {
+    "description": "As a waiter, I want to see the seating preferences of my assigned customers, so that I can provide better service.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to receive confirmation of my seating preferences being taken into account, so that I feel valued and understood.",
+    "priority": 5
+  },
+  {
+    "description": "As a manager, I want to view analytics on table usage patterns, so that I can make informed decisions about seating arrangements.",
+    "priority": 1
+  },
+  {
+    "description": "As a staff member, I want to access reports on peak usage times, so that I can optimize my work schedule accordingly.",
+    "priority": 2
+  },
+  {
+    "description": "As a data analyst, I want to generate visual reports on table occupancy rates, so that management can easily interpret the data.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to receive alerts when table usage exceeds a certain threshold, so that I can adjust staffing levels in real-time.",
+    "priority": 3
+  },
+  {
+    "description": "As a team leader, I want to analyze historical data on table usage, so that I can identify trends and improve future planning.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to add new menu items, so that I can expand my offerings and attract more customers.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to edit existing menu items, so that I can update prices and descriptions to reflect current offerings.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to delete menu items, so that I can remove items that are no longer available or relevant.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to categorize menu items, so that customers can easily find what they are looking for.",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to upload images for menu items, so that I can make my menu more visually appealing to customers.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to adjust prices for individual menu items, so that I can respond quickly to changes in ingredient costs.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to perform bulk updates on menu item prices, so that I can save time when adjusting multiple items at once.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to set seasonal pricing strategies for menu items, so that I can maximize profits during peak seasons.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to view historical price changes for menu items, so that I can analyze pricing trends and make informed decisions.",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to receive notifications for significant price changes in the market, so that I can adjust my prices accordingly.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to easily add daily specials to my menu, so that customers can quickly see what promotions are available.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to customize the appearance of my specials on the menu, so that they stand out and attract more customers.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to schedule my specials in advance, so that I can plan my promotions without needing to update the menu daily.",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to receive analytics on the performance of my specials, so that I can understand which promotions are most effective.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to share my daily specials on social media, so that I can reach a wider audience and increase customer engagement.",
+    "priority": 5
+  },
+  {
+    "description": "As a restaurant owner, I want to customize the layout of my menu, so that I can create a unique dining experience that reflects my brand.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to rearrange menu items within categories, so that I can highlight popular dishes and improve customer choices.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to add and remove categories from my menu, so that I can adapt to seasonal offerings and customer preferences.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to change the design elements of my menu, such as fonts and colors, so that it aligns with my restaurant's theme and ambiance.",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to preview my menu layout changes before publishing, so that I can ensure it looks appealing and functions well for my customers.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to add nutritional information for each menu item, so that health-conscious customers can make informed choices.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to update nutritional information easily, so that I can keep my menu accurate and up-to-date.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to categorize menu items by dietary preferences (e.g., vegan, gluten-free), so that customers can quickly find suitable options.",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to display nutritional information on my website, so that customers can access it before visiting the restaurant.",
+    "priority": 4
+  },
+  {
+    "description": "As a restaurant owner, I want to receive feedback from customers about the nutritional information provided, so that I can improve my offerings.",
+    "priority": 5
+  },
+  {
+    "description": "As a restaurant owner, I want to create multiple versions of my menu, so that I can easily switch between seasonal offerings and special event items.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant owner, I want to preview different menu versions before publishing them, so that I can ensure they meet my standards and branding.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to schedule when each menu version goes live, so that I can align my menu changes with marketing campaigns or seasonal changes.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant owner, I want to track the performance of different menu versions, so that I can analyze customer preferences and optimize my offerings.",
+    "priority": 3
+  },
+  {
+    "description": "As a restaurant owner, I want to easily revert to a previous menu version, so that I can quickly respond to customer feedback or issues with a new menu.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to browse products by category, so that I can easily find items that interest me.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to filter products by price range, so that I can find items that fit my budget.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to sort products by customer ratings, so that I can see the best-reviewed items first.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to search for products using keywords, so that I can quickly locate specific items.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view product details including images and descriptions, so that I can make informed purchasing decisions.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to save my favorite products to a wishlist, so that I can easily find them later.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to compare multiple products side by side, so that I can choose the best option for my needs.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive recommendations based on my browsing history, so that I can discover new products I might like.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to select my preferred size for each item in my order, so that I can ensure the products fit me perfectly.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to choose the color of the products I am ordering, so that I can personalize my purchase to match my style.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to add special instructions for my order, so that I can communicate any specific requests to the seller.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to see a preview of my customized order before finalizing it, so that I can confirm that everything is correct.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to save my customization preferences for future orders, so that I can easily reorder without starting from scratch.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to add items to my shopping cart, so that I can review my selections before checkout.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to remove items from my shopping cart, so that I can change my mind about my purchases.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to modify the quantity of items in my shopping cart, so that I can purchase the exact amount I need.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view the total price of items in my shopping cart, so that I can stay within my budget.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to save my shopping cart for later, so that I can return to it without losing my selections.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to securely enter my credit card information, so that I can complete my purchase without worrying about my data being compromised.",
+    "priority": 1
+  },
+  {
+    "description": "As a user, I want to save my preferred payment methods, so that I can make future transactions faster and more conveniently.",
+    "priority": 2
+  },
+  {
+    "description": "As a merchant, I want to receive instant notifications of successful transactions, so that I can manage my sales effectively.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to use digital wallets for payment, so that I can have a more flexible and secure payment option.",
+    "priority": 3
+  },
+  {
+    "description": "As a user, I want to view my transaction history, so that I can keep track of my spending and manage my finances better.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to receive alerts for any suspicious activity on my account, so that I can take immediate action to protect my information.",
+    "priority": 3
+  },
+  {
+    "description": "As a user, I want to have the option to set up two-factor authentication for my payments, so that I can enhance the security of my transactions.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive an order confirmation email after my purchase, so that I have a record of my transaction.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to track my order status in real-time, so that I can know when to expect delivery.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive notifications about my order status changes, so that I am informed of any delays or updates.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to view my order history, so that I can easily reference past purchases.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to have the option to cancel my order before it ships, so that I can change my mind if needed.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to create an account, so that I can manage my orders and preferences easily.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to log in to my account, so that I can access my order history and saved preferences.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view my order history, so that I can track my past purchases.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to update my account information, so that my details are always current.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to save my preferences for future orders, so that I can streamline my shopping experience.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to reset my password, so that I can regain access to my account if I forget it.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to delete my account, so that I can remove my information from the platform if I choose to.",
+    "priority": 4
+  },
+  {
+    "description": "As a shift manager, I want to create new staff shifts, so that I can ensure optimal coverage for all departments.",
+    "priority": 1
+  },
+  {
+    "description": "As a shift manager, I want to modify existing staff shifts, so that I can accommodate changes in staff availability.",
+    "priority": 2
+  },
+  {
+    "description": "As a staff member, I want to view my assigned shifts, so that I can plan my personal schedule accordingly.",
+    "priority": 1
+  },
+  {
+    "description": "As a shift manager, I want to receive notifications for shift changes, so that I can promptly inform affected staff members.",
+    "priority": 3
+  },
+  {
+    "description": "As a shift manager, I want to generate reports on shift coverage, so that I can analyze staffing efficiency and make informed decisions.",
+    "priority": 4
+  },
+  {
+    "description": "As a staff member, I want to request shift swaps with my colleagues, so that I can manage my work-life balance more effectively.",
+    "priority": 2
+  },
+  {
+    "description": "As a shift manager, I want to set up recurring shifts for regular staff, so that I can streamline the scheduling process.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to track employee hours worked, so that I can ensure accurate payroll processing.",
+    "priority": 1
+  },
+  {
+    "description": "As an employee, I want to log my hours easily, so that I can ensure I am compensated for all the time I work.",
+    "priority": 1
+  },
+  {
+    "description": "As a compliance officer, I want to generate reports on employee hours, so that I can ensure compliance with labor regulations.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to receive alerts for overtime hours, so that I can manage labor costs effectively.",
+    "priority": 2
+  },
+  {
+    "description": "As an HR representative, I want to analyze time tracking data, so that I can identify trends in employee attendance and productivity.",
+    "priority": 3
+  },
+  {
+    "description": "As an employee, I want to view my logged hours and reports, so that I can verify my work records.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to integrate time tracking with project management tools, so that I can better allocate resources and track project progress.",
+    "priority": 4
+  },
+  {
+    "description": "As a system administrator, I want to ensure data security for time tracking information, so that employee privacy is maintained.",
+    "priority": 4
+  },
+  {
+    "description": "As a project manager, I want to generate custom reports based on time tracking data, so that I can present insights to stakeholders.",
+    "priority": 5
+  },
+  {
+    "description": "As a staff member, I want to receive notifications about my upcoming shifts, so that I can plan my personal schedule accordingly.",
+    "priority": 1
+  },
+  {
+    "description": "As a manager, I want to be alerted when there are changes in the schedule, so that I can inform my team promptly.",
+    "priority": 2
+  },
+  {
+    "description": "As a staff member, I want to receive alerts for coverage needs during peak times, so that I can volunteer for extra shifts if I am available.",
+    "priority": 3
+  },
+  {
+    "description": "As a team leader, I want to have a summary of all scheduling alerts sent to staff, so that I can ensure everyone is informed.",
+    "priority": 4
+  },
+  {
+    "description": "As a staff member, I want to customize my notification preferences for scheduling alerts, so that I only receive the information that is relevant to me.",
+    "priority": 5
+  },
+  {
+    "description": "As an employee, I want to submit my availability for shifts, so that I can ensure I am scheduled for work when I am available.",
+    "priority": 1
+  },
+  {
+    "description": "As an employee, I want to indicate my preferred shifts, so that I can work during times that suit me best.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to view all employees' availability, so that I can create a schedule that meets everyone's needs.",
+    "priority": 1
+  },
+  {
+    "description": "As an employee, I want to update my availability easily, so that I can reflect any changes in my schedule promptly.",
+    "priority": 3
+  },
+  {
+    "description": "As a manager, I want to receive notifications when employees update their availability, so that I can adjust the schedule accordingly.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to assess current staffing levels, so that I can identify gaps during peak hours.",
+    "priority": 1
+  },
+  {
+    "description": "As a scheduler, I want to receive suggestions for optimal shift patterns, so that I can efficiently allocate staff during high-demand periods.",
+    "priority": 2
+  },
+  {
+    "description": "As a team leader, I want to visualize staffing needs over time, so that I can better prepare for upcoming shifts.",
+    "priority": 3
+  },
+  {
+    "description": "As a data analyst, I want to analyze historical demand data, so that I can improve future staffing recommendations.",
+    "priority": 4
+  },
+  {
+    "description": "As a user, I want to receive alerts for staffing shortages, so that I can take immediate action to address them.",
+    "priority": 5
+  },
+  {
+    "description": "As an employee, I want to request a shift swap with a colleague, so that I can manage my schedule more flexibly.",
+    "priority": 1
+  },
+  {
+    "description": "As an employee, I want to view available shifts for swapping, so that I can find suitable options that fit my needs.",
+    "priority": 2
+  },
+  {
+    "description": "As a manager, I want to approve or deny shift swap requests, so that I can ensure coverage and maintain team productivity.",
+    "priority": 2
+  },
+  {
+    "description": "As an employee, I want to receive notifications for shift swap requests, so that I can respond promptly and stay informed.",
+    "priority": 3
+  },
+  {
+    "description": "As an employee, I want to see my shift history, so that I can track my swaps and understand my work patterns.",
+    "priority": 4
+  },
+  {
+    "description": "As an employee, I want to filter potential swap partners by role and availability, so that I can find the best match for my shift.",
+    "priority": 3
+  },
+  {
+    "description": "As an employee, I want to cancel a shift swap request, so that I can manage my schedule without complications.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to select a date and time for my table booking, so that I can ensure my preferred dining experience is available.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to specify the party size when booking a table, so that I can reserve an appropriate amount of space for my group.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view available dining locations, so that I can choose a restaurant that fits my preferences.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive a confirmation of my table booking via email, so that I have a record of my reservation.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant manager, I want to manage table availability, so that I can ensure accurate bookings and avoid overbooking.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to cancel or modify my booking easily, so that I can adjust my plans without hassle.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to see reviews and ratings of dining locations, so that I can make informed decisions about where to book.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to filter dining locations by cuisine type, so that I can find restaurants that match my taste.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to save my favorite dining locations, so that I can easily access them for future bookings.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to receive reminders for my upcoming bookings, so that I don't forget my reservation.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to view the real-time status of my order, so that I can know when to expect delivery.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive notifications about changes in my order status, so that I am always informed about my order's progress.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to see a timeline of my order's preparation and delivery stages, so that I can understand the process better.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to access my order history, so that I can track past orders and their statuses.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to have a user-friendly interface for the order tracking dashboard, so that I can easily navigate and find the information I need.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to provide feedback on my dining experience, so that the restaurant can improve its service and offerings.",
+    "priority": 1
+  },
+  {
+    "description": "As a restaurant manager, I want to view customer feedback in real-time, so that I can address issues promptly and enhance customer satisfaction.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to rate my dining experience on a scale of 1 to 5, so that I can express my level of satisfaction clearly.",
+    "priority": 2
+  },
+  {
+    "description": "As a restaurant staff member, I want to receive notifications for new feedback submissions, so that I can respond to customers quickly.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to see responses from the restaurant to previous feedback, so that I can understand how my input is valued and acted upon.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to update my personal information, so that my profile reflects my current details.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to view my booking history, so that I can keep track of my past reservations.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to set my preferences for notifications, so that I receive relevant updates according to my interests.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to delete my account, so that I can remove my information from the platform if I choose to.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to change my password, so that I can ensure my account security.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to view available promotions during the booking process, so that I can take advantage of discounts and save money.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to apply a discount code at checkout, so that I can reduce the total cost of my booking.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to receive notifications about new promotions via email, so that I can stay informed and not miss out on savings.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to see the terms and conditions of each promotion, so that I can understand how to qualify for the discounts.",
+    "priority": 4
+  },
+  {
+    "description": "As a marketing manager, I want to track the usage of promotions and discounts, so that I can analyze their effectiveness and adjust strategies accordingly.",
+    "priority": 5
+  },
+  {
+    "description": "As a customer, I want to receive an automated confirmation of my reservation, so that I can be assured that my booking is secure.",
+    "priority": 1
+  },
+  {
+    "description": "As a customer, I want to receive reminders about my upcoming reservation, so that I can prepare and ensure I don't forget about it.",
+    "priority": 2
+  },
+  {
+    "description": "As a customer, I want to have the option to customize the timing of my reminder notifications, so that I can choose when I want to be reminded.",
+    "priority": 3
+  },
+  {
+    "description": "As a customer, I want to receive notifications via my preferred communication channel (email, SMS, app notification), so that I can get the information in a way that suits me best.",
+    "priority": 4
+  },
+  {
+    "description": "As a customer, I want to be able to easily access my reservation details from the notification, so that I can quickly review the information without searching.",
+    "priority": 5
+  }
+]
