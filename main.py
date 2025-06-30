@@ -2,6 +2,8 @@ from dotenv import load_dotenv
 from pydantic import BaseModel, ValidationError, Field 
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
+from langchain_xai import ChatXAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -96,7 +98,7 @@ def parse_json_or_log(output_text, model_cls):
 
 
 
-def call_agent( llm: Union[ChatOpenAI, ChatAnthropic], prompt_template: ChatPromptTemplate, input_text: str, tools: list, verbose: bool = False) -> str:
+def call_agent( llm: Union[ChatOpenAI, ChatAnthropic, ChatXAI, ChatGoogleGenerativeAI], prompt_template: ChatPromptTemplate, input_text: str, tools: list, verbose: bool = False) -> str:
     agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt_template)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose)
     result = agent_executor.invoke({"input": input_text})
@@ -108,87 +110,85 @@ def call_agent( llm: Union[ChatOpenAI, ChatAnthropic], prompt_template: ChatProm
     return str(output)
 
 
-def run_tests(llm, tools, test_inputs, prompt_variants, results_file="test_results.csv"):
+def run_tests(llm_list, grader_llm, tools, test_inputs, prompt_variants, results_file="test_results.csv"):
     results = []
 
-    for input_item in test_inputs:
-        print(f"Testing input: {input_item[:50]}...")  # Shortened for readability
-                
-        # Step 1: Generate RTF theme set as the reference
-        rtf_prompt_template = None
-        for name, template in prompt_variants:
-            if name == "RTF":
-                rtf_prompt_template = template
-                break
-        
-        if rtf_prompt_template is None:
-            logger.error("RTF prompt template not found in prompt_variants")
-            continue
-        
-        try:
-            chat_prompt = build_prompt(rtf_prompt_template)
-        except Exception as e:
-            logger.error(f"Failed to build prompt with RTF template: {e}")
-            continue
-        rtf_theme_response = call_agent(llm, chat_prompt, input_item, tools)
-        try:
-            rtf_themes_response = parse_json_or_log(rtf_theme_response, ThemeResponse)
-            rtf_themes_json = stories_to_json(rtf_themes_response.theme)
-            print("Generated RTF reference themes")
-        except Exception as e:
-            logger.error(f"RTF theme parsing failed for input: {input_item}: {e}")
-            continue
+    for llm_name, test_llm in llm_list:
+        print(f"\n=== Testing prompts using LLM: {llm_name} ===\n")
 
-        # Format the system prompt with RTF themes
-        escaped_json = escape_curly_braces_for_langchain(rtf_themes_json)
-        system_prompt_text = theme_eval_prompt_template.substitute(rtf_themes_json=escaped_json)
+        for input_item in test_inputs:
+            print(f"Input: {input_item[:50]}...")
 
-        
-        # Step 2: Generate and grade other theme sets relative to RTF
-        for prompt_name, prompt_template in prompt_variants:
-            if prompt_name == "RTF":
-                continue  # Skip RTF since it's the reference
-            
-            print(f"Testing: {prompt_name}")
-            chat_prompt = build_prompt(prompt_template)
-            theme_response = call_agent(llm, chat_prompt, input_item, tools)
-            try:
-                themes_response = parse_json_or_log(theme_response, ThemeResponse)
-                themes_json = stories_to_json(themes_response.theme)
-                print(f"Generated themes for {prompt_name}")
-            except Exception as e:
-                logger.error(f"Theme parsing failed for {prompt_name}: {e}")
+            # Step 1: Generate RTF reference themes using grader LLM
+            rtf_prompt_template = None
+            for name, template in prompt_variants:
+                if name == "RTF":
+                    rtf_prompt_template = template
+                    break
+
+            if rtf_prompt_template is None:
+                logger.error("RTF prompt template not found in prompt_variants")
                 continue
-            
-            # Step 3: Build grading prompt with RTF themes in system prompt
-            print(f"Evaluating {prompt_name} relative to RTF")
-            grading_prompt = build_prompt(system_prompt_text)
-            input_text = f"""
-                Themes to grade:
-                {themes_json}
-                Product Description:
-                {input_item},
-            """
-            grading_response = call_agent(llm, grading_prompt, input_text, tools)
-            try:
-                grading_data = json.loads(extract_json_block(grading_response))
-            except Exception as e:
-                logger.error(f"Grading parsing failed for {prompt_name}: {e}")
-                continue
-            
-            result = {
-                "input": input_item,
-                "prompt_name": prompt_name,
-                "coverage": grading_data.get("coverage"),
-                "clarity": grading_data.get("clarity"),
-                "relevance": grading_data.get("relevance"),
-                "actionability": grading_data.get("actionability"),
-                "justification": grading_data.get("justification")
-            }
-            results.append(result)
-            print(f"Graded {prompt_name} for input")
 
-    # Step 4: Save results to CSV (moved outside the input loop)
+            try:
+                rtf_prompt = build_prompt(rtf_prompt_template)
+                rtf_response = call_agent(grader_llm, rtf_prompt, input_item, tools)
+                rtf_data = parse_json_or_log(rtf_response, ThemeResponse)
+                rtf_json = stories_to_json(rtf_data.theme)
+                print("Generated RTF reference themes")
+            except Exception as e:
+                logger.error(f"[{llm_name}] Failed to generate RTF reference: {e}")
+                continue
+
+            # Prepare grading system prompt
+            escaped_json = escape_curly_braces_for_langchain(rtf_json)
+            grading_prompt_text = theme_eval_prompt_template.substitute(rtf_themes_json=escaped_json)
+
+            # Step 2: Test all prompt variants on current LLM
+            for prompt_name, prompt_template in prompt_variants:
+                if prompt_name == "RTF":
+                    continue  # skip the reference
+
+                print(f"Generating themes with prompt: {prompt_name} using {llm_name}")
+                try:
+                    prompt = build_prompt(prompt_template)
+                    candidate_response = call_agent(test_llm, prompt, input_item, tools)
+                    candidate_data = parse_json_or_log(candidate_response, ThemeResponse)
+                    candidate_json = stories_to_json(candidate_data.theme)
+                except Exception as e:
+                    logger.error(f"[{llm_name}] Theme generation failed for {prompt_name}: {e}")
+                    continue
+
+                # Step 3: Grade candidate themes using GPT-4 grader
+                print(f"Grading output from {llm_name} using GPT-4")
+                try:
+                    grading_prompt = build_prompt(grading_prompt_text)
+                    grading_input = f"""
+                        Themes to grade:
+                        {candidate_json}
+                        Product Description:
+                        {input_item},
+                    """
+                    grading_response = call_agent(grader_llm, grading_prompt, grading_input, tools)
+                    grading_data = json.loads(extract_json_block(grading_response))
+                except Exception as e:
+                    logger.error(f"[{llm_name}] Grading failed for {prompt_name}: {e}")
+                    continue
+
+                result = {
+                    "llm": llm_name,
+                    "input": input_item,
+                    "prompt_name": prompt_name,
+                    "coverage": grading_data.get("coverage"),
+                    "clarity": grading_data.get("clarity"),
+                    "relevance": grading_data.get("relevance"),
+                    "actionability": grading_data.get("actionability"),
+                    "justification": grading_data.get("justification")
+                }
+                results.append(result)
+                print(f"[{llm_name}] {prompt_name} scored and recorded")
+
+    # Step 4: Save all results to CSV
     if results:
         fieldnames = list(results[0].keys())
         file_exists = os.path.isfile(results_file)
@@ -197,10 +197,9 @@ def run_tests(llm, tools, test_inputs, prompt_variants, results_file="test_resul
             if not file_exists:
                 writer.writeheader()
             writer.writerows(results)
+        print(f"Results saved to {results_file}")
     else:
         print("No results to save.")
-
-    return results
 
 
 
@@ -228,11 +227,21 @@ def main():
     retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": config.search_k})
     tools = [make_rag_tool(retriever)]
 
+    llms_to_test = [
+    ("GPT-4o-mini", ChatOpenAI(model="gpt-4o-mini", temperature=0)),
+    ("Claude-3.5", ChatAnthropic(model="claude-3-5-sonnet-20241022", temperature=0)),
+    ("grok-3-latest", ChatXAI(model="grok-3-latest", temperature=0)),
+    ("gemini-2.5-flash", ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)),  # Corrected Gemini Flash model name
+    ("gemini-2.5-pro", ChatGoogleGenerativeAI(model="gemini-2.5-pro", temperature=0)),
+    # Add more test LLMs here
+]
+
+    google_grader = ChatGoogleGenerativeAI(model="gemini-2.5-pro", temperature=0)
 
     if args.test:
         print("running test")
         # You should have run_tests defined as shown in previous messages
-        run_tests(llm, tools, test_inputs, PROMPT_VARIANTS, results_file="test_results.csv")
+        run_tests(llms_to_test, google_grader, tools, test_inputs, PROMPT_VARIANTS, results_file="test_results.csv")
         return  # Exit after testing
     
     all_themes = []

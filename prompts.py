@@ -339,9 +339,9 @@ Compare the candidate theme set against the reference theme baseline. Score the 
 - Completeness: Are there major missing areas or gaps?
 
 Use the reference as a fixed benchmark:  
-- If the candidate themes are significantly better than the RTF set in a category, score them above 3.  
-- If they are worse, score them below 3.  
-- If they are about the same, give a 3.
+- If the candidate themes are significantly better than the RTF set in a category, score them above 5.  
+- If they are worse, score them below 5.  
+- If they are about the same, give a 5.
 
 Be thoughtful and critical. Do not default to high scores unless warranted.
 Remember, the reference set is a baseline with average quality. Everyscore is based on how the candidate themes compare to this baseline.
@@ -358,6 +358,20 @@ Return your final evaluation in this exact JSON format:
   "justification": "<string explaining the scores and how the candidate themes compare to the reference set. Use specific examples from both the reference theme and candidiate theme set and compare where the reference theme or candidate theme is better or worse. Be specific and detailed.>" 
 }}
 """)
+
+
+# Add your prompt templates here (import or define them)
+PROMPT_VARIANTS = [
+    ("RTF", theme_generator__RTF_prompt),
+    ("TAG", theme_generator__TAG_prompt),
+    ("DREAM", theme_generator__DREAM_prompt),
+    ("CARE", theme_generator__CARE_prompt),
+    ("SOLVE", theme_generator__SOLVE_prompt),
+    ("RACE", theme_generator__RACE_prompt),
+    ("PACT", theme_generator__PACT_prompt),
+    ("RISE", theme_generator__RISE_prompt),
+    ("BAD", theme_generator_BAD_prompt)
+]
 
 
 
@@ -407,17 +421,3 @@ You may consult background documents or tools as needed to retrieve helpful info
 In total there should be between 20 to 50 stories.
 Return only a valid JSON object with a single key 'user_stories', whose value is a list of user story objects.
 """
-
-
-# Add your prompt templates here (import or define them)
-PROMPT_VARIANTS = [
-    ("RTF", theme_generator__RTF_prompt),
-    ("TAG", theme_generator__TAG_prompt),
-    ("DREAM", theme_generator__DREAM_prompt),
-    ("CARE", theme_generator__CARE_prompt),
-    ("SOLVE", theme_generator__SOLVE_prompt),
-    ("RACE", theme_generator__RACE_prompt),
-    ("PACT", theme_generator__PACT_prompt),
-    ("RISE", theme_generator__RISE_prompt),
-    ("BAD", theme_generator_BAD_prompt)
-]
