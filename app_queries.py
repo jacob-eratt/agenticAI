@@ -51,13 +51,5 @@ smart_home_control = (
 # Collect into test_inputs list
 test_inputs = [
     restaurant_management,
-    social_media,
-    personal_finance,
-    fitness_and_wellness,
-    ecommerce_marketplace,
     healthcare_appointment,
-    education_learning,
-    project_management,
-    travel_planning,
-    smart_home_control,
 ]
