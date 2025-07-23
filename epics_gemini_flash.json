@@ -1,0 +1,116 @@
+[
+  {
+    "name": "Current Weather Display",
+    "description": "Enable users to view real-time current weather conditions for a selected location.",
+    "id": "28cb6e0d-10f6-46e7-92c0-31b6afef5be8",
+    "theme_id": "f6ede8f4-5b32-44c5-b8b2-75debd224710"
+  },
+  {
+    "name": "Hourly Weather Forecasts",
+    "description": "Provide users with detailed hourly weather forecasts for a selected location.",
+    "id": "e52734ce-e3b8-4c89-8afa-73c5d3c20c41",
+    "theme_id": "f6ede8f4-5b32-44c5-b8b2-75debd224710"
+  },
+  {
+    "name": "Daily Weather Forecasts",
+    "description": "Provide users with detailed daily weather forecasts for a selected location.",
+    "id": "030e7c09-bfed-4232-a38d-6848e37ed55d",
+    "theme_id": "f6ede8f4-5b32-44c5-b8b2-75debd224710"
+  },
+  {
+    "name": "Location Selection & Management",
+    "description": "Allow users to search for, select, and manage locations for which they want to view weather data.",
+    "id": "3fe39f90-04c7-4088-9c3f-6ae658ff5a72",
+    "theme_id": "f6ede8f4-5b32-44c5-b8b2-75debd224710"
+  },
+  {
+    "name": "Location Management",
+    "description": "Enable users to add, view, edit, and remove multiple saved locations within the application.",
+    "id": "429c98cb-3ad0-4489-9068-b1aa90af8870",
+    "theme_id": "2c0fcb26-0e9d-455c-91e1-5c28cb5cd52d"
+  },
+  {
+    "name": "Current Location Detection",
+    "description": "Allow the application to automatically detect and display information relevant to the user's current geographical location.",
+    "id": "af01fd8c-8e37-4ba6-a4d3-907ede926ed9",
+    "theme_id": "2c0fcb26-0e9d-455c-91e1-5c28cb5cd52d"
+  },
+  {
+    "name": "User Preferences & Personalization",
+    "description": "Provide users with the ability to customize application settings, including units of measurement and notification preferences.",
+    "id": "5990b7ab-c094-4c94-8b81-cd387d8b30ff",
+    "theme_id": "2c0fcb26-0e9d-455c-91e1-5c28cb5cd52d"
+  },
+  {
+    "name": "Real-time Radar & Satellite Visualization",
+    "description": "Enable users to view interactive, real-time radar and satellite imagery, including features like zoom, pan, and time-lapse.",
+    "id": "7dfecfd1-5ad8-4fda-a7bb-09cdd093c4db",
+    "theme_id": "41f0f22c-e82a-4601-90eb-fcc83e770fbd"
+  },
+  {
+    "name": "Future Weather Forecast Visualizations",
+    "description": "Provide interactive visual representations of future weather conditions, such as precipitation forecasts, temperature changes, and wind patterns over time.",
+    "id": "77a4e409-56f6-4199-8db1-2e2bd3ff1ffd",
+    "theme_id": "41f0f22c-e82a-4601-90eb-fcc83e770fbd"
+  },
+  {
+    "name": "Historical Weather Data Analysis",
+    "description": "Allow users to explore and visualize historical weather data and trends, including temperature, precipitation, and other meteorological parameters over various timeframes.",
+    "id": "c4ee8334-97de-4f75-b3d9-f7eaec5a359f",
+    "theme_id": "41f0f22c-e82a-4601-90eb-fcc83e770fbd"
+  },
+  {
+    "name": "Advanced Visualization Controls & Customization",
+    "description": "Develop comprehensive controls for users to customize their weather visualizations, including layer selection, data overlays, color schemes, and unit preferences.",
+    "id": "5d1ca6b4-f839-4460-bc49-407b7ead579a",
+    "theme_id": "41f0f22c-e82a-4601-90eb-fcc83e770fbd"
+  },
+  {
+    "name": "Severe Weather Warning System",
+    "description": "Implement a system to deliver immediate and critical push notifications for severe weather events such as heavy rain, snow, extreme temperatures, high winds, and poor air quality.",
+    "id": "3d790fde-bcf2-4b30-bfec-960552145dc2",
+    "theme_id": "7d016b05-995b-4cdd-81cd-3e1a96a129b7"
+  },
+  {
+    "name": "Customizable Daily Forecast Notifications",
+    "description": "Enable users to set up and receive personalized daily or periodic weather forecast push notifications based on their preferred locations and specific weather parameters.",
+    "id": "0d2b1e32-d51f-4ef2-bbff-4608d33f8124",
+    "theme_id": "7d016b05-995b-4cdd-81cd-3e1a96a129b7"
+  },
+  {
+    "name": "Location-Aware Alerting",
+    "description": "Develop functionality to provide proactive weather alerts and notifications relevant to the user's current location or other user-defined saved locations.",
+    "id": "2e40547f-39a2-439e-a019-649df01f8be3",
+    "theme_id": "7d016b05-995b-4cdd-81cd-3e1a96a129b7"
+  },
+  {
+    "name": "Notification Preferences Management",
+    "description": "Allow users to manage their alert subscriptions, including enabling/disabling specific alert types, adjusting notification frequency, and selecting delivery preferences for push notifications.",
+    "id": "3de6442e-704d-4993-8200-74924da4a313",
+    "theme_id": "7d016b05-995b-4cdd-81cd-3e1a96a129b7"
+  },
+  {
+    "name": "Performance Optimization",
+    "description": "Improve application speed, responsiveness, and overall performance to ensure a fast user experience.",
+    "id": "aa133356-524c-415e-897b-bcb07fe324c1",
+    "theme_id": "3835f0a6-5390-4e99-b328-4a9e4b1b42f4"
+  },
+  {
+    "name": "Intuitive User Interface Design",
+    "description": "Develop an intuitive and easy-to-use interface that allows users to effortlessly navigate and interact with the application.",
+    "id": "703d4ed5-bfb6-40d0-8c93-4341a817267b",
+    "theme_id": "3835f0a6-5390-4e99-b328-4a9e4b1b42f4"
+  },
+  {
+    "name": "Visual Design & Aesthetics",
+    "description": "Create a visually appealing and modern user interface with consistent branding and design elements.",
+    "id": "80dc9e85-4f06-4f38-921f-55816c410816",
+    "theme_id": "3835f0a6-5390-4e99-b328-4a9e4b1b42f4"
+  },
+  {
+    "name": "Cross-Device Responsiveness",
+    "description": "Ensure the application provides a seamless and optimized user experience across various mobile devices and screen sizes.",
+    "id": "f74dd902-2bf2-49d2-8439-d0a5a1f3d065",
+    "theme_id": "3835f0a6-5390-4e99-b328-4a9e4b1b42f4"
+  }
+]

@@ -9,12 +9,14 @@ from langchain_core.output_parsers import PydanticOutputParser
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_core.prompts import MessagesPlaceholder
 from langchain.agents import create_tool_calling_agent, AgentExecutor
+from langchain_core.documents import Document
 from collections import defaultdict
-from tools import *
-from prompts import *
+from llm_utils import *
+from story_creation import *
 from app_queries import *
 from elo_rating_system import *
 from chroma_db import *
+from vectorstores import init_vectorstores, manager
 import uuid
 from typing import List, Dict, Any, Optional, Union
 import logging
@@ -22,6 +24,8 @@ import json
 import argparse
 import csv
 import random
+from langchain_core.messages import AIMessage, HumanMessage
+import os
 
 
 load_dotenv()
@@ -32,85 +36,6 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger("my_app_logger")
-
-def escape_curly_braces_for_langchain(s: str) -> str:
-    return s.replace("{", "{{").replace("}", "}}")
-
-def extract_json_block(text):
-    start = text.find('{')
-    if start == -1:
-        raise ValueError("No JSON object found")
-
-    brace_count = 0
-    for i in range(start, len(text)):
-        if text[i] == '{':
-            brace_count += 1
-        elif text[i] == '}':
-            brace_count -= 1
-            if brace_count == 0:
-                return text[start:i+1]
-
-    raise ValueError("Unbalanced braces in JSON content")
-
-
-class Theme(BaseModel):
-    id: Optional[uuid.UUID] = Field(None, description="Unique identifier for the theme")
-    name: str
-    description: str
-
-class ThemeResponse(BaseModel):
-    theme: List[Theme]
-
-class Epic(BaseModel):
-    id: Optional[uuid.UUID] = Field(None, description="Unique identifier for the epic")
-    theme_id: Optional[uuid.UUID] = Field(None, description="ID of the parent theme")
-    name: str
-    description: str
-
-class EpicsResponse(BaseModel):
-    epics: List[Epic]
-
-class UserStory(BaseModel):
-    id: Optional[uuid.UUID] = Field(None, description="Unique identifier for the story")
-    epic_id: Optional[uuid.UUID] = Field(None, description="ID of the parent epic")
-    description: str
-    priority: Optional[int] = Field(default=1, ge=1, le=5)
-
-class UserStoryResponse(BaseModel):
-    user_stories: List[UserStory]
-
-def stories_to_json(items: List[BaseModel]) -> str:
-    return json.dumps([item.dict() for item in items], indent=2)
-
-def build_prompt(template: str) -> ChatPromptTemplate:
-    return ChatPromptTemplate.from_messages([
-        ("system", template),
-        ("human", "{input}"),
-        MessagesPlaceholder("agent_scratchpad")
-    ])
-
-def parse_json_or_log(output_text, model_cls):
-    try:
-        json_str = extract_json_block(output_text)
-        data = json.loads(json_str)
-        result = model_cls(**data)
-        return result
-    except Exception as e:
-        logger.error(f"Failed to parse JSON: {e}\nOutput was:\n{output_text}")
-        raise
-
-
-
-def call_agent( llm: Union[ChatOpenAI, ChatAnthropic, ChatXAI, ChatGoogleGenerativeAI], prompt_template: ChatPromptTemplate, input_text: str, tools: list, verbose: bool = False) -> str:
-    agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt_template)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose)
-    result = agent_executor.invoke({"input": input_text})
-    output = result.get("output", result)
-    if isinstance(output, list) and output and "text" in output[0]:
-        return output[0]["text"]
-    elif isinstance(output, dict) and "text" in output:
-        return output["text"]
-    return str(output)
 
 
 # === Integration with Prompt Testing Code ===
@@ -177,7 +102,7 @@ def run_swiss_elo_evaluation(llm_list, grader_llm, tools, test_inputs, prompt_va
                         {output2}
                         """
                         grading_response = call_agent(grader_llm, build_prompt(comparison_prompt), grading_input, tools)
-                        parsed = json.loads(extract_json_block(grading_response))
+                        parsed = json.loads(extract_json_from_llm(grading_response))
                         winner = parsed.get("winner", "Draw")
                         justification = parsed.get("justification", "")
 
@@ -229,28 +154,46 @@ def run_swiss_elo_evaluation(llm_list, grader_llm, tools, test_inputs, prompt_va
 
     return all_ratings_per_prompt
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--add-new", action="store_true")
-    parser.add_argument("--llm", choices=["anthropic","openai"], default="openai")
+    parser.add_argument("--llm", choices=["anthropic", "openai", "gemini"], default="gemini")
     parser.add_argument("--test", action="store_true")  # New argument for test mode
     args = parser.parse_args()
+
+    # Initialize vectorstores with correct args
+    print("Initializing vectorstores...")
+    manager = init_vectorstores(args)
+    print("Vectorstores initialized.")
 
     if args.llm == "anthropic":
         llm = ChatAnthropic(model="claude-3-5-sonnet-20241022", temperature=0)
         theme_file = "themes_anthropic.json"
         epics_file = "epics_anthropic.json"
         user_stories_file = "user_stories_anthropic.json"
-    else:
+        print("Using LLM: Claude-3.5 (Anthropic)")
+    elif args.llm == "openai":
         llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
         theme_file = "themes_gpt4o_mini.json"
         epics_file = "epics_gpt4o_mini.json"
         user_stories_file = "user_stories_gpt4o_mini.json"
+        print("Using LLM: GPT-4o-mini (OpenAI)")
+    else:  # Default to Gemini 2.5 Pro for best bang for buck
+        llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+        theme_file = "themes_gemini_flash.json"
+        epics_file = "epics_gemini_flash.json"
+        user_stories_file = "user_stories_gemini_flash.json"
+        print("Using LLM: Gemini-2.5-flash (Google)")
 
-    embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-    vectorstore = prepare_vectorstore(embedding, config, args.add_new)
-    retriever = vectorstore.as_retriever(search_type="mmr", search_kwargs={"k": config.search_k})
-    tools = [make_rag_tool(retriever)]
+    # Get retrievers
+    story_retriever = manager.get_retriever("rag_info", search_type="mmr", search_kwargs={"k": config.search_k})
+    pipeline_retriever = manager.get_retriever("pipeline_parts", search_type="mmr", search_kwargs={"k": config.search_k})
+
+    print("RAG DB status:")
+    print(f"Story retriever: {'OK' if story_retriever else 'NOT FOUND'}")
+    print(f"Pipeline retriever: {'OK' if pipeline_retriever else 'NOT FOUND'}")
+    print(f"Theme file path: {theme_file}")
 
     llms_to_test = [
     ("GPT-4o-mini", ChatOpenAI(model="gpt-4o-mini", temperature=0)),
@@ -258,82 +201,93 @@ def main():
     ("grok-3-latest", ChatXAI(model="grok-3-latest", temperature=0)),
     ("gemini-2.5-flash", ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)),  # Corrected Gemini Flash model name,
     # Add more test LLMs here
-]
+    ]
 
     google_grader = ChatGoogleGenerativeAI(model="gemini-2.5-pro", temperature=0)
-
+    app_query = "build me a weather app. like the one used on a phone"
     if args.test:
         print("running test")
         # You should have run_tests defined as shown in previous messages
+        tools = [] 
+        PROMPT_VARIANTS = []
         run_swiss_elo_evaluation(llms_to_test, google_grader, tools, test_inputs, PROMPT_VARIANTS, rounds=3, samples_per_combo=1)
         return  # Exit after testing
-    
-    all_themes = []
-    all_epics = []
-    all_stories = []
+
     print("skipped testing")
-    return
-    # === Generate Themes ===
-    theme_prompt_template = build_prompt(theme_generator__RTF_prompt)
-    theme_response = call_agent(llm, theme_prompt_template, query, tools)
-    themes_response = parse_json_or_log(theme_response, ThemeResponse)
 
-    for theme in themes_response.theme:
-        theme_id = uuid.uuid4()
-        theme_dict = {
-            "id": str(theme_id),
-            "name": theme.name,
-            "description": theme.description
-        }
-        all_themes.append(theme_dict)
-    with open(theme_file, "w") as f:
-        f.write(stories_to_json(all_themes))
-
-    # === Generate Epics ===
-    all_epics = []
-    for theme in all_themes:
-        epic_prompt_template = build_prompt(epic_generator_prompt)
-        input_theme = f"{theme.name}: {theme.description}"
-        epic_response = call_agent(llm,epic_prompt_template, input_theme, tools)
-        epics_response = parse_json_or_log(epic_response, EpicsResponse)
-        for epic in epics_response.epics:
-            epic_id = uuid.uuid4()
-            epic_dict = {
-                "id": str(epic_id),
-                "theme_id": theme["id"],  # reference to parent theme
-                "name": epic.name,
-                "description": epic.description
-            }
-            all_epics.append(epic_dict)
+#region: Story Generation
+    #Theme generation
+    if not os.path.exists(theme_file):
+        print(f"{theme_file} does not exist. Creating new themes...")
+        interactive_theme_generation(llm, app_query, theme_file, manager)
+    else:
+        print(f"{theme_file} exists. Skipping theme generation.")
     
-    with open(epics_file, "w") as f:
-        f.write(stories_to_json(all_epics))
+    with open("themes_gemini_flash.json", "r", encoding="utf-8") as f:
+        themes = json.load(f)
+    
+    theme_docs = [
+        Document(
+            page_content=theme["description"],
+            metadata={"name": theme["name"], "id": theme["id"]}
+        )
+        for theme in themes
+    ]
+    print(f"Loaded {len(theme_docs)} themes from {theme_file}")
+    story_retriever.vectorstore.add_documents(theme_docs)
+    print("Themes added to story retriever.")
+    
+    #Epic generation
+    #Only create new epics if epics_file does not exist
+    if not os.path.exists(epics_file):
+        print(f"{epics_file} does not exist. Creating new epics...")
+        interactive_epic_generation(llm, themes, epics_file, manager)
+    else:
+        print(f"{epics_file} exists. Skipping epic generation.")
 
-    # === Generate User Stories ===
-    all_stories = []
-    for epic in all_epics:
-        story_prompt_template = build_prompt(story_generator_prompt)
-        input_epic = f"{epic.name}: {epic.description}"
-        story_response = call_agent(llm, story_prompt_template, input_epic, tools)
-        stories_data = parse_json_or_log(story_response, UserStoryResponse)
-        for story in stories_data.user_stories:
-            story_id = uuid.uuid4()
-            story_dict = {
-                "id": str(story_id),
-                "epic_id": epic["id"],  # reference to parent epic
-                "title": story.title,
-                "description": story.description
+    with open(epics_file, "r", encoding="utf-8") as f:
+        epics = json.load(f)
+
+    epic_docs = [
+        Document(
+            page_content=epic["description"],
+            metadata={"name": epic["name"], "id": epic["id"], "theme_id": epic["theme_id"]}  
+        )
+        for epic in epics
+    ]
+    print(f"Loaded {len(epic_docs)} epics from {epics_file}")
+    story_retriever.vectorstore.add_documents(epic_docs)
+    print("Epics added to story retriever.")
+
+    # User story generation
+    if not os.path.exists(user_stories_file):
+        print(f"{user_stories_file} does not exist. Creating new user stories...")
+        generate_user_stories(llm, epics, user_stories_file)
+    else:
+        print(f"{user_stories_file} exists. Skipping user story generation.")
+
+    with open(user_stories_file, "r", encoding="utf-8") as f:
+        user_stories = json.load(f)
+
+    story_docs = [
+        Document(
+            page_content=story["description"],
+            metadata={
+                "name": story["name"],
+                "id": story["id"],
+                "epic_id": story["epic_id"],
+                "theme_id": story["theme_id"]
             }
-            all_stories.append(story_dict)
-        #all_stories.extend(stories_data.user_stories)
+        )
+        for story in user_stories
+    ]
+    print(f"Loaded {len(story_docs)} user stories from {user_stories_file}")
+    story_retriever.vectorstore.add_documents(story_docs)
+    print("User stories added to story retriever.")
+#endregion
 
-    with open(user_stories_file, "w") as f:
-        f.write(stories_to_json(all_stories))
+#region: Story Refinmenet 
 
-    print("\n=== Final Comprehensive User Stories ===")
-    print(stories_to_json(all_stories))
-    logger.info("Final user stories:")
-    logger.info(stories_to_json(all_stories))
 
 if __name__ == "__main__":
     main()

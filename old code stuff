@@ -1,0 +1,61 @@
+ === Generate Themes ===
+    theme_prompt_template = build_prompt(theme_generator__RTF_prompt)
+    theme_response = call_agent(llm, theme_prompt_template, app_query, tools)
+    themes_response = parse_json_or_log(theme_response, ThemeResponse)
+
+    for theme in themes_response.theme:
+        theme_id = uuid.uuid4()
+        theme_dict = {
+            "id": str(theme_id),
+            "name": theme.name,
+            "description": theme.description
+        }
+        all_themes.append(theme_dict)
+    with open(theme_file, "w") as f:
+        f.write(stories_to_json(all_themes))
+
+    # === Generate Epics ===
+    all_epics = []
+    for theme in all_themes:
+        epic_prompt_template = build_prompt(epic_generator_prompt)
+        input_theme = f"{theme.name}: {theme.description}"
+        epic_response = call_agent(llm,epic_prompt_template, input_theme, tools)
+        epics_response = parse_json_or_log(epic_response, EpicsResponse)
+        for epic in epics_response.epics:
+            epic_id = uuid.uuid4()
+            epic_dict = {
+                "id": str(epic_id),
+                "theme_id": theme["id"],  # reference to parent theme
+                "name": epic.name,
+                "description": epic.description
+            }
+            all_epics.append(epic_dict)
+    
+    with open(epics_file, "w") as f:
+        f.write(stories_to_json(all_epics))
+
+    # === Generate User Stories ===
+    all_stories = []
+    for epic in all_epics:
+        story_prompt_template = build_prompt(story_generator_prompt)
+        input_epic = f"{epic.name}: {epic.description}"
+        story_response = call_agent(llm, story_prompt_template, input_epic, tools)
+        stories_data = parse_json_or_log(story_response, UserStoryResponse)
+        for story in stories_data.user_stories:
+            story_id = uuid.uuid4()
+            story_dict = {
+                "id": str(story_id),
+                "epic_id": epic["id"],  # reference to parent epic
+                "title": story.title,
+                "description": story.description
+            }
+            all_stories.append(story_dict)
+        #all_stories.extend(stories_data.user_stories)
+
+    with open(user_stories_file, "w") as f:
+        f.write(stories_to_json(all_stories))
+
+    print("\n=== Final Comprehensive User Stories ===")
+    print(stories_to_json(all_stories))
+    logger.info("Final user stories:")
+    logger.info(stories_to_json(all_stories))
