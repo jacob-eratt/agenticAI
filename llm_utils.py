@@ -1,4 +1,5 @@
 import json
+import os
 import re
 from typing import Any, Type, Union
 import logging
@@ -106,3 +107,45 @@ def call_agent(llm: Union[ChatOpenAI, ChatAnthropic, ChatXAI, ChatGoogleGenerati
     elif isinstance(output, dict) and "text" in output:
         return output["text"]
     return str(output)
+
+
+
+def serialize_container(container_dict):
+    return {
+        box_name: {
+            "id": box.id,
+            "name": box.name,
+            "description": box.description,
+            "stories": box.stories
+        }
+        for box_name, box in container_dict.items()
+    }
+
+def save_containers_to_files(containers, folder_path="containers"):
+    os.makedirs(folder_path, exist_ok=True)
+    for container_name, box_dict in containers.items():
+        file_path = os.path.join(folder_path, f"{container_name}.json")
+        with open(file_path, "w", encoding="utf-8") as f:
+            json.dump(serialize_container(box_dict), f, indent=2)
+
+
+
+
+def serialize_ui_boxes(ui_boxes):
+    return {
+        box_name: {
+            "id": box.id,
+            "name": box.name,
+            "description": box.description,
+            "stories": box.stories
+        }
+        for box_name, box in ui_boxes.items()
+    }
+
+def save_ui_boxes_to_json(ui_boxes, filename="ui_boxes.json"):
+    """
+    Serialize and save the UI component boxes to a JSON file.
+    """
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(serialize_ui_boxes(ui_boxes), f, indent=2)
+    print(f"UI boxes saved to {filename}")

@@ -1,0 +1,128 @@
+{
+  "Application Performance and Startup": {
+    "id": "9cd89292-4d78-4b01-a551-3a9020214472",
+    "name": "Application Performance and Startup",
+    "description": "This box contains stories related to the core performance and efficiency of the application, including fast startup, quick content loading, smooth and responsive user interactions, rapid completion of user-initiated actions, efficient device resource usage, and minimized network data usage.",
+    "stories": [
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "type": "story",
+        "name": "Fast Application Startup",
+        "id": "f32993a0-39dd-47c1-ba20-bbc609409ef1",
+        "description": "As a user, I want the application to load quickly when I launch it so that I can begin using it without unnecessary waiting."
+      },
+      {
+        "type": "story",
+        "name": "Quick Content Loading",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "id": "089a6236-be7f-4046-9926-7f13093ce702",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want new pages, sections, or data within the application to load quickly so that I can navigate and access information efficiently."
+      },
+      {
+        "id": "168e55d7-10be-4f2f-8c20-3a8b268fd165",
+        "type": "story",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "name": "Smooth User Interactions",
+        "description": "As a user, I want the application to respond instantly to my clicks, typing, and other inputs so that my interactions feel fluid and uninterrupted."
+      },
+      {
+        "name": "Efficient Device Resource Usage",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "id": "470897a6-a338-4685-b15f-5b98010fc003",
+        "description": "As a user, I want the application to consume minimal device resources (e.g., CPU, memory, battery) so that my device remains performant and its battery life is preserved."
+      },
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "type": "story",
+        "name": "Minimized Network Data Usage",
+        "id": "797a399e-7fb9-4e16-b697-fa9fc789b787",
+        "description": "As a user, I want the application to use minimal network data so that I can save on data costs and have a faster experience on limited or metered connections."
+      }
+    ]
+  },
+  "Global Navigation and Application Structure": {
+    "id": "6b7a6f60-b90a-4764-84d4-2917e819cc6a",
+    "name": "Global Navigation and Application Structure",
+    "description": "This box encompasses the core structure, consistency, overall visual design, branding, responsive content layout adaptation for various screen sizes and orientation changes, appropriate sizing and placement of interactive elements (e.g., buttons, forms) for easy user interaction on any device, navigation accessibility across devices, ensuring images and other media scale and display correctly on any device screen size or orientation while maintaining quality, and ensuring all text within the application remains legible and properly formatted on any device screen size or orientation.",
+    "stories": [
+      {
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Easy Application Navigation",
+        "id": "d1960935-6616-4476-97c2-9f5c73ba5c53",
+        "type": "story",
+        "description": "As a user, I want to easily find and access different sections and features of the application so that I can efficiently complete my tasks."
+      },
+      {
+        "name": "Consistent User Interface",
+        "type": "story",
+        "id": "288906fe-3997-49a2-b9ac-1b8fbf91b2b0",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "description": "As a user, I want the application's layout, terminology, and interaction patterns to be consistent across all screens so that I can quickly learn and predict how to use new features."
+      },
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Modern and Clean User Interface",
+        "id": "a128dd7f-4b0e-4a66-90d9-87bf26ed52fb",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "description": "As a user, I want the application to have a modern and clean layout so that it is easy to navigate and visually appealing."
+      },
+      {
+        "id": "f7338406-8cc7-4c55-ae64-ab88ea247d1d",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Consistent Branding Across Application",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "type": "story",
+        "description": "As a user, I want the application to display consistent branding elements (e.g., logo, color scheme, typography) across all screens so that I recognize it as a cohesive and professional product."
+      },
+      {
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "id": "b5ba42e3-0b06-4a72-ad25-4abb9a1dd8c5",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Content Layout Adaptation for Screen Sizes",
+        "description": "As a user, I want the application's content and layout to automatically adjust when viewed on different screen sizes (e.g., phone, tablet) so that information is always clearly visible and easy to consume without manual zooming or scrolling."
+      },
+      {
+        "type": "story",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "id": "c96c7977-96d7-416b-9253-dad178432c12",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Content Layout Adaptation for Orientation Changes",
+        "description": "As a user, I want the application's content and layout to automatically re-arrange itself when I switch my device between portrait and landscape orientations so that the display remains optimized and readable."
+      },
+      {
+        "id": "1ec7d6e9-981d-4109-b437-1d8bceb87052",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Navigation Accessibility Across Devices",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "description": "As a user, I want the application's navigation menus to be easily accessible and usable regardless of my device's screen size or orientation so that I can effortlessly move between different sections of the app."
+      },
+      {
+        "name": "Image and Media Scaling",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "id": "f89bca0d-e14b-4844-8954-1b79f8ef8481",
+        "type": "story",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "description": "As a user, I want images and other media within the application to scale and display correctly on any device screen size or orientation so that they are always fully visible, not distorted, and maintain their quality."
+      },
+      {
+        "type": "story",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Text Readability Across Devices",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "id": "8d2d34e2-e6ed-49ef-8d4d-072cff8922c6",
+        "description": "As a user, I want all text within the application to remain legible and properly formatted on any device screen size or orientation so that I don't have to zoom or scroll horizontally to read it."
+      }
+    ]
+  }
+}

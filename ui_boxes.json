@@ -1,0 +1,1217 @@
+{
+  "Current Weather Display Panel": {
+    "id": "e1a1ca9d-a813-41fe-8742-e9a6e34a098d",
+    "name": "Current Weather Display Panel",
+    "description": "Displays current weather conditions for the user's default or automatically detected location.",
+    "stories": [
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "epic_id": "55c8de8a-0404-4d91-97cd-7e6b48a98fa4",
+        "name": "View Current Weather for Default/Current Location",
+        "type": "story",
+        "id": "1e7f045a-ffad-400e-b3c7-9c105cf98287",
+        "description": "As a user, I want to see the current weather conditions for my automatically detected or default location so that I can quickly get relevant weather information upon opening the application."
+      },
+      {
+        "epic_id": "55c8de8a-0404-4d91-97cd-7e6b48a98fa4",
+        "type": "story",
+        "id": "596d5578-b33b-46b4-94ca-2b0f862a5699",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "name": "Display Core Weather Metrics",
+        "description": "As a user, I want to view essential current weather metrics such as temperature, 'feels like' temperature, humidity, and wind speed/direction so that I have a clear overview of the conditions."
+      },
+      {
+        "type": "story",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "name": "Display Weather Condition Description and Icon",
+        "id": "6ee07436-4a84-41ef-b27f-97ea2e77eb4c",
+        "epic_id": "55c8de8a-0404-4d91-97cd-7e6b48a98fa4",
+        "description": "As a user, I want to see a textual description (e.g., 'Sunny', 'Partly Cloudy') and an accompanying icon for the current weather so that I can quickly understand the overall conditions."
+      },
+      {
+        "type": "story",
+        "epic_id": "55c8de8a-0404-4d91-97cd-7e6b48a98fa4",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "name": "Indicate Data Last Updated Time",
+        "id": "a9899ed1-1b46-4e08-bbe6-f4ec1f3f0b26",
+        "description": "As a user, I want to see the timestamp of when the current weather data was last updated so that I can be confident in its real-time accuracy."
+      }
+    ]
+  },
+  "Location Search Panel": {
+    "id": "4c45ca36-4d68-4c5e-8386-32dfd8ceb77f",
+    "name": "Location Search Panel",
+    "description": "Allows users to search for and select a specific city or location to view its weather conditions.",
+    "stories": [
+      {
+        "name": "Search for a Specific Location's Weather",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "type": "story",
+        "epic_id": "55c8de8a-0404-4d91-97cd-7e6b48a98fa4",
+        "id": "91fc89b9-2632-4d69-8ad8-d642d633e877",
+        "description": "As a user, I want to search for and select a specific city or location so that I can view its current weather conditions."
+      },
+      {
+        "name": "Select Forecast Location",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "epic_id": "f4eec8ac-424e-47a3-ab36-030f487858ec",
+        "id": "0f7f7778-3b91-496c-9868-c0320061145d",
+        "type": "story",
+        "description": "As a user, I want to search for and select a specific geographic location so that I can view its hourly weather forecast."
+      }
+    ]
+  },
+  "Hourly Forecast Timeline Panel": {
+    "id": "4202c136-cf13-446f-b13c-08b6446a02a8",
+    "name": "Hourly Forecast Timeline Panel",
+    "description": "Displays a timeline of hourly weather forecasts for the selected location.",
+    "stories": [
+      {
+        "epic_id": "f4eec8ac-424e-47a3-ab36-030f487858ec",
+        "id": "027960a8-d4fb-4bf1-bd79-a713c31ea661",
+        "name": "View Hourly Forecast Timeline",
+        "type": "story",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "description": "As a user, I want to see a clear timeline of the hourly weather forecast for my selected location so that I can understand the progression of weather conditions throughout the day."
+      },
+      {
+        "epic_id": "f4eec8ac-424e-47a3-ab36-030f487858ec",
+        "id": "7f1b783e-f0f3-4921-a426-60e61de89ab3",
+        "type": "story",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "name": "View Hourly Temperature Details",
+        "description": "As a user, I want to see the temperature and 'feels like' temperature for each hour in the forecast so that I can understand the actual and perceived warmth or coldness."
+      },
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "epic_id": "f4eec8ac-424e-47a3-ab36-030f487858ec",
+        "name": "View Hourly Precipitation Details",
+        "id": "4b08ff8c-3227-4698-9757-1ef2ebc4a126",
+        "type": "story",
+        "description": "As a user, I want to see the chance of precipitation and expected precipitation type (e.g., rain, snow) for each hour so that I can prepare for wet weather."
+      },
+      {
+        "id": "0f703734-04b1-4da2-8a7e-f97c040d4c0a",
+        "name": "View Hourly Wind Conditions",
+        "epic_id": "f4eec8ac-424e-47a3-ab36-030f487858ec",
+        "type": "story",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "description": "As a user, I want to see the wind speed and direction for each hour so that I can assess potential wind impacts on my activities."
+      },
+      {
+        "epic_id": "f4eec8ac-424e-47a3-ab36-030f487858ec",
+        "id": "35848817-593a-48aa-b8a6-b52ddfad8661",
+        "name": "View Hourly Humidity Details",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "type": "story",
+        "description": "As a user, I want to see the humidity level for each hour so that I can understand the air moisture content."
+      }
+    ]
+  },
+  "Daily Weather Summary Panel": {
+    "id": "89cfe16e-2b2e-4a0a-a7d0-ed0a93b84c30",
+    "name": "Daily Weather Summary Panel",
+    "description": "Displays a comprehensive summary of the daily weather forecast for a selected location.",
+    "stories": [
+      {
+        "epic_id": "52cc9e02-81af-45c4-9bb1-a08ab7331541",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "id": "5ea72502-6e3f-457f-a6de-3470f6e00922",
+        "name": "View Daily Weather Summary",
+        "type": "story",
+        "description": "As a user, I want to view a comprehensive summary of the daily weather forecast for a selected location so that I can quickly understand the key conditions for the day."
+      },
+      {
+        "epic_id": "52cc9e02-81af-45c4-9bb1-a08ab7331541",
+        "name": "View Multi-Day Forecast",
+        "type": "story",
+        "id": "965b6e69-d4fa-4187-b5f6-21e82cfb47a0",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "description": "As a user, I want to view the daily weather forecasts for the upcoming several days for a selected location so that I can plan my activities further in advance."
+      }
+    ]
+  },
+  "Location Search Input Panel": {
+    "id": "1fef9992-edab-4766-867f-60d7e979fe01",
+    "name": "Location Search Input Panel",
+    "description": "Handles user input for location search, including displaying search suggestions and results as the user types.",
+    "stories": [
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "epic_id": "52cc9e02-81af-45c4-9bb1-a08ab7331541",
+        "name": "Search for a Specific Location",
+        "id": "fa918793-8114-4c7b-be73-293bc4b643b4",
+        "type": "story",
+        "description": "As a user, I want to search for a specific city or location by name so that I can view its daily weather forecast."
+      },
+      {
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "id": "9a96b241-b066-4d6a-bbff-ffd18041ef60",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "name": "Search for a location by name or zip code",
+        "type": "story",
+        "description": "As a user, I want to search for a location by typing its name or zip code so that I can find the specific place I want to view weather data for."
+      },
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "type": "story",
+        "name": "View search suggestions and results",
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "id": "c270ba08-e850-4f61-985a-24fb034afe0b",
+        "description": "As a user, I want to see a list of matching locations with relevant details (e.g., city, state, country) as I type in the search bar so that I can quickly select the correct one."
+      },
+      {
+        "type": "story",
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "name": "Select a location from search results",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "id": "c050c156-388e-455c-b984-db74fc160d1c",
+        "description": "As a user, I want to select a location from the search results so that its weather information becomes the primary view."
+      }
+    ]
+  },
+  "Location Auto-Detection Panel": {
+    "id": "e546bffa-3e32-4058-bbbd-ce4e9782658c",
+    "name": "Location Auto-Detection Panel",
+    "description": "Handles the automatic detection of the user's current location for weather forecast purposes.",
+    "stories": [
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "type": "story",
+        "id": "3167175d-6486-4d4e-921b-3bd88443239e",
+        "name": "Auto-Detect Current Location",
+        "epic_id": "52cc9e02-81af-45c4-9bb1-a08ab7331541",
+        "description": "As a user, I want the system to automatically detect my current location so that I can quickly see the daily weather forecast for where I am without manual input."
+      },
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "id": "717f535a-e1d8-4e94-97c8-21cda292d3c6",
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "type": "story",
+        "name": "Automatically detect current location",
+        "description": "As a user, I want the application to automatically detect my current geographical location so that I can view local weather without manual input."
+      }
+    ]
+  },
+  "Saved Locations Management Panel": {
+    "id": "dffd5f3c-bdb9-40af-a62f-5b627a698407",
+    "name": "Saved Locations Management Panel",
+    "description": "Manages user-defined saved locations, including adding, viewing, selecting, removing, and editing location details.",
+    "stories": [
+      {
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "type": "story",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "id": "b2f1880f-5acc-4026-922f-22ce911d7623",
+        "name": "Add current location to saved list",
+        "description": "As a user, I want to add the currently viewed location to a list of my saved locations so that I can easily access its weather data again later."
+      },
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "id": "4d53f1c1-c75d-4837-a5ec-aa44c4b3d92e",
+        "type": "story",
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "name": "View list of saved locations",
+        "description": "As a user, I want to view a list of all my saved locations so that I can quickly navigate between them."
+      },
+      {
+        "name": "Select a location from saved list",
+        "type": "story",
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "id": "ded688ca-0dc5-4f97-8005-ee82e56e219e",
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "description": "As a user, I want to select a location from my saved list so that its weather data is displayed."
+      },
+      {
+        "theme_id": "111f9368-13e5-4aca-993f-dfe5dad6aba5",
+        "epic_id": "da3e2601-a633-48e5-963b-9db6b87cc394",
+        "name": "Remove a location from saved list",
+        "id": "e7a734a4-2fe6-47a5-bf93-3e65690b7d2f",
+        "type": "story",
+        "description": "As a user, I want to remove a location from my saved list so that I can keep my list relevant and uncluttered."
+      },
+      {
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "epic_id": "13e2d11e-18a0-4478-9b87-00b19115610a",
+        "id": "a75ea8ef-3c0e-4263-95c1-dab0f3b45fe5",
+        "name": "Add Saved Location",
+        "type": "story",
+        "description": "As a user, I want to add a new location to my saved list so that I can quickly access its relevant information later."
+      },
+      {
+        "type": "story",
+        "epic_id": "13e2d11e-18a0-4478-9b87-00b19115610a",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "name": "View Saved Locations List",
+        "id": "98fffad9-b8a2-4030-83c1-85dd3ba0a6d3",
+        "description": "As a user, I want to view a list of all my saved locations so that I can easily select one to access its relevant information."
+      },
+      {
+        "name": "Edit Saved Location Details",
+        "type": "story",
+        "epic_id": "13e2d11e-18a0-4478-9b87-00b19115610a",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "id": "c42c7d4b-b20b-4ac3-a7e9-5224bbc1aae2",
+        "description": "As a user, I want to edit the details of an existing saved location so that I can keep my saved locations organized and accurate."
+      },
+      {
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "type": "story",
+        "id": "58bc21bd-e638-41b2-b0e3-79ee625e0a0f",
+        "epic_id": "13e2d11e-18a0-4478-9b87-00b19115610a",
+        "name": "Remove Saved Location",
+        "description": "As a user, I want to remove a saved location from my list so that I can manage my list and remove locations I no longer need."
+      }
+    ]
+  },
+  "Automatic Location Detection Module": {
+    "id": "41d7c675-835b-4152-94a5-9b58626d1a5a",
+    "name": "Automatic Location Detection Module",
+    "description": "Handles the automatic detection of the user's current geographical location upon application launch.",
+    "stories": [
+      {
+        "type": "story",
+        "name": "Automatic Location Detection on Launch",
+        "id": "0c9592fb-aff4-4866-aea9-7683c084ab86",
+        "epic_id": "154027e0-0e34-40d9-ab32-121fb17b4600",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "description": "As a user, I want the application to automatically detect my current geographical location upon launch, so that I don't have to manually input it."
+      },
+      {
+        "epic_id": "154027e0-0e34-40d9-ab32-121fb17b4600",
+        "id": "2cfde655-caa8-432b-bb7f-9179fe38208a",
+        "type": "story",
+        "name": "Utilize Detected Location for Relevant Data",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "description": "As a user, I want the application to utilize my automatically detected location to display relevant data, so that the information presented is always specific to my current whereabouts."
+      },
+      {
+        "type": "story",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "id": "42132799-11d0-4882-a774-8e9db63ba70e",
+        "epic_id": "154027e0-0e34-40d9-ab32-121fb17b4600",
+        "name": "Handle Location Detection Failure or Disabled Services",
+        "description": "As a user, if automatic location detection fails or my device's location services are disabled, I want the application to inform me and provide an option to manually enter a location, so that I can still access relevant data."
+      }
+    ]
+  },
+  "Location Permission Prompt": {
+    "id": "336e7147-9551-476e-81a5-8daf752c26e6",
+    "name": "Location Permission Prompt",
+    "description": "Manages user interaction with location access permissions, including prompting for permission and handling scenarios where access is denied.",
+    "stories": [
+      {
+        "id": "569cca36-d623-4836-bf2b-89240d2a0a9c",
+        "type": "story",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "epic_id": "154027e0-0e34-40d9-ab32-121fb17b4600",
+        "name": "Prompt for Location Permission",
+        "description": "As a user, I want to be prompted for permission to access my device's location, so that I can control my privacy and data sharing."
+      }
+    ]
+  },
+  "Detected Location Display Panel": {
+    "id": "e521a465-b440-4ddd-ac17-cc05280bcad1",
+    "name": "Detected Location Display Panel",
+    "description": "Displays the automatically detected current location to the user for confirmation and relevance.",
+    "stories": [
+      {
+        "type": "story",
+        "id": "c8ae7b52-0c7e-4146-a8b5-bb0f60b1b63b",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "name": "Display Detected Location",
+        "epic_id": "154027e0-0e34-40d9-ab32-121fb17b4600",
+        "description": "As a user, I want to see my current automatically detected location displayed within the application, so that I can confirm its accuracy and relevance."
+      }
+    ]
+  },
+  "Personalization Settings Panel": {
+    "id": "87ab793d-c157-426d-be10-e3ff4ad8ae47",
+    "name": "Personalization Settings Panel",
+    "description": "A dedicated section for users to manage and adjust their application preferences and settings.",
+    "stories": [
+      {
+        "name": "Access Personalization Settings",
+        "type": "story",
+        "id": "d7679fa9-1c06-439b-86fb-e129a7dec0da",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "description": "As a user, I want to access a dedicated section for managing my preferences so that I can easily find and adjust my application settings."
+      },
+      {
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "type": "story",
+        "name": "Set Units of Measurement",
+        "id": "9e4e7046-1b6a-43aa-9986-fd1a063537fa",
+        "description": "As a user, I want to select my preferred units of measurement (e.g., Imperial, Metric) so that I can view data in a format I understand."
+      },
+      {
+        "id": "780749fa-0961-46d2-aacf-3e5e40aa7101",
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "name": "Manage Notification Types",
+        "type": "story",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "description": "As a user, I want to enable or disable specific types of notifications so that I only receive alerts relevant to me."
+      },
+      {
+        "type": "story",
+        "id": "7c4e3cca-10c5-455b-8163-a5df1cc1a186",
+        "name": "Choose Notification Delivery Method",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "description": "As a user, I want to choose how I receive notifications (e.g., email, push, in-app) so that I can be alerted through my preferred channel."
+      },
+      {
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "name": "Select Display Theme",
+        "id": "b265ec4e-cf44-48b2-b915-91b00dbab55c",
+        "type": "story",
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "description": "As a user, I want to choose a display theme (e.g., light mode, dark mode) so that I can customize the application's visual appearance to my preference."
+      },
+      {
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "id": "9b04e3cc-2160-44ae-ba27-5e097f98debc",
+        "name": "Set Preferred Language",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "type": "story",
+        "description": "As a user, I want to select my preferred language for the application so that I can use it in my native tongue."
+      },
+      {
+        "type": "story",
+        "theme_id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3",
+        "id": "be657e74-9a63-40a7-ab25-9d16eed736b7",
+        "name": "Persist User Preferences",
+        "epic_id": "184be69a-f4e7-448c-b9e0-2f58364741fe",
+        "description": "As a user, I want my chosen preferences to be saved and applied automatically so that my customized settings persist across sessions."
+      }
+    ]
+  },
+  "Real-time Radar Map Panel": {
+    "id": "58c95349-b20a-4957-a917-7ea276a41f93",
+    "name": "Real-time Radar Map Panel",
+    "description": "Displays real-time and time-lapse radar data, allowing users to view current weather systems and observe their movement and evolution. Includes interactive controls for zooming, panning, and playing time-lapse sequences.",
+    "stories": [
+      {
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "type": "story",
+        "id": "c13577d1-64d0-4f0b-b558-5bbe37e0eaf1",
+        "epic_id": "5bfa0251-95c5-4849-a457-662b893718a1",
+        "name": "View Current Real-time Radar",
+        "description": "As a user, I want to view an interactive, real-time radar map displaying current precipitation and storms so that I can understand immediate weather conditions."
+      },
+      {
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "type": "story",
+        "name": "Zoom Radar Map View",
+        "id": "879f42d8-7e8f-435b-8d61-6bd2b4044ecb",
+        "epic_id": "5bfa0251-95c5-4849-a457-662b893718a1",
+        "description": "As a user, I want to be able to zoom in and out on the radar map so that I can view weather phenomena at different levels of detail."
+      },
+      {
+        "name": "Pan Radar Map View",
+        "epic_id": "5bfa0251-95c5-4849-a457-662b893718a1",
+        "id": "a28bdaa9-6709-498d-8a6b-27df66fa7426",
+        "type": "story",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "description": "As a user, I want to be able to pan across the radar map so that I can explore weather conditions in different geographical areas."
+      },
+      {
+        "type": "story",
+        "name": "Play Time-Lapse Radar",
+        "id": "d6f62fa5-2d86-4385-8126-b7eccbed2722",
+        "epic_id": "5bfa0251-95c5-4849-a457-662b893718a1",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "description": "As a user, I want to play a time-lapse of past radar data so that I can observe the movement and evolution of weather systems."
+      },
+      {
+        "name": "Understand Radar Map Legend",
+        "epic_id": "5bfa0251-95c5-4849-a457-662b893718a1",
+        "type": "story",
+        "id": "5678f53c-2a70-4520-8518-b94ac98468be",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "description": "As a user, I want to see a legend explaining the colors and symbols on the radar map so that I can correctly interpret the displayed weather phenomena."
+      }
+    ]
+  },
+  "Future Precipitation Map Panel": {
+    "id": "451050f7-4edb-425b-8d4d-c529bb351525",
+    "name": "Future Precipitation Map Panel",
+    "description": "Displays future precipitation forecasts, allowing users to view the map, select timeframes, animate the forecast, scrub the timeline, differentiate precipitation types, and view precipitation intensity.",
+    "stories": [
+      {
+        "id": "5db5511a-31ac-4afb-bb3e-bd1621f0123f",
+        "name": "View Future Precipitation Map",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "type": "story",
+        "epic_id": "ab9c689f-5472-4dd1-b04f-ee0007584275",
+        "description": "As a user, I want to view a visual map showing predicted future precipitation so that I can quickly understand upcoming weather patterns."
+      },
+      {
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "type": "story",
+        "name": "Select Precipitation Forecast Timeframe",
+        "epic_id": "ab9c689f-5472-4dd1-b04f-ee0007584275",
+        "id": "9aeb43d1-aea0-4ec9-813c-788432e91c51",
+        "description": "As a user, I want to select different timeframes (e.g., next 1 hour, next 6 hours, next 24 hours) for the precipitation forecast so that I can plan for various short-term needs."
+      },
+      {
+        "type": "story",
+        "id": "716172f3-c684-4104-ad1d-59b33a437593",
+        "name": "Animate Precipitation Forecast",
+        "epic_id": "ab9c689f-5472-4dd1-b04f-ee0007584275",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "description": "As a user, I want to play an animation of the precipitation forecast over time so that I can observe the movement and evolution of weather systems."
+      },
+      {
+        "id": "be9f86c4-a2d7-4ffd-8558-9c0ec0de7e92",
+        "type": "story",
+        "name": "Scrub Precipitation Forecast Timeline",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "epic_id": "ab9c689f-5472-4dd1-b04f-ee0007584275",
+        "description": "As a user, I want to manually scrub through the precipitation forecast timeline so that I can examine predicted conditions at specific future moments."
+      },
+      {
+        "id": "3fa75ade-720a-4374-9871-709871ae93b7",
+        "name": "Differentiate Precipitation Types",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "epic_id": "ab9c689f-5472-4dd1-b04f-ee0007584275",
+        "type": "story",
+        "description": "As a user, I want to see different types of precipitation (e.g., rain, snow, mixed) clearly distinguished on the visual forecast so that I can understand the specific nature of the upcoming weather."
+      },
+      {
+        "type": "story",
+        "name": "View Precipitation Intensity",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "id": "3ee68ec3-5e29-48f0-89ff-2d2adb1cb062",
+        "epic_id": "ab9c689f-5472-4dd1-b04f-ee0007584275",
+        "description": "As a user, I want the visual forecast to indicate the intensity of predicted precipitation so that I can gauge how heavy the rain or snow will be."
+      }
+    ]
+  },
+  "Historical Data Location Selector": {
+    "id": "fd2ff087-4a15-43a1-961d-b5c90fde579b",
+    "name": "Historical Data Location Selector",
+    "description": "Allows users to select a specific location to view its historical weather data.",
+    "stories": [
+      {
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "type": "story",
+        "id": "55d7459b-fc68-4571-8ede-9ea60fe84652",
+        "name": "Select Location for Historical Data",
+        "description": "As a user, I want to select a specific location so that I can view its historical weather data."
+      }
+    ]
+  },
+  "Historical Data Parameter Selector": {
+    "id": "a2c1950e-f059-495d-bd5f-16f21184a360",
+    "name": "Historical Data Parameter Selector",
+    "description": "Allows users to select specific meteorological parameters (e.g., temperature, precipitation, humidity, wind speed) for historical data analysis.",
+    "stories": [
+      {
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "id": "4f9699c5-b5d2-4c98-8821-dbe94eb3475c",
+        "type": "story",
+        "name": "Choose Historical Weather Parameter",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "description": "As a user, I want to choose which meteorological parameter (e.g., temperature, precipitation, humidity, wind speed) to analyze so that I can focus on the data relevant to my interest."
+      }
+    ]
+  },
+  "Historical Data Date Range Selector": {
+    "id": "756676bf-2f3e-41ad-8338-18dd64e3a64d",
+    "name": "Historical Data Date Range Selector",
+    "description": "Allows users to select predefined time periods for historical weather data analysis.",
+    "stories": [
+      {
+        "id": "c4bfac48-1472-4b70-9c1a-8a092b3d3087",
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "type": "story",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "name": "Select Predefined Historical Date Range",
+        "description": "As a user, I want to select predefined time periods (e.g., last 7 days, last 30 days, last year) for historical weather data so that I can quickly view common trend analyses."
+      }
+    ]
+  },
+  "Historical Data Display Panel": {
+    "id": "130f5fd6-7bf3-4da7-ae26-0166211c0852",
+    "name": "Historical Data Display Panel",
+    "description": "Displays historical weather data as trend graphs or other visual representations, based on user-selected location, parameters, and date ranges.",
+    "stories": [
+      {
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "type": "story",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "name": "View Historical Data Trend Graph",
+        "id": "922e64cf-4036-4d53-975b-404b37827f8a",
+        "description": "As a user, I want to view historical weather data as a trend line graph so that I can easily identify patterns and changes over time."
+      },
+      {
+        "type": "story",
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "name": "View Historical Precipitation Bar Chart",
+        "id": "cca98055-9c13-4149-a66c-357cf9b1af53",
+        "description": "As a user, I want to view historical precipitation totals as a bar chart so that I can compare accumulated values across different periods."
+      },
+      {
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "name": "Display Historical Data Summary Statistics",
+        "type": "story",
+        "id": "afb3b01c-5595-47fe-8c7e-aa9156346929",
+        "description": "As a user, I want to see summary statistics (e.g., average, minimum, maximum) for the selected historical weather parameter and period so that I can quickly understand the overall characteristics of the data."
+      },
+      {
+        "theme_id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a",
+        "name": "Compare Historical Data Periods",
+        "epic_id": "92fbed05-da34-49fd-af52-09d3eb8c6059",
+        "id": "8c4cf198-ca17-4867-8fe5-69141a744db2",
+        "type": "story",
+        "description": "As a user, I want to compare historical weather data from two different time periods for the same location so that I can identify year-over-year changes or long-term shifts."
+      }
+    ]
+  },
+  "Severe Weather Alerts Notification Panel": {
+    "id": "c396619d-ba86-4b9d-a554-c60cbf57f342",
+    "name": "Severe Weather Alerts Notification Panel",
+    "description": "Displays immediate severe weather alerts and details about the type of severe weather event.",
+    "stories": [
+      {
+        "name": "Receive immediate severe weather alerts",
+        "id": "b7360760-05bb-4972-bd69-4c68a92261ac",
+        "type": "story",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As an affected individual, I want to receive immediate notifications for severe weather events in my area so that I can take timely protective action."
+      },
+      {
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Identify affected geographic area",
+        "id": "794c39cb-02b7-402a-aa6d-45c875070378",
+        "description": "As an affected individual, I want to know the specific geographic area impacted by the alert so that I can determine if I am in danger."
+      },
+      {
+        "name": "Receive recommended actions",
+        "type": "story",
+        "id": "f7ce70f4-d4ec-4fc1-9b57-08c5e8df04b4",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As an affected individual, I want to receive clear instructions on recommended actions (e.g., 'seek shelter,' 'evacuate') so that I know how to protect myself and my family."
+      }
+    ]
+  },
+  "Location Alert Preferences Panel": {
+    "id": "b1cf38b6-f315-4d14-a3d2-096bb1cc7999",
+    "name": "Location Alert Preferences Panel",
+    "description": "Allows users to manage and opt-in for severe weather alerts for specific, user-defined locations (e.g., home, work, family's location).",
+    "stories": [
+      {
+        "name": "Opt-in for specific locations",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "id": "6067385e-1c2d-4402-b07d-00226201b4d5",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "description": "As an affected individual, I want to be able to opt-in to receive alerts for specific locations (e.g., home, work, family's location) so that I am informed about areas I care about."
+      },
+      {
+        "id": "fa99c967-6111-4270-af54-5b8ebddae575",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Choose alert delivery methods",
+        "description": "As an affected individual, I want to be able to choose my preferred alert delivery methods (e.g., push notification, SMS, email) so that I receive critical information in a way that works best for me."
+      }
+    ]
+  },
+  "Severe Weather Alert Issuance Panel": {
+    "id": "d3447e7d-8b4e-4d03-829f-9cad89c63c4e",
+    "name": "Severe Weather Alert Issuance Panel",
+    "description": "Allows weather authorities to create, define geographic areas, specify type and severity, include recommended actions, and immediately send severe weather alerts.",
+    "stories": [
+      {
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "name": "Create new severe weather alert",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "id": "76e697f7-d20f-40f3-bd38-69272e0f1275",
+        "description": "As a weather authority, I want to be able to create a new severe weather alert so that I can quickly inform the public of an impending threat."
+      },
+      {
+        "id": "f92fc62d-7b4c-47db-8f3a-a6e24790a90e",
+        "name": "Define alert geographic area",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "description": "As a weather authority, I want to be able to define the specific geographic area affected by an alert so that warnings are targeted accurately."
+      },
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "id": "cc87299a-e10f-412f-b2a5-8f739ddcf1d3",
+        "type": "story",
+        "name": "Specify alert type and severity",
+        "description": "As a weather authority, I want to be able to specify the type and severity level of a weather event so that recipients understand the urgency and nature of the threat."
+      },
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "id": "a49be300-7417-4322-b021-ec1e3b8002c2",
+        "type": "story",
+        "name": "Include recommended actions in alert",
+        "description": "As a weather authority, I want to be able to include specific recommended actions within an alert so that the public knows how to respond appropriately."
+      },
+      {
+        "type": "story",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Send alert immediately",
+        "id": "0e54a7d0-4d5e-46ff-8557-a06c5a5bca5f",
+        "description": "As a weather authority, I want to be able to send an alert immediately to all relevant recipients so that critical information is disseminated without delay."
+      },
+      {
+        "type": "story",
+        "name": "Update active severe weather alert",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "9a4593c2-e8cf-499f-b51b-050805420784",
+        "description": "As a weather authority, I want to be able to update an active severe weather alert so that I can provide new information or changes in conditions to the public."
+      },
+      {
+        "id": "1e781c0f-a3cd-49d7-af03-1fa91067e1de",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "name": "Cancel active severe weather alert",
+        "description": "As a weather authority, I want to be able to cancel an active severe weather alert so that the public is informed when a threat has passed or is no longer valid."
+      }
+    ]
+  },
+  "Issued Alert History Panel": {
+    "id": "276577fb-7850-48d2-b65b-d956ae460a32",
+    "name": "Issued Alert History Panel",
+    "description": "Displays a historical record of all previously issued severe weather alerts for review and compliance purposes.",
+    "stories": [
+      {
+        "name": "View history of issued alerts",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "id": "7ab0f3cb-1db9-4ce6-bc95-392a4146566e",
+        "type": "story",
+        "description": "As a weather authority, I want to be able to view a history of all issued alerts so that I can review past communications and ensure compliance."
+      }
+    ]
+  },
+  "Forecast Notification Settings Panel": {
+    "id": "117036eb-c53e-4b1d-b783-ba8ddec945c1",
+    "name": "Forecast Notification Settings Panel",
+    "description": "Allows users to manage their forecast notification preferences, including enabling/disabling notifications and selecting specific locations for receiving them.",
+    "stories": [
+      {
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Enable/Disable Forecast Notifications",
+        "id": "c3d1a015-0725-4b5f-8222-5be577c60383",
+        "description": "As a user, I want to enable or disable forecast notifications so that I can control when I receive updates."
+      },
+      {
+        "name": "Customize Notification Content",
+        "id": "ce3cac1f-4bc8-4698-a33b-515c1638a10d",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "description": "As a user, I want to customize the type of weather information (e.g., temperature, precipitation, wind) included in my forecast notifications so that I only receive the details most relevant to me."
+      },
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Choose Notification Frequency Type",
+        "id": "b7e70b31-d5f0-4369-9366-69d40e939b44",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "type": "story",
+        "description": "As a user, I want to choose between daily or periodic notification frequencies so that I can decide how often I receive updates."
+      },
+      {
+        "id": "0c226bb3-17eb-4c2d-a798-1169ca14619a",
+        "name": "Specify Daily Notification Time",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "description": "As a user, I want to specify a preferred time of day for my daily forecast notifications so that I receive the update when it's most convenient for me."
+      },
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "id": "eb9f54bf-13b3-4d86-a903-297fcc15c21a",
+        "name": "Set Periodic Notification Schedule",
+        "description": "As a user, I want to select specific days of the week and times for my periodic forecast notifications so that I receive updates only when and where I need them."
+      },
+      {
+        "name": "View Current Notification Settings",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "id": "6b8a1191-9be6-4e53-9c16-39ec4b989500",
+        "description": "As a user, I want to view my current forecast notification settings so that I can easily understand and manage my preferences."
+      }
+    ]
+  },
+  "Forecast Notification Display": {
+    "id": "531b9353-0d1c-40ff-97f2-430699765412",
+    "name": "Forecast Notification Display",
+    "description": "Displays the daily weather forecast notification to the user at their chosen time and for their selected location.",
+    "stories": [
+      {
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "id": "ae683d61-fb85-47fc-80d6-5726c8874c76",
+        "name": "Receive Daily Forecast Notification",
+        "description": "As a user, I want to receive a daily forecast notification at my chosen time and for my selected location so that I am prepared for the day's weather."
+      },
+      {
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Receive Periodic Forecast Notification",
+        "id": "255feab0-1f0d-4520-8a3c-6d1ac39bd2db",
+        "description": "As a user, I want to receive periodic forecast notifications on my selected schedule and for my chosen location so that I get timely updates throughout the week."
+      }
+    ]
+  },
+  "Weather Advisory Creation Panel": {
+    "id": "2a7e656c-fb73-42af-9452-9fa4e1161c57",
+    "name": "Weather Advisory Creation Panel",
+    "description": "Allows administrators to create, define geographic areas, set validity periods, and publish weather advisories/alerts.",
+    "stories": [
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Create Weather Advisory",
+        "id": "9f79d3b7-97fd-42a4-9669-17fc0d6a9a9b",
+        "type": "story",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "description": "As a weather alert administrator, I want to create a new weather advisory with specific details so that I can inform users about non-severe but relevant conditions."
+      },
+      {
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Define Alert Geographic Area",
+        "type": "story",
+        "id": "5caa44e8-c19e-4c51-bf27-f5ade06968c5",
+        "description": "As a weather alert administrator, I want to specify the geographic area for a weather alert so that only users in the affected region receive it."
+      },
+      {
+        "id": "1b2bee19-635f-4e6e-8701-f221dd0bbeb6",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "name": "Set Alert Validity Period",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a weather alert administrator, I want to set the start and end times for a weather alert so that alerts are active only when necessary."
+      },
+      {
+        "name": "Publish Weather Alert",
+        "type": "story",
+        "id": "dfbb0048-0b00-4f1c-a085-c06539358288",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a weather alert administrator, I want to publish a weather alert so that it is delivered to affected users promptly."
+      }
+    ]
+  },
+  "Weather Alert Management Panel": {
+    "id": "e6654603-6292-42f6-8ae7-f74fbeee2eae",
+    "name": "Weather Alert Management Panel",
+    "description": "Allows administrators to view, modify, or cancel active weather alerts.",
+    "stories": [
+      {
+        "type": "story",
+        "id": "824b0345-a128-4e13-8821-1cd3a7bce87d",
+        "name": "Modify or Cancel Active Alert",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a weather alert administrator, I want to modify or cancel an active weather alert so that I can correct information or remove outdated alerts."
+      }
+    ]
+  },
+  "Weather Notification Display Panel": {
+    "id": "7505c719-0881-4c06-b5d7-7cc0ac097ba3",
+    "name": "Weather Notification Display Panel",
+    "description": "Displays timely weather notifications and advisories relevant to the user's location.",
+    "stories": [
+      {
+        "type": "story",
+        "name": "Receive Timely Weather Notifications",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "id": "c659142b-e48d-4608-adb3-514f9b754b8a",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a user, I want to receive timely notifications for weather advisories relevant to my location so that I am aware of non-severe but important conditions."
+      },
+      {
+        "type": "story",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "name": "View Weather Alert Details",
+        "id": "dabced66-6192-4145-86f2-80c094f7c76f",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a user, I want to view the full details of a received weather alert so that I can understand the specific conditions and recommended actions."
+      }
+    ]
+  },
+  "User Alert Preferences Panel": {
+    "id": "84dc7db5-5017-4051-81ee-1c40c47adbfd",
+    "name": "User Alert Preferences Panel",
+    "description": "Allows users to manage their personal weather alert preferences, including location and alert types.",
+    "stories": [
+      {
+        "name": "Manage Alert Preferences",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "id": "8cc71c44-e5f3-4444-9eb5-79f888ebc4e8",
+        "type": "story",
+        "description": "As a user, I want to manage my weather alert preferences (e.g., location, type) so that I only receive alerts that are most relevant to me."
+      },
+      {
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "View Notification Preferences",
+        "epic_id": "04bbcdd1-db64-4632-bcbe-3020d4d79734",
+        "id": "e06ba1fb-fc3d-4c95-8512-4c5cabaf8ff2",
+        "description": "As a user, I want to view my current notification preferences so that I can understand how I will receive alerts."
+      },
+      {
+        "epic_id": "04bbcdd1-db64-4632-bcbe-3020d4d79734",
+        "type": "story",
+        "name": "Manage Alert Type Subscriptions",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "a3481d17-cea0-4115-905f-921f8b3833c2",
+        "description": "As a user, I want to enable or disable specific types of weather alerts (e.g., severe weather, daily forecast) so that I only receive notifications relevant to my needs."
+      },
+      {
+        "type": "story",
+        "name": "Select Notification Delivery Methods",
+        "id": "8c5235ef-1ad3-42ea-8a2d-d6621f4de813",
+        "epic_id": "04bbcdd1-db64-4632-bcbe-3020d4d79734",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a user, I want to choose my preferred delivery method(s) (e.g., email, SMS, push notification) for each type of alert so that I receive notifications via my most convenient channels."
+      },
+      {
+        "name": "Configure Notification Frequency",
+        "epic_id": "04bbcdd1-db64-4632-bcbe-3020d4d79734",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "id": "2dcd32e3-4e23-403f-ab1e-dc0f819a10ed",
+        "description": "As a user, I want to set the frequency (e.g., immediate, daily, weekly) for each type of weather alert so that I receive information at an appropriate interval."
+      },
+      {
+        "type": "story",
+        "epic_id": "04bbcdd1-db64-4632-bcbe-3020d4d79734",
+        "name": "Save Notification Preference Changes",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "71917c4b-2857-4dd6-960c-98d45edc3a13",
+        "description": "As a user, I want to save my updated notification preferences so that my changes are applied and remembered."
+      },
+      {
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Enable/Disable push notifications",
+        "id": "c51bee40-db6b-4df0-9f7a-0a11ddd61704",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "description": "As a user, I want to be able to enable or disable push notifications for weather alerts so that I can control my immediate alert preferences."
+      },
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "name": "Specify email address for alerts",
+        "id": "206dfce2-b01b-41d6-ad7f-de3ab45eed80",
+        "description": "As a user, I want to be able to specify the email address where I receive weather alerts so that notifications are sent to my preferred inbox."
+      },
+      {
+        "id": "68c1ccaf-f50d-463c-b0fe-e81109afce98",
+        "name": "Enable/Disable email notifications",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "description": "As a user, I want to be able to enable or disable email notifications for weather alerts so that I can control whether I receive alerts via email."
+      },
+      {
+        "type": "story",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "id": "7d1a21b6-d55f-4185-81bf-2db19e2f40eb",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Specify phone number for SMS alerts",
+        "description": "As a user, I want to be able to specify the phone number where I receive SMS weather alerts so that notifications are sent to my preferred mobile device."
+      },
+      {
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "type": "story",
+        "name": "Enable/Disable SMS notifications",
+        "id": "0179fc4e-530c-4f82-9e00-8e695827b7c7",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a user, I want to be able to enable or disable SMS notifications for weather alerts so that I can control whether I receive alerts via text message."
+      }
+    ]
+  },
+  "Weather Alert Notification Display": {
+    "id": "c08f45be-85d1-4607-9309-594fe1560c47",
+    "name": "Weather Alert Notification Display",
+    "description": "Displays critical weather alerts to the user via push notifications or other in-app mechanisms.",
+    "stories": [
+      {
+        "name": "Receive weather alerts via push notification",
+        "id": "d91b8aaa-e591-40ba-b863-5ca46c6c3881",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "type": "story",
+        "description": "As a user, I want to receive weather alerts as push notifications on my device so that I am immediately informed of critical weather events."
+      },
+      {
+        "id": "3ff00558-6462-47eb-848b-78257039c19d",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "name": "Receive weather alerts via email",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "description": "As a user, I want to receive weather alerts via email so that I have a detailed record of important weather information."
+      },
+      {
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "name": "Receive weather alerts via SMS",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "03b9f00c-a3d8-469f-b59f-f683b4226ea5",
+        "description": "As a user, I want to receive weather alerts via SMS so that I can get critical updates even when I have limited internet access."
+      }
+    ]
+  },
+  "Application Loading Experience": {
+    "id": "9a89760f-3dcd-494a-9cd6-12e0d52b9aa2",
+    "name": "Application Loading Experience",
+    "description": "Manages and optimizes the initial loading, content loading, and overall responsiveness of the application to ensure a fast, seamless, and fluid user experience.",
+    "stories": [
+      {
+        "type": "story",
+        "name": "Fast Application Startup",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "id": "f32993a0-39dd-47c1-ba20-bbc609409ef1",
+        "description": "As a user, I want the application to load quickly when I launch it so that I can begin using it without unnecessary waiting."
+      },
+      {
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "id": "089a6236-be7f-4046-9926-7f13093ce702",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Quick Content Loading",
+        "description": "As a user, I want new pages, sections, or data within the application to load quickly so that I can navigate and access information efficiently."
+      },
+      {
+        "id": "168e55d7-10be-4f2f-8c20-3a8b268fd165",
+        "type": "story",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "name": "Smooth User Interactions",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want the application to respond instantly to my clicks, typing, and other inputs so that my interactions feel fluid and uninterrupted."
+      },
+      {
+        "id": "7f1e9939-2a96-4b13-9a33-fb15cee75afe",
+        "type": "story",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "name": "Rapid Action Completion",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want actions I initiate (e.g., saving, submitting, searching, filtering) to complete quickly so that I can proceed with my tasks without delay."
+      }
+    ]
+  },
+  "Application Resource Management": {
+    "id": "b7b5d944-bc31-4ee4-bde9-9ad101d4aa9e",
+    "name": "Application Resource Management",
+    "description": "Manages the application's internal resource consumption, including CPU, memory, battery, and network data usage, to ensure efficiency and optimize underlying technical performance.",
+    "stories": [
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Efficient Device Resource Usage",
+        "id": "470897a6-a338-4685-b15f-5b98010fc003",
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "description": "As a user, I want the application to consume minimal device resources (e.g., CPU, memory, battery) so that my device remains performant and its battery life is preserved."
+      },
+      {
+        "epic_id": "32c6af1f-f50e-4745-a5c6-51400b20cd47",
+        "id": "797a399e-7fb9-4e16-b697-fa9fc789b787",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Minimized Network Data Usage",
+        "type": "story",
+        "description": "As a user, I want the application to use minimal network data so that I can save on data costs and have a faster experience on limited or metered connections."
+      }
+    ]
+  },
+  "Application Navigation Panel": {
+    "id": "493961c5-7c36-4d3d-a791-a1fcdc645406",
+    "name": "Application Navigation Panel",
+    "description": "Provides users with clear and intuitive ways to navigate between different sections, features, and content within the application.",
+    "stories": [
+      {
+        "name": "Easy Application Navigation",
+        "type": "story",
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "id": "d1960935-6616-4476-97c2-9f5c73ba5c53",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want to easily find and access different sections and features of the application so that I can efficiently complete my tasks."
+      }
+    ]
+  },
+  "UI Element Clarity and Usability Panel": {
+    "id": "6f8baf0f-8660-477b-80f1-6f00580bc3ec",
+    "name": "UI Element Clarity and Usability Panel",
+    "description": "Ensures all interactive UI elements (buttons, links, input fields) have a clear and immediately understandable purpose, and provides clear and timely feedback on user actions (e.g., success messages, error alerts, loading indicators) to ensure users always understand the status and outcome of their operations.",
+    "stories": [
+      {
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "type": "story",
+        "id": "2f127cc5-0d80-4023-9652-c745b7bfbc39",
+        "name": "Clear UI Element Purpose",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want the purpose of all interactive elements (e.g., buttons, links, input fields) to be immediately clear so that I can confidently use the application without confusion."
+      },
+      {
+        "name": "Immediate Action Feedback",
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "id": "eab18c0f-8189-4428-9c9d-d7c97482f243",
+        "description": "As a user, I want to receive clear and timely feedback on my actions (e.g., success messages, error alerts, loading indicators) so that I always understand the status of my operations."
+      },
+      {
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "id": "ebc4e5e8-107e-4d4a-9540-475d3e10a337",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Helpful Error Messages",
+        "description": "As a user, I want to receive clear, actionable, and user-friendly error messages when something goes wrong so that I can understand the problem and easily resolve it."
+      }
+    ]
+  },
+  "Application Design System": {
+    "id": "f599cb39-cf85-4f41-901a-a93b82df1cba",
+    "name": "Application Design System",
+    "description": "This box encompasses all global design and usability standards for the application, including responsive design, content layout adaptation for various screen sizes and orientation changes, appropriate sizing and placement of interactive elements, navigation accessibility across devices, image and media scaling, and ensuring text readability across devices.",
+    "stories": [
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Consistent User Interface",
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "id": "288906fe-3997-49a2-b9ac-1b8fbf91b2b0",
+        "type": "story",
+        "description": "As a user, I want the application's layout, terminology, and interaction patterns to be consistent across all screens so that I can quickly learn and predict how to use new features."
+      },
+      {
+        "id": "8edca210-aeaf-4229-8d78-5ba6038e53ee",
+        "name": "Legible Content Presentation",
+        "epic_id": "baa0dc9b-b410-4b28-91da-0a0d9b8145c2",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "description": "As a user, I want all text and visual information to be presented in a clear, readable, and well-organized manner so that I can quickly comprehend the content without effort."
+      },
+      {
+        "id": "a128dd7f-4b0e-4a66-90d9-87bf26ed52fb",
+        "type": "story",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "name": "Modern and Clean User Interface",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want the application to have a modern and clean layout so that it is easy to navigate and visually appealing."
+      },
+      {
+        "type": "story",
+        "id": "f7338406-8cc7-4c55-ae64-ab88ea247d1d",
+        "name": "Consistent Branding Across Application",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want the application to display consistent branding elements (e.g., logo, color scheme, typography) across all screens so that I recognize it as a cohesive and professional product."
+      },
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Engaging Icons and Imagery",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "id": "18e461e7-15fe-4c17-afb9-85e72e41fdd1",
+        "type": "story",
+        "description": "As a user, I want the application to use engaging and relevant icons and imagery so that the interface is more intuitive and visually interesting."
+      },
+      {
+        "name": "Smooth UI Transitions and Animations",
+        "id": "a12aa592-adfb-44ae-bbbf-0fd98fed2d9a",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "type": "story",
+        "description": "As a user, I want the application to incorporate subtle and smooth transitions and animations so that interactions feel fluid and dynamic."
+      },
+      {
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "name": "Polished Interactive Elements",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "id": "41534cf1-0b02-4226-b470-5b32e6f63a45",
+        "type": "story",
+        "description": "As a user, I want interactive elements (e.g., buttons, forms, input fields) to have a refined and polished design so that they are intuitive to use and visually appealing."
+      },
+      {
+        "type": "story",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "High-Quality Visual Assets",
+        "epic_id": "9ccc4cef-bd62-4580-b77d-97078cc68b2c",
+        "id": "2174d3bb-4574-4b6e-a4d8-338b02074825",
+        "description": "As a user, I want the application to use high-quality graphics and visual assets so that the overall appearance is crisp and professional."
+      },
+      {
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "name": "Content Layout Adaptation for Screen Sizes",
+        "type": "story",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "id": "b5ba42e3-0b06-4a72-ad25-4abb9a1dd8c5",
+        "description": "As a user, I want the application's content and layout to automatically adjust when viewed on different screen sizes (e.g., phone, tablet) so that information is always clearly visible and easy to consume without manual zooming or scrolling."
+      },
+      {
+        "name": "Content Layout Adaptation for Orientation Changes",
+        "type": "story",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "id": "c96c7977-96d7-416b-9253-dad178432c12",
+        "description": "As a user, I want the application's content and layout to automatically re-arrange itself when I switch my device between portrait and landscape orientations so that the display remains optimized and readable."
+      },
+      {
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "type": "story",
+        "name": "Interactive Element Sizing and Placement",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "id": "68e23941-ab5c-4fa6-a76b-388f9960bfb8",
+        "description": "As a user, I want buttons, forms, and other interactive elements to be appropriately sized and positioned on any device screen size or orientation so that I can easily tap and interact with them without errors or difficulty."
+      },
+      {
+        "name": "Navigation Accessibility Across Devices",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "type": "story",
+        "id": "1ec7d6e9-981d-4109-b437-1d8bceb87052",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "description": "As a user, I want the application's navigation menus to be easily accessible and usable regardless of my device's screen size or orientation so that I can effortlessly move between different sections of the app."
+      },
+      {
+        "id": "f89bca0d-e14b-4844-8954-1b79f8ef8481",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "name": "Image and Media Scaling",
+        "type": "story",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "description": "As a user, I want images and other media within the application to scale and display correctly on any device screen size or orientation so that they are always fully visible, not distorted, and maintain their quality."
+      },
+      {
+        "name": "Text Readability Across Devices",
+        "epic_id": "9003a80e-459b-4ad8-9abc-7b8a54a778a8",
+        "type": "story",
+        "theme_id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503",
+        "id": "8d2d34e2-e6ed-49ef-8d4d-072cff8922c6",
+        "description": "As a user, I want all text within the application to remain legible and properly formatted on any device screen size or orientation so that I don't have to zoom or scroll horizontally to read it."
+      }
+    ]
+  }
+}

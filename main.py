@@ -16,7 +16,6 @@ from story_creation import *
 from app_queries import *
 from elo_rating_system import *
 from chroma_db import *
-from vectorstores import init_vectorstores, manager
 import uuid
 from typing import List, Dict, Any, Optional, Union
 import logging
@@ -26,6 +25,8 @@ import csv
 import random
 from langchain_core.messages import AIMessage, HumanMessage
 import os
+from ui_component_creation import box_user_stories_with_llm
+import vectorstores
 
 
 load_dotenv()
@@ -164,7 +165,7 @@ def main():
 
     # Initialize vectorstores with correct args
     print("Initializing vectorstores...")
-    manager = init_vectorstores(args)
+    vectorstores.init_vectorstores(args)
     print("Vectorstores initialized.")
 
     if args.llm == "anthropic":
@@ -187,11 +188,11 @@ def main():
         print("Using LLM: Gemini-2.5-flash (Google)")
 
     # Get retrievers
-    story_retriever = manager.get_retriever("rag_info", search_type="mmr", search_kwargs={"k": config.search_k})
-    pipeline_retriever = manager.get_retriever("pipeline_parts", search_type="mmr", search_kwargs={"k": config.search_k})
+    rag_info_retriever = vectorstores.manager.get_retriever("rag_info", search_type="mmr", search_kwargs={"k": config.search_k})
+    pipeline_retriever = vectorstores.manager.get_retriever("pipeline_parts", search_type="mmr", search_kwargs={"k": config.search_k})
 
     print("RAG DB status:")
-    print(f"Story retriever: {'OK' if story_retriever else 'NOT FOUND'}")
+    print(f"Story retriever: {'OK' if rag_info_retriever else 'NOT FOUND'}")
     print(f"Pipeline retriever: {'OK' if pipeline_retriever else 'NOT FOUND'}")
     print(f"Theme file path: {theme_file}")
 
@@ -229,14 +230,18 @@ def main():
     theme_docs = [
         Document(
             page_content=theme["description"],
-            metadata={"name": theme["name"], "id": theme["id"]}
+            metadata={
+                "name": theme["name"],
+                "id": theme["id"],
+                "type": "theme"
+            }
         )
         for theme in themes
     ]
     print(f"Loaded {len(theme_docs)} themes from {theme_file}")
-    story_retriever.vectorstore.add_documents(theme_docs)
-    print("Themes added to story retriever.")
-    
+    pipeline_retriever.vectorstore.add_documents(theme_docs)
+    print("Themes added to pipeline retriever.")
+
     #Epic generation
     #Only create new epics if epics_file does not exist
     if not os.path.exists(epics_file):
@@ -251,13 +256,18 @@ def main():
     epic_docs = [
         Document(
             page_content=epic["description"],
-            metadata={"name": epic["name"], "id": epic["id"], "theme_id": epic["theme_id"]}  
+            metadata={
+                "name": epic["name"],
+                "id": epic["id"],
+                "theme_id": epic["theme_id"],
+                "type": "epic"
+            }
         )
         for epic in epics
     ]
     print(f"Loaded {len(epic_docs)} epics from {epics_file}")
-    story_retriever.vectorstore.add_documents(epic_docs)
-    print("Epics added to story retriever.")
+    pipeline_retriever.vectorstore.add_documents(epic_docs)
+    print("Epics added to pipeline retriever.")
 
     # User story generation
     if not os.path.exists(user_stories_file):
@@ -276,18 +286,23 @@ def main():
                 "name": story["name"],
                 "id": story["id"],
                 "epic_id": story["epic_id"],
-                "theme_id": story["theme_id"]
+                "theme_id": story["theme_id"],
+                "type": "story"
             }
         )
         for story in user_stories
     ]
     print(f"Loaded {len(story_docs)} user stories from {user_stories_file}")
-    story_retriever.vectorstore.add_documents(story_docs)
-    print("User stories added to story retriever.")
+    pipeline_retriever.vectorstore.add_documents(story_docs)
+    print("User stories added to pipeline retriever.")
 #endregion
 
-#region: Story Refinmenet 
+#region: Story Refinement
+    with open(user_stories_file, "r") as f:
+        stories = json.load(f)
 
+    boxed_stories = box_user_stories_with_llm(llm, stories)
+    save_containers_to_files(boxed_stories)
 
 if __name__ == "__main__":
     main()

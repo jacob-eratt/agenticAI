@@ -1,0 +1,103 @@
+{
+  "Severe Weather Alert Notification System": {
+    "id": "c572f050-2f37-48d6-b7c6-f482d9f19d84",
+    "name": "Severe Weather Alert Notification System",
+    "description": "Handles the end-to-end process of receiving, processing, and displaying severe weather alerts, including the type of weather, affected geographic area, and recommended actions for users.",
+    "stories": [
+      {
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "name": "Receive immediate severe weather alerts",
+        "id": "b7360760-05bb-4972-bd69-4c68a92261ac",
+        "type": "story",
+        "description": "As an affected individual, I want to receive immediate notifications for severe weather events in my area so that I can take timely protective action."
+      },
+      {
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "name": "Understand severe weather type",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "id": "914ef587-0005-4999-9d61-1eb49f6f8aa6",
+        "description": "As an affected individual, I want to see the type of severe weather event (e.g., tornado, flood, blizzard) so that I understand the specific threat."
+      },
+      {
+        "name": "Identify affected geographic area",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "794c39cb-02b7-402a-aa6d-45c875070378",
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "type": "story",
+        "description": "As an affected individual, I want to know the specific geographic area impacted by the alert so that I can determine if I am in danger."
+      },
+      {
+        "epic_id": "b125dd69-a5b0-4f58-9dc7-d9b85655ad99",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "f7ce70f4-d4ec-4fc1-9b57-08c5e8df04b4",
+        "type": "story",
+        "name": "Receive recommended actions",
+        "description": "As an affected individual, I want to receive clear instructions on recommended actions (e.g., 'seek shelter,' 'evacuate') so that I know how to protect myself and my family."
+      },
+      {
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "type": "story",
+        "id": "dfbb0048-0b00-4f1c-a085-c06539358288",
+        "name": "Publish Weather Alert",
+        "description": "As a weather alert administrator, I want to publish a weather alert so that it is delivered to affected users promptly."
+      },
+      {
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "id": "3ff00558-6462-47eb-848b-78257039c19d",
+        "type": "story",
+        "name": "Receive weather alerts via email",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "description": "As a user, I want to receive weather alerts via email so that I have a detailed record of important weather information."
+      },
+      {
+        "id": "03b9f00c-a3d8-469f-b59f-f683b4226ea5",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "6f530bed-b4f2-4e36-abb9-4b6459f395da",
+        "type": "story",
+        "name": "Receive weather alerts via SMS",
+        "description": "As a user, I want to receive weather alerts via SMS so that I can get critical updates even when I have limited internet access."
+      }
+    ]
+  },
+  "Forecast Notification System": {
+    "id": "c04871c7-22d4-4665-a979-c0fc13e5243f",
+    "name": "Forecast Notification System",
+    "description": "Handles the end-to-end process of sending and receiving weather forecast notifications (daily and periodic), including backend delivery and frontend display.",
+    "stories": [
+      {
+        "type": "story",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "name": "Receive Daily Forecast Notification",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "ae683d61-fb85-47fc-80d6-5726c8874c76",
+        "description": "As a user, I want to receive a daily forecast notification at my chosen time and for my selected location so that I am prepared for the day's weather."
+      },
+      {
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "id": "255feab0-1f0d-4520-8a3c-6d1ac39bd2db",
+        "name": "Receive Periodic Forecast Notification",
+        "epic_id": "7bc3a36a-ef8b-48ca-b263-5ecbc3ab0b8e",
+        "type": "story",
+        "description": "As a user, I want to receive periodic forecast notifications on my selected schedule and for my chosen location so that I get timely updates throughout the week."
+      }
+    ]
+  },
+  "Weather Advisory Notification System": {
+    "id": "4d981eed-9e1b-408c-bc10-baf27b52bdde",
+    "name": "Weather Advisory Notification System",
+    "description": "Handles the end-to-end process of delivering and displaying timely notifications for non-severe but important weather advisories to users.",
+    "stories": [
+      {
+        "name": "Receive Timely Weather Notifications",
+        "type": "story",
+        "theme_id": "03b794ea-1b63-429c-90d9-051ef6d27f21",
+        "epic_id": "2e68f593-6191-4bc5-bbff-583df74b43eb",
+        "id": "c659142b-e48d-4608-adb3-514f9b754b8a",
+        "description": "As a user, I want to receive timely notifications for weather advisories relevant to my location so that I am aware of non-severe but important conditions."
+      }
+    ]
+  }
+}

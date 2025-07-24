@@ -2,26 +2,26 @@
   {
     "name": "Current & Forecast Weather",
     "description": "Provide accurate, real-time current weather conditions and detailed forecasts (hourly, daily) for user-selected locations.",
-    "id": "f6ede8f4-5b32-44c5-b8b2-75debd224710"
+    "id": "111f9368-13e5-4aca-993f-dfe5dad6aba5"
   },
   {
     "name": "Location Management & Personalization",
     "description": "Enable users to easily manage multiple locations, detect their current location, and personalize settings such as units and notification preferences.",
-    "id": "2c0fcb26-0e9d-455c-91e1-5c28cb5cd52d"
+    "id": "e6458c10-a615-4b0e-8be2-ade6f7b00bb3"
   },
   {
     "name": "Advanced Weather Visualizations",
     "description": "Offer interactive visual representations of weather data, including radar maps, precipitation forecasts, and historical trends.",
-    "id": "41f0f22c-e82a-4601-90eb-fcc83e770fbd"
+    "id": "5adf3d1a-a99c-44bf-a11f-719b12825c3a"
   },
   {
     "name": "Proactive Alerts & Notifications",
     "description": "Deliver timely and relevant weather alerts, severe weather warnings, and customizable daily forecast notifications.",
-    "id": "7d016b05-995b-4cdd-81cd-3e1a96a129b7"
+    "id": "03b794ea-1b63-429c-90d9-051ef6d27f21"
   },
   {
     "name": "User Experience & Performance",
     "description": "Ensure a fast, intuitive, and visually appealing user interface that provides a seamless experience across mobile devices.",
-    "id": "3835f0a6-5390-4e99-b328-4a9e4b1b42f4"
+    "id": "e049ab4b-9ee8-4f0e-9ab2-ff3dac2e5503"
   }
 ]
