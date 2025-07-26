@@ -5,3 +5,4 @@ __pycache__/
 story_vectorstore/
 question_store/
 rag_store/
+rag_store_information/

@@ -1,5 +1,5 @@
 import uuid
-from llm_tools import *
+from llm_tools.stories_to_box_tools import *
 from langchain.tools import Tool, StructuredTool
 from functools import partial
 from llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json, extract_json_from_llm

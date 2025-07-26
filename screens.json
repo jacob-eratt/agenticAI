@@ -1,0 +1,165 @@
+{
+  "Weather Dashboard": {
+    "name": "Weather Dashboard",
+    "description": "The primary user-facing screen for displaying current weather conditions, forecasts, and active alerts. It serves as the main entry point for users to get an overview of weather information, access detailed alert information, including temporary email alerts, and embodies the core UI element design principles for clarity, feedback, and visual quality across the application.",
+    "boxes": [
+      {
+        "id": "82d7204e-8811-489d-be96-eac917e84e0c",
+        "name": "Current Weather Display Panel",
+        "description": "A user-facing panel displaying current weather information, including core metrics, real-time interactive radar maps with zooming, panning, time-lapse capabilities, and a legend explaining radar map colors and symbols.",
+        "container": "frontend",
+        "story_ids": "[\"1e7f045a-ffad-400e-b3c7-9c105cf98287\", \"596d5578-b33b-46b4-94ca-2b0f862a5699\", \"6ee07436-4a84-41ef-b27f-97ea2e77eb4c\", \"a9899ed1-1b46-4e08-bbe6-f4ec1f3f0b26\", \"c13577d1-64d0-4f0b-b558-5bbe37e0eaf1\", \"879f42d8-7e8f-435b-8d61-6bd2b4044ecb\", \"a28bdaa9-6709-498d-8a6b-27df66fa7426\", \"d6f62fa5-2d86-4385-8126-b7eccbed2722\", \"5678f53c-2a70-4520-8518-b94ac98468be\"]"
+      },
+      {
+        "id": "4b663180-f323-44be-9703-186f44cdd6c9",
+        "name": "Hourly Forecast Display Panel",
+        "description": "A panel displaying detailed hourly weather forecasts, including temperature, 'feels like' temperature, precipitation details, wind speed and direction, and humidity levels.",
+        "container": "frontend",
+        "story_ids": "[\"027960a8-d4fb-4bf1-bd79-a713c31ea661\", \"7f1b783e-f0f3-4921-a426-60e61de89ab3\", \"4b08ff8c-3227-4698-9757-1ef2ebc4a126\", \"0f703734-04b1-4da2-8a7e-f97c040d4c0a\", \"35848817-593a-48aa-b8a6-b52ddfad8661\"]"
+      },
+      {
+        "id": "465980cc-96df-4cfd-a246-8cf8d957d08a",
+        "name": "Daily Weather Summary Panel",
+        "description": "A user-facing panel displaying a comprehensive summary of the daily weather forecast, including key conditions for the day.",
+        "container": "frontend",
+        "story_ids": "[\"5ea72502-6e3f-457f-a6de-3470f6e00922\"]"
+      },
+      {
+        "id": "f77c2cfa-3fae-4055-aea1-dc1480c60bea",
+        "name": "Multi-Day Forecast Display Panel",
+        "description": "A user-facing panel displaying daily weather forecasts for multiple upcoming days for a selected location.",
+        "container": "frontend",
+        "story_ids": "[\"965b6e69-d4fa-4187-b5f6-21e82cfb47a0\"]"
+      },
+      {
+        "id": "e8a8605f-44d0-4247-8f3c-e6e032abdac6",
+        "name": "Future Weather Map Display Panel",
+        "description": "A user-facing panel displaying predicted future weather patterns, including precipitation maps, and allowing users to select different timeframes and animate forecasts.",
+        "container": "frontend",
+        "story_ids": "[\"5db5511a-31ac-4afb-bb3e-bd1621f0123f\", \"9aeb43d1-aea0-4ec9-813c-788432e91c51\", \"716172f3-c684-4104-ad1d-59b33a437593\", \"be9f86c4-a2d7-4ffd-8558-9c0ec0de7e92\", \"3fa75ade-720a-4374-9871-709871ae93b7\", \"3ee68ec3-5e29-48f0-89ff-2d2adb1cb062\"]"
+      },
+      {
+        "id": "558c9de1-63a8-4cc7-9f7b-5d52cd9c29b2",
+        "name": "Weather Alert Details Display Panel",
+        "description": "A user-facing panel to display the full details of a received weather alert, including specific conditions and recommended actions.",
+        "container": "frontend",
+        "story_ids": "[\"dabced66-6192-4145-86f2-80c094f7c76f\"]"
+      },
+      {
+        "id": "20939a61-3b88-4b01-a980-690a8fd78bcf",
+        "name": "Temporary Email Alert Display",
+        "description": "A temporary UI component for displaying received email alerts, to be moved to the correct container.",
+        "container": "frontend",
+        "story_ids": "[]"
+      }
+    ]
+  },
+  "Location Management": {
+    "name": "Location Management",
+    "description": "A dedicated screen for users to search, select, save, edit, and manage all their preferred weather locations, including handling location permissions and auto-detection settings.",
+    "boxes": [
+      {
+        "id": "7ae1abf6-e619-4bd4-83a5-84aad02b05b9",
+        "name": "Location Search and Selection Panel",
+        "description": "A comprehensive panel for all location management interactions, including searching, selecting, auto-detecting, saving, viewing, editing, removing, prompting for location permissions, and handling location access denial by informing the user about the unavailability or limitation of location-dependent features.",
+        "container": "frontend",
+        "story_ids": "[\"91fc89b9-2632-4d69-8ad8-d642d633e877\", \"0f7f7778-3b91-496c-9868-c0320061145d\", \"fa918793-8114-4c7b-be73-293bc4b643b4\", \"3167175d-6486-4d4e-921b-3bd88443239e\", \"9a96b241-b066-4d6a-bbff-ffd18041ef60\", \"c270ba08-e850-4f61-985a-24fb034afe0b\", \"c050c156-388e-455c-b984-db74fc160d1c\", \"717f535a-e1d8-4e94-97c8-21cda292d3c6\", \"b2f1880f-5acc-4026-922f-22ce911d7623\", \"4d53f1c1-c75d-4837-a5ec-aa44c4b3d92e\", \"ded688ca-0dc5-4f97-8005-ee82e56e219e\", \"e7a734a4-2fe6-47a5-bf93-3e65690b7d2f\", \"a75ea8ef-3c0e-4263-95c1-dab0f3b45fe5\", \"98fffad9-b8a2-4030-83c1-85dd3ba0a6d3\", \"c42c7d4b-b20b-4ac3-a7e9-5224bbc1aae2\", \"58bc21bd-e638-41b2-b0e3-79ee625e0a0f\", \"0c9592fb-aff4-4866-aea9-7683c084ab86\", \"2cfde655-caa8-432b-bb7f-9179fe38208a\", \"569cca36-d623-4836-bf2b-89240d2a0a9c\", \"0547572f-95ce-4a63-af89-51fee56cfa4a\", \"42132799-11d0-4882-a774-8e9db63ba70e\", \"c8ae7b52-0c7e-4146-a8b5-bb0f60b1b63b\", \"55d7459b-fc68-4571-8ede-9ea60fe84652\"]"
+      }
+    ]
+  },
+  "Settings": {
+    "name": "Settings",
+    "description": "A dedicated screen for managing all application-wide user preferences and settings, including notification preferences, units of measurement, language, and alert delivery methods.",
+    "boxes": [
+      {
+        "id": "e27a3b3f-80fb-4a53-aab7-ebac2b2844df",
+        "name": "Personalization Settings Panel",
+        "description": "A user-facing panel where users can manage their application settings, including notification preferences, location-specific alert opt-in settings, and preferred alert delivery methods (e.g., push, SMS, email).",
+        "container": "frontend",
+        "story_ids": "[\"d7679fa9-1c06-439b-86fb-e129a7dec0da\", \"9e4e7046-1b6a-43aa-9986-fd1a063537fa\", \"780749fa-0961-46d2-aacf-3e5e40aa7101\", \"9b04e3cc-2160-44ae-ba27-5e097f98debc\", \"be657e74-9a63-40a7-ab25-9d16eed736b7\", \"6067385e-1c2d-4402-b07d-00226201b4d5\", \"fa99c967-6111-4270-af54-5b8ebddae575\"]"
+      },
+      {
+        "id": "e0169ea7-1ef4-4e5c-8c93-e2bdce285ae5",
+        "name": "Forecast Notification Preferences Panel",
+        "description": "A user-facing panel where users can view, understand, and manage all their forecast notification settings, including enabling/disabling notifications, selecting notification locations, customizing notification content, choosing notification frequency type, specifying daily notification times, and setting periodic notification schedules.",
+        "container": "frontend",
+        "story_ids": "[\"c3d1a015-0725-4b5f-8222-5be577c60383\", \"23c5501e-ee55-4f85-b7b5-702a6af7afdc\", \"ce3cac1f-4bc8-4698-a33b-515c1638a10d\", \"0c226bb3-17eb-4c2d-a798-1169ca14619a\", \"eb9f54bf-13b3-4d86-a903-297fcc15c21a\", \"6b8a1191-9be6-4e53-9c16-39ec4b989500\"]"
+      },
+      {
+        "id": "c746a148-26b2-4814-83dc-c455da61d064",
+        "name": "Alert Preferences Management Panel",
+        "description": "A user-facing panel where users can manage their weather alert preferences, including location and type of alerts received.",
+        "container": "frontend",
+        "story_ids": "[\"8cc71c44-e5f3-4444-9eb5-79f888ebc4e8\", \"e06ba1fb-fc3d-4c95-8512-4c5cabaf8ff2\", \"a3481d17-cea0-4115-905f-921f8b3833c2\", \"8c5235ef-1ad3-42ea-8a2d-d6621f4de813\", \"2dcd32e3-4e23-403f-ab1e-dc0f819a10ed\", \"71917c4b-2857-4dd6-960c-98d45edc3a13\", \"c51bee40-db6b-4df0-9f7a-0a11ddd61704\", \"206dfce2-b01b-41d6-ad7f-de3ab45eed80\", \"68c1ccaf-f50d-463c-b0fe-e81109afce98\", \"7d1a21b6-d55f-4185-81bf-2db19e2f40eb\", \"0179fc4e-530c-4f82-9e00-8e695827b7c7\"]"
+      }
+    ]
+  },
+  "Historical Weather Data": {
+    "name": "Historical Weather Data",
+    "description": "A screen dedicated to viewing and analyzing historical weather data, allowing users to select specific parameters and date ranges.",
+    "boxes": [
+      {
+        "id": "c361b86e-704e-4921-960a-10e4714f2872",
+        "name": "Historical Data Parameter Selection Panel",
+        "description": "A panel for selecting specific meteorological parameters and custom date ranges for historical weather data analysis.",
+        "container": "frontend",
+        "story_ids": "[\"4f9699c5-b5d2-4c98-8821-dbe94eb3475c\", \"6bb7751a-c42a-4821-89a2-fab2284f45a7\", \"c4bfac48-1472-4b70-9c1a-8a092b3d3087\"]"
+      },
+      {
+        "id": "a05a35ae-5b07-4c1d-9c99-7d8b27b3d476",
+        "name": "Historical Data Trend Graph Display Panel",
+        "description": "A panel for displaying historical weather data visualizations, including trend graphs, bar charts, summary statistics, and comparative views of different historical data periods.",
+        "container": "frontend",
+        "story_ids": "[\"922e64cf-4036-4d53-975b-404b37827f8a\", \"cca98055-9c13-4149-a66c-357cf9b1af53\", \"afb3b01c-5595-47fe-8c7e-aa9156346929\", \"8c4cf198-ca17-4867-8fe5-69141a744db2\"]"
+      }
+    ]
+  },
+  "Severe Weather Alert Management": {
+    "name": "Severe Weather Alert Management",
+    "description": "A dedicated screen for weather authorities to create, define, send, update, and cancel severe weather alerts, managing the full lifecycle of critical notifications.",
+    "boxes": [
+      {
+        "id": "aa4b7a5c-dfda-42f5-aa47-baea27a50f9f",
+        "name": "Severe Weather Alert Creation Panel",
+        "description": "A user-facing panel for weather authorities to create, define, specify, include actions, send, update, and cancel severe weather alerts, managing the entire lifecycle of critical notifications.",
+        "container": "frontend",
+        "story_ids": "[\"76e697f7-d20f-40f3-bd38-69272e0f1275\", \"f92fc62d-7b4c-47db-8f3a-a6e24790a90e\", \"a49be300-7417-4322-b021-ec1e3b8002c2\", \"0e54a7d0-4d5e-46ff-8557-a06c5a5bca5f\", \"9a4593c2-e8cf-499f-b51b-050805420784\", \"1e781c0f-a3cd-49d7-af03-1fa91067e1de\"]"
+      },
+      {
+        "id": "d33c7167-091b-4185-88b3-67a53642aec8",
+        "name": "Issued Alert History Display Panel",
+        "description": "A panel displaying a chronological history of all previously issued severe weather alerts for review and compliance.",
+        "container": "frontend",
+        "story_ids": "[\"7ab0f3cb-1db9-4ce6-bc95-392a4146566e\"]"
+      },
+      {
+        "id": "d742313d-0879-462d-bb23-4b68b4c0cf86",
+        "name": "Weather Advisory Creation Panel",
+        "description": "A user-facing panel for weather alert administrators to create and manage non-severe weather advisories.",
+        "container": "frontend",
+        "story_ids": "[\"9f79d3b7-97fd-42a4-9669-17fc0d6a9a9b\"]"
+      },
+      {
+        "id": "e5e2a5e7-6734-4736-a140-92aa5c84383c",
+        "name": "Alert Geographic Area Definition Panel",
+        "description": "A UI component for administrators to define and select the geographic area for a weather alert.",
+        "container": "frontend",
+        "story_ids": "[\"5caa44e8-c19e-4c51-bf27-f5ade06968c5\"]"
+      },
+      {
+        "id": "c4c6dd35-e86b-43e4-8b2d-dec77a21d347",
+        "name": "Alert Validity Period Setting Panel",
+        "description": "A panel for administrators to set the start and end times for weather alerts, defining their active period.",
+        "container": "frontend",
+        "story_ids": "[\"1b2bee19-635f-4e6e-8701-f221dd0bbeb6\"]"
+      },
+      {
+        "id": "85a2fc8f-d1c8-4ada-9e61-a40f0c2e4318",
+        "name": "Active Alert Management Panel",
+        "description": "A panel for administrators to modify or cancel active weather alerts.",
+        "container": "frontend",
+        "story_ids": "[\"824b0345-a128-4e13-8821-1cd3a7bce87d\"]"
+      }
+    ]
+  }
+}

@@ -177,6 +177,11 @@ You are an expert product manager and requirements analyst. Your task is to gene
 GOAL:
 - Carefully analyze the provided epic's name and description.
 - Generate distinct user stories that break down the epic into specific, valuable, and testable requirements from the user's perspective.
+- For each user story, include a "category" field with one of the following values:
+    - "frontend" (user-facing, visible in the UI)
+    - "backend" (server-side, data, or logic not directly visible to the user)
+    - "shared" (applies to both frontend and backend)
+    - "general_app_design" (applies to overall app structure, navigation, or experience)
 - Each user story should follow the format: "As a <user>, I want to <do something> so that <benefit>."
 - Ensure user stories are non-overlapping, each representing a unique aspect or functionality related to the epic.
 - User stories should be actionable, specific, and suitable for direct implementation or further refinement.
@@ -185,10 +190,10 @@ GOAL:
 CHAIN-OF-THOUGHT INSTRUCTIONS:
 - First, carefully review the epic and its context.
 - Identify all major user goals, actions, and benefits implied by the epic.
+- For each story, determine if it is primarily frontend, backend, shared, or general_app_design, and label it accordingly in the "type" field.
 - If you see multiple user types or scenarios, generate stories for each relevant case.
 - Ensure coverage of both core and edge cases, but do not duplicate or overlap stories.
 - Once you have all necessary information, thoughtfully generate a set of distinct user stories for the epic.
-- Really try to cover all functionality and consider the ui and backend when generating stories.
 - Ensure each user story is distinct and can be implemented independently.
 - Return the user stories in the required JSON format.
 
@@ -201,7 +206,7 @@ LIMITATIONS:
 
 RESPONSE FORMAT:
 - Output must be a valid JSON array containing user story objects.
-- Each user story object must include "title" and "description" fields.
+- Each user story object must include "name", "description", and "type" fields.
 - Do not include any other fields or metadata.
 
 EXAMPLE OUTPUT:
@@ -209,15 +214,23 @@ EXAMPLE OUTPUT:
   "stories": [
     {
       "name": "View current weather conditions",
-      "description": "As a user, I want to see the current weather for my selected location so that I can plan my day."
+      "description": "As a user, I want to see the current weather for my selected location so that I can plan my day.",
+      "category": "frontend"
     },
     {
-      "name": "Hourly weather forecast",
-      "description": "As a user, I want to view hourly weather forecasts so that I can prepare for changes throughout the day."
+      "name": "Fetch weather data from API",
+      "description": "As a system, I want to retrieve weather data from a third-party API so that I can provide up-to-date information to users.",
+      "category": "backend"
     },
     {
-      "name": "Save favorite locations",
-      "description": "As a user, I want to save my favorite locations so that I can quickly check the weather for places I care about."
+      "name": "Synchronize favorite locations",
+      "description": "As a user, I want my favorite locations to be available on all my devices so that I have a consistent experience.",
+      "category": "shared"
+    },
+    {
+      "name": "App navigation structure",
+      "description": "As a user, I want a clear navigation structure so that I can easily find different features in the app.",
+      "category": "general_app_design"
     }
   ]
 }
@@ -226,4 +239,4 @@ INPUT FORMAT:
 - Epic and context will be provided as plain text or JSON.
 - Output must be a JSON array containing user story objects.
 
-Begin by analyzing the epic and generating"""
+Begin by analyzing the epic and generating user stories, labeling each with its appropriate type."""
