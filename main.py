@@ -27,6 +27,9 @@ from langchain_core.messages import AIMessage, HumanMessage
 import os
 from ui_component_creation import box_user_stories_with_llm
 import vectorstores
+from screen_creation import assign_boxes_to_screens_with_llm
+from stories_to_flow import generate_user_flows
+from flow_to_screen_conversion import decompose_flow_with_llm
 
 
 load_dotenv()
@@ -287,7 +290,8 @@ def main():
                 "id": story["id"],
                 "epic_id": story["epic_id"],
                 "theme_id": story["theme_id"],
-                "type": "story"
+                "type": "story",
+                "category": story["category"]  # Default to 'general' if not specified
             }
         )
         for story in user_stories
@@ -296,13 +300,113 @@ def main():
     pipeline_retriever.vectorstore.add_documents(story_docs)
     print("User stories added to pipeline retriever.")
 #endregion
+    
+#region: Flow Generation
+    # Generate user flows from user stories
+    if os.path.exists(user_stories_file):
+        with open(user_stories_file, "r", encoding="utf-8") as f:
+            all_user_stories = json.load(f)
+        # Filter for frontend user stories (category/type may be "frontend" or similar)
+        frontend_user_stories = [
+            story for story in all_user_stories
+            if story.get("category", story.get("category", "")).lower() == "frontend"
+        ]
+        print(f"Found {len(frontend_user_stories)} frontend user stories.")
+    else:
+        print(f"{user_stories_file} does not exist. No user stories to generate flows.")
+        frontend_user_stories = []
 
-#region: Story Refinement
-    with open(user_stories_file, "r") as f:
-        stories = json.load(f)
+    flows_file = "user_flows.json"
+    if frontend_user_stories:
+        if not os.path.exists(flows_file):
+            # Generate flows and save to file
+            generate_user_flows(llm, frontend_user_stories, flows_file)
+        else:
+            print(f"{flows_file} exists. Skipping flow generation.")
 
-    boxed_stories = box_user_stories_with_llm(llm, stories)
-    save_containers_to_files(boxed_stories)
+        # Add flows to vector DB
+        with open(flows_file, "r", encoding="utf-8") as f:
+            flows = json.load(f)
+
+        flow_docs = [
+            Document(
+                page_content=flow["description"] + "\n\nSteps:\n" + json.dumps(flow.get("steps", []), indent=2),
+                metadata={
+                    "name": flow["name"],
+                    "id": flow["flow_id"],
+                    "type": "flow"
+                }
+            )
+            for flow in flows
+        ]
+        pipeline_retriever.vectorstore.add_documents(flow_docs)
+        print("Flows added to pipeline retriever.")
+    else:
+        print("No frontend user stories found.")
+#endregion
+
+#region: Screen Generation
+    screen_data_folder = "screen_data"
+    os.makedirs(screen_data_folder, exist_ok=True)
+
+    screens_json = os.path.join(screen_data_folder, "screens.json")
+    component_types_json = os.path.join(screen_data_folder, "component_types.json")
+    component_instances_json = os.path.join(screen_data_folder, "component_instances.json")
+
+    if all(os.path.isfile(f) for f in [screens_json, component_types_json, component_instances_json]):
+        print("Screen/component JSON files already exist. Skipping screen/component generation.")
+    else:
+        print("Generating screens and components from user flows...")
+        # You should have 'flows', 'app_query', and 'llm' defined earlier in your pipeline
+        screens, component_types, component_instances = decompose_flow_with_llm(llm, flows, app_query)
+        # Save to JSON files
+        save_ui_state_to_json(screens, component_types, component_instances)
+        print(f"Saved screens to {screens_json}")
+        print(f"Saved component types to {component_types_json}")
+        print(f"Saved component instances to {component_instances_json}")
+#endregion
+
+
+
+
+#old method of ui creation going with a different pipeline approach
+#region: Story Clustering
+#     containers_folder = "containers"
+#     required_files = {"frontend.json", "backend.json", "shared.json", "infrastructure.json"}
+#     skip_boxing = False
+
+#     if os.path.isdir(containers_folder):
+#         existing_files = set(os.listdir(containers_folder))
+#         if required_files.issubset(existing_files):
+#             print("All container files exist. Skipping boxing of user stories.")
+#             skip_boxing = True
+
+#     if not skip_boxing:
+#         with open(user_stories_file, "r") as f:
+#             stories = json.load(f)
+#         boxed_stories = box_user_stories_with_llm(llm, stories)
+#         save_containers_to_files(boxed_stories)
+    
+#     boxes = load_boxes_from_jsons(containers_folder)
+#     print(f"Loaded {len(boxes)} boxes from {containers_folder}")
+#     add_boxes_to_vectordb(boxes, pipeline_retriever.vectorstore)
+#     print("Boxes added to pipeline retriever.")
+# #endregion: Story Clustering
+
+#     #region: Screen Creation
+#     screens_json = "screens.json"
+#     frontend_boxes = get_frontend_boxes(containers_folder)
+#     if not os.path.isfile(screens_json):
+#         # Run screen assignment and save
+#         screens = assign_boxes_to_screens_with_llm(llm, frontend_boxes, app_query)
+#         save_screens_to_json(screens, screens_json)
+
+#     # Always load screens from JSON
+#     screens = load_screens_from_json(screens_json)
+
+#     # Add screens to vector DB
+#     add_screens_to_vectordb(screens, pipeline_retriever.vectorstore)
+#     #endregion: Screen Creation
 
 if __name__ == "__main__":
     main()
