@@ -358,7 +358,7 @@ def main():
     else:
         print("Generating screens and components from user flows...")
         # You should have 'flows', 'app_query', and 'llm' defined earlier in your pipeline
-        screens, component_types, component_instances = decompose_flow_with_llm(llm, flows, app_query)
+        screens, component_types, component_instances = decompose_flow_with_llm(flows, app_query)
         # Save to JSON files
         save_ui_state_to_json(screens, component_types, component_instances)
         print(f"Saved screens to {screens_json}")

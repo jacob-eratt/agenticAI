@@ -3,6 +3,7 @@ import os
 import re
 from typing import Any, Type, Union
 import logging
+import ast
 from pydantic import BaseModel, ValidationError
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -95,7 +96,7 @@ def extract_json_from_llm(llm_output, key="output"):
 
 def call_agent(llm: Union[ChatOpenAI, ChatAnthropic, ChatXAI, ChatGoogleGenerativeAI], prompt_template: ChatPromptTemplate, input_text: str, tools: list, memory=None, verbose: bool = True) -> str:
     agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt_template)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose, max_iterations=30)  # Increase max_iterations if needed
     # Properly extract chat history from memory object
     if memory and hasattr(memory, "load_memory_variables"):
         messages = memory.load_memory_variables({}).get("chat_history", [])
@@ -318,3 +319,40 @@ def save_ui_state_to_json(screens, component_types, component_instances):
     ]
     with open("component_instances.json", "w", encoding="utf-8") as f:
         json.dump(component_instances_json, f, indent=2)
+
+def safe_parse_props(props):
+    if isinstance(props, dict):
+        return props
+    if isinstance(props, str):
+        try:
+            result = ast.literal_eval(props)
+            if isinstance(result, dict):
+                return result
+            raise ValueError("Parsed props string is not a dict")
+        except Exception as e:
+            raise ValueError(f"Could not parse props string as dict: {e}")
+    raise ValueError("props must be a dict or a string representing a dict")
+
+def safe_parse_supported_props(supported_props):
+    if isinstance(supported_props, list):
+        return supported_props
+    if isinstance(supported_props, str):
+        try:
+            result = ast.literal_eval(supported_props)
+            if isinstance(result, list):
+                return result
+            raise ValueError("Parsed supported_props string is not a list")
+        except Exception as e:
+            raise ValueError(f"Could not parse supported_props string as list: {e}")
+    raise ValueError("supported_props must be a list or a string representing a list")
+
+
+def save_dict_to_file(data, filename):
+    with open(filename, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2)
+
+def load_dict_from_file(filename):
+    if os.path.exists(filename):
+        with open(filename, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}

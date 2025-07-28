@@ -1,5 +1,6 @@
 from langchain.tools import tool, Tool, StructuredTool
 import uuid
+from llm_utils import safe_parse_props, safe_parse_supported_props
 
 #region: Flow to Screen Conversion
 
@@ -10,12 +11,27 @@ class ComponentType:
         self.description = description
         self.supported_props = supported_props or []  # e.g., ["label", "icon", "size"]
 
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "supported_props": self.supported_props
+        }
+
 class ComponentInstance:
     def __init__(self, type_id, props=None):
         self.id = str(uuid.uuid4())
         self.type_id = type_id  # Reference to ComponentType
         self.props = props or {}
         self.usage_count = 0  # Track how often this instance is used
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "type_id": self.type_id,
+            "props": self.props,
+            "usage_count": self.usage_count
+        }
 
 class Screen:
     def __init__(self, name, description):
@@ -38,15 +54,18 @@ class Screen:
             for cid in self.component_instance_ids
             if cid in component_instances_registry
         ]
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "component_instance_ids": self.component_instance_ids
+        }
 
-# --- Tool Declarations (function signatures) ---
-def get_component_types(component_types):
-    return list(component_types.values())
-
-def get_component_type_details(type_id, component_types):
-    return component_types.get(type_id)
+# === Component Type Tools ===
 
 def add_component_type(name, description, supported_props, component_types):
+    supported_props = safe_parse_supported_props(supported_props)
     new_type = ComponentType(name, description, supported_props)
     component_types[new_type.id] = new_type
     return new_type.id
@@ -66,9 +85,17 @@ def edit_component_type(type_id, new_name=None, new_description=None, new_suppor
     if new_description and new_description != comp_type.description:
         comp_type.description = new_description
         changes.append("description")
-    if new_supported_props is not None and new_supported_props != comp_type.supported_props:
-        comp_type.supported_props = new_supported_props
-        changes.append("supported_props")
+    if new_supported_props is not None:
+        try:
+            parsed_props = safe_parse_supported_props(new_supported_props)
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Failed to parse new_supported_props: {e}"
+            }
+        if parsed_props != comp_type.supported_props:
+            comp_type.supported_props = parsed_props
+            changes.append("supported_props")
     if changes:
         return {
             "status": "success",
@@ -102,14 +129,36 @@ def delete_component_type(type_id, component_types, component_instances):
     }
 
 
-def get_component_instances(component_instances):
-    return list(component_instances.values())
+def get_component_types(component_types):
+    types = [ct.to_dict() for ct in component_types.values()]
+    return {
+        "status": "success",
+        "message": f"Retrieved {len(types)} component types.",
+        "component_types": types
+    }
 
-def get_component_instance_details(instance_id, component_instances):
-    return component_instances.get(instance_id)
+def get_component_type_details(type_id, component_types):
+    comp_type = component_types.get(type_id)
+    if comp_type:
+        return {
+            "status": "success",
+            "message": f"Component type '{type_id}' retrieved.",
+            "component_type": comp_type.to_dict()  # <-- FIXED
+        }
+    else:
+        return {
+            "status": "error",
+            "message": f"Component type '{type_id}' not found.",
+            "component_type": None
+        }
 
+def get_component_type_usage(type_id, component_instances):
+    return sum(1 for inst in component_instances.values() if inst.type_id == type_id)
+
+# === Component Instance Tools ===
 
 def add_component_instance(type_id, props, component_instances):
+    props = safe_parse_props(props)
     new_instance = ComponentInstance(type_id, props)
     if new_instance.id in component_instances:
         return {"status": "error", "message": f"Instance '{new_instance.id}' already exists."}
@@ -117,6 +166,7 @@ def add_component_instance(type_id, props, component_instances):
     return {"status": "success", "message": f"Instance '{new_instance.id}' created.", "instance_id": new_instance.id}
 
 def edit_component_instance(instance_id, new_props, component_instances):
+    new_props = safe_parse_props(new_props)
     inst = component_instances.get(instance_id)
     if not inst:
         return {
@@ -147,6 +197,53 @@ def delete_component_instance(instance_id, component_instances, screens):
     return {"status": "success", "message": f"Instance '{instance_id}' deleted.", "affected_screens": affected_screens}
 
 
+
+def get_component_instances(component_instances):
+    instances = [ci.to_dict() for ci in component_instances.values()]
+    return {
+        "status": "success",
+        "message": f"Retrieved {len(instances)} component instances.",
+        "component_instances": instances
+    }
+
+def get_component_instance_details(instance_id, component_instances):
+    inst = component_instances.get(instance_id)
+    if inst:
+        return {
+            "status": "success",
+            "message": f"Component instance '{instance_id}' retrieved.",
+            "component_instance": inst.to_dict()
+        }
+    else:
+        return {
+            "status": "error",
+            "message": f"Component instance '{instance_id}' not found.",
+            "component_instance": None
+        }
+
+def increment_instance_usage(instance_id, component_instances):
+    if instance_id in component_instances:
+        component_instances[instance_id].usage_count += 1
+
+def batch_increment_instance_usage(instance_ids: list, component_instances: dict):
+    for iid in instance_ids:
+        if iid in component_instances:
+            component_instances[iid].usage_count += 1
+    return {"status": "success", "message": f"Incremented usage for {len(instance_ids)} instances."}
+
+def batch_delete_component_instances(instance_ids: list, component_instances: dict, screens: dict):
+    deleted = 0
+    for iid in instance_ids:
+        if iid in component_instances:
+            # Remove from screens
+            for screen in screens.values():
+                if iid in screen.component_instance_ids:
+                    screen.remove_component_instance(iid)
+            del component_instances[iid]
+            deleted += 1
+    return {"status": "success", "message": f"Deleted {deleted} component instances."}
+
+# === Screen Tools ===
 
 def add_screen(name, description, screens):
     new_screen = Screen(name, description)
@@ -182,12 +279,6 @@ def delete_screen(screen_id, screens):
     del screens[screen_id]
     return {"status": "success", "message": f"Screen '{screen_id}' deleted.", "affected_instance_ids": instance_ids}
 
-def get_screens(screens):
-    return list(screens.values())
-
-def get_screen_details(screen_id, screens):
-    return screens.get(screen_id)
-
 def add_component_instance_to_screen(screen_id, instance_id, screens):
     screen = screens.get(screen_id)
     if not screen:
@@ -206,17 +297,77 @@ def remove_component_instance_from_screen(screen_id, instance_id, screens):
     screen.remove_component_instance(instance_id)
     return {"status": "success", "message": f"Instance '{instance_id}' removed from screen '{screen_id}'."}
 
+def batch_add_component_instances_to_screen(screen_id: str, instance_ids: list, screens: dict):
+    screen = screens.get(screen_id)
+    if not screen:
+        return {"status": "error", "message": f"Screen '{screen_id}' not found."}
+    added = 0
+    for iid in instance_ids:
+        if iid not in screen.component_instance_ids:
+            screen.add_component_instance(iid)
+            added += 1
+    return {"status": "success", "message": f"Added {added} instances to screen '{screen_id}'."}
+
+def get_screens(screens):
+    screens_list = [s.to_dict() for s in screens.values()]
+    return {
+        "status": "success",
+        "message": f"Retrieved {len(screens_list)} screens.",
+        "screens": screens_list
+    }
+
+def get_screen_full_details(screen_id, screens, component_instances):
+    screen = screens.get(screen_id)
+    if not screen:
+        return {
+            "status": "error",
+            "message": f"Screen '{screen_id}' not found.",
+            "screen": None
+        }
+    # Get basic screen info
+    screen_dict = screen.to_dict()
+    # Add full component instance details
+    screen_dict["component_instances"] = [
+        component_instances[cid].to_dict()
+        for cid in screen.component_instance_ids
+        if cid in component_instances
+    ]
+    return {
+        "status": "success",
+        "message": f"Screen '{screen_id}' retrieved with component details.",
+        "screen": screen_dict
+    }
+
+
+#endregion: Flow to Screen Conversion
+
+# --- Unused tools ---
+def get_screen_details(screen_id, screens):
+    screen = screens.get(screen_id)
+    if screen:
+        return {
+            "status": "success",
+            "message": f"Screen '{screen_id}' retrieved.",
+            "screen": screen.to_dict()
+        }
+    else:
+        return {
+            "status": "error",
+            "message": f"Screen '{screen_id}' not found.",
+            "screen": None
+        }
+
 def get_screen_contents(screen_id, screens, component_instances):
     screen = screens.get(screen_id)
     if screen:
-        return screen.get_component_instances(component_instances)
-    return []
-
-def get_component_type_usage(type_id, component_instances):
-    return sum(1 for inst in component_instances.values() if inst.type_id == type_id)
-
-def increment_instance_usage(instance_id, component_instances):
-    if instance_id in component_instances:
-        component_instances[instance_id].usage_count += 1
-
-#endregion: Flow to Screen Conversion
+        contents = [ci.to_dict() for ci in screen.get_component_instances(component_instances)]
+        return {
+            "status": "success",
+            "message": f"Retrieved {len(contents)} component instances from screen '{screen_id}'.",
+            "component_instances": contents
+        }
+    return {
+        "status": "error",
+        "message": f"Screen '{screen_id}' not found.",
+        "component_instances": []
+    }

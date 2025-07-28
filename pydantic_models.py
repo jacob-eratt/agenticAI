@@ -1,6 +1,7 @@
 import uuid
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from typing import Optional, List, Dict, Any 
+import ast
 
 #region: Story Creation Models
 class Theme(BaseModel):
@@ -95,28 +96,72 @@ class GetScreenDetailsInput(BaseModel):
     screen_name: str = Field(..., description="The name of the screen to retrieve details for.")
 
 
-#region: Flow to Screen Conversion Models
+
+
+
 class AddComponentTypeInput(BaseModel):
     name: str = Field(..., description="Name of the component type (e.g., Button, Panel)")
     description: str = Field(..., description="Description of the component type")
-    supported_props: Optional[List[str]] = Field(default_factory=list, description="List of supported prop names")
+    supported_props: Any = Field(default_factory=list, description="List of supported prop names (list or string)")
+
+    @validator("supported_props", pre=True)
+    def parse_supported_props(cls, v):
+        if isinstance(v, list):
+            return v
+        if isinstance(v, str):
+            try:
+                return ast.literal_eval(v)
+            except Exception as e:
+                raise ValueError(f"Could not parse supported_props string: {e}")
+        return v
 
 class EditComponentTypeInput(BaseModel):
     type_id: str = Field(..., description="ID of the component type to edit")
     new_name: Optional[str] = Field(None, description="New name for the component type")
     new_description: Optional[str] = Field(None, description="New description for the component type")
     new_supported_props: Optional[List[str]] = Field(None, description="New list of supported prop names")
+    @validator("new_supported_props", pre=True)
+    def parse_new_supported_props(cls, v):
+        if isinstance(v, list):
+            return v
+        if isinstance(v, str):
+            try:
+                return ast.literal_eval(v)
+            except Exception as e:
+                raise ValueError(f"Could not parse new_supported_props string: {e}")
+        return v
 
 class DeleteComponentTypeInput(BaseModel):
     type_id: str = Field(..., description="ID of the component type to delete")
 
 class AddComponentInstanceInput(BaseModel):
     type_id: str = Field(..., description="ID of the component type to instantiate")
-    props: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Props for this component instance")
+    props: Any = Field(default_factory=dict, description="Props for this component instance (dict or string)")
+
+    @validator("props", pre=True)
+    def parse_props(cls, v):
+        if isinstance(v, dict):
+            return v
+        if isinstance(v, str):
+            try:
+                return ast.literal_eval(v)
+            except Exception as e:
+                raise ValueError(f"Could not parse props string: {e}")
+        return v
 
 class EditComponentInstanceInput(BaseModel):
     instance_id: str = Field(..., description="ID of the component instance to edit")
     new_props: Optional[Dict[str, Any]] = Field(None, description="New props for this component instance")
+    @validator("new_props", pre=True)
+    def parse_new_props(cls, v):
+        if isinstance(v, dict):
+            return v
+        if isinstance(v, str):
+            try:
+                return ast.literal_eval(v)
+            except Exception as e:
+                raise ValueError(f"Could not parse supported_props string: {e}")
+        return v
 
 class DeleteComponentInstanceInput(BaseModel):
     instance_id: str = Field(..., description="ID of the component instance to delete")
@@ -158,3 +203,50 @@ class GetComponentInstanceUsageInput(BaseModel):
 
 class IncrementInstanceUsageInput(BaseModel):
     instance_id: str = Field(..., description="The ID of the component instance to increment usage for.")
+
+class BatchAddComponentInstancesToScreenInput(BaseModel):
+    screen_id: str = Field(..., description="The ID of the screen.")
+    instance_ids: List[str] = Field(..., description="List of component instance IDs to add.")
+
+    @validator("instance_ids", pre=True)
+    def parse_instance_ids(cls, v):
+        if isinstance(v, list):
+            return v
+        if isinstance(v, str):
+            try:
+                # Handles both "[...]" and "['...', ...]"
+                return list(eval(v))
+            except Exception as e:
+                raise ValueError(f"Could not parse instance_ids string: {e}")
+        return v
+
+class BatchIncrementInstanceUsageInput(BaseModel):
+    instance_ids: List[str] = Field(..., description="List of component instance IDs.")
+
+    @validator("instance_ids", pre=True)
+    def parse_instance_ids(cls, v):
+        if isinstance(v, list):
+            return v
+        if isinstance(v, str):
+            try:
+                return list(eval(v))
+            except Exception as e:
+                raise ValueError(f"Could not parse instance_ids string: {e}")
+        return v
+
+class BatchDeleteComponentInstancesInput(BaseModel):
+    instance_ids: List[str] = Field(..., description="List of component instance IDs to delete.")
+
+    @validator("instance_ids", pre=True)
+    def parse_instance_ids(cls, v):
+        if isinstance(v, list):
+            return v
+        if isinstance(v, str):
+            try:
+                return list(eval(v))
+            except Exception as e:
+                raise ValueError(f"Could not parse instance_ids string: {e}")
+        return v
+
+class GetScreenFullDetailsInput(BaseModel):
+    screen_id: str = Field(..., description="The ID of the screen to get full details for.")

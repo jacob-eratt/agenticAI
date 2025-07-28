@@ -1,0 +1,855 @@
+[
+  {
+    "id": "2aedd09d-75c3-4fde-b7e5-9ffd9f3c14ea",
+    "name": "current_weather_panel",
+    "description": "Displays current temperature and 'feels like' temperature.",
+    "supported_props": [
+      "current_temperature",
+      "feels_like_temperature",
+      "precipitation_type",
+      "precipitation_intensity"
+    ]
+  },
+  {
+    "id": "663d4df8-38a7-4d76-a998-b0ebe88cf876",
+    "name": "current_weather_description_text",
+    "description": "Displays the current weather description text.",
+    "supported_props": [
+      "text",
+      "font_size"
+    ]
+  },
+  {
+    "id": "7ff1d0fd-19e2-472f-a8b2-21c24d020d33",
+    "name": "current_weather_icon",
+    "description": "Displays the current weather condition icon.",
+    "supported_props": [
+      "icon_name",
+      "size"
+    ]
+  },
+  {
+    "id": "7c902c90-30fa-455a-9c18-c476cd34e5e0",
+    "name": "humidity_display",
+    "description": "Displays humidity percentage",
+    "supported_props": [
+      "percentage"
+    ]
+  },
+  {
+    "id": "f9910d1b-b546-4f9b-bd60-6bcf87a5f5ee",
+    "name": "wind_display",
+    "description": "Displays wind speed and direction",
+    "supported_props": [
+      "speed",
+      "direction"
+    ]
+  },
+  {
+    "id": "42a7c5b4-44b6-4452-ab96-ef530606bad7",
+    "name": "location_search_button",
+    "description": "A button to initiate a location search.",
+    "supported_props": [
+      "label"
+    ]
+  },
+  {
+    "id": "0eee88ff-ae7e-456a-a1c9-4c60950003b7",
+    "name": "location_search_input",
+    "description": "An input field for entering location search queries.",
+    "supported_props": [
+      "placeholder",
+      "value"
+    ]
+  },
+  {
+    "id": "f46ce2a6-056b-4cc9-b828-d11b82a32a92",
+    "name": "location_search_results_list",
+    "description": "A list to display location search results.",
+    "supported_props": [
+      "items"
+    ]
+  },
+  {
+    "id": "fe5dd4a5-908c-4c6d-b0a4-cb1aff51e7e5",
+    "name": "last_updated_timestamp",
+    "description": "Displays the timestamp of the last weather data update.",
+    "supported_props": [
+      "timestamp_value",
+      "format_string"
+    ]
+  },
+  {
+    "id": "33b6b466-e3f5-4e48-985f-a71990b579c4",
+    "name": "hourly_forecast_summary_panel",
+    "description": "A panel summarizing the hourly forecast for a specific time range.",
+    "supported_props": [
+      "time_range",
+      "temperature_summary"
+    ]
+  },
+  {
+    "id": "854a29e8-f7ab-4317-9180-d17ed1ae7d1b",
+    "name": "hourly_forecast_list",
+    "description": "A list displaying detailed hourly forecast items.",
+    "supported_props": [
+      "forecast_items"
+    ]
+  },
+  {
+    "id": "aa2e3a90-ba97-4ba8-8235-8a010fb6b4bd",
+    "name": "hourly_forecast_display",
+    "description": "Displays detailed hourly weather data including time, temperature, and conditions.",
+    "supported_props": [
+      "time",
+      "temperature",
+      "condition",
+      "precipitation"
+    ]
+  },
+  {
+    "id": "c8cd154f-7330-4cde-a109-5917a7dfd169",
+    "name": "LocationSuggestionsList",
+    "description": "A list of location suggestions",
+    "supported_props": [
+      "items",
+      "on_select"
+    ]
+  },
+  {
+    "id": "85232999-49a9-4745-bf63-70c8bb1a5fbb",
+    "name": "daily_forecast_summary_panel",
+    "description": "A panel displaying a summary of the daily weather forecast.",
+    "supported_props": [
+      "date",
+      "high_temp",
+      "low_temp",
+      "condition_icon"
+    ]
+  },
+  {
+    "id": "55253ad0-b751-4b54-bb0c-4aa8d07d4a89",
+    "name": "daily_forecast_list",
+    "description": "A scrollable list displaying multiple daily weather forecast summaries.",
+    "supported_props": [
+      "forecast_items"
+    ]
+  },
+  {
+    "id": "7ca7c4c3-eca8-4981-b7d4-df7b0230d9fa",
+    "name": "upcoming_day_forecast_card",
+    "description": "A card displaying a summary of the forecast for an upcoming day.",
+    "supported_props": [
+      "date",
+      "high_temperature",
+      "low_temperature",
+      "condition_icon",
+      "condition_description"
+    ]
+  },
+  {
+    "id": "f56ae9ad-6188-4cc7-9a27-70106edd068e",
+    "name": "daily_weather_details_panel",
+    "description": "A panel displaying comprehensive weather details for a specific day.",
+    "supported_props": [
+      "date",
+      "high_temperature",
+      "low_temperature",
+      "condition_icon",
+      "condition_description",
+      "sunrise_time",
+      "sunset_time",
+      "uv_index",
+      "humidity",
+      "wind_speed",
+      "precipitation_chance"
+    ]
+  },
+  {
+    "id": "e2d5f998-206b-44fd-a5c1-612a347df985",
+    "name": "add_location_button",
+    "description": "A button to add a selected location to the saved list.",
+    "supported_props": [
+      "label",
+      "on_tap"
+    ]
+  },
+  {
+    "id": "cbab13d3-c191-442e-80b9-baa8a4201f8e",
+    "name": "saved_locations_list",
+    "description": "A list displaying the user's saved locations.",
+    "supported_props": [
+      "locations",
+      "on_select_location",
+      "on_delete_location"
+    ]
+  },
+  {
+    "id": "6b9a4c30-5589-4a6f-a71a-851bfdf65658",
+    "name": "location_management_button_type",
+    "description": "A button for managing locations.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "f03657a1-a816-46e0-9084-737b6766dc42",
+    "name": "DeleteIcon",
+    "description": "An icon used to delete an item",
+    "supported_props": [
+      "icon_name",
+      "size",
+      "color"
+    ]
+  },
+  {
+    "id": "079fe909-b904-49cb-bc7d-33aba1c7ad4d",
+    "name": "ConfirmationDialog",
+    "description": "A dialog for confirming user actions",
+    "supported_props": [
+      "title",
+      "message",
+      "confirm_text",
+      "cancel_text"
+    ]
+  },
+  {
+    "id": "ddd0bbea-8565-4969-b6c5-aa31627e9568",
+    "name": "ConfirmButton",
+    "description": "A button to confirm an action within a dialog",
+    "supported_props": [
+      "label",
+      "color"
+    ]
+  },
+  {
+    "id": "2c0d3b37-3573-417c-b19c-574bdce56dd6",
+    "name": "BackButton",
+    "description": "A button to navigate back to the previous screen",
+    "supported_props": [
+      "icon_name",
+      "label"
+    ]
+  },
+  {
+    "id": "0a37aa77-7034-43e0-b000-52a3e26c379a",
+    "name": "set_as_default_button_type",
+    "description": "A button to set a saved location as the default.",
+    "supported_props": [
+      "label",
+      "on_tap"
+    ]
+  },
+  {
+    "id": "2d32a526-5341-4430-8505-824c4d52abe5",
+    "name": "manage_locations_button",
+    "description": "Button to navigate to the location management screen.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "ec56188b-7fe0-4072-a77d-32fb8fb67762",
+    "name": "saved_locations_list",
+    "description": "Displays a list of user-saved locations.",
+    "supported_props": [
+      "locations",
+      "on_select_location",
+      "on_reorder_locations"
+    ]
+  },
+  {
+    "id": "71efd813-ddb3-41f9-8bee-c7c0661783ab",
+    "name": "reorder_handle",
+    "description": "A handle for reordering items in a list.",
+    "supported_props": [
+      "aria_label"
+    ]
+  },
+  {
+    "id": "b1e4adcb-be2f-4931-b7c1-93f5371e10ed",
+    "name": "back_button",
+    "description": "Button to navigate back to the previous screen.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "30282b48-cae5-4f8b-98a0-b0691b7fa3e5",
+    "name": "location_carousel",
+    "description": "A carousel component to display multiple locations.",
+    "supported_props": [
+      "locations",
+      "current_location_index",
+      "on_location_change"
+    ]
+  },
+  {
+    "id": "7bbeeaf7-aac2-43d0-89c1-2a10bd41d4e5",
+    "name": "no_results_message",
+    "description": "A message component to display when no search results are found.",
+    "supported_props": [
+      "message_text",
+      "is_visible"
+    ]
+  },
+  {
+    "id": "a6f83b58-1943-4e4e-b1f4-434e24548745",
+    "name": "error_message_toast",
+    "description": "A transient message display for errors.",
+    "supported_props": [
+      "message",
+      "duration",
+      "is_visible"
+    ]
+  },
+  {
+    "id": "07773740-62c7-40f4-9ad8-b7f35d83f1ca",
+    "name": "EditIcon",
+    "description": "An icon to trigger editing of an item.",
+    "supported_props": [
+      "icon_name",
+      "on_press"
+    ]
+  },
+  {
+    "id": "46737508-dca8-4313-a4a0-4f2203d41642",
+    "name": "TextInput",
+    "description": "A text input field.",
+    "supported_props": [
+      "label",
+      "value",
+      "on_change"
+    ]
+  },
+  {
+    "id": "db48618a-67c3-4c5b-bb77-fb5a73ccd36b",
+    "name": "saved_location_list_item_delete_button",
+    "description": "A button within a saved location list item to delete the location.",
+    "supported_props": [
+      "location_id",
+      "on_delete"
+    ]
+  },
+  {
+    "id": "bd11ec5b-0381-4638-98f7-7512fe889eb4",
+    "name": "location_permission_denial_banner",
+    "description": "A banner displayed when location permission is denied.",
+    "supported_props": [
+      "message",
+      "action_text",
+      "is_visible"
+    ]
+  },
+  {
+    "id": "10b8bd9f-91b8-4ed9-acdc-c44279f1171c",
+    "name": "location_error_banner",
+    "description": "A banner to display location-related errors with an optional action.",
+    "supported_props": [
+      "message",
+      "action_text",
+      "action_link"
+    ]
+  },
+  {
+    "id": "79419714-fc4c-48b6-98a3-2b3a685cd5b9",
+    "name": "setting_item",
+    "description": "A generic item for settings lists, typically with a label.",
+    "supported_props": [
+      "label"
+    ]
+  },
+  {
+    "id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
+    "name": "toggle_switch",
+    "description": "A switch to toggle settings on or off.",
+    "supported_props": [
+      "label",
+      "is_enabled"
+    ]
+  },
+  {
+    "id": "e25fd29f-b5c9-4ef9-a234-76b3b31346f8",
+    "name": "back_button",
+    "description": "A button to navigate back to the previous screen.",
+    "supported_props": [
+      "icon",
+      "label"
+    ]
+  },
+  {
+    "id": "55d54720-a84a-4fe6-884a-994e96b098df",
+    "name": "settings_icon",
+    "description": "An icon to navigate to settings.",
+    "supported_props": [
+      "icon_name",
+      "size"
+    ]
+  },
+  {
+    "id": "1dd8db0d-38ca-4f0f-83a8-370c9b632958",
+    "name": "MenuItem",
+    "description": "A selectable item in a menu.",
+    "supported_props": [
+      "text",
+      "icon",
+      "onPress"
+    ]
+  },
+  {
+    "id": "083e8d14-3b4c-4505-be1d-bb8110636451",
+    "name": "RadioButtons",
+    "description": "A group of radio buttons for selecting a single option.",
+    "supported_props": [
+      "options",
+      "selectedOption",
+      "onSelect"
+    ]
+  },
+  {
+    "id": "870adff0-9bce-453a-9f47-a745155a6dc6",
+    "name": "Slider",
+    "description": "A slider for selecting a value from a range.",
+    "supported_props": [
+      "min",
+      "max",
+      "step",
+      "value",
+      "onChange"
+    ]
+  },
+  {
+    "id": "9bb03de9-ea75-49ca-aca7-3955d34f961c",
+    "name": "radar_map_button",
+    "description": "Button to navigate to the real-time radar map screen.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "96b87151-5a4d-4aab-9d79-000fe57240be",
+    "name": "interactive_radar_map",
+    "description": "An interactive map displaying real-time weather radar data.",
+    "supported_props": [
+      "data_source",
+      "zoom_level",
+      "center_coordinates"
+    ]
+  },
+  {
+    "id": "bd383421-2bd4-4946-a5ed-2eb3840fd7aa",
+    "name": "time_lapse_play_button",
+    "description": "A button to play time-lapse radar animation.",
+    "supported_props": [
+      "icon",
+      "label",
+      "state"
+    ]
+  },
+  {
+    "id": "56be45f3-125d-4a18-a270-9298ed82effa",
+    "name": "detailed_forecast_button",
+    "description": "A button to view detailed forecast, with text, icon, and a target screen.",
+    "supported_props": [
+      "text",
+      "icon",
+      "target_screen_id"
+    ]
+  },
+  {
+    "id": "20c1f440-8c13-4c4b-81d5-b344e4bf29e6",
+    "name": "precipitation_forecast_display",
+    "description": "Displays precipitation forecast data with various modes and indicators.",
+    "supported_props": [
+      "data_source",
+      "display_mode",
+      "visual_indicators"
+    ]
+  },
+  {
+    "id": "464bca70-3024-4d23-a523-b16423115ccc",
+    "name": "forecast_timeframe_selector",
+    "description": "A selector for different forecast timeframes (e.g., next hour, next 24 hours).",
+    "supported_props": [
+      "selected_timeframe",
+      "available_timeframes"
+    ]
+  },
+  {
+    "id": "7b866020-ad67-4e43-b003-64eaba5f3bb9",
+    "name": "historical_data_button",
+    "description": "Button to navigate to the historical data screen.",
+    "supported_props": [
+      "label",
+      "target_screen_id"
+    ]
+  },
+  {
+    "id": "e3283b7b-c114-4063-aa89-a54caf4aee5b",
+    "name": "select_location_button",
+    "description": "Button to select a location for historical data.",
+    "supported_props": [
+      "label",
+      "target_screen_id"
+    ]
+  },
+  {
+    "id": "0ece1835-617e-4e5d-ab0a-5e9a1aafb9d1",
+    "name": "historical_data_display_panel",
+    "description": "Panel to display historical weather data.",
+    "supported_props": [
+      "data_source",
+      "display_mode"
+    ]
+  },
+  {
+    "id": "37490adc-3443-4180-bf63-6ae754803e3d",
+    "name": "date_range_selector_button",
+    "description": "Button to open the date range picker.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "a8142be3-e95d-4f73-858d-70bef2be896e",
+    "name": "start_date_calendar_input",
+    "description": "Input field for selecting the start date.",
+    "supported_props": [
+      "selectedDate",
+      "minDate",
+      "maxDate"
+    ]
+  },
+  {
+    "id": "287ef139-3f43-4ee6-b721-d06dfd704ee6",
+    "name": "end_date_calendar_input",
+    "description": "Input field for selecting the end date.",
+    "supported_props": [
+      "selectedDate",
+      "minDate",
+      "maxDate"
+    ]
+  },
+  {
+    "id": "6367d9c0-0580-4663-9ee4-4484e4a6257f",
+    "name": "apply_date_range_button",
+    "description": "Button to apply the selected date range.",
+    "supported_props": [
+      "label",
+      "isEnabled"
+    ]
+  },
+  {
+    "id": "4a9826e7-2b00-497f-a386-94e8a67b3126",
+    "name": "historical_data_display",
+    "description": "Component to display historical weather data.",
+    "supported_props": [
+      "data",
+      "dateRange"
+    ]
+  },
+  {
+    "id": "0cef43bc-1ff1-454e-867d-87e84d25ff0f",
+    "name": "customize_parameters_button",
+    "description": "Button to navigate to the parameter selection screen.",
+    "supported_props": [
+      "label",
+      "target_screen_id"
+    ]
+  },
+  {
+    "id": "a7daa533-af2e-42c8-ba72-3553cc3e0603",
+    "name": "parameter_list_checkbox",
+    "description": "Checkbox for selecting a meteorological parameter.",
+    "supported_props": [
+      "label",
+      "is_selected",
+      "parameter_id"
+    ]
+  },
+  {
+    "id": "141da44c-ad83-4b4f-b390-e78daa7ac516",
+    "name": "apply_changes_button",
+    "description": "Button to apply selected parameters and return to the trend analysis screen.",
+    "supported_props": [
+      "label"
+    ]
+  },
+  {
+    "id": "e891b4d2-1fbc-4986-843c-36caf3810937",
+    "name": "trend_chart_display",
+    "description": "Displays a chart showing trends for selected meteorological parameters.",
+    "supported_props": [
+      "data_source",
+      "parameters_displayed",
+      "chart_type"
+    ]
+  },
+  {
+    "id": "55427c8e-1700-4f84-862c-d084580f36a6",
+    "name": "current_weather_panel",
+    "description": "Displays current weather conditions for a location.",
+    "supported_props": [
+      "location",
+      "temperature",
+      "conditions"
+    ]
+  },
+  {
+    "id": "e5d99778-532c-4430-9837-70f52aec6f03",
+    "name": "view_historical_data_button",
+    "description": "Button to navigate to historical data screen.",
+    "supported_props": [
+      "label",
+      "target_screen_id"
+    ]
+  },
+  {
+    "id": "93506520-4823-40c9-a782-83bcefda8f55",
+    "name": "historical_data_chart",
+    "description": "Interactive chart for historical weather data.",
+    "supported_props": [
+      "data_type",
+      "time_range",
+      "location"
+    ]
+  },
+  {
+    "id": "61f28eaf-cf28-462a-9a49-b133bd8a7b01",
+    "name": "time_range_selector",
+    "description": "Selector for different time ranges.",
+    "supported_props": [
+      "available_ranges",
+      "selected_range"
+    ]
+  },
+  {
+    "id": "05b8eb74-b2c5-4aad-aab7-32f0ed887f47",
+    "name": "alerts_settings_option",
+    "description": "Option to navigate to alert settings",
+    "supported_props": [
+      "label",
+      "navigation_target"
+    ]
+  },
+  {
+    "id": "d4147bb4-20fd-4c0c-b383-76c9109d04cc",
+    "name": "add_location_button",
+    "description": "Button to add a new location",
+    "supported_props": [
+      "label",
+      "icon",
+      "navigation_target"
+    ]
+  },
+  {
+    "id": "3a0fe70c-7d5b-44ba-8cdf-5a38bea60f73",
+    "name": "location_search_input",
+    "description": "Input field for searching locations",
+    "supported_props": [
+      "placeholder",
+      "value",
+      "on_change",
+      "on_submit"
+    ]
+  },
+  {
+    "id": "0b639982-d97f-47c1-9400-c96cc5cbf333",
+    "name": "location_search_results_list",
+    "description": "List to display location search results",
+    "supported_props": [
+      "items",
+      "on_select"
+    ]
+  },
+  {
+    "id": "73803ec3-4ca7-41fe-9a0c-fbe590f5b93f",
+    "name": "alert_locations_list",
+    "description": "List to display preferred alert locations",
+    "supported_props": [
+      "locations",
+      "on_remove"
+    ]
+  },
+  {
+    "id": "ff1125b7-d8a2-4e61-b56d-35eb26fe71a3",
+    "name": "alerts_icon",
+    "description": "Icon to navigate to the alerts screen.",
+    "supported_props": []
+  },
+  {
+    "id": "604a97c7-3ac4-4281-b5f4-aa853e9e2c10",
+    "name": "view_history_button",
+    "description": "Button to navigate to the alert history screen.",
+    "supported_props": []
+  },
+  {
+    "id": "095b5ced-e4db-409a-a672-e34830528604",
+    "name": "alert_history_list",
+    "description": "List displaying past severe weather alerts.",
+    "supported_props": []
+  },
+  {
+    "id": "ce223231-4891-4152-b24c-65b5acf9f3cf",
+    "name": "notification_frequency_selector",
+    "description": "Selector for setting the frequency of notifications (e.g., daily, hourly).",
+    "supported_props": [
+      "frequency_options",
+      "selected_frequency"
+    ]
+  },
+  {
+    "id": "929c3ee2-15d4-438e-9b5b-2474f3bd17ec",
+    "name": "notification_type_options",
+    "description": "Options for selecting different types of notifications (e.g., daily summary, severe weather alerts).",
+    "supported_props": [
+      "available_types",
+      "selected_types"
+    ]
+  },
+  {
+    "id": "9c1454c5-65e8-4259-a2eb-2210941ed03e",
+    "name": "weather_alerts_indicator",
+    "description": "Indicates the presence of weather alerts and provides a summary.",
+    "supported_props": [
+      "alert_count",
+      "severity",
+      "is_active"
+    ]
+  },
+  {
+    "id": "88b0c9cf-dc97-45ce-8066-7c9c84ee0380",
+    "name": "weather_alert_summary_card",
+    "description": "A card displaying a summary of a weather alert.",
+    "supported_props": [
+      "alert_id",
+      "title",
+      "severity",
+      "brief_description"
+    ]
+  },
+  {
+    "id": "888eb9f9-31d6-47cc-88a2-2902b351dedb",
+    "name": "alert_detail_content",
+    "description": "Displays the full details of a weather alert, including recommended actions.",
+    "supported_props": [
+      "alert_id",
+      "full_description",
+      "recommended_actions",
+      "issued_time",
+      "expires_time"
+    ]
+  },
+  {
+    "id": "b2ac666c-0349-4cfc-aff0-6a4766a9da56",
+    "name": "settings_button",
+    "description": "Button to navigate to the settings screen.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "b26f122f-e686-408b-8d8e-4bca358a942f",
+    "name": "weather_alerts_option",
+    "description": "Option to navigate to weather alert preferences.",
+    "supported_props": [
+      "label",
+      "icon"
+    ]
+  },
+  {
+    "id": "e8b212a8-a30c-40cb-a23b-12ce4733d64b",
+    "name": "location_alert_toggle",
+    "description": "Toggle switch for enabling/disabling alerts for a specific location.",
+    "supported_props": [
+      "location_name",
+      "is_enabled"
+    ]
+  },
+  {
+    "id": "6b6ec4df-c1a3-4b71-84ea-f6aafc5f373d",
+    "name": "alert_type_checkbox",
+    "description": "Checkbox for selecting different types of weather advisories.",
+    "supported_props": [
+      "alert_type",
+      "is_selected"
+    ]
+  },
+  {
+    "id": "e2f4c388-f037-40ec-b4ff-867188c0e15e",
+    "name": "save_button",
+    "description": "Button to save changes and return to the previous screen.",
+    "supported_props": [
+      "label"
+    ]
+  },
+  {
+    "id": "ce7fad07-4b8b-4316-99a9-7bea4ddb0b88",
+    "name": "dashboard_location_header",
+    "description": "Displays the current location and allows navigation to location management.",
+    "supported_props": [
+      "location_name",
+      "temperature"
+    ]
+  },
+  {
+    "id": "7b438b17-e344-4c50-94af-5da5cca9a661",
+    "name": "refresh_button",
+    "description": "A button to refresh data.",
+    "supported_props": [
+      "icon",
+      "label"
+    ]
+  },
+  {
+    "id": "e833d634-4957-4e91-b097-2dee7259f236",
+    "name": "loading_indicator",
+    "description": "A visual indicator for ongoing data loading.",
+    "supported_props": [
+      "is_visible",
+      "size"
+    ]
+  },
+  {
+    "id": "976c0f88-8f5c-4bd2-a55b-1b4b574587dc",
+    "name": "error_dialog",
+    "description": "A modal dialog for displaying error messages with actionable buttons.",
+    "supported_props": [
+      "title",
+      "message",
+      "primary_button_text",
+      "secondary_button_text"
+    ]
+  },
+  {
+    "id": "6245ba04-d519-4edb-9869-cac98290ebf9",
+    "name": "dialog_retry_button",
+    "description": "A button within a dialog to retry an action.",
+    "supported_props": [
+      "text"
+    ]
+  },
+  {
+    "id": "48f28517-7b5f-44d9-8c76-95758a75e145",
+    "name": "dialog_dismiss_button",
+    "description": "A button within a dialog to dismiss it.",
+    "supported_props": [
+      "text"
+    ]
+  },
+  {
+    "id": "edb16d0b-aea6-44f4-93cd-5691d2e9e207",
+    "name": "LayoutManager",
+    "description": "Manages UI layout adaptation based on device orientation changes.",
+    "supported_props": [
+      "portrait_layout_config",
+      "landscape_layout_config"
+    ]
+  }
+]

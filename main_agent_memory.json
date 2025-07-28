@@ -1,0 +1,17 @@
+{
+  "sub_agent_capabilities": [
+    "increment_instance_usage",
+    "add_component_instance_to_screen",
+    "edit_component_instance",
+    "edit_component_type",
+    "add_component_instance",
+    "get_components",
+    "batch_increment_instance_usage",
+    "batch_add_component_instances_to_screen",
+    "get_component_type_details",
+    "add_component_type",
+    "get_screen_full_details",
+    "add_screen",
+    "get_component_types"
+  ]
+}
