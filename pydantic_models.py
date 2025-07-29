@@ -136,6 +136,7 @@ class DeleteComponentTypeInput(BaseModel):
 
 class AddComponentInstanceInput(BaseModel):
     type_id: str = Field(..., description="ID of the component type to instantiate")
+    screen_id: str = Field(..., description="ID of the screen to add this instance to")
     props: Any = Field(default_factory=dict, description="Props for this component instance (dict or string)")
 
     @validator("props", pre=True)
@@ -152,6 +153,7 @@ class AddComponentInstanceInput(BaseModel):
 class EditComponentInstanceInput(BaseModel):
     instance_id: str = Field(..., description="ID of the component instance to edit")
     new_props: Optional[Dict[str, Any]] = Field(None, description="New props for this component instance")
+    new_screen_id: Optional[str] = Field(None, description="New screen ID for this component instance")
     @validator("new_props", pre=True)
     def parse_new_props(cls, v):
         if isinstance(v, dict):
@@ -250,3 +252,10 @@ class BatchDeleteComponentInstancesInput(BaseModel):
 
 class GetScreenFullDetailsInput(BaseModel):
     screen_id: str = Field(..., description="The ID of the screen to get full details for.")
+
+
+class SemanticSearchInput(BaseModel):
+    query: str = Field(..., description="The semantic search string.")
+    filter_key: Optional[str] = Field(None, description="Metadata key to filter on (e.g., 'type_id', 'name').")
+    filter_value: Optional[str] = Field(None, description="Value for the filter key.")
+    k: Optional[int] = Field(5, description="Number of results to return (default 5).")

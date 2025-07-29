@@ -61,6 +61,7 @@ def parse_llm_output_to_model(output: str, model: Type[BaseModel]) -> Any:
         print(f"Validation error: {e}")
 
 
+
 def build_prompt(template: str) -> ChatPromptTemplate:
     return ChatPromptTemplate.from_messages([
         ("system", template),
@@ -93,6 +94,7 @@ def extract_json_from_llm(llm_output, key="output"):
     if isinstance(llm_output, str):
         return extract_json(llm_output)
     return llm_output
+
 
 def call_agent(llm: Union[ChatOpenAI, ChatAnthropic, ChatXAI, ChatGoogleGenerativeAI], prompt_template: ChatPromptTemplate, input_text: str, tools: list, memory=None, verbose: bool = True) -> str:
     agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt_template)

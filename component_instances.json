@@ -1,1108 +1,1271 @@
 [
   {
-    "id": "1937cb54-a45a-4145-ac09-aebc83b85cf1",
-    "type_id": "2aedd09d-75c3-4fde-b7e5-9ffd9f3c14ea",
+    "id": "839756b5-8b3a-45d0-8cbe-faae7ddb45b6",
+    "type_id": "5fb14fae-8667-4ccc-af87-d5c902d0dc6e",
     "props": {
-      "precipitation_intensity": "Moderate",
-      "precipitation_type": "Rain"
-    },
-    "usage_count": 6
-  },
-  {
-    "id": "ef4d0be8-c0a5-4cce-ab9d-3dbbeb957f27",
-    "type_id": "663d4df8-38a7-4d76-a998-b0ebe88cf876",
-    "props": {
-      "text": "Sunny"
+      "wind_direction": "NW",
+      "feels_like_temperature": "27\u00b0C",
+      "humidity": "75%",
+      "current_temperature": "25\u00b0C",
+      "wind_speed": "15 mph"
     },
     "usage_count": 1
   },
   {
-    "id": "ca55cc48-8871-46cc-a7af-1bb88bd79381",
-    "type_id": "7ff1d0fd-19e2-472f-a8b2-21c24d020d33",
+    "id": "b3f86801-96bd-4384-b8ea-f7658f76a9dd",
+    "type_id": "d6eb0e7c-27fc-46f4-9442-b9bc0563f6a6",
     "props": {
-      "size": "medium",
-      "icon_name": "sun"
+      "text_content": "Current weather description"
     },
     "usage_count": 0
   },
   {
-    "id": "70ca3a00-0aca-402e-9db7-b9811749242e",
-    "type_id": "7c902c90-30fa-455a-9c18-c476cd34e5e0",
+    "id": "38cf66ae-db51-4061-b4fd-dae6e37e1e5c",
+    "type_id": "9d113c59-3e42-4914-ac78-41318679befb",
     "props": {
-      "percentage": 75.0
+      "icon_source": "weather_icon_placeholder",
+      "alt_text": "Current weather icon"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "da5b6373-561a-43b1-9dce-17bcd75f519a",
-    "type_id": "f9910d1b-b546-4f9b-bd60-6bcf87a5f5ee",
+    "id": "0612d0cb-a396-4820-bf94-711619274719",
+    "type_id": "6212f564-dc25-497e-a673-37ab9d3a179e",
     "props": {
-      "speed": "10 mph",
-      "direction": "NW"
+      "icon": "search_icon",
+      "label": "Manage Locations"
     },
-    "usage_count": 1
+    "usage_count": 2
   },
   {
-    "id": "c4952ff5-83e1-4801-a76d-66aa6ebcfebe",
-    "type_id": "42a7c5b4-44b6-4452-ab96-ef530606bad7",
-    "props": {},
-    "usage_count": 4
-  },
-  {
-    "id": "8ab6bb08-d0cc-412b-bc02-fb03a8d67485",
-    "type_id": "0eee88ff-ae7e-456a-a1c9-4c60950003b7",
-    "props": {},
-    "usage_count": 10
-  },
-  {
-    "id": "a142d7c0-d8c4-46d2-91ab-836ae43364d1",
-    "type_id": "f46ce2a6-056b-4cc9-b828-d11b82a32a92",
-    "props": {},
-    "usage_count": 5
-  },
-  {
-    "id": "747a1f88-7840-4b22-bbc0-755cd2a3ef88",
-    "type_id": "fe5dd4a5-908c-4c6d-b0a4-cb1aff51e7e5",
+    "id": "c2605c0b-9149-4e0c-ba65-70cd5361dd5b",
+    "type_id": "ef918170-51c8-46fd-966d-4eb55ba928d9",
     "props": {
-      "timestamp_value": "2023-10-27 10:30:00",
-      "format_string": "MM/DD/YYYY HH:mm"
+      "placeholder": "Enter city or zip code"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "1ad86712-2d91-477a-bf7e-b9bcbc58b18e",
-    "type_id": "33b6b466-e3f5-4e48-985f-a71990b579c4",
+    "id": "c7f9aca0-17bf-490b-b6bf-72ed1ec45c0a",
+    "type_id": "235f50a4-df44-4bcf-ba5b-5df0cf2796d9",
     "props": {
-      "time_range": "Next 24 hours",
-      "temperature_summary": "20\u00b0C - 25\u00b0C"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "b893b8ba-f066-44fb-a6f1-007067806257",
-    "type_id": "854a29e8-f7ab-4317-9180-d17ed1ae7d1b",
-    "props": {
-      "forecast_items": []
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "5830aa2f-d86c-4023-b6df-3a29e4a3104e",
-    "type_id": "42a7c5b4-44b6-4452-ab96-ef530606bad7",
-    "props": {
-      "label": "Search Location"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "30d21623-6825-4ee6-b300-e72cf042b914",
-    "type_id": "aa2e3a90-ba97-4ba8-8235-8a010fb6b4bd",
-    "props": {
-      "forecast_data": []
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "797a60f3-8a6e-4d28-8a79-7a7534859e2b",
-    "type_id": "c8cd154f-7330-4cde-a109-5917a7dfd169",
-    "props": {
-      "on_select": "handleLocationSelection",
       "items": []
     },
-    "usage_count": 3
-  },
-  {
-    "id": "44d0296b-d57c-44b7-b924-9447c84bf2ff",
-    "type_id": "85232999-49a9-4745-bf63-70c8bb1a5fbb",
-    "props": {
-      "high_temp": "25C",
-      "low_temp": "15C",
-      "date": "Today",
-      "condition_icon": "sunny"
-    },
     "usage_count": 1
   },
   {
-    "id": "16a9bc9a-83ee-4ed7-9c4a-cef10adcb877",
-    "type_id": "55253ad0-b751-4b54-bb0c-4aa8d07d4a89",
+    "id": "bf696c4e-ab3c-4135-afb8-d6861f10df4e",
+    "type_id": "d6eb0e7c-27fc-46f4-9442-b9bc0563f6a6",
+    "props": {
+      "text_content": "Last Updated: [Timestamp Placeholder]"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "2503c377-b597-45dc-8c22-18b43cc206f2",
+    "type_id": "e9d50d6e-4601-4114-bb97-11f82b32a629",
+    "props": {
+      "precipitation_chance": "10%",
+      "temperature": "25\u00b0C",
+      "condition_icon": "sunny",
+      "wind_speed": "15 km/h"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "befb3dfd-64f9-40ba-a269-98e6d2ff9500",
+    "type_id": "dd3ecec2-46f6-4396-8e81-c26a28044310",
+    "props": {
+      "hourly_data": [
+        {
+          "time": "10:00",
+          "temperature": "26\u00b0C",
+          "condition": "Sunny"
+        },
+        {
+          "temperature": "27\u00b0C",
+          "time": "11:00",
+          "condition": "Sunny"
+        }
+      ]
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "a7999849-d9f0-4e71-bd1a-9ef61e5987b0",
+    "type_id": "dd3ecec2-46f6-4396-8e81-c26a28044310",
+    "props": {
+      "hourly_data": []
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "9fbf9132-74cc-4fb0-b02c-bfa431e60736",
+    "type_id": "85624055-1a28-4ab2-9bad-13d8b524d82d",
+    "props": {
+      "summary_text": "Tap to view detailed daily forecast.",
+      "title": "Daily Forecast",
+      "date_range": "Next 7 Days"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "d6edebab-2d71-4a69-86a9-4e946f6c7324",
+    "type_id": "3c0061c1-7f70-4ab7-aa6e-a022cc0b2cb2",
     "props": {
       "forecast_items": []
     },
     "usage_count": 0
   },
   {
-    "id": "38ded6a0-b38a-4b7c-ba2a-fabbb6d5a5dd",
-    "type_id": "7ca7c4c3-eca8-4981-b7d4-df7b0230d9fa",
+    "id": "3bb79a92-6ed1-4373-b78c-feebe0a40f65",
+    "type_id": "3c0061c1-7f70-4ab7-aa6e-a022cc0b2cb2",
     "props": {
-      "high_temperature": "25\u00b0C",
-      "date": "Tomorrow",
-      "condition_description": "Partly Cloudy",
-      "condition_icon": "sunny",
-      "low_temperature": "15\u00b0C"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "55f30e89-ee98-493c-b3b5-d4f93a5f5090",
-    "type_id": "f56ae9ad-6188-4cc7-9a27-70106edd068e",
-    "props": {
-      "humidity": "65%",
-      "uv_index": "7",
-      "date": "2024-07-20",
-      "condition_description": "Partly cloudy with a chance of showers.",
-      "high_temperature": "28\u00b0C",
-      "low_temperature": "18\u00b0C",
-      "precipitation_chance": "30%",
-      "sunset_time": "08:30 PM",
-      "wind_speed": "15 km/h",
-      "condition_icon": "partly_cloudy",
-      "sunrise_time": "06:00 AM",
-      "name": "daily_weather_details_panel_instance"
+      "forecast_items": []
     },
     "usage_count": 0
   },
   {
-    "id": "56c19e5a-f3bf-4793-bf76-62e304b1b833",
-    "type_id": "42a7c5b4-44b6-4452-ab96-ef530606bad7",
-    "props": {},
+    "id": "5e4b752a-ba9a-4e23-a108-e6fa73c5b488",
+    "type_id": "85624055-1a28-4ab2-9bad-13d8b524d82d",
+    "props": {
+      "summary_text": "Comprehensive weather information for the day.",
+      "title": "Daily Weather Details",
+      "date_range": "Selected Day"
+    },
     "usage_count": 0
   },
   {
-    "id": "cf966e93-3222-45cf-90f7-92ebc10b5832",
-    "type_id": "0eee88ff-ae7e-456a-a1c9-4c60950003b7",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "b16c0a9c-cbb8-4a5a-ba84-9be70a2794aa",
-    "type_id": "e2d5f998-206b-44fd-a5c1-612a347df985",
+    "id": "428e22cc-b456-4cd5-acfb-b635eaeacba0",
+    "type_id": "6212f564-dc25-497e-a673-37ab9d3a179e",
     "props": {
-      "on_tap": "addLocation",
+      "icon": "add_icon",
       "label": "Add Location"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "d0704e93-9345-4b3a-975e-7dcaacf41bec",
-    "type_id": "cbab13d3-c191-442e-80b9-baa8a4201f8e",
+    "id": "85a6d24d-aea5-40c7-9c73-d4218890f107",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
     "props": {
-      "on_select_location": "viewLocationDetails",
-      "on_delete_location": "deleteLocation",
-      "locations": []
-    },
-    "usage_count": 6
-  },
-  {
-    "id": "2f96975e-e26e-40b0-9638-f31209c03b56",
-    "type_id": "6b9a4c30-5589-4a6f-a71a-851bfdf65658",
-    "props": {
-      "icon": "location_icon",
+      "style": "primary",
       "label": "Manage Locations"
-    },
-    "usage_count": 5
-  },
-  {
-    "id": "d829e7c0-a8d4-4882-abd1-88f0dcf46dba",
-    "type_id": "f03657a1-a816-46e0-9084-737b6766dc42",
-    "props": {
-      "size": 24.0,
-      "color": "red",
-      "icon_name": "delete"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "eebaac16-5cde-46d2-843f-48691ecacce7",
-    "type_id": "079fe909-b904-49cb-bc7d-33aba1c7ad4d",
-    "props": {
-      "title": "Confirm Deletion",
-      "message": "Are you sure you want to remove this location?",
-      "confirm_text": "Delete",
-      "cancel_text": "Cancel"
     },
     "usage_count": 0
   },
   {
-    "id": "74358c9c-f8c9-4d54-bb4e-fcfd1e315266",
-    "type_id": "ddd0bbea-8565-4969-b6c5-aa31627e9568",
+    "id": "e173c113-4579-4501-8136-f32fc737057a",
+    "type_id": "5b8501cb-4fe3-418c-9359-527a647f3482",
     "props": {
-      "color": "red",
-      "label": "Delete"
+      "icon_name": "delete",
+      "action": "delete_location"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "0933e42b-4abf-4701-9518-66742b483826",
-    "type_id": "2c0d3b37-3573-417c-b19c-574bdce56dd6",
+    "id": "3bfd4a18-986f-4a61-987f-851413563bf4",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
     "props": {
-      "icon_name": "arrow_back",
+      "style": "danger",
+      "label": "Confirm Delete"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "7c3d769b-2382-4a34-b627-abfdf8ef3c0b",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "style": "secondary",
       "label": "Back"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "3718513b-1c30-413e-8666-8a8efc334148",
-    "type_id": "0a37aa77-7034-43e0-b000-52a3e26c379a",
+    "id": "81f0e843-f685-45ab-9a04-4b9111c176ee",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
     "props": {
+      "style": "secondary",
       "label": "Set as Default"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "20d13df4-d841-47c7-90c0-21ce4863e76b",
-    "type_id": "2d32a526-5341-4430-8505-824c4d52abe5",
+    "id": "35b3f30b-d957-48f8-9c23-6bc7f217da85",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
     "props": {
-      "icon": "settings",
+      "icon": "settings_icon",
       "label": "Manage Locations"
     },
-    "usage_count": 2
+    "usage_count": 0
   },
   {
-    "id": "3d13c05f-d0f7-4987-bea2-bb2131aa68c7",
-    "type_id": "ec56188b-7fe0-4072-a77d-32fb8fb67762",
+    "id": "2c8066a7-ed62-419c-9a12-488f1b2200ee",
+    "type_id": "235f50a4-df44-4bcf-ba5b-5df0cf2796d9",
     "props": {
-      "on_select_location": "navigate_to_detail",
-      "on_reorder_locations": "update_order",
-      "locations": []
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "025d95ca-ecd9-48e5-b753-3b9a35dd468a",
-    "type_id": "71efd813-ddb3-41f9-8bee-c7c0661783ab",
-    "props": {
-      "aria_label": "Reorder location"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "612095bb-079b-44f1-88a4-89688a139e1f",
-    "type_id": "b1e4adcb-be2f-4931-b7c1-93f5371e10ed",
-    "props": {
-      "icon": "arrow_back",
-      "label": "Back"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "a90ad80a-0b58-4422-89e8-ac98e115740e",
-    "type_id": "30282b48-cae5-4f8b-98a0-b0691b7fa3e5",
-    "props": {
-      "on_location_change": "update_dashboard",
-      "current_location_index": 0.0,
-      "locations": []
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "78ead0df-10b2-4b57-a6ba-c2557002c75f",
-    "type_id": "7bbeeaf7-aac2-43d0-89c1-2a10bd41d4e5",
-    "props": {
-      "message_text": "No results found",
-      "is_visible": true
+      "reorder_enabled": true,
+      "items": []
     },
     "usage_count": 0
   },
   {
-    "id": "89b9920f-da45-4117-b058-44a3dbaf06a9",
-    "type_id": "a6f83b58-1943-4e4e-b1f4-434e24548745",
+    "id": "ceed2a28-e89d-42e3-a66e-2150bcf0b3c9",
+    "type_id": "ddc2be7e-2385-4739-ba74-69d950744492",
+    "props": {
+      "icon": "reorder_handle_icon",
+      "target_item_id": "N/A"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "5280dc2d-8bd9-47f5-927e-e40a6ce1bc5b",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "icon": "back_arrow_icon",
+      "label": "Back"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "d5abd3d7-ac10-4601-91eb-44795c3056cf",
+    "type_id": "34d5111f-1869-43d1-8587-d93127b83c76",
+    "props": {
+      "items": [],
+      "current_item_index": 0.0
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "978d00cb-022b-41db-902d-48d229ef5abb",
+    "type_id": "6212f564-dc25-497e-a673-37ab9d3a179e",
+    "props": {
+      "icon": "search_icon",
+      "label": "Search Location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "79782561-e111-4c58-9721-0006965c6a49",
+    "type_id": "ef918170-51c8-46fd-966d-4eb55ba928d9",
+    "props": {
+      "placeholder": "Enter location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "050d1125-a2aa-42e5-9fd2-d52ccaaf6c58",
+    "type_id": "d6eb0e7c-27fc-46f4-9442-b9bc0563f6a6",
+    "props": {
+      "text_content": "No results found"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "e2867f62-6a2d-4da4-9329-448e70f7a078",
+    "type_id": "ef918170-51c8-46fd-966d-4eb55ba928d9",
+    "props": {
+      "placeholder": "Search for a location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "ac83687f-97d0-4d78-8e9c-54a7d6e70d45",
+    "type_id": "235f50a4-df44-4bcf-ba5b-5df0cf2796d9",
+    "props": {
+      "items": []
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "b97c0454-87e1-4128-b57d-2089f304a345",
+    "type_id": "ef15a77c-c06d-4d62-8ade-9ebb0d285ac8",
     "props": {
       "duration": 3000.0,
-      "message": "An unexpected error occurred.",
-      "is_visible": false
+      "type": "error",
+      "message": "System error: Unable to add location."
     },
     "usage_count": 0
   },
   {
-    "id": "afaea8e4-87ce-4fb3-bb73-6889f969dabb",
-    "type_id": "42a7c5b4-44b6-4452-ab96-ef530606bad7",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "827344e4-31fe-4eaa-b28a-e6f7bdef487a",
-    "type_id": "07773740-62c7-40f4-9ad8-b7f35d83f1ca",
+    "id": "646d0ebd-5388-483a-a802-cd940c6c8699",
+    "type_id": "e3a58b51-f17a-4aca-92a3-c0807487078e",
     "props": {
-      "icon_name": "edit",
-      "on_press": "navigateToEditLocation"
+      "label": "Manage Locations"
     },
     "usage_count": 0
   },
   {
-    "id": "18e35ae9-a044-4d77-bc35-32d58bc060c1",
-    "type_id": "46737508-dca8-4313-a4a0-4f2203d41642",
+    "id": "6f90d2dc-1843-4b67-8170-0807fa5055d5",
+    "type_id": "8bc5cad1-2ac8-4acb-b0f6-a44770f55b44",
     "props": {
-      "value": "",
-      "on_change": "updateLocationName",
-      "label": "Location Name"
+      "location_name": "Home",
+      "location_alias": "My House",
+      "edit_icon": "edit_icon_path"
     },
     "usage_count": 0
   },
   {
-    "id": "53c24cfb-2b48-4c43-82fc-16d4d123c91b",
-    "type_id": "46737508-dca8-4313-a4a0-4f2203d41642",
+    "id": "c9e26229-62d9-429e-92b6-454c40094221",
+    "type_id": "92dbe32a-115b-4a4e-8bd5-070043ca7cec",
     "props": {
-      "value": "",
-      "on_change": "updateLocationAlias",
-      "label": "Location Alias"
-    },
-    "usage_count": 0
-  },
-  {
-    "id": "685a15c6-eded-4b99-a51c-61fe472530ab",
-    "type_id": "42a7c5b4-44b6-4452-ab96-ef530606bad7",
-    "props": {
-      "label": "Search Locations"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "18f5a001-0ba5-4656-8d61-12f2e62483ca",
-    "type_id": "db48618a-67c3-4c5b-bb77-fb5a73ccd36b",
-    "props": {
-      "location_id": "dynamic",
-      "on_delete": "function"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "df2885da-96b1-48a6-b684-8b16bc26c77f",
-    "type_id": "2c0d3b37-3573-417c-b19c-574bdce56dd6",
-    "props": {
-      "icon_name": "arrow_back",
-      "label": "Back"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "65817d55-bad6-428a-b231-2bcbfb235f86",
-    "type_id": "2aedd09d-75c3-4fde-b7e5-9ffd9f3c14ea",
-    "props": {
-      "feels_like_temperature": "27C",
-      "precipitation_intensity": "0",
-      "precipitation_type": "none",
-      "current_temperature": "25C"
-    },
-    "usage_count": 4
-  },
-  {
-    "id": "0c5122e3-7416-4945-b05d-36394a68a6f3",
-    "type_id": "bd11ec5b-0381-4638-98f7-7512fe889eb4",
-    "props": {
-      "message": "Location access is required to show local weather. Please enable it in settings.",
-      "is_visible": true,
-      "action_text": "Go to Settings"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "3297eec2-d0e6-4326-99d3-fa8623d01e55",
-    "type_id": "10b8bd9f-91b8-4ed9-acdc-c44279f1171c",
-    "props": {
-      "action_link": "settings_screen",
-      "message": "Could not determine your current location.",
-      "action_text": "Check Settings"
-    },
-    "usage_count": 0
-  },
-  {
-    "id": "6d8cfb6b-1cc6-4120-b9a3-a5fb2c5899a5",
-    "type_id": "settings_icon_button",
-    "props": {
-      "icon": "settings",
-      "label": "Settings"
-    },
-    "usage_count": 9
-  },
-  {
-    "id": "01a722ca-48e9-4269-a537-48e8683dfe57",
-    "type_id": "units_of_measurement_setting_item",
-    "props": {
-      "label": "Units of Measurement"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "8d9ec57c-3d14-4675-98e4-096f7451084d",
-    "type_id": "unit_selection_radio_group",
-    "props": {
-      "selected": "Metric",
-      "options": [
-        "Metric",
-        "Imperial"
-      ]
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "1ff87b1e-e4b2-45fd-8be5-ca44fa6bf9fd",
-    "type_id": "back_button",
-    "props": {
-      "icon": "arrow_back",
-      "label": "Back"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "12b2ac40-8b41-4553-919c-2a42357313a0",
-    "type_id": "back_button",
-    "props": {
-      "icon": "arrow_back",
-      "label": "Back"
-    },
-    "usage_count": 5
-  },
-  {
-    "id": "d5484396-5203-41ad-9af1-4a4a3ff87a31",
-    "type_id": "79419714-fc4c-48b6-98a3-2b3a685cd5b9",
-    "props": {
-      "label": "Notifications"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "c09145f3-dc69-4bea-b24e-f8c903a23ed1",
-    "type_id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
-    "props": {
-      "is_enabled": true,
-      "label": "Severe Weather Alerts"
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "99b33b01-4463-4044-86e3-12df4fedeff2",
-    "type_id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
-    "props": {
-      "is_enabled": true,
-      "label": "Daily Forecasts"
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "0e0bbd80-3f39-475e-8858-e95127ecfb71",
-    "type_id": "e25fd29f-b5c9-4ef9-a234-76b3b31346f8",
-    "props": {
-      "icon": "arrow_back",
-      "label": "Back"
-    },
-    "usage_count": 3
-  },
-  {
-    "id": "e7bc50ce-f329-4ce0-85a1-77c277bd1960",
-    "type_id": "55d54720-a84a-4fe6-884a-994e96b098df",
-    "props": {
-      "size": "medium",
-      "icon_name": "settings"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "aad97f51-4f19-4ca8-a6d8-5e1e220c432b",
-    "type_id": "79419714-fc4c-48b6-98a3-2b3a685cd5b9",
-    "props": {
-      "navigation_target": "notification_settings_screen",
-      "label": "Notification Settings"
-    },
-    "usage_count": 6
-  },
-  {
-    "id": "ed57617e-8a64-45d4-a069-9c77a1e7be4b",
-    "type_id": "79419714-fc4c-48b6-98a3-2b3a685cd5b9",
-    "props": {
-      "default": "Push Notification",
-      "options": [
-        "Email",
-        "Push Notification",
-        "SMS"
+      "items": [
+        "saved_locations_list_item_edit_icon_instance_id"
       ],
-      "label": "Delivery Method"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "27df5b0c-ecbc-48ee-b240-5433a2f545e1",
-    "type_id": "2c0d3b37-3573-417c-b19c-574bdce56dd6",
-    "props": {
-      "label": "Back"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "49574dcd-bc5b-4fc5-b46a-a3d3e30275a9",
-    "type_id": "1dd8db0d-38ca-4f0f-83a8-370c9b632958",
-    "props": {
-      "text": "Display Options"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "4ec048fa-027b-46cc-80fb-6d251862d96d",
-    "type_id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
-    "props": {
-      "label": "Dark Mode",
-      "isOn": false
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "9b27ea7d-99e7-4b21-82a3-54feacf714fb",
-    "type_id": "083e8d14-3b4c-4505-be1d-bb8110636451",
-    "props": {
-      "selectedOption": "Metric",
-      "options": [
-        "Metric",
-        "Imperial"
-      ]
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "ae4e0dcd-b37e-4183-a21b-4ea85e5281f8",
-    "type_id": "870adff0-9bce-453a-9f47-a745155a6dc6",
-    "props": {
-      "value": 16.0,
-      "step": 1.0,
-      "min": 10.0,
-      "max": 20.0
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "c3b11458-2e83-446c-9aa9-3c1fea714877",
-    "type_id": "2c0d3b37-3573-417c-b19c-574bdce56dd6",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "2a3ebf5e-a14e-42b8-87b4-bce4f3bfaf81",
-    "type_id": "9bb03de9-ea75-49ca-aca7-3955d34f961c",
-    "props": {
-      "icon": "map_icon",
-      "label": "Radar Map"
-    },
-    "usage_count": 4
-  },
-  {
-    "id": "33e1e3bd-64c7-438a-8c0f-a957bc92f72a",
-    "type_id": "96b87151-5a4d-4aab-9d79-000fe57240be",
-    "props": {
-      "center_coordinates": {
-        "latitude": 34.1,
-        "longitude": -118.3
-      },
-      "zoom_level": 8.0,
-      "data_source": "realtime_radar_api",
-      "description": "Main interactive radar map display, capable of showing real-time and time-lapse radar data.",
-      "time_lapse_enabled": true
-    },
-    "usage_count": 6
-  },
-  {
-    "id": "a7af876e-57d7-4933-9cef-948810ba8dc8",
-    "type_id": "bd383421-2bd4-4946-a5ed-2eb3840fd7aa",
-    "props": {
-      "max_time_position": 100.0,
-      "icon": "play",
-      "state": "paused",
-      "current_time_position": 0.0,
-      "label": "Play Time-lapse"
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "779b3ec4-1c79-4e2b-99ea-29ebfcf40993",
-    "type_id": "56be45f3-125d-4a18-a270-9298ed82effa",
-    "props": {
-      "target_screen_id": "6650bb65-3809-452b-8ef3-a87d180e29b8",
-      "text": "Detailed Forecast",
-      "icon": "forecast_icon"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "c3a8c986-97f8-41d0-9977-84aac2d85969",
-    "type_id": "20c1f440-8c13-4c4b-81d5-b344e4bf29e6",
-    "props": {
-      "data_source": "weather_api",
-      "visual_indicators": [
-        "icons",
-        "colors"
-      ],
-      "display_mode": "visual"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "0b286acb-945f-4579-b52a-c844c0c2d2e6",
-    "type_id": "464bca70-3024-4d23-a523-b16423115ccc",
-    "props": {
-      "available_timeframes": [
-        "Next hour",
-        "Next 24 hours",
-        "Next 7 days"
-      ],
-      "selected_timeframe": "Next 24 hours"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "0f5e5705-eb8b-4d86-ae42-13b85bb72c72",
-    "type_id": "20c1f440-8c13-4c4b-81d5-b344e4bf29e6",
-    "props": {
-      "data_source": "selected_timeframe",
-      "visual_indicators": [
-        "rain_intensity",
-        "snow_depth"
-      ],
-      "display_mode": "chart"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "16769427-8e1a-4b96-9084-04e31f0db167",
-    "type_id": "7b866020-ad67-4e43-b003-64eaba5f3bb9",
-    "props": {
-      "target_screen_id": "c2d44833-13c1-42eb-80f7-9f55922c198c",
-      "label": "Historical Data"
+      "item_type": "Saved Location List Item"
     },
     "usage_count": 0
   },
   {
-    "id": "d7f35710-0120-4895-9cdf-57c1beda406a",
-    "type_id": "e3283b7b-c114-4063-aa89-a54caf4aee5b",
+    "id": "5dd71655-932f-4703-87a8-b2696cf6d78a",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
     "props": {
-      "target_screen_id": "53f37c2e-d105-441b-a2f8-02700780cb9f",
+      "label": "Back",
+      "icon": "back_arrow_icon"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "f274389e-dd13-47ba-ae2d-2d4c80594710",
+    "type_id": "acc48745-a7b1-49fa-b568-da43347f16e6",
+    "props": {
+      "label": "Location Name",
+      "placeholder": "Enter location name",
+      "value": ""
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "a181d09c-ed6f-4592-b2ea-036dc6a47c65",
+    "type_id": "acc48745-a7b1-49fa-b568-da43347f16e6",
+    "props": {
+      "label": "Location Alias",
+      "placeholder": "Enter alias (optional)",
+      "value": ""
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "369b09ea-4243-42a0-b822-b36feb9c22ea",
+    "type_id": "27f66a7f-799a-46f2-bee6-82184444af66",
+    "props": {
+      "label": "Save Changes"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "3fc1b780-6cb5-467f-a306-ab7ff852b980",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
+    "props": {
+      "label": "Back",
+      "icon": "back_arrow_icon"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "1a46ad86-a2d2-4b0b-9888-e1924fd62408",
+    "type_id": "9653caae-9032-4108-b26b-49e9a528cf0b",
+    "props": {
+      "secondary_text": "Location Details",
+      "delete_button_action": "delete_location",
+      "primary_text": "Saved Location Name",
+      "delete_button_icon": "delete_icon"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "b6c8f7ae-7e01-4c0a-a85a-5dc3d6de7a2d",
+    "type_id": "b037128a-2bb1-4542-83a2-de8b10097b28",
+    "props": {
+      "icon": "back_arrow_icon",
+      "label": "Back"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "d5897b65-641b-499e-8141-34efce44fb08",
+    "type_id": "6212f564-dc25-497e-a673-37ab9d3a179e",
+    "props": {
+      "icon": "location_icon",
       "label": "Select Location"
     },
     "usage_count": 0
   },
   {
-    "id": "9251baac-4c2f-4140-a6b6-d8302fc00cea",
-    "type_id": "0ece1835-617e-4e5d-ab0a-5e9a1aafb9d1",
+    "id": "b3b96ad7-1a85-4418-ac01-7fe0ab2b863a",
+    "type_id": "92dbe32a-115b-4a4e-8bd5-070043ca7cec",
     "props": {
-      "description": "Panel to display historical weather data for the selected location.",
-      "data_source": "selected_location",
-      "display_mode": "chart",
-      "name": "historical_data_display_panel"
+      "item_type": "Saved Location List Item",
+      "items": []
     },
     "usage_count": 0
   },
   {
-    "id": "badad852-fb21-4a6e-b0ee-d63bb5628cb8",
-    "type_id": "37490adc-3443-4180-bf63-6ae754803e3d",
+    "id": "95ba5cb1-6f92-4a38-9450-30c1a771eddf",
+    "type_id": "5fb14fae-8667-4ccc-af87-d5c902d0dc6e",
     "props": {
-      "label": "Select Date Range"
+      "description": "Loading weather data...",
+      "location_name": "Detecting Location...",
+      "temperature": "N/A",
+      "condition_icon": "loading_icon"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "ae38b44e-4bd1-4ccb-a435-b285010533dc",
-    "type_id": "a8142be3-e95d-4f73-858d-70bef2be896e",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "0ec29e74-e0b8-43a0-9169-304e5a7261d3",
-    "type_id": "287ef139-3f43-4ee6-b721-d06dfd704ee6",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "83425e93-5716-4d78-a760-580d282fc01f",
-    "type_id": "6367d9c0-0580-4663-9ee4-4484e4a6257f",
+    "id": "c4977592-00d5-47c3-abd6-398101037ff1",
+    "type_id": "b057a379-e487-4b13-877c-8ff4f10aa410",
     "props": {
-      "isEnabled": false,
-      "label": "Apply"
+      "message": "Location access denied. Please enable location in settings to see local weather.",
+      "is_dismissible": false
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "68eae6b9-a74d-4cce-b80f-387d09ef1f63",
-    "type_id": "4a9826e7-2b00-497f-a386-94e8a67b3126",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "d42d1923-d8b1-40ff-8fef-2908e90ce1a3",
-    "type_id": "0cef43bc-1ff1-454e-867d-87e84d25ff0f",
+    "id": "73059e0f-f883-4f3a-93a3-990001397f2d",
+    "type_id": "b057a379-e487-4b13-877c-8ff4f10aa410",
     "props": {
-      "target_screen_id": "5c59ee7d-7a13-4395-825a-96674a6352d0",
-      "label": "Customize Parameters"
+      "action_label": "Check Settings",
+      "message": "Could not determine your current location. Please check your device settings.",
+      "is_dismissible": true
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "c9a6719f-e39b-4e8f-918f-063c8466b4be",
-    "type_id": "e891b4d2-1fbc-4986-843c-36caf3810937",
+    "id": "95783a66-2593-4ef1-a0cf-4bec8c462c72",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
     "props": {
-      "data_source": "historical_data",
-      "chart_type": "line",
-      "parameters_displayed": []
+      "icon_name": "settings",
+      "action": "navigate_to_settings"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "8234edd1-0658-4ec7-93c8-9a641802001b",
-    "type_id": "a7daa533-af2e-42c8-ba72-3553cc3e0603",
+    "id": "a97e3865-ae60-431b-abdb-40f31495b02f",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
     "props": {
-      "is_selected": false,
-      "parameter_id": "temperature",
-      "label": "Temperature"
+      "label": "Units of Measurement",
+      "action": "navigate_to_units_settings"
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "b4a6ba13-99bf-4b8b-a82f-22791d512385",
-    "type_id": "a7daa533-af2e-42c8-ba72-3553cc3e0603",
+    "id": "467f1e81-c29a-4c85-9f8a-7fe08c402f18",
+    "type_id": "54657bd8-8de7-4d37-89f8-04b0003f31a3",
     "props": {
-      "is_selected": false,
-      "parameter_id": "precipitation",
-      "label": "Precipitation"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "b1b59a0e-03a0-4c04-91dd-e5bf2f4a1ff8",
-    "type_id": "141da44c-ad83-4b4f-b390-e78daa7ac516",
-    "props": {
-      "label": "Apply Changes"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "29d5f75f-b40d-4398-b1dd-35a56d103268",
-    "type_id": "55427c8e-1700-4f84-862c-d084580f36a6",
-    "props": {
-      "conditions": "Sunny",
-      "temperature": "25C",
-      "location": "Primary"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "630317cb-51e6-4b17-8847-42ddc6b18f82",
-    "type_id": "e5d99778-532c-4430-9837-70f52aec6f03",
-    "props": {
-      "target_screen_id": "c2d44833-13c1-42eb-80f7-9f55922c198c",
-      "label": "View Historical Data"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "2724917d-d7fa-4751-bb49-c187f8280d60",
-    "type_id": "93506520-4823-40c9-a782-83bcefda8f55",
-    "props": {
-      "time_range": "last_7_days",
-      "location": "Primary",
-      "data_type": "temperature"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "1b5f728f-eed8-49bc-8d13-b9463d28d4f5",
-    "type_id": "61f28eaf-cf28-462a-9a49-b133bd8a7b01",
-    "props": {
-      "selected_range": "last_7_days",
-      "available_ranges": [
-        "last_24_hours",
-        "last_7_days",
-        "last_30_days"
+      "on_select": "update_unit_preference",
+      "selected_option": "Metric",
+      "options": [
+        "Metric",
+        "Imperial"
       ]
     },
-    "usage_count": 1
+    "usage_count": 0
   },
   {
-    "id": "03119859-0335-4301-8807-3c2846c9bd4e",
-    "type_id": "05b8eb74-b2c5-4aad-aab7-32f0ed887f47",
+    "id": "847a43e4-40f3-4177-b61b-3e3fb067ef11",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
     "props": {
-      "navigation_target": "alert_settings_screen",
-      "label": "Alert Settings"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "c89287f6-2139-4b7f-8c5b-8bb9480707b8",
-    "type_id": "d4147bb4-20fd-4c0c-b383-76c9109d04cc",
-    "props": {
-      "icon": "add",
-      "navigation_target": "add_alert_location_screen",
-      "label": "Add Location"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "a9a758ee-243d-4d26-944f-0aeffaf4e535",
-    "type_id": "3a0fe70c-7d5b-44ba-8cdf-5a38bea60f73",
-    "props": {
-      "value": "",
-      "placeholder": "Enter location"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "e917a0da-ca10-4109-8bba-346791e51be0",
-    "type_id": "0b639982-d97f-47c1-9400-c96cc5cbf333",
-    "props": {
-      "on_select": "add_selected_location_to_alerts",
-      "items": []
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "4b5865ea-1128-4a28-8442-88be2958dfe6",
-    "type_id": "73803ec3-4ca7-41fe-9a0c-fbe590f5b93f",
-    "props": {
-      "locations": []
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "796ccf2b-9fba-4bf5-8c9a-1232127960ee",
-    "type_id": "ce223231-4891-4152-b24c-65b5acf9f3cf",
-    "props": {
-      "frequency_options": [
-        "Daily",
-        "Hourly",
-        "Weekly"
-      ],
-      "selected_frequency": "Daily"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "c30e9e3c-9ce4-4c95-bd51-68fe7c2b3536",
-    "type_id": "929c3ee2-15d4-438e-9b5b-2474f3bd17ec",
-    "props": {
-      "available_types": [
-        "Daily Summary",
-        "Severe Weather Alerts",
-        "Pollen Alerts"
-      ],
-      "selected_types": [
-        "Daily Summary"
-      ]
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "427445ec-cec5-49a0-9938-12b7d06afbd1",
-    "type_id": "9c1454c5-65e8-4259-a2eb-2210941ed03e",
-    "props": {
-      "is_active": true,
-      "severity": "high",
-      "alert_count": 3.0
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "0c197878-6e8f-4d5a-9852-e84e72e61ca9",
-    "type_id": "88b0c9cf-dc97-45ce-8066-7c9c84ee0380",
-    "props": {
-      "title": "Severe Thunderstorm Warning",
-      "brief_description": "Expect heavy rain and strong winds.",
-      "alert_id": "sample_alert_1",
-      "severity": "High"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "edb33f3e-ced7-40cf-bd57-45677e6a6c18",
-    "type_id": "888eb9f9-31d6-47cc-88a2-2902b351dedb",
-    "props": {
-      "issued_time": "2024-07-20T14:00:00Z",
-      "expires_time": "2024-07-20T20:00:00Z",
-      "full_description": "A severe thunderstorm warning is in effect until 8 PM. Expect heavy rainfall, strong winds up to 60 mph, and potential for hail. Seek shelter immediately.",
-      "alert_id": "sample_alert_1",
-      "recommended_actions": "Stay indoors, avoid windows, and unplug electronics."
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "b078c91d-1c2e-4d2c-9c37-5f2595f8a719",
-    "type_id": "b2ac666c-0349-4cfc-aff0-6a4766a9da56",
-    "props": {
-      "label": "Settings"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "91341849-10ba-489a-b9eb-fce75f35ce4a",
-    "type_id": "b26f122f-e686-408b-8d8e-4bca358a942f",
-    "props": {
-      "label": "Weather Alerts"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "1c2e4282-cb55-4087-b28b-dc30658b0f11",
-    "type_id": "e8b212a8-a30c-40cb-a23b-12ce4733d64b",
-    "props": {
-      "is_enabled": true,
-      "location_name": "New York"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "40c06db9-bde1-46d2-ba5c-ff43ab15f43c",
-    "type_id": "6b6ec4df-c1a3-4b71-84ea-f6aafc5f373d",
-    "props": {
-      "alert_type": "Severe Weather Advisory",
-      "is_selected": true
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "7f523c8d-d78c-44b2-b6ce-7db34d2a25aa",
-    "type_id": "e2f4c388-f037-40ec-b4ff-867188c0e15e",
-    "props": {
-      "label": "Save"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "897ec535-1ae9-47df-bb2d-9bbdbfd674f0",
-    "type_id": "e25fd29f-b5c9-4ef9-a234-76b3b31346f8",
-    "props": {
+      "action": "navigate_back",
+      "icon": "arrow_back",
       "label": "Back"
     },
     "usage_count": 0
   },
   {
-    "id": "a660419f-8a71-47d0-b4be-e2489f48db98",
-    "type_id": "46737508-dca8-4313-a4a0-4f2203d41642",
+    "id": "92c5d832-2c08-4fb2-a879-ec184e50534a",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
     "props": {
-      "placeholder": "Enter your email address"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "e21de07f-c485-4f53-b2fb-9c8374323cfe",
-    "type_id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
-    "props": {
-      "is_enabled": true,
-      "label": "Email Notifications"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "94175d94-ed13-4dfd-9371-ed1a6113cded",
-    "type_id": "save_button",
-    "props": {
-      "label": "Save Preferences"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "6e1f92b3-0599-4c24-ac9a-4765a81e3a5c",
-    "type_id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
-    "props": {
-      "is_enabled": false,
-      "label": "SMS Notifications"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "d27759f4-2651-4b4c-a423-7a7341575a69",
-    "type_id": "79419714-fc4c-48b6-98a3-2b3a685cd5b9",
-    "props": {
-      "navigation_target": "c7d8cb3b-dad3-42fb-8e38-5465a2c3c6b1",
-      "label": "Manage SMS Preferences"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "e3f51604-74ae-45e7-943e-21d59889c034",
-    "type_id": "46737508-dca8-4313-a4a0-4f2203d41642",
-    "props": {
-      "placeholder": "Enter your phone number",
-      "label": "Phone Number"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "9218c9a5-2184-4491-80d0-0028756ee73e",
-    "type_id": "622dcb81-d187-457c-a9fc-b582dbf77df3",
-    "props": {
-      "is_enabled": true,
-      "label": "Severe Weather Alerts"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "ab4ed154-54be-410e-8d61-033da5416139",
-    "type_id": "e2f4c388-f037-40ec-b4ff-867188c0e15e",
-    "props": {
-      "label": "Save"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "059db047-ce44-4621-a44f-0a3c48a45937",
-    "type_id": "ce7fad07-4b8b-4316-99a9-7bea4ddb0b88",
-    "props": {
-      "location_name": "New York",
-      "temperature": "72F"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "51d8a682-b979-4d28-b77d-a5321a63a235",
-    "type_id": "7b438b17-e344-4c50-94af-5da5cca9a661",
-    "props": {
-      "icon": "refresh",
-      "label": "Refresh"
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "d5703c7a-6fc5-4723-9c5e-c64e67de7faa",
-    "type_id": "e833d634-4957-4e91-b097-2dee7259f236",
-    "props": {
-      "size": "medium",
-      "is_visible": false
-    },
-    "usage_count": 2
-  },
-  {
-    "id": "88180603-88c0-4fe0-8d5e-20808c07649c",
-    "type_id": "7b438b17-e344-4c50-94af-5da5cca9a661",
-    "props": {},
-    "usage_count": 1
-  },
-  {
-    "id": "c8b6ea65-9ffe-4b87-ab43-548896fc5a70",
-    "type_id": "976c0f88-8f5c-4bd2-a55b-1b4b574587dc",
-    "props": {
-      "primary_button_text": "Retry",
-      "message": "Please check your network settings and try again.",
-      "title": "No Internet Connection",
-      "secondary_button_text": "Dismiss"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "8eed43e5-b62c-4833-b579-cdde5f26c12b",
-    "type_id": "6245ba04-d519-4edb-9869-cac98290ebf9",
-    "props": {
-      "text": "Retry"
-    },
-    "usage_count": 1
-  },
-  {
-    "id": "ce1bac58-8fe0-4f49-8a6c-2b4306c9e189",
-    "type_id": "48f28517-7b5f-44d9-8c76-95758a75e145",
-    "props": {
-      "text": "Dismiss"
+      "action": "navigate_back",
+      "icon": "arrow_back",
+      "label": "Back"
     },
     "usage_count": 0
   },
   {
-    "id": "b58bf45c-0651-4add-ad3b-cfbb07bbbf2c",
-    "type_id": "edb16d0b-aea6-44f4-93cd-5691d2e9e207",
+    "id": "215f6950-7e71-4e9b-aa66-319ebb3f6740",
+    "type_id": "5fb14fae-8667-4ccc-af87-d5c902d0dc6e",
     "props": {
-      "landscape_layout_config": {},
-      "portrait_layout_config": {}
+      "description": "Clear skies",
+      "location_name": "Current Location",
+      "temperature": "25C",
+      "current_temperature": "25C",
+      "condition_icon": "sunny"
     },
-    "usage_count": 26
+    "usage_count": 0
+  },
+  {
+    "id": "f7d83cdf-0a92-4b61-8c10-5dd999f78cca",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
+    "props": {
+      "icon_name": "settings",
+      "action": "navigate_to_settings_screen"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "209ae35b-6acc-4789-a53f-b7fa32df1091",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
+    "props": {
+      "label": "Notifications",
+      "action": "navigate_to_notification_settings_screen"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "bdfac0c7-88fe-4072-ae66-96d2ee8be5c7",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "label": "Severe Weather Notifications",
+      "on_toggle": "update_severe_weather_preference",
+      "is_on": true
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "2e171d2b-0212-43f4-9415-a088aefa4a73",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "is_on": true,
+      "label": "Daily Forecast Notifications",
+      "on_toggle": "update_daily_forecast_preference"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "086161a3-ac1f-493d-8936-2984b8ae8f84",
+    "type_id": "54657bd8-8de7-4d37-89f8-04b0003f31a3",
+    "props": {
+      "on_select": "update_delivery_method",
+      "selected_option": "Push Notification",
+      "options": [
+        "Email",
+        "Push Notification",
+        "SMS"
+      ]
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "da613ea2-19e3-473c-8d73-7e2cd4338ec5",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
+    "props": {
+      "icon": "arrow_back",
+      "label": "Back"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "44bde843-7c16-4067-aaee-3bd7bf203e85",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "is_on": false,
+      "on_toggle": "update_theme",
+      "label": "Dark Mode"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "5a3240fc-534b-42a4-a33a-3a8997d2f0a5",
+    "type_id": "2b7c3f85-4815-439c-b1f2-1a69a8c4aff5",
+    "props": {
+      "min_value": 10.0,
+      "current_value": 16.0,
+      "max_value": 24.0,
+      "on_change": "update_font_size"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "a579d1f3-3b6b-4ea2-8057-d560473ac5e2",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
+    "props": {
+      "icon": "settings",
+      "action": "navigate_to_settings"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "35ce88a5-0e84-4a77-9f9d-ee90e6265a31",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
+    "props": {
+      "on_tap": "navigate_to_display_settings",
+      "label": "Display Options"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "6a540ea5-6e7a-455b-bc50-41bacd6d1d45",
+    "type_id": "e831fbfb-d015-4a8c-9d42-e8f8c98abcaa",
+    "props": {
+      "icon": "radar_icon",
+      "label": "Radar Map"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "701dc63d-d49b-46a6-a97f-4d49d2df35de",
+    "type_id": "3bd5644f-2730-459c-a9a8-e11be614e02c",
+    "props": {
+      "zoom_level": 10.0,
+      "map_data": "real_time_radar",
+      "is_time_lapse_playing": true,
+      "overlays": [
+        "precipitation",
+        "wind"
+      ],
+      "center_coordinates": "new_panned_coordinates"
+    },
+    "usage_count": 1
+  },
+  {
+    "id": "22ae9a9f-708e-4491-9ef5-90c66ab9aab4",
+    "type_id": "e831fbfb-d015-4a8c-9d42-e8f8c98abcaa",
+    "props": {
+      "icon": "radar_icon",
+      "label": "Radar Map"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "b50e627d-7c73-4081-831b-5daa1138059e",
+    "type_id": "3bd5644f-2730-459c-a9a8-e11be614e02c",
+    "props": {
+      "zoom_level": "default",
+      "map_data": "current_radar",
+      "overlays": [
+        "precipitation",
+        "temperature"
+      ],
+      "center_coordinates": "user_location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "38bf68a4-60ab-4dc7-8ffd-01d08978980e",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
+    "props": {
+      "icon_name": "play_arrow",
+      "action": "start_time_lapse"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "5eb5ab54-0c13-47c3-9ad7-d7c1d8005a4c",
+    "type_id": "e333c894-75e6-46f7-a98a-3d5a57405ed2",
+    "props": {
+      "title": "Radar Map",
+      "button_label": "View Map",
+      "description": "View future precipitation and weather patterns"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "4e8e887f-7ad0-4d77-8ea5-5e345e134aac",
+    "type_id": "3bd5644f-2730-459c-a9a8-e11be614e02c",
+    "props": {
+      "zoom_level": 10.0,
+      "map_data": "current_radar_data",
+      "overlays": [
+        "precipitation",
+        "temperature"
+      ],
+      "center_coordinates": "34.0522, -118.2437"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "f02a9daa-89c5-48fe-8930-5a9c502d72f3",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "icon": "play_pause_icon",
+      "label": "Play/Pause"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "8ec0af18-9b9f-427c-9c9f-7c6909845933",
+    "type_id": "b2f338f2-20ab-4d01-950d-d5d41923dfda",
+    "props": {
+      "min_value": 0.0,
+      "label": "Time",
+      "current_value": 0.0,
+      "max_value": 24.0,
+      "step_size": 1.0
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "c8f0e736-bd1b-41d3-858c-6878cda2765a",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Detailed Forecast"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "a95fa301-0807-4ab3-9e8e-28cbdbc237b5",
+    "type_id": "1c2a3b4c-5d6e-7f8a-9b0c-1d2e3f4a5b6c",
+    "props": {
+      "chart_type": "line_with_differentiated_types",
+      "data_points": "precipitation_data"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "2726d090-7bec-4fc0-b8ec-c22a59501da0",
+    "type_id": "b2f338f2-20ab-4d01-950d-d5d41923dfda",
+    "props": {
+      "min_value": 0.0,
+      "step_size": 1.0,
+      "current_value": 1.0,
+      "max_value": 24.0,
+      "label": "Forecast Timeframe"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "6b3bed46-56b9-4197-8050-1fd869e242e4",
+    "type_id": "e9d50d6e-4601-4114-bb97-11f82b32a629",
+    "props": {
+      "precipitation_chance": "80%",
+      "temperature": "20\u00b0C",
+      "wind_speed": "15 km/h",
+      "condition_icon": "rainy"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "3002da19-81d8-46ab-940f-c6637f75f0d0",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Historical Data"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "cd751750-de65-465c-bd68-11478e5a3218",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Select Location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "218d2332-13c3-4752-a585-86a532687495",
+    "type_id": "ef918170-51c8-46fd-966d-4eb55ba928d9",
+    "props": {
+      "placeholder": "Search for a location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "381df344-be2a-49e8-a571-954959196b84",
+    "type_id": "235f50a4-df44-4bcf-ba5b-5df0cf2796d9",
+    "props": {
+      "results_type": "locations"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "e4f4c3b4-e0fc-4ca5-be6f-69cec6f36a37",
+    "type_id": "5fb14fae-8667-4ccc-af87-d5c902d0dc6e",
+    "props": {
+      "data_type": "historical_weather"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "b23fc4ac-694b-4c66-a784-0c868d10e431",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Select Date Range"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "ef505ff6-e753-44ec-9c7d-311d474372b9",
+    "type_id": "69308434-4654-4aa5-87ba-ffe2d15b97e4",
+    "props": {
+      "label": "Start Date"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "89a55d42-753c-4db1-b542-8c828794f8f9",
+    "type_id": "69308434-4654-4aa5-87ba-ffe2d15b97e4",
+    "props": {
+      "label": "End Date"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "eab5633b-16f0-402f-99b7-a634999c1030",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Apply"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "e89eaf26-86ed-4c99-b681-eecc8a6c1bab",
+    "type_id": "d6eb0e7c-27fc-46f4-9442-b9bc0563f6a6",
+    "props": {
+      "content": "Historical weather data will be displayed here."
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "849ecaed-66f3-45d4-ab80-f01eba32d0ef",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Customize Parameters"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "60f13d69-0e75-43df-ac1f-074fbe031729",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Apply Changes"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "f1852f2a-51da-469c-a7a6-3b63ebcbd7cf",
+    "type_id": "09bae6be-cc92-48e5-a4eb-7e9dd2d43b7e",
+    "props": {
+      "is_checked": true,
+      "label": "Temperature"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "6390e206-7118-460d-8657-c0d7684e848a",
+    "type_id": "e6514bfa-deed-4bef-bb3f-58d4da37af33",
+    "props": {
+      "data_source": "historical_weather",
+      "chart_type": "line",
+      "parameters_displayed": [
+        "Temperature"
+      ]
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "55b45530-c2de-4636-9be7-de1ad2c75349",
+    "type_id": "5fb14fae-8667-4ccc-af87-d5c902d0dc6e",
+    "props": {},
+    "usage_count": 0
+  },
+  {
+    "id": "ff3b7639-1436-44cd-b689-fe0d9bededa4",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "View Historical Data"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "02fe4a35-8bd5-43b6-9be9-5fc573bf8d22",
+    "type_id": "e6514bfa-deed-4bef-bb3f-58d4da37af33",
+    "props": {},
+    "usage_count": 0
+  },
+  {
+    "id": "041642e7-4f9c-4ca1-8c82-715362c02f6b",
+    "type_id": "b2f338f2-20ab-4d01-950d-d5d41923dfda",
+    "props": {},
+    "usage_count": 0
+  },
+  {
+    "id": "df0e4b82-328a-4568-b510-31be941e92be",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Settings"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "9671c5b7-e36b-4836-8079-3644bde6fd4b",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
+    "props": {
+      "action": "navigate_to_alert_settings",
+      "label": "Alerts Settings"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "3e275cee-c8db-4df1-bd3d-122983c28ab2",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Add Location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "73d71236-dcf0-43f4-8855-40a20be00021",
+    "type_id": "acc48745-a7b1-49fa-b568-da43347f16e6",
+    "props": {
+      "placeholder": "Search for a location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "6ba05b4c-addc-4e54-8622-c9b7502fecd3",
+    "type_id": "92dbe32a-115b-4a4e-8bd5-070043ca7cec",
+    "props": {
+      "item_type": "LocationItem",
+      "items": []
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "5f71b66a-2b7d-47e8-97b0-5e133158320e",
+    "type_id": "92dbe32a-115b-4a4e-8bd5-070043ca7cec",
+    "props": {
+      "item_type": "AlertLocationItem",
+      "items": []
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "f06b298d-a987-43a5-86b6-90a2f3d22433",
+    "type_id": "02fe4a35-8bd5-43b6-9be9-5fc573bf8d22",
+    "props": {
+      "icon_name": "bell"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "fd6e7dd0-1169-4e2c-b2d9-a3d0a8b9ac4e",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "View History"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "7f6db69c-60e9-4835-b4da-f433e9102164",
+    "type_id": "92dbe32a-115b-4a4e-8bd5-070043ca7cec",
+    "props": {
+      "display_order": "chronological",
+      "items_type": "alert_item"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "f1d7d68e-b9f7-4f39-9be9-6d09c3e08374",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
+    "props": {
+      "icon_name": "settings",
+      "action": "navigate_to_settings_screen"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "fc5d2296-c036-4e33-b095-83c6041e0444",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
+    "props": {
+      "action": "navigate_to_notification_settings_screen",
+      "label": "Notifications"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "2a68436f-7873-4b45-ba69-8db645ad6e4b",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "is_on": false,
+      "on_toggle": "enable_forecast_notifications",
+      "label": "Forecast Notifications"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "21dc0828-4603-472e-99bf-ae733b5bac96",
+    "type_id": "54657bd8-8de7-4d37-89f8-04b0003f31a3",
+    "props": {
+      "on_select": "update_notification_frequency",
+      "selected_option": "Daily",
+      "options": [
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ]
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "ce812c4d-d7df-47ff-9533-4fc2dcd87e81",
+    "type_id": "09bae6be-cc92-48e5-a4eb-7e9dd2d43b7e",
+    "props": {
+      "is_checked": true,
+      "label": "Daily Summary"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "76be258a-6e5f-45be-8b1b-55aa82069736",
+    "type_id": "09bae6be-cc92-48e5-a4eb-7e9dd2d43b7e",
+    "props": {
+      "is_checked": true,
+      "label": "Severe Weather Alerts"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "f2992cf2-a3ab-4704-99e5-1148844a1475",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
+    "props": {
+      "action": "save_and_navigate_back_to_settings",
+      "icon": "arrow_back",
+      "label": "Back"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "462ef7f4-b320-4356-b268-59a5dd57aa2a",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
+    "props": {
+      "label": "Back",
+      "icon": "arrow_back",
+      "action": "navigate_back_to_dashboard"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "9ddbb9a2-6453-4c74-a503-21f4efd9069d",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Active Weather Alerts"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "828a6d1b-c80b-4626-835b-f9970c4cf686",
+    "type_id": "1bc0089f-8616-4ce8-88cf-455336918ec7",
+    "props": {},
+    "usage_count": 0
+  },
+  {
+    "id": "a00fcecf-9516-4b36-a44a-19ed92b5b0a9",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "label": "Location Alerts",
+      "is_on": true
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "08d7ab29-744b-453b-b802-6062553da572",
+    "type_id": "09bae6be-cc92-48e5-a4eb-7e9dd2d43b7e",
+    "props": {
+      "is_checked": true,
+      "label": "Severe Weather Advisory"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "d9b9f781-41ad-4f50-af29-e4019b4da1de",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "style": "primary",
+      "label": "Save"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "30df8a18-68b9-4d79-8330-0aa45952c3a2",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
+    "props": {
+      "icon_name": "settings",
+      "action": "navigate_to_settings_screen"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "112f1dad-0ae8-45fc-8e44-13a74aa1cf5a",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
+    "props": {
+      "action": "navigate_to_notification_settings_screen",
+      "label": "Notifications"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "3a47bb04-b2c7-4135-8bbe-1db6c568de76",
+    "type_id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+    "props": {
+      "title": "Current Notification Preferences",
+      "summary_text": "Displaying user's current notification preferences."
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "9b5ed70e-c048-428b-af06-cf8689f5b860",
+    "type_id": "8c8307f3-6487-41ec-8e81-d89e4ef0e6b8",
+    "props": {
+      "icon_name": "settings",
+      "action": "navigate_to_settings_screen"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "c2862945-17ed-43a1-a821-31e7424427b4",
+    "type_id": "6b602c87-f2ea-46fe-bb2e-a05ca542e35c",
+    "props": {
+      "action": "navigate_to_notification_settings_screen",
+      "label": "Notifications"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "12d1308e-9471-4ab5-b412-80807349c47c",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "is_on": true,
+      "on_toggle": "update_push_notification_preference",
+      "label": "Push Notifications"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "c48aac55-c044-4621-af64-b66b1d483bde",
+    "type_id": "324a2117-ebeb-4371-a115-d89e340a6bc9",
+    "props": {
+      "icon": "back_arrow",
+      "action": "navigate_back_to_settings_screen"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "0d205bfa-2f55-4d3a-bba9-297a7c6dbc8d",
+    "type_id": "acc48745-a7b1-49fa-b568-da43347f16e6",
+    "props": {
+      "placeholder": "Enter your email",
+      "label": "Email Address"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "6581d785-4d55-420d-9ba6-554b12057d36",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "label": "Email Notifications",
+      "is_on": true
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "af707027-a476-4ced-a49a-1a811a88c1d8",
+    "type_id": "5b8501cb-4fe3-418c-9359-527a647f3482",
+    "props": {
+      "icon_name": "settings"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "1b9e089e-476c-48c6-b1e9-a340964dc908",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Notification Settings"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "db1b939a-4d61-4614-bb1d-2d3aa9f6bd7b",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "is_on": false,
+      "label": "SMS Notifications"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "759b4061-a9ef-4be3-9e04-59f214248ee2",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "label": "Manage SMS Preferences"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "d7b6384f-ed72-4cc0-a36f-26fc0a9fe4f8",
+    "type_id": "ef918170-51c8-46fd-966d-4eb55ba928d9",
+    "props": {
+      "value": "",
+      "placeholder": "Enter phone number"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "849f08bb-0651-4f17-8bde-0a08a6d90ce6",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "label": "Severe Weather Alerts",
+      "is_on": true
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "eb837aed-9471-455f-ac10-78b18d05a725",
+    "type_id": "0b9a2bd0-2fb9-4299-b005-f608de4e3b8a",
+    "props": {
+      "label": "Daily Forecast Alerts",
+      "is_on": false
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "3a0c96b6-d5a0-4245-9ca2-51ceca16ff41",
+    "type_id": "27f66a7f-799a-46f2-bee6-82184444af66",
+    "props": {
+      "label": "Save"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "ddd39ced-66ab-4d3d-98d3-981fe2fe4073",
+    "type_id": "935338c5-183f-4bc7-adb6-856e477ef063",
+    "props": {
+      "location_name": "Current Location"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "ff9f49f3-1e2a-4879-835f-46fa6c0caef7",
+    "type_id": "54106bb0-1972-4d1a-b4aa-57dab08ebc60",
+    "props": {
+      "icon": "refresh_icon",
+      "label": "Refresh"
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "96fd9658-71ef-4da1-afe8-ee1e886fa969",
+    "type_id": "1805f48a-ef3f-42b7-8850-bcce6317a276",
+    "props": {
+      "isVisible": false
+    },
+    "usage_count": 0
+  },
+  {
+    "id": "c25f6278-3e45-4b70-a87c-57efabc9ae1f",
+    "type_id": "ab73ad77-4f1c-4ed2-9a18-bea812509fbc",
+    "props": {
+      "title": "No Internet Connection",
+      "message": "Please check your network settings and try again.",
+      "buttons": [
+        {
+          "label": "Retry",
+          "type": "Button",
+          "action": "retry_refresh"
+        },
+        {
+          "action": "dismiss_dialog",
+          "type": "Button",
+          "label": "Dismiss"
+        }
+      ]
+    },
+    "usage_count": 0
   }
 ]
