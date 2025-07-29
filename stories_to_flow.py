@@ -8,10 +8,11 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
     """
     Iterates over user stories and generates user flows using the LLM.
     Each flow is saved as a JSON object in the output file.
-    Tracks all screen names and passes them to the LLM for each iteration.
+    Tracks screen names to add and delete, and passes only the keep set to the LLM for each iteration.
     """
     user_flows = []
-    screen_names = set()  # Track all screen names
+    screen_names_to_keep = set()   # Only pass these to the agent
+    screen_names_to_delete = set() # Track screens to delete
 
     for idx, story in enumerate(user_stories_front_end):
         print(f"\nGenerating user flow for story {idx}/{len(user_stories_front_end)}: {story['name']}")
@@ -21,8 +22,8 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
             "description": story["description"]
         }, indent=2)
 
-        # Pass current screen names to the LLM
-        screen_names_context = json.dumps(sorted(list(screen_names)), indent=2)
+        # Pass only screen_names_to_keep to the LLM
+        screen_names_context = json.dumps(sorted(list(screen_names_to_keep)), indent=2)
         user_input = f"""
         USER STORY:
         {story_context}
@@ -61,15 +62,27 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
             print(f"Failed to extract flow for story: {story['name']}")
             continue
 
-        # Add flows and extract screen names from steps
+        # Add flows and update screen name sets using only add/delete lists
         for flow in flows_to_add:
             user_flows.append(flow)
-            if "steps" in flow and isinstance(flow["steps"], list):
-                for step in flow["steps"]:
-                    if isinstance(step, dict) and "screen_name" in step:
-                        screen_names.add(step["screen_name"])
+            # Add new screens to keep set
+            if "screen_names_to_add" in flow and isinstance(flow["screen_names_to_add"], list):
+                for name in flow["screen_names_to_add"]:
+                    screen_names_to_keep.add(name)
+            # Add screens to delete set and remove from keep set
+            if "screen_names_to_delete" in flow and isinstance(flow["screen_names_to_delete"], list):
+                for name in flow["screen_names_to_delete"]:
+                    screen_names_to_delete.add(name)
+                screen_names_to_keep -= set(flow["screen_names_to_delete"])
+            screen_names_to_keep -= screen_names_to_delete
 
-    # Save user flows to file (outside the loop)
-    with open(flows_file, "w", encoding="utf-8") as f:
-        json.dump(user_flows, f, indent=2)
-    print(f"User flows saved to {flows_file}")
+        # Save user flows to file (outside the loop)
+        with open(flows_file, "w", encoding="utf-8") as f:
+            json.dump(user_flows, f, indent=2)
+        print(f"User flows saved to {flows_file}")
+
+        # Optionally, save the sets for later use
+        with open("screen_names_to_keep.json", "w", encoding="utf-8") as f:
+            json.dump(sorted(list(screen_names_to_keep)), f, indent=2)
+        with open("screen_names_to_delete.json", "w", encoding="utf-8") as f:
+            json.dump(sorted(list(screen_names_to_delete)), f, indent=2)

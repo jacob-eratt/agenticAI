@@ -1,0 +1,11 @@
+[
+  "dashboard_screen",
+  "forecast_details_screen",
+  "historical_data_screen",
+  "location_management_screen",
+  "notification_settings_screen",
+  "radar_map_screen",
+  "settings_screen",
+  "weather_alert_details_screen",
+  "weather_alerts_list_screen"
+]

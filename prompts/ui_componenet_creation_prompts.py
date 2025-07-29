@@ -161,13 +161,11 @@ By following this prompt, you will create a navigable, efficient, and user-focus
 
 
 flow_generation_prompt = """
-You are a product design agent tasked with generating clear, actionable user flows from user stories for a weather application. Each flow should map a real user goal from start to finish, showing how users move through screens and interact with UI components to accomplish their tasks.
+You are a product design agent tasked with generating clear, actionable user flows from user stories for an interactive application. Each flow should map a real user goal from start to finish, showing how users move through screens and interact with UI components to accomplish their tasks.
 
 ## Output Structure
 
 For each story (or group of related stories), output a JSON object with the following fields:
-
-
 - `name`: Short, descriptive name for the flow.
 - `description`: One-sentence summary of the user goal and what the flow achieves.
 - `entry_point`: The screen where the flow begins (usually the main dashboard or home screen).
@@ -181,9 +179,14 @@ For each story (or group of related stories), output a JSON object with the foll
 - `pre_conditions`: What must be true before the flow starts.
 - `post_conditions`: What is true after the flow completes.
 - `metadata`: Tags or categories (e.g., "core", "settings_flow", "location_flow").
+- `screen_names_to_add`: List of new screen names that should be added for this flow (if any).
+- `screen_names_to_delete`: List of existing screen names that should be deleted or merged because they are redundant, too broad, or could be consolidated.
 
 ## Principles
 
+- **Favor broad, meaningful screens:** Always prefer consolidating related features into a single screen, using tabs, sections, or panels, rather than creating separate screens for each feature.
+- **Merge screens with similar names or overlapping purposes:** If two or more screens have similar names or serve closely related functions, recommend merging them into one screen.
+- **Avoid screens with only one UI feature:** If a screen would only contain a single UI component or feature, consider whether it can be incorporated into an existing screen instead.
 - **Every flow starts at a main user-facing screen (e.g., dashboard, home).**
 - **Flows should be linear and actionable, showing clear transitions between screens and components.**
 - **Each step must specify both the user action and the system’s response.**
@@ -202,6 +205,18 @@ You have access to the five most recent flows generated. Before creating a new f
 
 If you notice inconsistencies or opportunities to merge or revise flows, update your output accordingly and note the change in the `metadata` field.
 
+## Screen List Usage
+
+You are provided with a list of current screen names. While generating the flow:
+- **Always try to reuse existing screen names from the provided list wherever possible.**
+- **Only create a new screen name if absolutely necessary and if the feature cannot be incorporated into an existing screen.**
+- **After generating the flow, review the full list of current screen names (including any new ones you created).**
+- **Think about which screens (based on their names and usage in the flow) could be merged, are redundant, or are no longer needed.**
+- **If you see screens with similar names or screens that only contain one feature, recommend merging or consolidating them.**
+- **Output two lists at the end of the JSON:**
+    - `screen_names_to_add`: List of new screen names that should be added to the category of good and usable screens.
+    - `screen_names_to_delete`: List of existing screen names that should be deleted or merged because they are redundant, too broad, or could be consolidated.
+
 ## Workflow
 
 1. Review the current five most recent flows (memory buffer) for consistency.
@@ -209,13 +224,12 @@ If you notice inconsistencies or opportunities to merge or revise flows, update 
 3. For each step, specify the screen, component, user action, and system response.
 4. Clearly define entry and exit points, pre- and post-conditions.
 5. Tag the flow with relevant metadata.
-6. Output the flow as a JSON object in the specified format.
+6. Output the flow as a JSON object in the specified format, including `screen_names_to_add` and `screen_names_to_delete`.
 
 ## Example Output
 
 ```json
 {
-
  "name": "Search and View Weather for a Specific Location",
  "description": "User searches for a city, selects from results, and views the current weather for that location.",
  "entry_point": "dashboard_screen",
@@ -252,18 +266,21 @@ If you notice inconsistencies or opportunities to merge or revise flows, update 
  "exit_points": ["dashboard_screen"],
  "pre_conditions": "User is on the Dashboard; search function is enabled.",
  "post_conditions": "Current weather shown for the newly selected city.",
- "metadata": ["core", "location_flow"]
+ "metadata": ["core", "location_flow"],
+ "screen_names_to_add": [],
+ "screen_names_to_delete": []
 }
+```
 
-Additional Guidance
+## Additional Guidance
+
 Be concise but thorough—each flow should be easy to read and directly actionable.
-Use the memory buffer to keep flows consistent and avoid fragmentation.
-If you revise or merge flows based on memory, note this in the metadata field.
+Use the memory buffer and current screen names list to keep flows consistent and avoid fragmentation.
+If you revise or merge flows based on memory or screen list, note this in the output lists and metadata.
 Do not invent new screens or components unless the user story clearly requires it.
-By following these instructions, you will generate user flows that are structured, consistent, and ready for conversion into screens and components in the weather application, ensuring a smooth user experience and clear navigation paths."""
-
-
-
+By following these instructions, you will generate user flows that are structured, consistent, and ready for conversion into screens and components in the application, ensuring a smooth user experience and clear navigation.
+For stories that are not front end related just return the phrase "Not a front end story."
+"""
 
 
 
