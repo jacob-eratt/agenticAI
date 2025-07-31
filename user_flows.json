@@ -1,13 +1,13 @@
 [
   {
-    "name": "View Current Temperature and 'Feels Like'",
-    "description": "User views the current temperature and 'feels like' temperature for a pre-selected or default location on the main dashboard.",
+    "name": "View Current Temperature and Feels Like",
+    "description": "User views the current temperature and 'feels like' temperature for the selected location on the main dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "current_weather_panel",
+        "component_name": "current_weather_display_card",
         "action": "view",
         "system_response": "Display current temperature and 'feels like' temperature for the selected location."
       }
@@ -15,17 +15,21 @@
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "A location is selected (either default or user-chosen) and weather data is available for that location.",
+    "pre_conditions": "A location has been selected or automatically determined, and weather data is available.",
     "post_conditions": "The current temperature and 'feels like' temperature are visible on the dashboard.",
     "metadata": [
       "core",
-      "display_flow"
+      "weather_display"
     ],
     "screen_names_to_add": [
       "dashboard_screen"
     ],
     "screen_names_to_delete": [],
-    "flow_id": "7790ae54-9840-4b6c-9616-68f3efe865cd",
+    "component_names_to_add": [
+      "current_weather_display_card"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "e2b6e1a4-0084-4694-b9a8-356e96a0e8ad",
     "story_id": "cddcaa31-e01e-4343-b326-7b3489f7e1ad"
   },
   {
@@ -36,23 +40,25 @@
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "current_weather_summary_panel",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display current weather description (e.g., 'Sunny', 'Partly Cloudy') and corresponding icon for the selected location."
+        "system_response": "Display current weather description (e.g., 'Sunny', 'Partly Cloudy') and an associated icon within the card."
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard; a location is selected, and current weather data is available.",
-    "post_conditions": "The current weather description and icon are visible on the dashboard.",
+    "pre_conditions": "User is on the Dashboard; a location has been selected; current weather data is available.",
+    "post_conditions": "The current weather description and icon are visible on the dashboard for the selected location.",
     "metadata": [
       "core",
       "weather_display"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "62c18435-721a-44ac-8121-8f518c2a85e9",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "7f52bad8-22b5-48b2-8ca1-492f0b43ed6e",
     "story_id": "b1c3aab9-3497-438a-bc7d-5d4faab1f257"
   },
   {
@@ -63,61 +69,65 @@
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "weather_details_panel",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display current humidity and wind speed/direction for the selected location."
+        "system_response": "Display current humidity and wind speed/direction details within the card."
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen, and a location has been selected for weather display.",
-    "post_conditions": "Current humidity and wind details are visible on the Dashboard screen.",
+    "pre_conditions": "User is on the Dashboard; a location is selected and current weather data is available.",
+    "post_conditions": "Current humidity and wind details are visible on the dashboard within the weather display.",
     "metadata": [
       "core",
-      "weather_details_flow"
+      "weather_details"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "0a4ffd87-55e6-488f-87b9-a64d04a4a74f",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "e801c3d7-0995-4eef-a9ee-ddd77397ffc0",
     "story_id": "ac51c573-539c-416a-ba9f-bd6ed146619d"
   },
   {
     "name": "View Current Precipitation Information",
-    "description": "User views the current precipitation type and intensity for the selected location on the dashboard.",
+    "description": "User views current precipitation type and intensity for the selected location on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "current_weather_panel",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display current precipitation type and intensity (e.g., 'Light Rain', 'Heavy Snow')."
+        "system_response": "Display current precipitation type and intensity within the card"
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
     "pre_conditions": "User is on the Dashboard; a location is selected and weather data is available.",
-    "post_conditions": "Current precipitation information is visible on the dashboard.",
+    "post_conditions": "Current precipitation information (type and intensity) is visible on the dashboard.",
     "metadata": [
       "core",
-      "weather_display"
+      "weather_data_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "dab44419-75fc-4a4d-bd7c-2f663c63563d",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "e9229126-b8e2-421c-8838-07485ed35e52",
     "story_id": "84750c9b-d47c-4276-a770-741917107b37"
   },
   {
-    "name": "Search for and View Weather for a Specific Location",
-    "description": "User searches for a city or location to find and view its current weather conditions.",
+    "name": "Search for and View Location Weather",
+    "description": "User searches for a specific city or location to find and display its current weather conditions on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "search_location_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Search Screen"
       },
@@ -126,28 +136,28 @@
         "screen_name": "location_search_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display real-time location suggestions/results below the input field"
+        "system_response": "Display real-time search suggestions/results below the input"
       },
       {
         "step_number": 3,
         "screen_name": "location_search_screen",
-        "component_name": "location_search_results_list",
+        "component_name": "search_results_list",
         "action": "select",
         "system_response": "Save selected location and navigate back to Dashboard Screen"
       },
       {
         "step_number": 4,
         "screen_name": "dashboard_screen",
-        "component_name": "current_weather_display",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display current weather conditions for the newly selected location"
+        "system_response": "Display current weather for the newly selected location"
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
     "pre_conditions": "User is on the Dashboard Screen.",
-    "post_conditions": "The Dashboard Screen displays weather information for the newly searched and selected location.",
+    "post_conditions": "The Dashboard Screen displays the current weather for the newly searched and selected location.",
     "metadata": [
       "core",
       "location_flow"
@@ -156,82 +166,95 @@
       "location_search_screen"
     ],
     "screen_names_to_delete": [],
-    "flow_id": "a9f18256-4eff-440c-b309-a7e3e78d889b",
+    "component_names_to_add": [
+      "search_icon_button",
+      "location_search_input",
+      "search_results_list"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "292ad8e2-59ff-4c94-8175-55869f596ca9",
     "story_id": "c5051285-f6dd-4b12-ad14-2d6a2ea7b710"
   },
   {
     "name": "Display Last Weather Data Update Timestamp",
-    "description": "User views the timestamp of the last weather data update to understand data freshness.",
+    "description": "User views the timestamp of the last weather data update on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "last_update_timestamp_label",
+        "component_name": "last_updated_timestamp_text",
         "action": "view",
-        "system_response": "Display the timestamp indicating when the weather data was last updated."
+        "system_response": "Display the timestamp of the last weather data update."
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen and weather data has been fetched.",
+    "pre_conditions": "User is on the dashboard_screen; weather data has been loaded and is being displayed.",
     "post_conditions": "The timestamp of the last weather data update is visible on the dashboard.",
     "metadata": [
       "core",
-      "information_display"
+      "display_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "c68dbd91-b4c8-48af-9495-c4140924073e",
+    "component_names_to_add": [
+      "last_updated_timestamp_text"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "06fb2bb4-aaec-4b0f-9e2e-0bb90b6900b3",
     "story_id": "bc075164-0c03-4a3c-b0fc-70a60c5f8431"
   },
   {
     "name": "View Detailed Hourly Forecast",
-    "description": "User navigates from the dashboard to view a detailed hourly weather forecast for their selected location.",
+    "description": "User views a detailed hourly weather forecast for their selected location to understand expected weather changes throughout the day.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "daily_forecast_card",
+        "component_name": "current_weather_display_card",
         "action": "tap",
-        "system_response": "Navigate to Forecast Details Screen"
+        "system_response": "Navigate to Hourly Forecast Screen"
       },
       {
         "step_number": 2,
-        "screen_name": "forecast_details_screen",
-        "component_name": "hourly_forecast_display",
+        "screen_name": "hourly_forecast_screen",
+        "component_name": "hourly_forecast_list",
         "action": "view",
-        "system_response": "Display detailed hourly weather forecast"
+        "system_response": "Display detailed hourly weather forecast for the selected location"
       }
     ],
     "exit_points": [
-      "forecast_details_screen",
-      "dashboard_screen"
+      "hourly_forecast_screen"
     ],
-    "pre_conditions": "User is on the Dashboard and a location is selected.",
+    "pre_conditions": "User is on the Dashboard with a selected location.",
     "post_conditions": "Detailed hourly forecast for the selected location is displayed.",
     "metadata": [
       "core",
       "forecast_flow"
     ],
     "screen_names_to_add": [
-      "forecast_details_screen"
+      "hourly_forecast_screen"
     ],
     "screen_names_to_delete": [],
-    "flow_id": "bb32a5a9-8239-4ea2-9f77-a54ccbfd8e3f",
+    "component_names_to_add": [
+      "hourly_forecast_list"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "b27d2a5d-bb6c-4992-96a3-4eb030b5d348",
     "story_id": "5fb9472a-81d2-46c8-9814-e03b722aa9fc"
   },
   {
     "name": "Select Location for Hourly Forecast",
-    "description": "User selects a specific location to view its hourly forecast.",
+    "description": "User selects a specific location to view its detailed hourly weather forecast.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "select_location_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Search Screen"
       },
@@ -240,47 +263,49 @@
         "screen_name": "location_search_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display location search results"
+        "system_response": "Display location suggestions/results in search_results_list"
       },
       {
         "step_number": 3,
         "screen_name": "location_search_screen",
-        "component_name": "location_search_results_list",
+        "component_name": "search_results_list",
         "action": "select",
-        "system_response": "Navigate to Forecast Details Screen with selected location's data"
+        "system_response": "Save selected location and navigate to Hourly Forecast Screen"
       },
       {
         "step_number": 4,
-        "screen_name": "forecast_details_screen",
-        "component_name": "hourly_forecast_display",
+        "screen_name": "hourly_forecast_screen",
+        "component_name": "hourly_forecast_list",
         "action": "view",
         "system_response": "Display hourly forecast for the selected location"
       }
     ],
     "exit_points": [
-      "forecast_details_screen"
+      "hourly_forecast_screen"
     ],
-    "pre_conditions": "User is on the Dashboard.",
-    "post_conditions": "Hourly forecast for the selected location is displayed.",
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "Hourly forecast for the selected location is displayed on the Hourly Forecast Screen.",
     "metadata": [
       "core",
-      "forecast_flow",
-      "location_flow"
+      "location_flow",
+      "forecast_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "591ff6b3-ba6f-4242-9485-fc9fb03fc050",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "e51554f9-0a79-4484-b57e-d69161fdc841",
     "story_id": "17982304-7418-4768-83dd-68497c7d14a7"
   },
   {
-    "name": "Search and View Weather Forecast for a Location",
-    "description": "User searches for a specific city or location and views its detailed weather forecast.",
+    "name": "Search and View Weather Location",
+    "description": "User searches for a specific city or location to view its weather forecast on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "search_location_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Search Screen"
       },
@@ -289,123 +314,127 @@
         "screen_name": "location_search_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display real-time location suggestions"
+        "system_response": "Display search results in search_results_list"
       },
       {
         "step_number": 3,
         "screen_name": "location_search_screen",
-        "component_name": "location_search_results_list",
+        "component_name": "search_results_list",
         "action": "select",
-        "system_response": "Navigate to Forecast Details Screen with selected location's data"
+        "system_response": "Save selected location and navigate back to Dashboard Screen"
       },
       {
         "step_number": 4,
-        "screen_name": "forecast_details_screen",
-        "component_name": "weather_forecast_display",
+        "screen_name": "dashboard_screen",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display detailed weather forecast for the selected location"
+        "system_response": "Display current weather for the newly selected location"
       }
     ],
     "exit_points": [
-      "forecast_details_screen"
+      "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen.",
-    "post_conditions": "Detailed weather forecast for the searched and selected location is displayed.",
+    "pre_conditions": "User is on the Dashboard Screen.",
+    "post_conditions": "The weather forecast for the searched and selected location is displayed on the Dashboard Screen.",
     "metadata": [
       "core",
-      "search_flow",
-      "weather_forecast"
+      "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "f0b97acd-050e-49d5-93f4-b442f04de149",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "283dc74d-ed24-4638-bfbc-353e42ae197b",
     "story_id": "4503fad9-21bd-446a-9596-d28033039975"
   },
   {
     "name": "View Daily Forecast Summary",
-    "description": "User views a summary of the daily weather forecast for the next several days for a selected location.",
+    "description": "User views a summary of the daily weather forecast for the next several days for a selected location directly on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "daily_forecast_summary_card",
+        "component_name": "daily_forecast_list",
         "action": "view",
-        "system_response": "Display a brief summary of the upcoming daily forecast."
-      },
-      {
-        "step_number": 2,
-        "screen_name": "dashboard_screen",
-        "component_name": "daily_forecast_summary_card",
-        "action": "tap",
-        "system_response": "Navigate to Forecast Details Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "forecast_details_screen",
-        "component_name": "multi_day_forecast_list",
-        "action": "view",
-        "system_response": "Display a detailed list of daily forecasts for the next several days."
+        "system_response": "Display daily weather forecast summary for the next several days for the currently selected location."
       }
     ],
     "exit_points": [
-      "forecast_details_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User has a location selected and is on the Dashboard Screen.",
-    "post_conditions": "The daily weather forecast summary for the selected location is displayed.",
+    "pre_conditions": "User is on the Dashboard; a location is selected and weather data is available.",
+    "post_conditions": "Daily weather forecast summary is displayed on the dashboard.",
     "metadata": [
       "core",
       "forecast_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "556e21a3-894c-4a87-a1f9-49f2dc0f27db",
+    "component_names_to_add": [
+      "daily_forecast_list"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "4b011d2c-c644-4ebc-8178-879ccf0757a0",
     "story_id": "fdc891df-2d50-4bfb-9f74-7cb96a9c485d"
   },
   {
     "name": "View Comprehensive Daily Details",
-    "description": "User navigates from the dashboard to view detailed weather information for a specific forecasted day.",
+    "description": "User selects a specific day from the daily forecast to view comprehensive weather details for that day.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "daily_forecast_card",
-        "action": "tap",
-        "system_response": "Navigate to Forecast Details Screen for the selected day"
+        "component_name": "daily_forecast_list",
+        "action": "select",
+        "system_response": "Navigate to Daily Forecast Details Screen for the selected day."
       },
       {
         "step_number": 2,
-        "screen_name": "forecast_details_screen",
-        "component_name": "daily_details_display",
+        "screen_name": "daily_forecast_details_screen",
+        "component_name": "daily_details_panel",
         "action": "view",
-        "system_response": "Display comprehensive weather details (temperature, precipitation, wind, humidity) for the selected day"
+        "system_response": "Display comprehensive weather details (temperature, precipitation, wind, humidity, etc.) for the selected day."
+      },
+      {
+        "step_number": 3,
+        "screen_name": "daily_forecast_details_screen",
+        "component_name": "hourly_forecast_list",
+        "action": "view",
+        "system_response": "Display hourly forecast breakdown for the selected day."
       }
     ],
     "exit_points": [
-      "forecast_details_screen"
+      "daily_forecast_details_screen",
+      "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen and a multi-day forecast is available.",
-    "post_conditions": "Comprehensive weather details for the selected day are displayed on the Forecast Details screen.",
+    "pre_conditions": "User is on the Dashboard screen and daily forecast data is available.",
+    "post_conditions": "User is viewing comprehensive weather details for a specific forecasted day, including an hourly breakdown.",
     "metadata": [
       "core",
       "forecast_flow"
     ],
-    "screen_names_to_add": [],
+    "screen_names_to_add": [
+      "daily_forecast_details_screen"
+    ],
     "screen_names_to_delete": [],
-    "flow_id": "35c880eb-42b6-41ad-b8a3-b1af329291fa",
+    "component_names_to_add": [
+      "daily_details_panel"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "d6b8a448-0a53-4d6b-80c6-d8f7118eb83e",
     "story_id": "e520c426-a06a-4a44-8adf-272da784101c"
   },
   {
     "name": "Search for a Specific Location",
-    "description": "User searches for a location by name or identifier and selects it from the results.",
+    "description": "User searches for a location by name or identifier to find a specific place and view its information.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "search_location_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Search Screen"
       },
@@ -414,46 +443,48 @@
         "screen_name": "location_search_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display real-time search suggestions/results below the input field"
+        "system_response": "Display search results dynamically in search_results_list"
       },
       {
         "step_number": 3,
         "screen_name": "location_search_screen",
-        "component_name": "location_search_results_list",
+        "component_name": "search_results_list",
         "action": "select",
-        "system_response": "Save selected location and navigate back to Dashboard Screen"
+        "system_response": "Set selected location as current and navigate back to Dashboard Screen"
       },
       {
         "step_number": 4,
         "screen_name": "dashboard_screen",
-        "component_name": "selected_location_display",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display the newly selected location, potentially updating the primary weather view"
+        "system_response": "Display weather information for the newly selected location"
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
     "pre_conditions": "User is on the Dashboard Screen.",
-    "post_conditions": "A specific location has been found and selected, and is now reflected on the Dashboard Screen.",
+    "post_conditions": "The application displays weather information for the newly searched and selected location on the Dashboard Screen.",
     "metadata": [
       "core",
       "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "0095436b-3211-4ff2-b110-0a2bfdcb6211",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "fe39b057-eaf1-440b-a678-fda5171de478",
     "story_id": "e7b3d918-a47b-4a20-a608-cb52a1e5792a"
   },
   {
-    "name": "Display and Select Location Search Results",
-    "description": "User initiates a location search, enters a query, views the list of matching results, and selects a location.",
+    "name": "Display Location Search Results",
+    "description": "User initiates a location search, enters a query, and views a list of matching locations.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "search_location_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Search Screen"
       },
@@ -462,53 +493,41 @@
         "screen_name": "location_search_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display real-time location suggestions/results below the input field"
+        "system_response": "Perform search query and display results dynamically"
       },
       {
         "step_number": 3,
         "screen_name": "location_search_screen",
-        "component_name": "location_search_results_list",
+        "component_name": "search_results_list",
         "action": "view",
-        "system_response": "Show a list of matching locations based on the entered query"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "location_search_screen",
-        "component_name": "location_search_results_list_item",
-        "action": "tap",
-        "system_response": "Save selected location and navigate back to Dashboard Screen"
-      },
-      {
-        "step_number": 5,
-        "screen_name": "dashboard_screen",
-        "component_name": "current_location_display",
-        "action": "view",
-        "system_response": "Update current location and display weather forecast for the newly selected location"
+        "system_response": "Display a list of matching locations based on the query"
       }
     ],
     "exit_points": [
-      "dashboard_screen"
+      "location_search_screen"
     ],
-    "pre_conditions": "User is on the Dashboard Screen.",
-    "post_conditions": "A list of location search results is displayed, and upon selection, the dashboard updates with the chosen location's weather.",
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "A list of location search results is displayed on the Location Search Screen.",
     "metadata": [
       "core",
-      "location_flow"
+      "search_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "dbbd3ac0-d903-4015-8e3e-9268bc8dd620",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "d278246f-544b-4cea-a4cd-2e3899430d33",
     "story_id": "9bf0aa93-fed5-46ad-a2f8-d9c69ca9f2a3"
   },
   {
     "name": "Add Location to Saved List",
-    "description": "User searches for a location and adds it to their list of saved locations for quick access.",
+    "description": "User searches for a location, selects it from the results, and adds it to their list of saved locations.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "add_location_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Search Screen"
       },
@@ -517,42 +536,46 @@
         "screen_name": "location_search_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display location search results below the input field"
+        "system_response": "Display search results in 'search_results_list'"
       },
       {
         "step_number": 3,
         "screen_name": "location_search_screen",
-        "component_name": "save_location_button",
-        "action": "tap",
-        "system_response": "Add selected location to saved list and show confirmation message (e.g., toast notification)"
+        "component_name": "search_results_list",
+        "action": "select",
+        "system_response": "Highlight selected location and show 'save_location_button'"
       },
       {
         "step_number": 4,
         "screen_name": "location_search_screen",
-        "component_name": "back_button",
+        "component_name": "save_location_button",
         "action": "tap",
-        "system_response": "Navigate back to Dashboard Screen"
+        "system_response": "Add selected location to user's saved list and navigate back to Dashboard Screen"
       },
       {
         "step_number": 5,
         "screen_name": "dashboard_screen",
-        "component_name": "saved_locations_list",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display the newly added location in the saved locations list"
+        "system_response": "Display updated list of saved locations or confirmation of addition"
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen.",
-    "post_conditions": "The selected location is added to the user's saved locations list and is visible on the Dashboard.",
+    "pre_conditions": "User is on the Dashboard Screen.",
+    "post_conditions": "The selected location is added to the user's saved locations list and is accessible for future viewing.",
     "metadata": [
       "core",
       "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "fcd94eb1-253e-49f3-9a53-70966f73ed08",
+    "component_names_to_add": [
+      "save_location_button"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "772d6470-03cd-4b03-84a9-2aab612cc8b6",
     "story_id": "4d25f827-ab2e-4abe-b3fc-e9cf136c5dcd"
   },
   {
@@ -563,7 +586,7 @@
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "manage_locations_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Management Screen"
       },
@@ -576,10 +599,11 @@
       }
     ],
     "exit_points": [
-      "location_management_screen"
+      "location_management_screen",
+      "dashboard_screen"
     ],
-    "pre_conditions": "User is logged in and has at least one location saved.",
-    "post_conditions": "User is viewing a list of their saved locations.",
+    "pre_conditions": "User is on the Dashboard and has at least one location saved.",
+    "post_conditions": "User is viewing a list of their saved locations on the Location Management Screen.",
     "metadata": [
       "core",
       "location_flow"
@@ -590,18 +614,22 @@
     "screen_names_to_delete": [
       "location_search_screen"
     ],
-    "flow_id": "1b4e9d12-bd80-467c-b4ca-845a865e42ab",
+    "component_names_to_add": [
+      "saved_locations_list"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "8092a9b0-04c0-465e-97f7-0311a9c04c53",
     "story_id": "5ba19694-5e70-489d-b1c4-a63117b99cae"
   },
   {
     "name": "Remove a Saved Location",
-    "description": "User removes a specific location from their list of saved locations to keep it organized.",
+    "description": "User navigates to the location management screen, selects a saved location, and removes it from their list.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "manage_locations_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Management Screen"
       },
@@ -610,28 +638,28 @@
         "screen_name": "location_management_screen",
         "component_name": "saved_locations_list",
         "action": "view",
-        "system_response": "Display list of currently saved locations"
+        "system_response": "Display list of user's saved locations"
       },
       {
         "step_number": 3,
         "screen_name": "location_management_screen",
-        "component_name": "location_list_item_delete_icon",
+        "component_name": "delete_location_button",
         "action": "tap",
-        "system_response": "Remove selected location from the list and update display"
+        "system_response": "Show confirmation dialog for deletion"
       },
       {
         "step_number": 4,
         "screen_name": "location_management_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate to Dashboard Screen"
+        "component_name": "confirmation_dialog",
+        "action": "select_confirm",
+        "system_response": "Remove selected location from saved list and update saved_locations_list"
       }
     ],
     "exit_points": [
-      "dashboard_screen",
-      "location_management_screen"
+      "location_management_screen",
+      "dashboard_screen"
     ],
-    "pre_conditions": "User has at least one location saved in their list.",
+    "pre_conditions": "User is logged in and has at least one location saved in their list.",
     "post_conditions": "The selected location is removed from the user's saved list.",
     "metadata": [
       "core",
@@ -639,18 +667,23 @@
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "0237eaf2-bd6f-4d0c-aaaa-e9296ebb8c1e",
+    "component_names_to_add": [
+      "delete_location_button",
+      "confirmation_dialog"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "ffb95e9f-0822-4fa5-9c68-2248ff215fd6",
     "story_id": "89250106-1ec5-4823-92a5-53c37ba8c975"
   },
   {
     "name": "Set Default Location",
-    "description": "User navigates to location management, selects a saved location, and sets it as the default for immediate display on app launch.",
+    "description": "User sets one of their saved locations as the primary location, whose weather data is displayed by default on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "manage_locations_button",
+        "component_name": "search_icon_button",
         "action": "tap",
         "system_response": "Navigate to Location Management Screen"
       },
@@ -658,20 +691,27 @@
         "step_number": 2,
         "screen_name": "location_management_screen",
         "component_name": "saved_locations_list",
-        "action": "select_item",
-        "system_response": "Highlight selected location and show options"
+        "action": "view",
+        "system_response": "Display list of saved locations"
       },
       {
         "step_number": 3,
         "screen_name": "location_management_screen",
         "component_name": "set_as_default_button",
         "action": "tap",
-        "system_response": "Set selected location as default and navigate back to Dashboard"
+        "system_response": "Show confirmation dialog to set selected location as default"
       },
       {
         "step_number": 4,
+        "screen_name": "location_management_screen",
+        "component_name": "confirmation_dialog",
+        "action": "confirm_action",
+        "system_response": "Set selected location as default, close dialog, and navigate to Dashboard Screen"
+      },
+      {
+        "step_number": 5,
         "screen_name": "dashboard_screen",
-        "component_name": "current_weather_panel",
+        "component_name": "current_weather_display_card",
         "action": "view",
         "system_response": "Display current weather for the newly set default location"
       }
@@ -680,7 +720,7 @@
       "dashboard_screen"
     ],
     "pre_conditions": "User has at least one saved location.",
-    "post_conditions": "A new default location is set, and its weather data is displayed on the dashboard.",
+    "post_conditions": "One saved location is designated as the default, and its weather data is displayed on the dashboard.",
     "metadata": [
       "core",
       "settings_flow",
@@ -688,12 +728,16 @@
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "3b603822-c132-41b1-a062-610d099166f7",
+    "component_names_to_add": [
+      "set_as_default_button"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "2ca5486f-3a7f-4af1-9eac-c27a75942da2",
     "story_id": "6bd3d1f5-43df-47cd-882c-3b09caa10ce9"
   },
   {
     "name": "Reorder Saved Locations",
-    "description": "User reorders their saved locations to prioritize them on the location management screen.",
+    "description": "User reorders their saved locations to prioritize them on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -706,92 +750,56 @@
       {
         "step_number": 2,
         "screen_name": "location_management_screen",
-        "component_name": "edit_locations_button",
-        "action": "tap",
-        "system_response": "Enable reorder mode for saved locations list"
+        "component_name": "saved_locations_list",
+        "action": "view",
+        "system_response": "Display list of saved locations with reorder handles"
       },
       {
         "step_number": 3,
         "screen_name": "location_management_screen",
-        "component_name": "saved_locations_list_item_reorder_handle",
-        "action": "drag_and_drop",
-        "system_response": "Update order of locations in the list visually"
+        "component_name": "reorder_handle",
+        "action": "drag",
+        "system_response": "Visually reorder the selected location within the list"
       },
       {
         "step_number": 4,
         "screen_name": "location_management_screen",
         "component_name": "done_button",
         "action": "tap",
-        "system_response": "Save new location order and navigate back to Dashboard"
+        "system_response": "Save the new order of locations and navigate back to Dashboard"
       },
       {
         "step_number": 5,
         "screen_name": "dashboard_screen",
-        "component_name": "saved_locations_display",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display locations in the newly ordered sequence"
+        "system_response": "Display weather for locations in their new order"
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User has multiple saved locations.",
-    "post_conditions": "Saved locations are reordered according to user preference.",
+    "pre_conditions": "User has at least two saved locations.",
+    "post_conditions": "Saved locations are reordered according to user preference on the dashboard.",
     "metadata": [
       "core",
-      "settings_flow",
-      "location_flow"
+      "location_flow",
+      "settings_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "454f5fa9-5359-45cb-b114-a69da2823766",
+    "component_names_to_add": [
+      "manage_locations_button",
+      "reorder_handle",
+      "done_button"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "7be9de5b-4876-4b09-8d5b-7cd6941d8146",
     "story_id": "cf13ae79-7467-4055-ab47-49911cd1f86d"
   },
   {
     "name": "Handle No Location Search Results",
-    "description": "User attempts to search for a location, and if no results are found, an informative message is displayed.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "manage_locations_button",
-        "action": "tap",
-        "system_response": "Navigate to Location Management Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "location_management_screen",
-        "component_name": "location_search_input",
-        "action": "enter_text",
-        "system_response": "Initiate search for entered text"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "location_management_screen",
-        "component_name": "search_results_area",
-        "action": "view",
-        "system_response": "Display 'No results found' message"
-      }
-    ],
-    "exit_points": [
-      "location_management_screen"
-    ],
-    "pre_conditions": "User is on the Dashboard; location search functionality is available.",
-    "post_conditions": "User is informed that no search results were found for their query, remaining on the location management screen.",
-    "metadata": [
-      "core",
-      "location_flow",
-      "error_handling"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "b982a72d-6be5-4bee-9aec-c8038f0c5df1",
-    "story_id": "7add3559-bf5c-4bf3-90df-5ca77b714573"
-  },
-  {
-    "name": "Handle Location Addition Error",
-    "description": "User attempts to add a location, encounters an error, and is informed about the issue on the same screen.",
+    "description": "User attempts to search for a location, and the system informs them if no results are found.",
     "entry_point": "location_management_screen",
     "steps": [
       {
@@ -799,42 +807,86 @@
         "screen_name": "location_management_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display location suggestions (if any)"
+        "system_response": "System initiates search for the entered text."
       },
       {
         "step_number": 2,
         "screen_name": "location_management_screen",
-        "component_name": "add_location_button",
-        "action": "tap",
-        "system_response": "Attempt to add location; encounter error"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "location_management_screen",
-        "component_name": "error_message_display",
+        "component_name": "no_results_message_text",
         "action": "view",
-        "system_response": "Display error message (e.g., 'Location not found', 'Network error')"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "location_management_screen",
-        "component_name": "error_message_display",
-        "action": "dismiss",
-        "system_response": "Hide error message; user remains on screen to retry or correct"
+        "system_response": "Display 'No results found' message in the search results area."
       }
     ],
     "exit_points": [
       "location_management_screen"
     ],
-    "pre_conditions": "User is on the Location Management Screen and has attempted to add a location that results in an error.",
-    "post_conditions": "An error message is displayed to the user, and the user remains on the Location Management Screen.",
+    "pre_conditions": "User is on the Location Management Screen, ready to search for a location.",
+    "post_conditions": "User is informed that their search query yielded no results.",
     "metadata": [
+      "core",
+      "search_flow",
+      "error_handling"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "no_results_message_text"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "12cca372-6362-4c4d-8992-99940ad87e24",
+    "story_id": "7add3559-bf5c-4bf3-90df-5ca77b714573"
+  },
+  {
+    "name": "Handle Location Addition Error",
+    "description": "User attempts to add a location, and if an error occurs during the process, an informative message is displayed.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "manage_locations_button",
+        "action": "tap",
+        "system_response": "Navigate to Location Management Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "location_management_screen",
+        "component_name": "location_search_input",
+        "action": "enter_text",
+        "system_response": "Display search suggestions (if any)"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "location_management_screen",
+        "component_name": "search_icon_button",
+        "action": "tap",
+        "system_response": "Attempt to search for and validate location"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "location_management_screen",
+        "component_name": "error_message_text",
+        "action": "view",
+        "system_response": "Display an error message indicating the issue (e.g., 'Location not found', 'Network error', 'Invalid input')"
+      }
+    ],
+    "exit_points": [
+      "location_management_screen"
+    ],
+    "pre_conditions": "User is on the Dashboard and has an active internet connection (or attempts to add an invalid location).",
+    "post_conditions": "An error message is displayed on the Location Management Screen, informing the user about the failed location addition attempt.",
+    "metadata": [
+      "core",
       "error_handling",
       "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "c153aaf1-635f-46f7-ae73-17f02b4fe32b",
+    "component_names_to_add": [
+      "error_message_text"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "bbec0661-20bd-449c-ad06-ebf6e17f491b",
     "story_id": "b940a13e-3931-4a49-b12c-589a3f9ac427"
   },
   {
@@ -854,28 +906,28 @@
         "screen_name": "location_management_screen",
         "component_name": "location_search_input",
         "action": "enter_text",
-        "system_response": "Display location suggestions/results"
+        "system_response": "Display search results in 'search_results_list'"
       },
       {
         "step_number": 3,
         "screen_name": "location_management_screen",
-        "component_name": "location_search_results_list",
+        "component_name": "search_results_list",
         "action": "select",
-        "system_response": "Show selected location details with 'Add' button"
+        "system_response": "Highlight selected location and enable 'save_location_button'"
       },
       {
         "step_number": 4,
         "screen_name": "location_management_screen",
-        "component_name": "add_location_button",
+        "component_name": "save_location_button",
         "action": "tap",
-        "system_response": "Add location to saved list and navigate back to Dashboard"
+        "system_response": "Add location to 'saved_locations_list' and update display"
       },
       {
         "step_number": 5,
-        "screen_name": "dashboard_screen",
-        "component_name": "saved_locations_list",
-        "action": "view",
-        "system_response": "Display updated list of saved locations, potentially including the newly added one"
+        "screen_name": "location_management_screen",
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Navigate back to Dashboard Screen"
       }
     ],
     "exit_points": [
@@ -889,12 +941,14 @@
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "3377638e-39f0-4e28-bd23-54b274b2ccf8",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "8ab4eee1-f66e-452d-92bf-2dc8af2bc049",
     "story_id": "1f3aa6fe-8348-4ef4-928a-94e7acd12c96"
   },
   {
     "name": "View Saved Locations List",
-    "description": "User navigates to the location management screen to view a list of all their saved locations.",
+    "description": "User navigates to a screen to view a list of all their saved locations.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -916,20 +970,22 @@
       "location_management_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User has at least one location saved.",
-    "post_conditions": "User has viewed the list of saved locations.",
+    "pre_conditions": "User has at least one saved location.",
+    "post_conditions": "The list of saved locations is displayed on the Location Management Screen.",
     "metadata": [
       "core",
       "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "730d55b2-bbc7-4dbf-a5d1-f7b769ef5a57",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "7e463646-f59d-4e37-be04-8ed9d9fbb0e2",
     "story_id": "3ff57199-aa68-4983-9cdb-3cc1fbf22aa8"
   },
   {
-    "name": "Modify Saved Location Details",
-    "description": "User modifies the details of an existing saved location to keep their list accurate and organized.",
+    "name": "Modify Saved Location Details (Set Default)",
+    "description": "User navigates to the location management screen to modify details of a saved location, specifically setting a different location as default.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -944,44 +1000,38 @@
         "screen_name": "location_management_screen",
         "component_name": "saved_locations_list",
         "action": "view",
-        "system_response": "Display list of all saved locations"
+        "system_response": "Display list of saved locations with management options"
       },
       {
         "step_number": 3,
         "screen_name": "location_management_screen",
-        "component_name": "saved_location_item",
+        "component_name": "set_as_default_button",
         "action": "tap",
-        "system_response": "Display 'Edit Location' form/modal with current details pre-filled for the selected location"
+        "system_response": "Update the default location and provide visual confirmation (e.g., checkmark, toast message)"
       },
       {
         "step_number": 4,
         "screen_name": "location_management_screen",
-        "component_name": "location_name_input",
-        "action": "enter_text",
-        "system_response": "Update input field with new text"
-      },
-      {
-        "step_number": 5,
-        "screen_name": "location_management_screen",
-        "component_name": "save_button",
+        "component_name": "done_button",
         "action": "tap",
-        "system_response": "Update location details in the system, close the 'Edit Location' form/modal, and refresh the saved locations list"
+        "system_response": "Navigate back to Dashboard Screen"
       }
     ],
     "exit_points": [
-      "location_management_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User has at least one saved location in their list.",
-    "post_conditions": "The details of the selected location are updated and reflected in the saved locations list.",
+    "pre_conditions": "User has at least two saved locations.",
+    "post_conditions": "A different saved location is now set as the default, and the dashboard reflects this change.",
     "metadata": [
       "core",
       "location_flow",
-      "edit_flow"
+      "settings_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "c5973c39-90c2-48a0-8d02-ee08ed1ea405",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "fe7dc3f9-191a-4c45-a027-3c4bb69ef6e3",
     "story_id": "c6b80928-5448-44f6-a781-9feea9fd3d0a"
   },
   {
@@ -1001,35 +1051,50 @@
         "screen_name": "location_management_screen",
         "component_name": "saved_locations_list",
         "action": "view",
-        "system_response": "Display list of saved locations with options to manage them"
+        "system_response": "Display list of saved locations"
       },
       {
         "step_number": 3,
         "screen_name": "location_management_screen",
-        "component_name": "delete_location_icon",
+        "component_name": "delete_location_button",
         "action": "tap",
-        "system_response": "Remove selected location from the list and update display"
+        "system_response": "Show confirmation dialog for deletion"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "location_management_screen",
+        "component_name": "confirmation_dialog",
+        "action": "tap_confirm",
+        "system_response": "Remove location from saved list and update saved_locations_list"
+      },
+      {
+        "step_number": 5,
+        "screen_name": "location_management_screen",
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Navigate back to Dashboard Screen"
       }
     ],
     "exit_points": [
-      "location_management_screen",
-      "dashboard_screen"
+      "dashboard_screen",
+      "location_management_screen"
     ],
     "pre_conditions": "User has at least one saved location.",
     "post_conditions": "The selected location is removed from the user's saved list.",
     "metadata": [
       "core",
-      "location_flow",
-      "settings_flow"
+      "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "acf51aa2-6e66-4e4b-89b4-88bfcbe518a3",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "bf2cd401-1226-4591-bf98-c4c08ad09f60",
     "story_id": "bed2ec12-590d-4858-a6bd-fd313747ebdb"
   },
   {
     "name": "Select Saved Location for Viewing",
-    "description": "User selects a previously saved location from a list to view its detailed information.",
+    "description": "User navigates to the location management screen, selects a saved location, and views its information on the dashboard.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -1044,253 +1109,112 @@
         "screen_name": "location_management_screen",
         "component_name": "saved_locations_list",
         "action": "select",
-        "system_response": "Load data for selected location and navigate to Forecast Details Screen"
+        "system_response": "Set selected location as active and navigate back to Dashboard"
       },
       {
         "step_number": 3,
-        "screen_name": "forecast_details_screen",
-        "component_name": "location_forecast_display",
+        "screen_name": "dashboard_screen",
+        "component_name": "current_weather_display_card",
         "action": "view",
-        "system_response": "Display detailed forecast for the selected location"
+        "system_response": "Display current weather and relevant information for the newly selected location"
       }
     ],
     "exit_points": [
-      "forecast_details_screen"
+      "dashboard_screen"
     ],
-    "pre_conditions": "User has at least one location saved in their list.",
-    "post_conditions": "Detailed forecast information for the selected saved location is displayed.",
+    "pre_conditions": "User has at least one saved location. User is on the Dashboard.",
+    "post_conditions": "The dashboard displays information for the newly selected saved location.",
     "metadata": [
       "core",
       "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "40d63e8c-ee85-42b8-856b-d516f52b7b0e",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "4f84dc31-dac9-4ab0-a678-f78253bedaa3",
     "story_id": "3ac44ba8-8075-4e76-b0af-aad45c28935f"
   },
   {
     "name": "Inform User of Location Permission Denial",
-    "description": "The application informs the user via a persistent message when location access has been denied, explaining why location-based features are unavailable.",
+    "description": "The application informs the user on the dashboard if location access has been denied, explaining why location-based features are unavailable.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "dashboard_screen",
+        "component_name": "error_message_text",
         "action": "view",
-        "system_response": "System attempts to retrieve location data and detects that location permission has been denied by the user at the OS level."
-      },
-      {
-        "step_number": 2,
-        "screen_name": "dashboard_screen",
-        "component_name": "location_permission_denied_banner",
-        "action": "view",
-        "system_response": "Display a persistent banner or message at the top of the screen, informing the user that location-based features are disabled due to denied permission."
+        "system_response": "Display a prominent message indicating location permission denial and its impact on features."
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User has previously denied location permission for the application at the operating system level.",
-    "post_conditions": "User is informed about the denied location permission via a persistent on-screen message.",
+    "pre_conditions": "The application has attempted to access location services, and the operating system has indicated that location permission is denied by the user.",
+    "post_conditions": "The user is clearly informed on the dashboard about the denied location permission.",
     "metadata": [
       "core",
       "permission_flow",
-      "notification_flow"
+      "system_initiated"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "20fb4e4f-ce06-40b3-b7e7-fc1c1a2b36d2",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "b59d372a-7123-4004-bbd0-f2a65df78abd",
     "story_id": "ac1902a1-a75e-449b-9609-296005a9f188"
   },
   {
     "name": "Inform User of Location Detection Failure",
-    "description": "The application informs the user when it fails to detect their current location, allowing them to understand why location-dependent data might be unavailable.",
+    "description": "The application informs the user when it fails to detect their current location, providing options to resolve the issue.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "dashboard_content",
-        "action": "view",
-        "system_response": "User is viewing the main dashboard, where location-based information would typically be displayed."
+        "component_name": "system_location_service",
+        "action": "system_detects_failure",
+        "system_response": "Display location_detection_failure_dialog on top of the Dashboard Screen"
       },
       {
         "step_number": 2,
         "screen_name": "dashboard_screen",
-        "component_name": "location_error_banner",
+        "component_name": "location_detection_failure_dialog",
         "action": "view",
-        "system_response": "System detects a failure in determining the user's current location and displays a persistent banner or message on the dashboard informing the user."
+        "system_response": "Present error message indicating location detection failure, along with actionable options like 'Try Again' and 'Manage Locations'."
+      },
+      {
+        "step_number": 3,
+        "screen_name": "dashboard_screen",
+        "component_name": "manage_locations_button",
+        "action": "tap",
+        "system_response": "Navigate to Location Management Screen"
       }
     ],
     "exit_points": [
+      "location_management_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the dashboard. The application has attempted to determine the user's current location but failed.",
-    "post_conditions": "A clear, visible message or banner indicating location detection failure is displayed on the dashboard.",
+    "pre_conditions": "User is on the dashboard_screen. The application attempts to automatically detect the user's current location, and this attempt fails.",
+    "post_conditions": "User has been informed of the location detection failure and has navigated to the Location Management Screen to resolve the issue, or has dismissed the dialog and remains on the Dashboard Screen.",
     "metadata": [
-      "error_handling",
-      "notification_flow"
+      "core",
+      "error_flow",
+      "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "a3771e3b-e6cd-4219-b349-4d7328e0126e",
+    "component_names_to_add": [
+      "location_detection_failure_dialog"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "1d9748d0-e55f-476b-8c31-f1c4a8a2604d",
     "story_id": "40b0c68f-b309-4a8a-9f3d-b14f1ea13f38"
   },
   {
     "name": "Configure Units of Measurement",
-    "description": "User selects their preferred units of measurement (e.g., Metric, Imperial) for data display.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "settings_button",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "settings_screen",
-        "component_name": "units_of_measurement_selector",
-        "action": "select",
-        "system_response": "Update user preference for units of measurement"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "settings_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate back to Dashboard Screen"
-      }
-    ],
-    "exit_points": [
-      "dashboard_screen",
-      "settings_screen"
-    ],
-    "pre_conditions": "User is on the Dashboard.",
-    "post_conditions": "Units of measurement preference is updated and saved.",
-    "metadata": [
-      "settings_flow",
-      "core"
-    ],
-    "screen_names_to_add": [
-      "settings_screen"
-    ],
-    "screen_names_to_delete": [],
-    "flow_id": "e0ffb631-83a5-495e-80eb-2e7301d02510",
-    "story_id": "a49a26db-ec34-4b15-8225-b336a346b9cc"
-  },
-  {
-    "name": "Manage Notification Preferences",
-    "description": "User navigates to notification settings to enable or disable specific types of notifications.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "settings_icon",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "settings_screen",
-        "component_name": "notifications_option",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "notification_type_toggle",
-        "action": "toggle",
-        "system_response": "Update notification preference for the selected type"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate back to Settings Screen"
-      }
-    ],
-    "exit_points": [
-      "settings_screen",
-      "dashboard_screen"
-    ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "User's notification preferences are updated and saved.",
-    "metadata": [
-      "settings_flow",
-      "notifications"
-    ],
-    "screen_names_to_add": [
-      "notification_settings_screen"
-    ],
-    "screen_names_to_delete": [],
-    "flow_id": "86d188ba-c135-4fe8-b01c-4e7bde60fc33",
-    "story_id": "463ab21a-a4f7-41e0-a46f-3ffa5c0ef9f2"
-  },
-  {
-    "name": "Choose Notification Delivery Method",
-    "description": "User navigates to notification settings and selects their preferred method for receiving alerts.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "settings_button",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "settings_screen",
-        "component_name": "notifications_option",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "email_notification_toggle",
-        "action": "toggle",
-        "system_response": "Update email notification preference"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "push_notification_toggle",
-        "action": "toggle",
-        "system_response": "Update push notification preference"
-      },
-      {
-        "step_number": 5,
-        "screen_name": "notification_settings_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate back to Settings Screen"
-      }
-    ],
-    "exit_points": [
-      "settings_screen",
-      "dashboard_screen"
-    ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "Notification delivery preferences (email, push) are updated and saved.",
-    "metadata": [
-      "settings_flow",
-      "notifications"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "3c5d9331-b22d-40d7-9bae-e68c248cfd1b",
-    "story_id": "e6a78140-bc0e-4f7b-8731-4fcf72322209"
-  },
-  {
-    "name": "Configure General Display Options",
-    "description": "User navigates to settings to customize various application display preferences.",
+    "description": "User selects their preferred units of measurement (e.g., Metric, Imperial) to ensure all relevant data is displayed in a consistent format.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -1303,57 +1227,204 @@
       {
         "step_number": 2,
         "screen_name": "settings_screen",
-        "component_name": "display_options_section_header",
-        "action": "view",
-        "system_response": "Display general display settings options"
+        "component_name": "unit_selection_radio_group",
+        "action": "select",
+        "system_response": "Update selected unit internally"
       },
       {
         "step_number": 3,
         "screen_name": "settings_screen",
-        "component_name": "theme_selection_dropdown",
-        "action": "select",
-        "system_response": "Update application theme (e.g., Light/Dark Mode)"
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Save unit preference and navigate back to Dashboard"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "dashboard_screen",
+        "component_name": "current_weather_display_card",
+        "action": "view",
+        "system_response": "Display weather data using the newly selected units"
+      }
+    ],
+    "exit_points": [
+      "dashboard_screen"
+    ],
+    "pre_conditions": "User is on the Dashboard.",
+    "post_conditions": "All relevant weather data is displayed using the user's selected units of measurement.",
+    "metadata": [
+      "settings_flow",
+      "preferences"
+    ],
+    "screen_names_to_add": [
+      "settings_screen"
+    ],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "settings_icon_button",
+      "unit_selection_radio_group"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "01c766b7-8242-4b70-85b2-27c3ced865b2",
+    "story_id": "a49a26db-ec34-4b15-8225-b336a346b9cc"
+  },
+  {
+    "name": "Manage Notification Preferences",
+    "description": "User navigates to settings to enable or disable specific types of notifications.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "settings_screen",
+        "component_name": "notification_type_toggle",
+        "action": "toggle_on",
+        "system_response": "Enable 'Severe Weather Alerts' notifications and save preference"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "settings_screen",
+        "component_name": "notification_type_toggle",
+        "action": "toggle_off",
+        "system_response": "Disable 'Daily Forecast Reminders' notifications and save preference"
       },
       {
         "step_number": 4,
         "screen_name": "settings_screen",
-        "component_name": "font_size_slider",
-        "action": "adjust",
-        "system_response": "Adjust application font size"
-      },
-      {
-        "step_number": 5,
-        "screen_name": "settings_screen",
-        "component_name": "unit_system_toggle",
-        "action": "toggle",
-        "system_response": "Switch measurement units (e.g., Metric/Imperial)"
-      },
-      {
-        "step_number": 6,
-        "screen_name": "settings_screen",
-        "component_name": "back_button",
+        "component_name": "done_button",
         "action": "tap",
         "system_response": "Navigate back to Dashboard Screen"
       }
     ],
     "exit_points": [
-      "dashboard_screen",
-      "settings_screen"
+      "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard and has access to settings.",
-    "post_conditions": "Application display settings are updated according to user preferences.",
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "Notification preferences are updated according to user selections.",
+    "metadata": [
+      "settings_flow",
+      "notifications"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "notification_type_toggle"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "1cde836d-c9f7-4cf4-83af-10225e918c0d",
+    "story_id": "463ab21a-a4f7-41e0-a46f-3ffa5c0ef9f2"
+  },
+  {
+    "name": "Choose Notification Delivery Method",
+    "description": "User selects their preferred method for receiving notifications (e.g., email, push notification) via the settings screen.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "settings_screen",
+        "component_name": "notification_type_toggle",
+        "action": "toggle",
+        "system_response": "Update notification preference and save setting"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "settings_screen",
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Navigate back to Dashboard Screen"
+      }
+    ],
+    "exit_points": [
+      "dashboard_screen"
+    ],
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "User's notification delivery preferences are updated and saved.",
+    "metadata": [
+      "settings_flow",
+      "notification_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "b6bed6ce-fc5a-46c6-9878-c94f0ca3750d",
+    "story_id": "e6a78140-bc0e-4f7b-8731-4fcf72322209"
+  },
+  {
+    "name": "Customize Display Settings",
+    "description": "User navigates to settings to adjust visual preferences like theme, font size, and units.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "settings_screen",
+        "component_name": "theme_selection_radio_group",
+        "action": "select",
+        "system_response": "Update application theme (e.g., Light/Dark mode)"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "settings_screen",
+        "component_name": "font_size_selection_radio_group",
+        "action": "select",
+        "system_response": "Adjust application font size"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "settings_screen",
+        "component_name": "unit_selection_radio_group",
+        "action": "select",
+        "system_response": "Update display units (e.g., Celsius/Fahrenheit)"
+      },
+      {
+        "step_number": 5,
+        "screen_name": "settings_screen",
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Navigate back to Dashboard Screen"
+      }
+    ],
+    "exit_points": [
+      "dashboard_screen"
+    ],
+    "pre_conditions": "User is on the Dashboard Screen.",
+    "post_conditions": "Application display settings (theme, font size, units) are updated according to user preferences.",
     "metadata": [
       "settings_flow",
       "display_options"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "4ba2d996-5ea7-4bb0-b2e9-3fd3a6946c04",
+    "component_names_to_add": [
+      "theme_selection_radio_group",
+      "font_size_selection_radio_group"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "84f33a8f-220f-453b-b401-fc427f5f7825",
     "story_id": "3db5750a-49c2-4019-8e34-8fa75a09d96b"
   },
   {
     "name": "View Real-time Radar Map",
-    "description": "User navigates from the dashboard to view an interactive, real-time radar map.",
+    "description": "User accesses an interactive, real-time radar map to view current weather phenomena.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -1368,28 +1439,22 @@
         "screen_name": "radar_map_screen",
         "component_name": "interactive_radar_map",
         "action": "view",
-        "system_response": "Display real-time weather radar data"
+        "system_response": "Display real-time interactive radar map"
       },
       {
         "step_number": 3,
         "screen_name": "radar_map_screen",
-        "component_name": "map_controls",
+        "component_name": "interactive_radar_map",
         "action": "interact",
-        "system_response": "Update map view (e.g., zoom, pan, play animation)"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "radar_map_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate back to Dashboard Screen"
+        "system_response": "Update map view based on user interaction (e.g., pan, zoom)"
       }
     ],
     "exit_points": [
-      "dashboard_screen"
+      "dashboard_screen",
+      "radar_map_screen"
     ],
-    "pre_conditions": "User is on the Dashboard Screen.",
-    "post_conditions": "User has viewed and interacted with the real-time radar map.",
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "User is viewing and interacting with the real-time radar map.",
     "metadata": [
       "core",
       "weather_data_flow"
@@ -1398,41 +1463,48 @@
       "radar_map_screen"
     ],
     "screen_names_to_delete": [],
-    "flow_id": "a845d5b6-24d1-4c95-81e9-d62928399f7f",
+    "component_names_to_add": [
+      "radar_map_button",
+      "interactive_radar_map"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "101fc502-66c7-4b83-a2e4-73e4c91997e8",
     "story_id": "cbb4efda-fa28-4ff0-b4d4-f17328535cd9"
   },
   {
     "name": "View Precipitation and Storms on Radar Map",
-    "description": "User navigates to the radar map to view current precipitation and storm activity.",
+    "description": "User navigates to the radar map to view precipitation and storm data.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "radar_map_card_or_button",
+        "component_name": "radar_map_button",
         "action": "tap",
         "system_response": "Navigate to Radar Map Screen"
       },
       {
         "step_number": 2,
         "screen_name": "radar_map_screen",
-        "component_name": "radar_map_display",
+        "component_name": "interactive_radar_map",
         "action": "view",
-        "system_response": "Display real-time precipitation and storm data on the map"
+        "system_response": "Display precipitation and storm data on the map"
       }
     ],
     "exit_points": [
       "radar_map_screen"
     ],
     "pre_conditions": "User is on the Dashboard screen.",
-    "post_conditions": "The radar map is displayed, showing precipitation and storm events.",
+    "post_conditions": "The radar map is displayed, showing precipitation and storm information.",
     "metadata": [
       "core",
-      "weather_display_flow"
+      "weather_data_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "3bcfd1fe-fd0e-4f46-8d04-eea83c142bd9",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "6dd4efb9-ca5c-4d15-9b66-b3a1974a28b4",
     "story_id": "8eb224c6-78ca-42a0-8a77-9917ba618d60"
   },
   {
@@ -1450,22 +1522,22 @@
       {
         "step_number": 2,
         "screen_name": "radar_map_screen",
-        "component_name": "radar_map_display",
+        "component_name": "interactive_radar_map",
         "action": "pinch_zoom",
-        "system_response": "Adjust zoom level of the radar map"
+        "system_response": "Update map scale and display zoomed view"
       },
       {
         "step_number": 3,
         "screen_name": "radar_map_screen",
-        "component_name": "radar_map_display",
+        "component_name": "interactive_radar_map",
         "action": "view",
-        "system_response": "Display radar map at new zoom level"
+        "system_response": "Display weather details at the new zoom level"
       }
     ],
     "exit_points": [
       "radar_map_screen"
     ],
-    "pre_conditions": "User is on the Dashboard; radar map feature is available.",
+    "pre_conditions": "User is on the Dashboard; radar map feature is accessible.",
     "post_conditions": "Radar map is displayed at the user's desired zoom level.",
     "metadata": [
       "core",
@@ -1473,49 +1545,53 @@
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "25e4f7d1-9f28-4566-adf4-31f23c7ce5c2",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "7b163fec-c127-45d8-be2b-dd4732af876e",
     "story_id": "a12742ff-643d-48f3-94f2-f64140416dc2"
   },
   {
     "name": "Pan Radar Map",
-    "description": "User navigates to the radar map and pans across it to explore different geographical areas.",
+    "description": "User navigates to the radar map and pans across it to explore weather phenomena in different geographical areas.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "view_radar_button",
+        "component_name": "radar_map_button",
         "action": "tap",
         "system_response": "Navigate to Radar Map Screen"
       },
       {
         "step_number": 2,
         "screen_name": "radar_map_screen",
-        "component_name": "radar_map_display",
+        "component_name": "interactive_radar_map",
         "action": "drag",
-        "system_response": "Update map view to show new geographical area"
+        "system_response": "Shift the visible area of the radar map"
       },
       {
         "step_number": 3,
         "screen_name": "radar_map_screen",
-        "component_name": "radar_map_display",
+        "component_name": "interactive_radar_map",
         "action": "view",
-        "system_response": "Display updated radar data for the panned area"
+        "system_response": "Display updated radar data for the new geographical area"
       }
     ],
     "exit_points": [
       "radar_map_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen.",
-    "post_conditions": "The radar map is displayed, showing the panned geographical area.",
+    "pre_conditions": "User is on the Dashboard screen and the radar map feature is available.",
+    "post_conditions": "The radar map is displayed, showing a different geographical area based on the user's panning action.",
     "metadata": [
       "core",
-      "map_flow"
+      "map_interaction_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "2214595a-9508-4ff2-8c1d-ddab67408f3a",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "98cb59ff-00f1-406c-8853-7d1128ebf53c",
     "story_id": "bf51140a-527d-45ca-bf01-afaa3a9645f0"
   },
   {
@@ -1535,39 +1611,37 @@
         "screen_name": "radar_map_screen",
         "component_name": "time_lapse_play_button",
         "action": "tap",
-        "system_response": "Start playing time-lapse radar animation on radar_display_area"
+        "system_response": "Initiate time-lapse playback on interactive radar map"
       },
       {
         "step_number": 3,
         "screen_name": "radar_map_screen",
-        "component_name": "time_lapse_slider",
+        "component_name": "interactive_radar_map",
         "action": "view",
-        "system_response": "Display current time-lapse progress and allow scrubbing"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "radar_map_screen",
-        "component_name": "time_lapse_controls",
-        "action": "interact",
-        "system_response": "Pause, resume, or scrub time-lapse animation"
+        "system_response": "Display time-lapse animation of radar data"
       }
     ],
     "exit_points": [
-      "radar_map_screen"
+      "radar_map_screen",
+      "dashboard_screen"
     ],
-    "pre_conditions": "User is logged in and has an active internet connection to fetch radar data.",
-    "post_conditions": "Time-lapse radar animation is playing or has been viewed on the radar map.",
+    "pre_conditions": "User is on the Dashboard; radar data is available.",
+    "post_conditions": "Time-lapse radar animation is playing or has completed on the radar map.",
     "metadata": [
       "core",
       "radar_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "1ad8a368-c144-4696-95f9-bbe1ec76febc",
+    "component_names_to_add": [
+      "time_lapse_play_button"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "d0b29d47-d7b8-44ac-a53d-3c7316adc634",
     "story_id": "8830e367-fe91-4f51-a5d4-7a863b2d3681"
   },
   {
-    "name": "View Interactive Precipitation Forecast",
+    "name": "Display Interactive Precipitation Forecast",
     "description": "User navigates to the radar map to view an interactive visual forecast of future precipitation.",
     "entry_point": "dashboard_screen",
     "steps": [
@@ -1581,116 +1655,84 @@
       {
         "step_number": 2,
         "screen_name": "radar_map_screen",
-        "component_name": "precipitation_forecast_map",
+        "component_name": "interactive_radar_map",
         "action": "view",
-        "system_response": "Display current precipitation radar data"
+        "system_response": "Display current radar data for the selected location"
       },
       {
         "step_number": 3,
         "screen_name": "radar_map_screen",
-        "component_name": "time_slider",
-        "action": "interact",
-        "system_response": "Update map to show future precipitation based on slider position"
+        "component_name": "time_lapse_play_button",
+        "action": "tap",
+        "system_response": "Start playing future precipitation forecast animation on the interactive radar map"
       },
       {
         "step_number": 4,
         "screen_name": "radar_map_screen",
-        "component_name": "play_button",
-        "action": "tap",
-        "system_response": "Animate map through future precipitation forecast"
+        "component_name": "interactive_radar_map",
+        "action": "view",
+        "system_response": "Display animated future precipitation forecast"
       }
     ],
     "exit_points": [
-      "radar_map_screen",
-      "dashboard_screen"
+      "radar_map_screen"
     ],
-    "pre_conditions": "User is on the Dashboard screen.",
-    "post_conditions": "Interactive precipitation forecast is displayed on the Radar Map screen.",
+    "pre_conditions": "User is on the Dashboard.",
+    "post_conditions": "User is viewing an interactive precipitation forecast on the radar map.",
     "metadata": [
       "core",
-      "forecast_flow",
-      "map_flow"
+      "weather_forecast_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "6984dded-1780-4dbe-9569-44a4377dc949",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "f85e0fc7-3cab-4db0-8ea9-40641d58c4c3",
     "story_id": "2c545951-d96d-4191-9d88-5eab2e62f046"
   },
   {
-    "name": "View Differentiated Precipitation Types in Forecast",
-    "description": "User navigates to the forecast details to view predicted rain, snow, and other precipitation types clearly differentiated.",
+    "name": "View Precipitation Predictions for Different Timeframes",
+    "description": "User navigates to the hourly forecast screen and selects different timeframes to view precipitation predictions.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "forecast_summary_card",
+        "component_name": "current_weather_display_card",
         "action": "tap",
-        "system_response": "Navigate to Forecast Details Screen"
+        "system_response": "Navigate to Hourly Forecast Screen"
       },
       {
         "step_number": 2,
-        "screen_name": "forecast_details_screen",
-        "component_name": "precipitation_forecast_section",
-        "action": "view",
-        "system_response": "Display predicted precipitation types (rain, snow, etc.) with distinct visual differentiation (e.g., icons, colors, labels)."
-      }
-    ],
-    "exit_points": [
-      "forecast_details_screen"
-    ],
-    "pre_conditions": "User has a location selected and forecast data is available.",
-    "post_conditions": "Predicted precipitation types are visually differentiated on the forecast details screen.",
-    "metadata": [
-      "core",
-      "forecast_flow",
-      "display_enhancement"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "26284495-0879-45e3-a359-cf97d65e4c09",
-    "story_id": "323b6a3c-0999-47a4-ba2f-2bf41ae4b764"
-  },
-  {
-    "name": "View Precipitation Forecasts for Different Timeframes",
-    "description": "User navigates to the forecast details and selects different timeframes to view precipitation predictions.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "forecast_summary_panel",
-        "action": "tap",
-        "system_response": "Navigate to Forecast Details Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "forecast_details_screen",
+        "screen_name": "hourly_forecast_screen",
         "component_name": "forecast_timeframe_selector",
         "action": "select",
-        "system_response": "Update forecast display to show selected timeframe's precipitation predictions"
+        "system_response": "Update hourly_forecast_list to display data for the selected timeframe (e.g., 'Next 24 Hours')"
       },
       {
         "step_number": 3,
-        "screen_name": "forecast_details_screen",
-        "component_name": "precipitation_forecast_display",
+        "screen_name": "hourly_forecast_screen",
+        "component_name": "hourly_forecast_list",
         "action": "view",
-        "system_response": "Display precipitation data for the chosen timeframe"
+        "system_response": "Display precipitation predictions for the selected timeframe"
       }
     ],
     "exit_points": [
-      "forecast_details_screen",
-      "dashboard_screen"
+      "hourly_forecast_screen"
     ],
-    "pre_conditions": "User has an active location selected and forecast data is available.",
-    "post_conditions": "Precipitation predictions for the selected timeframe are displayed on the Forecast Details Screen.",
+    "pre_conditions": "User is on the Dashboard with a location selected.",
+    "post_conditions": "User is viewing precipitation predictions for the chosen timeframe on the hourly forecast screen.",
     "metadata": [
       "core",
       "forecast_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "3747c913-8993-466c-8d23-d91257e00eae",
+    "component_names_to_add": [
+      "forecast_timeframe_selector"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "d26df442-feaa-4e4b-87c6-4e6277f8291b",
     "story_id": "b84e9d81-b0c5-40f6-9608-2631145a82e6"
   },
   {
@@ -1701,52 +1743,63 @@
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "historical_data_button",
+        "component_name": "view_historical_data_button",
         "action": "tap",
         "system_response": "Navigate to Location Management Screen"
       },
       {
         "step_number": 2,
         "screen_name": "location_management_screen",
-        "component_name": "location_list_item",
-        "action": "select",
-        "system_response": "Load historical data for selected location and navigate to Historical Data Screen"
+        "component_name": "location_search_input",
+        "action": "enter_text",
+        "system_response": "Show location suggestions in search results list"
       },
       {
         "step_number": 3,
+        "screen_name": "location_management_screen",
+        "component_name": "search_results_list",
+        "action": "select",
+        "system_response": "Navigate to Historical Data Screen with selected location"
+      },
+      {
+        "step_number": 4,
         "screen_name": "historical_data_screen",
-        "component_name": "historical_data_display",
+        "component_name": "historical_data_display_panel",
         "action": "view",
         "system_response": "Display historical weather data for the selected location"
       }
     ],
     "exit_points": [
-      "historical_data_screen",
-      "dashboard_screen"
+      "historical_data_screen"
     ],
-    "pre_conditions": "User is on the Dashboard; at least one location is saved or user can search for a new one.",
+    "pre_conditions": "User is on the Dashboard.",
     "post_conditions": "Historical weather data for the selected location is displayed.",
     "metadata": [
       "core",
-      "data_flow",
-      "location_flow"
+      "location_flow",
+      "data_view_flow"
     ],
     "screen_names_to_add": [
       "historical_data_screen"
     ],
     "screen_names_to_delete": [],
-    "flow_id": "2650b6d8-ed5a-4236-9faf-f7b8858f1ee5",
+    "component_names_to_add": [
+      "view_historical_data_button",
+      "historical_data_display_panel"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "3d0e1513-1903-4262-a08e-85476498a37d",
     "story_id": "13deb396-db2b-4241-b50d-918f889a5060"
   },
   {
     "name": "Specify Historical Data Date Range",
-    "description": "User specifies a custom date range for historical weather data to analyze trends over a particular period.",
+    "description": "User navigates to the historical data view and selects a custom start and end date to analyze trends over a specific period.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "historical_data_button",
+        "component_name": "view_historical_data_button",
         "action": "tap",
         "system_response": "Navigate to Historical Data Screen"
       },
@@ -1755,309 +1808,345 @@
         "screen_name": "historical_data_screen",
         "component_name": "start_date_picker",
         "action": "select_date",
-        "system_response": "Display selected start date in input field"
+        "system_response": "Display selected start date"
       },
       {
         "step_number": 3,
         "screen_name": "historical_data_screen",
         "component_name": "end_date_picker",
         "action": "select_date",
-        "system_response": "Display selected end date in input field"
+        "system_response": "Display selected end date"
       },
       {
         "step_number": 4,
         "screen_name": "historical_data_screen",
-        "component_name": "apply_date_range_button",
+        "component_name": "done_button",
         "action": "tap",
-        "system_response": "Load and display historical data for the specified date range"
+        "system_response": "Update historical_data_display_panel with data for the specified range"
+      }
+    ],
+    "exit_points": [
+      "historical_data_screen"
+    ],
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "Historical data for the specified date range is displayed on the Historical Data Screen.",
+    "metadata": [
+      "core",
+      "data_analysis_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "start_date_picker",
+      "end_date_picker"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "ff94bb54-b207-4ced-a3a8-59b1abe668ba",
+    "story_id": "31513e6e-57e9-4971-8eab-bd893d871138"
+  },
+  {
+    "name": "Customize Meteorological Parameters for Historical Data Analysis",
+    "description": "User selects specific meteorological parameters to display for customized trend analysis on the historical data screen.",
+    "entry_point": "historical_data_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "historical_data_screen",
+        "component_name": "customize_parameters_button",
+        "action": "tap",
+        "system_response": "Display meteorological parameter selection interface (e.g., a modal or panel) on the historical_data_screen."
+      },
+      {
+        "step_number": 2,
+        "screen_name": "historical_data_screen",
+        "component_name": "meteorological_parameter_selector",
+        "action": "select",
+        "system_response": "Internally update the list of selected parameters."
+      },
+      {
+        "step_number": 3,
+        "screen_name": "historical_data_screen",
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Close the parameter selection interface and update the historical data display panel with the newly selected parameters."
+      }
+    ],
+    "exit_points": [
+      "historical_data_screen"
+    ],
+    "pre_conditions": "User is on the Historical Data Screen, viewing historical weather data.",
+    "post_conditions": "The historical data display on the historical_data_screen is updated to show trends for the selected meteorological parameters.",
+    "metadata": [
+      "core",
+      "data_customization_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "customize_parameters_button",
+      "meteorological_parameter_selector"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "ae53538e-08a4-4e14-a38c-96518fc7161f",
+    "story_id": "deb40ba1-7119-4f52-afeb-e357f21d44ea"
+  },
+  {
+    "name": "View Historical Data Trends Visually",
+    "description": "User navigates to the historical data section, selects a date range and meteorological parameters, and views interactive charts displaying historical weather trends.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "view_historical_data_button",
+        "action": "tap",
+        "system_response": "Navigate to Historical Data Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "historical_data_screen",
+        "component_name": "start_date_picker",
+        "action": "select",
+        "system_response": "Open date picker and allow user to select start date"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "historical_data_screen",
+        "component_name": "end_date_picker",
+        "action": "select",
+        "system_response": "Open date picker and allow user to select end date"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "historical_data_screen",
+        "component_name": "meteorological_parameter_selector",
+        "action": "select",
+        "system_response": "Update selected parameters for data display"
       },
       {
         "step_number": 5,
         "screen_name": "historical_data_screen",
-        "component_name": "historical_data_display",
+        "component_name": "historical_data_display_panel",
         "action": "view",
-        "system_response": "Show historical weather trends for the selected period"
-      }
-    ],
-    "exit_points": [
-      "historical_data_screen"
-    ],
-    "pre_conditions": "User is on the Dashboard; historical data is available.",
-    "post_conditions": "Historical weather data for the specified date range is displayed on the Historical Data Screen.",
-    "metadata": [
-      "core",
-      "data_analysis_flow"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "cd65d938-4542-494a-84ea-30ddc186eda5",
-    "story_id": "31513e6e-57e9-4971-8eab-bd893d871138"
-  },
-  {
-    "name": "Select Meteorological Parameters for Trend Analysis",
-    "description": "User navigates to historical data and selects specific meteorological parameters to customize their trend analysis display.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "historical_data_button",
-        "action": "tap",
-        "system_response": "Navigate to Historical Data Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "historical_data_screen",
-        "component_name": "parameter_selection_dropdown",
-        "action": "tap",
-        "system_response": "Display list of available meteorological parameters"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "historical_data_screen",
-        "component_name": "parameter_list_checkboxes",
-        "action": "select",
-        "system_response": "Update selected parameters internally"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "historical_data_screen",
-        "component_name": "apply_parameters_button",
-        "action": "tap",
-        "system_response": "Refresh historical data display with selected parameters"
-      }
-    ],
-    "exit_points": [
-      "historical_data_screen"
-    ],
-    "pre_conditions": "User has historical data available for display.",
-    "post_conditions": "Historical data display on 'historical_data_screen' is updated to show only the selected meteorological parameters.",
-    "metadata": [
-      "core",
-      "data_analysis_flow"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "fc23e253-e1a5-480c-b8b4-3d1b64108ba2",
-    "story_id": "deb40ba1-7119-4f52-afeb-e357f21d44ea"
-  },
-  {
-    "name": "View Historical Data Trends Visifies",
-    "description": "User navigates to the historical data section to view interactive charts and graphs of past weather data.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "historical_data_button",
-        "action": "tap",
-        "system_response": "Navigate to Historical Data Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "historical_data_screen",
-        "component_name": "historical_charts_display",
-        "action": "view",
-        "system_response": "Display default historical weather charts (e.g., temperature, precipitation over time)"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "historical_data_screen",
-        "component_name": "date_range_filter",
-        "action": "select",
-        "system_response": "Update charts to reflect selected date range"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "historical_data_screen",
-        "component_name": "data_type_selector",
-        "action": "select",
-        "system_response": "Update charts to display selected data type (e.g., humidity, wind speed)"
+        "system_response": "Display interactive charts/graphs based on selected date range and parameters"
       }
     ],
     "exit_points": [
       "historical_data_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "Historical weather data trends are displayed on the Historical Data Screen, potentially filtered by user selections.",
+    "pre_conditions": "User is on the Dashboard; historical data is available for the selected location.",
+    "post_conditions": "Historical weather data trends are displayed visually on the Historical Data Screen.",
     "metadata": [
       "core",
       "data_visualization_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "3076082c-8a24-4473-a1b4-fb74b1762000",
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "b73b08f5-b19e-4b16-b8ab-388c4b2fa822",
     "story_id": "1680a7b7-3999-49aa-845d-c357d30ab9da"
   },
   {
     "name": "Manage Preferred Alert Locations",
-    "description": "User navigates to notification settings to add or remove specific geographic locations for severe weather alerts.",
+    "description": "User navigates to settings to manage preferred geographic locations for receiving severe weather alerts, including adding, removing, and toggling alert preferences for locations.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "settings_icon",
+        "component_name": "settings_icon_button",
         "action": "tap",
         "system_response": "Navigate to Settings Screen"
       },
       {
         "step_number": 2,
         "screen_name": "settings_screen",
-        "component_name": "notification_settings_option",
+        "component_name": "manage_alert_locations_button",
         "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
+        "system_response": "Navigate to Location Management Screen, focused on alert preferences"
       },
       {
         "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "add_alert_location_button",
-        "action": "tap",
-        "system_response": "Display location search input and suggestions (inline or modal)"
+        "screen_name": "location_management_screen",
+        "component_name": "location_search_input",
+        "action": "enter_text",
+        "system_response": "Display location suggestions in search_results_list"
       },
       {
         "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "location_search_input",
-        "action": "enter_text",
-        "system_response": "Show real-time location suggestions below input"
+        "screen_name": "location_management_screen",
+        "component_name": "search_results_list",
+        "action": "select",
+        "system_response": "Add selected location to saved_locations_list"
       },
       {
         "step_number": 5,
-        "screen_name": "notification_settings_screen",
-        "component_name": "location_suggestion_list",
-        "action": "select",
-        "system_response": "Add selected location to 'Preferred Alert Locations' list and dismiss search"
+        "screen_name": "location_management_screen",
+        "component_name": "alert_preference_toggle",
+        "action": "tap",
+        "system_response": "Toggle alert preference for the selected location (e.g., enable alerts for this location)"
       },
       {
         "step_number": 6,
-        "screen_name": "notification_settings_screen",
-        "component_name": "preferred_alert_locations_list",
-        "action": "view",
-        "system_response": "Display updated list of preferred alert locations"
+        "screen_name": "location_management_screen",
+        "component_name": "delete_location_button",
+        "action": "tap",
+        "system_response": "Remove location from saved_locations_list and disable alerts for it"
       },
       {
         "step_number": 7,
-        "screen_name": "notification_settings_screen",
-        "component_name": "alert_location_list_item_delete_button",
+        "screen_name": "location_management_screen",
+        "component_name": "done_button",
         "action": "tap",
-        "system_response": "Remove selected location from 'Preferred Alert Locations' list"
+        "system_response": "Save changes and navigate back to Settings Screen"
       }
     ],
     "exit_points": [
-      "notification_settings_screen",
       "settings_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User is logged in and has access to settings.",
-    "post_conditions": "The user's preferred geographic locations for receiving severe weather alerts are updated.",
+    "pre_conditions": "User is logged in and on the Dashboard.",
+    "post_conditions": "User's preferred alert locations are updated and saved.",
     "metadata": [
+      "core",
       "settings_flow",
-      "notification_flow",
       "location_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "58b67764-0f2c-4cca-93ba-a0e683c7aeb2",
+    "component_names_to_add": [
+      "manage_alert_locations_button",
+      "alert_preference_toggle"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "642fb15a-9e84-4a2c-a916-0f905c2f49ff",
     "story_id": "25b03817-42e9-4bf4-88a8-78b49bdb8af6"
   },
   {
     "name": "View Alert History",
-    "description": "User navigates to view a chronological list of past severe weather alerts issued for their subscribed locations.",
+    "description": "User navigates to the historical data section to view a chronological list of past severe weather alerts for their subscribed locations.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "alert_history_button",
+        "component_name": "view_historical_data_button",
         "action": "tap",
         "system_response": "Navigate to Historical Data Screen"
       },
       {
         "step_number": 2,
         "screen_name": "historical_data_screen",
+        "component_name": "alert_history_tab",
+        "action": "tap",
+        "system_response": "Switch view to display Alert History"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "historical_data_screen",
         "component_name": "alert_history_list",
         "action": "view",
-        "system_response": "Display chronological list of past severe weather alerts for subscribed locations"
+        "system_response": "Display a chronological list of past severe weather alerts"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "historical_data_screen",
+        "component_name": "alert_history_list_item",
+        "action": "tap",
+        "system_response": "Display detailed information for the selected alert in an alert_details_panel"
       }
     ],
     "exit_points": [
       "historical_data_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User has subscribed locations and severe weather alerts have been issued for them.",
-    "post_conditions": "User has reviewed the history of past severe weather alerts.",
+    "pre_conditions": "User is logged in and has subscribed locations with past alerts issued.",
+    "post_conditions": "User has reviewed past severe weather alerts.",
     "metadata": [
       "core",
-      "alerts_flow"
+      "alert_flow",
+      "historical_data_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "ecc7fcb4-adbf-4fcd-b1f7-e2807008f2cd",
+    "component_names_to_add": [
+      "alert_history_tab",
+      "alert_history_list",
+      "alert_history_list_item",
+      "alert_details_panel"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "0d352502-0b6a-479b-8820-88d1127a6229",
     "story_id": "0c8c08a6-944e-4a92-ab4c-6e8544084d90"
   },
   {
     "name": "Configure Personalized Forecast Notifications",
-    "description": "User navigates to notification settings to customize preferences for receiving personalized weather forecast updates.",
+    "description": "User navigates to settings to enable and customize personalized weather forecast notifications.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "settings_icon",
+        "component_name": "settings_icon_button",
         "action": "tap",
         "system_response": "Navigate to Settings Screen"
       },
       {
         "step_number": 2,
         "screen_name": "settings_screen",
-        "component_name": "notifications_option",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
+        "component_name": "notification_type_toggle",
+        "action": "toggle_on",
+        "system_response": "Enable personalized forecast notifications and reveal customization options"
       },
       {
         "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "forecast_notification_toggle",
+        "screen_name": "settings_screen",
+        "component_name": "customize_parameters_button",
         "action": "tap",
-        "system_response": "Toggle forecast notifications on/off"
+        "system_response": "Expand or navigate to notification customization panel/section"
       },
       {
         "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "frequency_dropdown",
+        "screen_name": "settings_screen",
+        "component_name": "notification_parameter_selector",
         "action": "select",
-        "system_response": "Update notification frequency (e.g., daily, hourly)"
+        "system_response": "Update notification parameters (e.g., time, conditions, frequency)"
       },
       {
         "step_number": 5,
-        "screen_name": "notification_settings_screen",
-        "component_name": "alert_type_checkboxes",
-        "action": "select",
-        "system_response": "Update selected alert types (e.g., severe weather, daily summary)"
+        "screen_name": "settings_screen",
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Save notification settings and return to main Settings Screen"
       },
       {
         "step_number": 6,
-        "screen_name": "notification_settings_screen",
+        "screen_name": "settings_screen",
         "component_name": "back_button",
         "action": "tap",
-        "system_response": "Save settings and navigate to Settings Screen"
+        "system_response": "Navigate back to Dashboard Screen"
       }
     ],
     "exit_points": [
+      "dashboard_screen",
       "settings_screen"
     ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "Notification settings are updated according to user preferences, enabling personalized forecast notifications.",
+    "pre_conditions": "User is logged in and on the Dashboard Screen.",
+    "post_conditions": "Personalized forecast notifications are configured according to user preferences.",
     "metadata": [
       "settings_flow",
-      "notification_flow",
-      "core"
+      "notification_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "8d97901f-8308-4cd0-9b55-23cca3b94f55",
+    "component_names_to_add": [
+      "notification_parameter_selector",
+      "back_button"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "1942a9e2-eec7-418e-845f-b9fb62bbfc3d",
     "story_id": "d99c9dc9-61a8-4547-a896-a58517572331"
   },
   {
@@ -2068,81 +2157,88 @@
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "active_alerts_summary_panel",
+        "component_name": "alerts_summary_card",
         "action": "tap",
-        "system_response": "Navigate to Weather Alerts List Screen"
+        "system_response": "Navigate to Weather Alerts Screen"
       },
       {
         "step_number": 2,
-        "screen_name": "weather_alerts_list_screen",
-        "component_name": "weather_alerts_list",
+        "screen_name": "weather_alerts_screen",
+        "component_name": "active_alerts_list",
         "action": "view",
-        "system_response": "Display a list of all active non-severe weather alerts"
+        "system_response": "Display list of active non-severe weather alerts"
       }
     ],
     "exit_points": [
-      "weather_alerts_list_screen"
+      "weather_alerts_screen",
+      "dashboard_screen"
     ],
-    "pre_conditions": "There are active non-severe weather alerts available for the user's selected locations.",
-    "post_conditions": "The user has viewed the list of active non-severe weather alerts.",
+    "pre_conditions": "User is on the Dashboard; there are active non-severe weather alerts available.",
+    "post_conditions": "User is viewing a list of active non-severe weather alerts.",
     "metadata": [
       "core",
       "alerts_flow"
     ],
     "screen_names_to_add": [
-      "weather_alerts_list_screen"
+      "weather_alerts_screen"
     ],
     "screen_names_to_delete": [],
-    "flow_id": "0c4bb2a4-5496-483b-a23e-1bed6e7e5a9a",
+    "component_names_to_add": [
+      "alerts_summary_card",
+      "active_alerts_list"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "4ce3eb1a-b36b-40f6-bea5-a48e5b8910f2",
     "story_id": "2afa7e8b-2151-406d-b6cc-34291b801767"
   },
   {
     "name": "View Detailed Weather Alert Information",
-    "description": "User navigates from the dashboard to a list of weather alerts, then selects an alert to view its full details.",
+    "description": "User navigates to the weather alerts screen, selects an active alert, and views its detailed information.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "weather_alerts_summary_card",
+        "component_name": "alerts_summary_card",
         "action": "tap",
-        "system_response": "Navigate to Weather Alerts List Screen"
+        "system_response": "Navigate to Weather Alerts Screen"
       },
       {
         "step_number": 2,
-        "screen_name": "weather_alerts_list_screen",
-        "component_name": "weather_alert_item",
+        "screen_name": "weather_alerts_screen",
+        "component_name": "active_alert_list_item",
         "action": "tap",
-        "system_response": "Navigate to Weather Alert Details Screen, displaying selected alert's information"
+        "system_response": "Display detailed information for the selected alert within the Alert Details Panel"
       },
       {
         "step_number": 3,
-        "screen_name": "weather_alert_details_screen",
-        "component_name": "alert_details_display",
+        "screen_name": "weather_alerts_screen",
+        "component_name": "alert_details_panel",
         "action": "view",
-        "system_response": "Display comprehensive details of the selected weather alert"
+        "system_response": "Show full scope and recommended actions of the alert"
       }
     ],
     "exit_points": [
-      "weather_alert_details_screen",
-      "weather_alerts_list_screen"
+      "weather_alerts_screen"
     ],
-    "pre_conditions": "User has active weather alerts and is on the dashboard.",
-    "post_conditions": "User is viewing the detailed information for a specific weather alert.",
+    "pre_conditions": "User is on the Dashboard; there are active weather alerts available.",
+    "post_conditions": "Detailed information for the selected weather alert is displayed on the Weather Alerts Screen.",
     "metadata": [
       "core",
       "alerts_flow"
     ],
-    "screen_names_to_add": [
-      "weather_alert_details_screen"
-    ],
+    "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "1416a231-b117-4dcf-a336-03b49a4dcf4b",
+    "component_names_to_add": [
+      "active_alert_list_item"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "1cb260a6-bc56-4f89-82d2-95ea0d2325e1",
     "story_id": "132da533-0123-4fdd-a634-bb5f8cefc4f8"
   },
   {
     "name": "Configure Weather Alert Preferences",
-    "description": "User navigates to notification settings to configure specific locations and types of advisories for weather alerts.",
+    "description": "User sets preferences for receiving weather alerts, including specific locations and types of advisories.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -2155,119 +2251,71 @@
       {
         "step_number": 2,
         "screen_name": "settings_screen",
-        "component_name": "notification_settings_option",
+        "component_name": "alert_preferences_button",
         "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
+        "system_response": "Navigate to Weather Alerts Screen"
       },
       {
         "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "manage_alert_locations_button",
-        "action": "tap",
-        "system_response": "Navigate to Location Management Screen (filtered for alerts)"
+        "screen_name": "weather_alerts_screen",
+        "component_name": "alert_preference_toggle",
+        "action": "toggle",
+        "system_response": "Update preference for specific alert type (e.g., severe weather, air quality)"
       },
       {
         "step_number": 4,
-        "screen_name": "location_management_screen",
-        "component_name": "add_location_button",
+        "screen_name": "weather_alerts_screen",
+        "component_name": "manage_alert_locations_button",
         "action": "tap",
-        "system_response": "Show location search interface"
+        "system_response": "Navigate to Location Management Screen"
       },
       {
         "step_number": 5,
         "screen_name": "location_management_screen",
-        "component_name": "location_search_input",
-        "action": "enter_text",
-        "system_response": "Display location suggestions"
+        "component_name": "saved_locations_list",
+        "action": "toggle",
+        "system_response": "Enable/disable alerts for the selected location within the list"
       },
       {
         "step_number": 6,
         "screen_name": "location_management_screen",
-        "component_name": "location_suggestion_list_item",
-        "action": "select",
-        "system_response": "Add selected location to alert list and return to Notification Settings Screen"
+        "component_name": "done_button",
+        "action": "tap",
+        "system_response": "Navigate back to Weather Alerts Screen"
       },
       {
         "step_number": 7,
-        "screen_name": "notification_settings_screen",
-        "component_name": "alert_type_toggle_severe_weather",
-        "action": "toggle",
-        "system_response": "Update preference for severe weather alerts"
-      },
-      {
-        "step_number": 8,
-        "screen_name": "notification_settings_screen",
-        "component_name": "alert_type_toggle_flood_warning",
-        "action": "toggle",
-        "system_response": "Update preference for flood warning alerts"
-      },
-      {
-        "step_number": 9,
-        "screen_name": "notification_settings_screen",
-        "component_name": "back_button",
+        "screen_name": "weather_alerts_screen",
+        "component_name": "done_button",
         "action": "tap",
-        "system_response": "Navigate back to Settings Screen"
+        "system_response": "Save all alert preferences and navigate back to Settings Screen"
       }
     ],
     "exit_points": [
       "settings_screen",
       "dashboard_screen"
     ],
-    "pre_conditions": "User is logged in and on the dashboard.",
-    "post_conditions": "Weather alert preferences (locations and types) are updated and saved.",
+    "pre_conditions": "User is logged in and has at least one location saved.",
+    "post_conditions": "User's weather alert preferences (types and associated locations) are updated and saved.",
     "metadata": [
+      "core",
       "settings_flow",
-      "notification_flow"
+      "alerts_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "8fdd4dbe-3deb-458c-8ec9-55c3ec15ccb2",
+    "component_names_to_add": [
+      "alert_preferences_button"
+    ],
+    "component_names_to_delete": [
+      "notification_type_toggle"
+    ],
+    "flow_id": "1ae63755-c37b-4c89-b5d0-187009ff5de1",
     "story_id": "4e82d263-e950-4277-beed-5f3de813ae42"
   },
   {
     "name": "View Current Notification Settings",
-    "description": "User navigates to the notification settings screen to review their current notification preferences.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "settings_button",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "settings_screen",
-        "component_name": "notifications_option",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "notification_preferences_display",
-        "action": "view",
-        "system_response": "Display current notification preferences"
-      }
-    ],
-    "exit_points": [
-      "notification_settings_screen"
-    ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "User has viewed their current notification preferences.",
-    "metadata": [
-      "settings_flow",
-      "notification_flow"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "d2d4cede-a617-48fd-8b54-da42ea1ea28d",
-    "story_id": "fd72cd27-db72-4232-b94d-8cdeb3bb7b32"
-  },
-  {
-    "name": "Manage Push Notification Preferences",
-    "description": "User navigates to notification settings to enable or disable push notifications for immediate weather alerts.",
+    "description": "User navigates to the settings screen to review a summary of their configured notification preferences.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
@@ -2280,212 +2328,297 @@
       {
         "step_number": 2,
         "screen_name": "settings_screen",
-        "component_name": "notification_settings_list_item",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "push_notifications_toggle",
-        "action": "toggle",
-        "system_response": "Update push notification preference and display confirmation (e.g., 'Preferences saved')"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate back to Settings Screen"
-      }
-    ],
-    "exit_points": [
-      "settings_screen",
-      "dashboard_screen"
-    ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "Push notification preferences are updated according to user's selection.",
-    "metadata": [
-      "settings_flow",
-      "notification_flow"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "a8e8ede8-fa7f-4b80-a564-9326eb850293",
-    "story_id": "7a567346-4b04-4c63-9deb-dd04c94f07a3"
-  },
-  {
-    "name": "Manage Email Notification Preferences",
-    "description": "User navigates to notification settings to provide or update their email address for weather alerts.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "settings_icon_button",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "settings_screen",
-        "component_name": "notifications_option",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "email_address_input_field",
-        "action": "enter_text",
-        "system_response": "Display entered email address"
-      },
-      {
-        "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "save_button",
-        "action": "tap",
-        "system_response": "Save email address and show confirmation message"
-      },
-      {
-        "step_number": 5,
-        "screen_name": "notification_settings_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate back to Settings Screen"
-      }
-    ],
-    "exit_points": [
-      "settings_screen",
-      "dashboard_screen"
-    ],
-    "pre_conditions": "User is logged in and on the Dashboard.",
-    "post_conditions": "User's email address for notifications is updated or set.",
-    "metadata": [
-      "settings_flow",
-      "notification_flow"
-    ],
-    "screen_names_to_add": [],
-    "screen_names_to_delete": [],
-    "flow_id": "3de747a8-cafd-45e1-962e-40a31fe40117",
-    "story_id": "df8bdbc2-8f30-4d22-9c0b-1128a595ff34"
-  },
-  {
-    "name": "Manage SMS Notification Preferences",
-    "description": "User navigates to notification settings to enable/disable SMS alerts and update their phone number.",
-    "entry_point": "dashboard_screen",
-    "steps": [
-      {
-        "step_number": 1,
-        "screen_name": "dashboard_screen",
-        "component_name": "settings_button",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
-      },
-      {
-        "step_number": 2,
-        "screen_name": "settings_screen",
-        "component_name": "notification_settings_option",
-        "action": "tap",
-        "system_response": "Navigate to Notification Settings Screen"
-      },
-      {
-        "step_number": 3,
-        "screen_name": "notification_settings_screen",
-        "component_name": "sms_alerts_toggle",
-        "action": "tap",
-        "system_response": "Toggle SMS alerts status; if enabled, display phone number input field."
-      },
-      {
-        "step_number": 4,
-        "screen_name": "notification_settings_screen",
-        "component_name": "phone_number_input",
-        "action": "enter_text",
-        "system_response": "Update phone number in input field."
-      },
-      {
-        "step_number": 5,
-        "screen_name": "notification_settings_screen",
-        "component_name": "save_button",
-        "action": "tap",
-        "system_response": "Save SMS preferences, validate phone number, and show confirmation message."
-      },
-      {
-        "step_number": 6,
-        "screen_name": "notification_settings_screen",
-        "component_name": "system_message",
+        "component_name": "notification_settings_section",
         "action": "view",
-        "system_response": "Display 'Preferences saved' message."
-      },
-      {
-        "step_number": 7,
-        "screen_name": "notification_settings_screen",
-        "component_name": "back_button",
-        "action": "tap",
-        "system_response": "Navigate to Settings Screen"
+        "system_response": "Display current notification preferences including toggles and selectors."
       }
     ],
     "exit_points": [
       "settings_screen"
     ],
-    "pre_conditions": "User is logged in and has access to settings.",
-    "post_conditions": "SMS notification preferences (enabled/disabled, phone number) are updated in the system.",
+    "pre_conditions": "User is logged in and on the Dashboard.",
+    "post_conditions": "User has reviewed their current notification settings.",
+    "metadata": [
+      "core",
+      "settings_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "notification_settings_section"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "1526d136-e264-45c1-994d-5ebee0966e4c",
+    "story_id": "fd72cd27-db72-4232-b94d-8cdeb3bb7b32"
+  },
+  {
+    "name": "Manage Push Notification Preferences",
+    "description": "User navigates to settings to enable or disable push notifications for immediate weather alerts.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "settings_screen",
+        "component_name": "notification_settings_section",
+        "action": "view",
+        "system_response": "Display notification preferences within the section"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "settings_screen",
+        "component_name": "alert_preference_toggle",
+        "action": "tap",
+        "system_response": "Update push notification preference (enable/disable) and reflect change on toggle"
+      }
+    ],
+    "exit_points": [
+      "settings_screen",
+      "dashboard_screen"
+    ],
+    "pre_conditions": "User is on the Dashboard screen.",
+    "post_conditions": "Push notification preferences are updated according to user selection.",
+    "metadata": [
+      "core",
+      "settings_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "90f62aab-b573-454c-9e22-d2ce94732e19",
+    "story_id": "7a567346-4b04-4c63-9deb-dd04c94f07a3"
+  },
+  {
+    "name": "Manage Email Notification Preferences",
+    "description": "User navigates to settings to provide or update their email address and control email notification preferences for weather alerts.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "settings_screen",
+        "component_name": "notification_settings_section",
+        "action": "view",
+        "system_response": "Display email notification options within the section"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "settings_screen",
+        "component_name": "email_input_field",
+        "action": "enter_text",
+        "system_response": "Update email address in the input field"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "settings_screen",
+        "component_name": "email_notification_toggle",
+        "action": "toggle",
+        "system_response": "Update the state of email notifications (on/off)"
+      },
+      {
+        "step_number": 5,
+        "screen_name": "settings_screen",
+        "component_name": "save_email_preferences_button",
+        "action": "tap",
+        "system_response": "Save email address and notification preferences; show confirmation dialog"
+      },
+      {
+        "step_number": 6,
+        "screen_name": "settings_screen",
+        "component_name": "confirmation_dialog",
+        "action": "view",
+        "system_response": "Display confirmation that preferences have been saved"
+      },
+      {
+        "step_number": 7,
+        "screen_name": "settings_screen",
+        "component_name": "back_button",
+        "action": "tap",
+        "system_response": "Navigate back to Dashboard Screen"
+      }
+    ],
+    "exit_points": [
+      "dashboard_screen"
+    ],
+    "pre_conditions": "User is logged in and on the Dashboard Screen.",
+    "post_conditions": "User's email address for notifications is updated/set, and email notification preference is configured.",
     "metadata": [
       "settings_flow",
       "notification_flow"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "a3ecf677-1ee2-40b7-ae88-43ebe1b2c042",
-    "story_id": "6e69efdc-3a84-4225-b7d4-1bf32739a0f6"
+    "component_names_to_add": [
+      "email_input_field",
+      "email_notification_toggle",
+      "save_email_preferences_button"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "c44c6fe9-c007-491b-a209-0c4ef4f66e97",
+    "story_id": "df8bdbc2-8f30-4d22-9c0b-1128a595ff34"
   },
   {
-    "name": "View Detailed Current Location",
-    "description": "User views the current location on the dashboard and optionally taps to see more detailed information about it for orientation.",
+    "name": "Manage SMS Notification Preferences",
+    "description": "User manages SMS notification preferences, including providing and updating their phone number, to control weather alerts via text message.",
     "entry_point": "dashboard_screen",
     "steps": [
       {
         "step_number": 1,
         "screen_name": "dashboard_screen",
-        "component_name": "current_location_display",
-        "action": "view",
-        "system_response": "Display current geographical location (e.g., 'New York, NY') in a prominent area."
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
       },
       {
         "step_number": 2,
-        "screen_name": "dashboard_screen",
-        "component_name": "current_location_display",
-        "action": "tap",
-        "system_response": "Show 'Current Location Details' modal."
+        "screen_name": "settings_screen",
+        "component_name": "notification_settings_section",
+        "action": "view",
+        "system_response": "Display notification preferences options"
       },
       {
         "step_number": 3,
-        "screen_name": "dashboard_screen",
-        "component_name": "current_location_details_modal",
-        "action": "view",
-        "system_response": "Display detailed location information (e.g., city, state, country, coordinates, accuracy, last updated time)."
+        "screen_name": "settings_screen",
+        "component_name": "sms_notification_toggle",
+        "action": "toggle",
+        "system_response": "Enable/disable SMS notification options and show/hide phone number input"
       },
       {
         "step_number": 4,
-        "screen_name": "dashboard_screen",
-        "component_name": "modal_close_button",
+        "screen_name": "settings_screen",
+        "component_name": "phone_number_input_field",
+        "action": "enter_text",
+        "system_response": "Update phone number in input field"
+      },
+      {
+        "step_number": 5,
+        "screen_name": "settings_screen",
+        "component_name": "save_notification_preferences_button",
         "action": "tap",
-        "system_response": "Dismiss 'Current Location Details' modal."
+        "system_response": "Save updated SMS preferences and display confirmation message"
+      }
+    ],
+    "exit_points": [
+      "settings_screen"
+    ],
+    "pre_conditions": "User is logged in and on the Dashboard.",
+    "post_conditions": "SMS notification preferences are updated, and the provided phone number is saved for alerts.",
+    "metadata": [
+      "settings_flow",
+      "notification_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [
+      "sms_notification_toggle",
+      "phone_number_input_field",
+      "save_notification_preferences_button"
+    ],
+    "component_names_to_delete": [
+      "save_email_preferences_button"
+    ],
+    "flow_id": "642cfedf-81b4-42fa-b196-ed06c7cb82a0",
+    "story_id": "6e69efdc-3a84-4225-b7d4-1bf32739a0f6"
+  },
+  {
+    "name": "View Current Location Display",
+    "description": "User views the current location prominently displayed on the main dashboard screen to orient themselves.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "current_location_label",
+        "action": "view",
+        "system_response": "Display the user's current detected or selected location (e.g., 'New York, NY' or 'Current Location')"
       }
     ],
     "exit_points": [
       "dashboard_screen"
     ],
-    "pre_conditions": "User is on the Dashboard. Location services are enabled and a current location is available.",
-    "post_conditions": "User has viewed their current location and optionally its details, feeling oriented.",
+    "pre_conditions": "User has launched the application and is on the dashboard or any location-aware screen.",
+    "post_conditions": "The user's current location is clearly visible on the screen, providing orientation.",
     "metadata": [
       "core",
-      "orientation",
-      "information_flow"
+      "information_display"
     ],
     "screen_names_to_add": [],
     "screen_names_to_delete": [],
-    "flow_id": "124dc303-fd5b-4e76-b33e-cbf776538050",
+    "component_names_to_add": [
+      "current_location_label"
+    ],
+    "component_names_to_delete": [],
+    "flow_id": "5c528aee-00b5-4414-88ce-e97e81bd062a",
     "story_id": "8e089f09-cec8-4957-a126-358a723a89c1"
+  },
+  {
+    "name": "Adjust Display Settings for Legibility",
+    "description": "User navigates to settings to adjust font size or theme to improve content legibility across the application.",
+    "entry_point": "dashboard_screen",
+    "steps": [
+      {
+        "step_number": 1,
+        "screen_name": "dashboard_screen",
+        "component_name": "settings_icon_button",
+        "action": "tap",
+        "system_response": "Navigate to Settings Screen"
+      },
+      {
+        "step_number": 2,
+        "screen_name": "settings_screen",
+        "component_name": "font_size_selection_radio_group",
+        "action": "select",
+        "system_response": "Apply selected font size across the application"
+      },
+      {
+        "step_number": 3,
+        "screen_name": "settings_screen",
+        "component_name": "theme_selection_radio_group",
+        "action": "select",
+        "system_response": "Apply selected theme across the application"
+      },
+      {
+        "step_number": 4,
+        "screen_name": "settings_screen",
+        "component_name": "back_button",
+        "action": "tap",
+        "system_response": "Navigate back to Dashboard Screen"
+      },
+      {
+        "step_number": 5,
+        "screen_name": "dashboard_screen",
+        "component_name": "current_weather_display_card",
+        "action": "view",
+        "system_response": "Display content with updated font size and/or theme, ensuring legibility"
+      }
+    ],
+    "exit_points": [
+      "dashboard_screen"
+    ],
+    "pre_conditions": "User is logged in and on the Dashboard.",
+    "post_conditions": "Application content is displayed with the user's preferred font size or theme settings, aiming for improved legibility.",
+    "metadata": [
+      "settings_flow",
+      "accessibility_flow"
+    ],
+    "screen_names_to_add": [],
+    "screen_names_to_delete": [],
+    "component_names_to_add": [],
+    "component_names_to_delete": [],
+    "flow_id": "ce541e76-baab-484d-9e30-d1b649d20d6a",
+    "story_id": "7050f358-aef8-47b8-8d9f-2bb763dab4ed"
   }
 ]

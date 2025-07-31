@@ -97,12 +97,18 @@ class GetScreenDetailsInput(BaseModel):
 
 
 
-
-
 class AddComponentTypeInput(BaseModel):
     name: str = Field(..., description="Name of the component type (e.g., Button, Panel)")
     description: str = Field(..., description="Description of the component type")
-    supported_props: Any = Field(default_factory=list, description="List of supported prop names (list or string)")
+    supported_props: Any = Field(
+        default_factory=list,
+        description=(
+            "List of supported props for this component type. "
+            "Each prop must be a dict with 'name', 'type', and 'description'. "
+            "Example: [{'name': 'label', 'type': 'string', 'description': 'Text for button'}]. "
+            "Can also be a string representing such a list."
+        )
+    )
 
     @validator("supported_props", pre=True)
     def parse_supported_props(cls, v):
@@ -110,7 +116,10 @@ class AddComponentTypeInput(BaseModel):
             return v
         if isinstance(v, str):
             try:
-                return ast.literal_eval(v)
+                result = ast.literal_eval(v)
+                if isinstance(result, list):
+                    return result
+                raise ValueError("Parsed supported_props string is not a list")
             except Exception as e:
                 raise ValueError(f"Could not parse supported_props string: {e}")
         return v
@@ -119,14 +128,28 @@ class EditComponentTypeInput(BaseModel):
     type_id: str = Field(..., description="ID of the component type to edit")
     new_name: Optional[str] = Field(None, description="New name for the component type")
     new_description: Optional[str] = Field(None, description="New description for the component type")
-    new_supported_props: Optional[List[str]] = Field(None, description="New list of supported prop names")
+    new_supported_props: Optional[Any] = Field(
+        None,
+        description=(
+            "New list of supported props for this component type. "
+            "Each prop must be a dict with 'name', 'type', and 'description'. "
+            "Example: [{'name': 'label', 'type': 'string', 'description': 'Text for button'}]. "
+            "Can also be a string representing such a list."
+        )
+    )
+
     @validator("new_supported_props", pre=True)
     def parse_new_supported_props(cls, v):
+        if v is None:
+            return v
         if isinstance(v, list):
             return v
         if isinstance(v, str):
             try:
-                return ast.literal_eval(v)
+                result = ast.literal_eval(v)
+                if isinstance(result, list):
+                    return result
+                raise ValueError("Parsed new_supported_props string is not a list")
             except Exception as e:
                 raise ValueError(f"Could not parse new_supported_props string: {e}")
         return v
@@ -138,6 +161,7 @@ class AddComponentInstanceInput(BaseModel):
     type_id: str = Field(..., description="ID of the component type to instantiate")
     screen_id: str = Field(..., description="ID of the screen to add this instance to")
     props: Any = Field(default_factory=dict, description="Props for this component instance (dict or string)")
+    description: Optional[str] = Field("", description="Description of the component instance")  # <-- Added
 
     @validator("props", pre=True)
     def parse_props(cls, v):
@@ -154,6 +178,8 @@ class EditComponentInstanceInput(BaseModel):
     instance_id: str = Field(..., description="ID of the component instance to edit")
     new_props: Optional[Dict[str, Any]] = Field(None, description="New props for this component instance")
     new_screen_id: Optional[str] = Field(None, description="New screen ID for this component instance")
+    new_description: Optional[str] = Field(None, description="New description for this component instance")  # <-- Added
+
     @validator("new_props", pre=True)
     def parse_new_props(cls, v):
         if isinstance(v, dict):
@@ -259,3 +285,7 @@ class SemanticSearchInput(BaseModel):
     filter_key: Optional[str] = Field(None, description="Metadata key to filter on (e.g., 'type_id', 'name').")
     filter_value: Optional[str] = Field(None, description="Value for the filter key.")
     k: Optional[int] = Field(5, description="Number of results to return (default 5).")
+
+
+class AskHumanClarificationInput(BaseModel):
+    question: str = Field(..., description="The clarification question to ask the human user.")

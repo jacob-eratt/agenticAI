@@ -1,11 +1,721 @@
-{
-  "4d7af823-81dd-4d3e-b7d2-44bfc373e2e9": {
-    "id": "4d7af823-81dd-4d3e-b7d2-44bfc373e2e9",
+[
+  {
+    "id": "6ff7dca6-b3cf-4af6-8c79-12067feec76b",
     "name": "dashboard_screen",
-    "description": "Main dashboard screen displaying current weather information.",
+    "description": "Main dashboard displaying current weather information and quick access to other features.",
     "component_instance_ids": [
-      "6d48f7b6-0201-4dd5-af19-6debf5da3608",
-      "c635f60a-7025-4207-bbc1-e3d82afe2494"
+      "6f9656e5-20da-468f-8c0e-9a8519eb9277",
+      "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
+      "6bab2bca-1b7e-4439-96cf-465044f3f93f",
+      "eea844ca-ade3-4f4f-8671-2437baa4ad73",
+      "6adcc0cc-1467-401d-8e56-2999aa961730",
+      "214bfa35-6839-44d5-8b83-d76f83311dce",
+      "40655ae8-bab4-48f6-9d86-a94ccf666958",
+      "786e7325-19cd-42f0-bd95-ea5b10f462c0",
+      "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+      "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
+      "ae7a42a9-b7e5-4000-8ccb-648439ec67c7",
+      "f2b7e60a-c29f-4ce6-a9a9-a550f7e411c9",
+      "84fab98b-aba8-4fd7-89d6-41eefc00f282",
+      "29cc1d4e-36e8-4651-bdb3-a21591361b2c"
+    ],
+    "components": [
+      {
+        "id": "6f9656e5-20da-468f-8c0e-9a8519eb9277",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "value": "27",
+          "unit": "\u00b0C",
+          "label": "Feels Like"
+        },
+        "description": "Displays the 'feels like' temperature."
+      },
+      {
+        "id": "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "value": "75",
+          "unit": "%",
+          "label": "Humidity"
+        },
+        "description": "Displays the current humidity."
+      },
+      {
+        "id": "6bab2bca-1b7e-4439-96cf-465044f3f93f",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "description": "NW",
+          "value": "15",
+          "unit": "km/h",
+          "label": "Wind"
+        },
+        "description": "Displays the current wind speed and direction."
+      },
+      {
+        "id": "eea844ca-ade3-4f4f-8671-2437baa4ad73",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "description": "Current precipitation type and intensity",
+          "icon": "precipitation_icon",
+          "label": "Precipitation",
+          "value": "N/A",
+          "onClick": "navigate_to_hourly_forecast_screen"
+        },
+        "description": "Displays current precipitation type and intensity."
+      },
+      {
+        "id": "6adcc0cc-1467-401d-8e56-2999aa961730",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "Last updated: {timestamp}"
+        },
+        "description": "Displays the timestamp of the last weather data update."
+      },
+      {
+        "id": "214bfa35-6839-44d5-8b83-d76f83311dce",
+        "type_id": "d0482d56-2378-446d-9c11-6c6167674367",
+        "props": {
+          "forecastItems": []
+        },
+        "description": "Displays a summary of the daily weather forecast for the next several days."
+      },
+      {
+        "id": "40655ae8-bab4-48f6-9d86-a94ccf666958",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "navigateToLocationManagement",
+          "ariaLabel": "Manage Locations",
+          "icon": "location"
+        },
+        "description": "Button to navigate to the location management screen to view and manage saved locations."
+      },
+      {
+        "id": "786e7325-19cd-42f0-bd95-ea5b10f462c0",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "Location access denied. Location-based features are unavailable."
+        },
+        "description": "Prominent message informing the user about denied location permission and its impact on features."
+      },
+      {
+        "id": "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+        "type_id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
+        "props": {
+          "isOpen": true,
+          "title": "Location Detection Failed",
+          "message": "Unable to detect your current location. Please try again or manage your locations.",
+          "onClose": "handleManageLocationsNavigation",
+          "onConfirm": "handleTryAgain"
+        },
+        "description": "Dialog to inform user of location detection failure with options to retry or manage locations."
+      },
+      {
+        "id": "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "navigate_to_settings_screen",
+          "ariaLabel": "Settings",
+          "icon": "settings"
+        },
+        "description": "Button to navigate to the settings screen."
+      },
+      {
+        "id": "ae7a42a9-b7e5-4000-8ccb-648439ec67c7",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "navigate_to_radar_map_screen",
+          "ariaLabel": "View Radar Map",
+          "icon": "map_icon"
+        },
+        "description": "Button to navigate to the Radar Map screen."
+      },
+      {
+        "id": "f2b7e60a-c29f-4ce6-a9a9-a550f7e411c9",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "label": "View Historical Data",
+          "onClick": "navigateToHistoricalDataScreen"
+        },
+        "description": "Button to navigate to the Location Management Screen to select a location for historical data."
+      },
+      {
+        "id": "84fab98b-aba8-4fd7-89d6-41eefc00f282",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "onClick": "navigate_to_weather_alerts_screen",
+          "value": "5",
+          "description": "Non-severe",
+          "label": "Active Alerts"
+        },
+        "description": "Summary card displaying active non-severe weather alerts on the dashboard."
+      },
+      {
+        "id": "29cc1d4e-36e8-4651-bdb3-a21591361b2c",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "Current Location: New York, NY"
+        },
+        "description": "Displays the user's current detected or selected location."
+      }
+    ]
+  },
+  {
+    "id": "ac034322-32bb-4d27-b922-17ffd04378d1",
+    "name": "daily_forecast_details_screen",
+    "description": "Displays comprehensive weather details and hourly breakdown for a selected day.",
+    "component_instance_ids": [
+      "82455772-5477-4a9d-8915-8afea7c3d08f"
+    ],
+    "components": [
+      {
+        "id": "82455772-5477-4a9d-8915-8afea7c3d08f",
+        "type_id": "c5eda0a9-cf36-4e86-9ee3-dca8c87ded39",
+        "props": {
+          "humidity": "60%",
+          "date": "2023-10-27",
+          "temperature": "25\u00b0C",
+          "precipitation": "10%",
+          "wind": "15 km/h NE"
+        },
+        "description": "Panel displaying comprehensive daily weather details."
+      }
+    ]
+  },
+  {
+    "id": "8dcb7ce6-62f1-4a97-bee6-a63a5e6f1930",
+    "name": "location_management_screen",
+    "description": "Screen to view and manage saved locations.",
+    "component_instance_ids": [
+      "7ab227d3-97a1-4e21-883e-0554e63cb6d3",
+      "13ec8c90-4684-42ed-82d2-42c57e3ac531",
+      "3455074d-0f4e-4a51-be20-dcf6c772ef68",
+      "1f97a286-f0b5-4f50-89af-cea84887009e",
+      "5c2ac363-5d8c-49c6-b2f4-906c556502f6",
+      "5692e1e7-6adc-40b1-8be3-95aff14d636b",
+      "84577fdb-cd0c-4d03-bec0-479df00ff393",
+      "5737c072-0fd8-4780-a1f9-c3e36fddb77a",
+      "d5958e7e-02a3-4b5c-8c62-d8f2376d4064",
+      "76a9178f-5dc2-415c-9eaa-681860a6bb2b",
+      "8485358f-872e-43cc-8b88-1f5b526f3ca9"
+    ],
+    "components": [
+      {
+        "id": "7ab227d3-97a1-4e21-883e-0554e63cb6d3",
+        "type_id": "575085bb-28bb-4289-8076-5fc5c34ecaba",
+        "props": {
+          "ariaLabel": "List of saved locations",
+          "itemKey": "id",
+          "items": [],
+          "onSelect": "handleLocationSelect",
+          "isReorderable": true,
+          "onReorder": "handleLocationReorder"
+        },
+        "description": "List to display saved locations. Selecting an item sets it as the active location and navigates back to the Dashboard."
+      },
+      {
+        "id": "13ec8c90-4684-42ed-82d2-42c57e3ac531",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "handleDeleteLocation",
+          "ariaLabel": "Delete location",
+          "icon": "trash"
+        },
+        "description": "Button to delete a saved location."
+      },
+      {
+        "id": "3455074d-0f4e-4a51-be20-dcf6c772ef68",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "saveLocationOrderAndNavigateToDashboard",
+          "label": "Done"
+        },
+        "description": "Button to save the new order of locations and navigate back to the Dashboard."
+      },
+      {
+        "id": "1f97a286-f0b5-4f50-89af-cea84887009e",
+        "type_id": "27fced0a-955d-410f-bb2a-0175d38912c7",
+        "props": {
+          "ariaLabel": "Location search input",
+          "placeholder": "Search for a location..."
+        },
+        "description": "Input field for searching locations."
+      },
+      {
+        "id": "5c2ac363-5d8c-49c6-b2f4-906c556502f6",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "No results found"
+        },
+        "description": "Message displayed when no search results are found."
+      },
+      {
+        "id": "5692e1e7-6adc-40b1-8be3-95aff14d636b",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "An error occurred during location addition."
+        },
+        "description": "Displays an error message when location addition fails."
+      },
+      {
+        "id": "84577fdb-cd0c-4d03-bec0-479df00ff393",
+        "type_id": "575085bb-28bb-4289-8076-5fc5c34ecaba",
+        "props": {
+          "ariaLabel": "Location search results",
+          "onSelect": "handleSearchResultSelect",
+          "itemKey": "id",
+          "items": []
+        },
+        "description": "List to display location search results."
+      },
+      {
+        "id": "5737c072-0fd8-4780-a1f9-c3e36fddb77a",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "handleSaveLocation",
+          "variant": "solid",
+          "label": "Save Location"
+        },
+        "description": "Button to save the selected location."
+      },
+      {
+        "id": "d5958e7e-02a3-4b5c-8c62-d8f2376d4064",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "setAsDefaultLocation",
+          "variant": "solid",
+          "label": "Set as Default"
+        },
+        "description": "Button to set the selected location as default."
+      },
+      {
+        "id": "76a9178f-5dc2-415c-9eaa-681860a6bb2b",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "navigateToDashboard",
+          "variant": "outline",
+          "label": "Done"
+        },
+        "description": "Button to navigate back to the Dashboard Screen."
+      },
+      {
+        "id": "8485358f-872e-43cc-8b88-1f5b526f3ca9",
+        "type_id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
+        "props": {
+          "isOpen": false,
+          "title": "Confirm Deletion",
+          "message": "Are you sure you want to delete this location?",
+          "onClose": "handleCloseDeleteConfirmation",
+          "onConfirm": "confirmDeleteLocation"
+        },
+        "description": "Confirmation dialog for deleting a saved location."
+      }
+    ]
+  },
+  {
+    "id": "4e912607-884b-4fe7-9122-4bd49fb358b3",
+    "name": "settings_screen",
+    "description": "Screen for managing application settings, including units of measurement.",
+    "component_instance_ids": [
+      "07a77a41-53d6-470c-b256-bdca3c34d2bc",
+      "d1d95d89-3107-484a-a9a1-e3a6bcaeed88",
+      "5dc25cf0-ed3d-408d-837e-001ce7648085",
+      "b7ffdc81-0c63-4180-bbf4-7d916faa846b",
+      "db2f9be3-b01f-4ee9-b82d-d01720ccbd81",
+      "9e674af7-f136-443a-8173-12f04e492475",
+      "6e913bb4-795d-41e2-b834-265c37211cfb",
+      "4fd84463-9ab4-4a1d-b9ad-80b9ccc5d62e",
+      "06f3b5a2-3a61-41a1-acb9-5c0e27625c40",
+      "34268053-aca2-4a8e-8173-667120ed5919",
+      "7d061293-a474-4b3f-b8ff-50609c3adf6a",
+      "0f8c360e-bedb-4856-b13a-0c1d6ccd786c",
+      "c425f01d-b388-49cb-a216-9fc2239dee13",
+      "8aefc5e5-e3af-46d1-8a9f-0a1191089eca",
+      "e5270537-a6e3-4a98-b65f-d1c5cf5f54b6",
+      "18320339-20b4-49e7-8d24-5b42a03e1b13"
+    ],
+    "components": [
+      {
+        "id": "07a77a41-53d6-470c-b256-bdca3c34d2bc",
+        "type_id": "a55d1460-03ab-4d6c-8209-945887e887b0",
+        "props": {
+          "onChange": "handleUnitChange",
+          "selectedValue": "Metric",
+          "options": [
+            "Metric",
+            "Imperial"
+          ]
+        },
+        "description": "Radio group for selecting units of measurement (Metric/Imperial)."
+      },
+      {
+        "id": "d1d95d89-3107-484a-a9a1-e3a6bcaeed88",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "label": "Back",
+          "onClick": "navigate_back_to_dashboard",
+          "variant": "ghost"
+        },
+        "description": "Button to navigate back to the Dashboard, saving any pending changes."
+      },
+      {
+        "id": "5dc25cf0-ed3d-408d-837e-001ce7648085",
+        "type_id": "a55d1460-03ab-4d6c-8209-945887e887b0",
+        "props": {
+          "onChange": "handle_theme_change",
+          "value": "light",
+          "options": [
+            {
+              "value": "light",
+              "label": "Light"
+            },
+            {
+              "value": "dark",
+              "label": "Dark"
+            }
+          ],
+          "label": "Select Theme"
+        },
+        "description": "Radio group for selecting application theme (Light/Dark mode)."
+      },
+      {
+        "id": "b7ffdc81-0c63-4180-bbf4-7d916faa846b",
+        "type_id": "a55d1460-03ab-4d6c-8209-945887e887b0",
+        "props": {
+          "value": "medium",
+          "onChange": "handle_font_size_change",
+          "options": [
+            {
+              "value": "small",
+              "label": "Small"
+            },
+            {
+              "value": "medium",
+              "label": "Medium"
+            },
+            {
+              "value": "large",
+              "label": "Large"
+            }
+          ],
+          "label": "Select Font Size"
+        },
+        "description": "Radio group for adjusting application font size."
+      },
+      {
+        "id": "db2f9be3-b01f-4ee9-b82d-d01720ccbd81",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "expandNotificationCustomization",
+          "label": "Customize Parameters"
+        },
+        "description": "Button to expand or navigate to notification customization options."
+      },
+      {
+        "id": "9e674af7-f136-443a-8173-12f04e492475",
+        "type_id": "78d0068d-3580-42d6-9e65-0877575434f3",
+        "props": {
+          "onChange": "handleNotificationParameterChange",
+          "selectedValues": [],
+          "options": [
+            "Time",
+            "Conditions",
+            "Frequency"
+          ]
+        },
+        "description": "Multi-select component for choosing notification parameters like time, conditions, and frequency."
+      },
+      {
+        "id": "6e913bb4-795d-41e2-b834-265c37211cfb",
+        "type_id": "4a8bee3e-1327-4d8b-b8d2-e48a4c95c7d3",
+        "props": {
+          "title": "Notification Preferences",
+          "preferences": [
+            {
+              "label": "Daily Weather Summary",
+              "type": "toggle",
+              "isChecked": true,
+              "onChange": "handleDailyWeatherSummaryToggle"
+            },
+            {
+              "label": "Severe Weather Alerts",
+              "type": "toggle",
+              "isChecked": true,
+              "onChange": "handleSevereWeatherAlertsToggle"
+            },
+            {
+              "label": "Immediate Weather Alerts",
+              "type": "toggle",
+              "isChecked": false,
+              "onChange": "handleImmediateWeatherAlertsToggle"
+            },
+            {
+              "label": "Precipitation Reminders",
+              "type": "toggle",
+              "isChecked": false,
+              "onChange": "handlePrecipitationRemindersToggle"
+            },
+            {
+              "label": "Alert Type",
+              "options": [
+                "Email",
+                "SMS",
+                "Push Notification"
+              ],
+              "type": "selector",
+              "value": [
+                "Push Notification"
+              ],
+              "onChange": "handleAlertTypeChange"
+            }
+          ]
+        },
+        "description": "Section to display and manage notification preferences."
+      },
+      {
+        "id": "4fd84463-9ab4-4a1d-b9ad-80b9ccc5d62e",
+        "type_id": "27fced0a-955d-410f-bb2a-0175d38912c7",
+        "props": {
+          "placeholder": "Enter your email",
+          "ariaLabel": "Email address input"
+        },
+        "description": "Input field for user's email address."
+      },
+      {
+        "id": "06f3b5a2-3a61-41a1-acb9-5c0e27625c40",
+        "type_id": "963ebc2a-5c38-4d46-a8ef-04bdac009c00",
+        "props": {
+          "label": "Enable Email Notifications",
+          "isChecked": false
+        },
+        "description": "Toggle to enable or disable email notifications."
+      },
+      {
+        "id": "34268053-aca2-4a8e-8173-667120ed5919",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "label": "Save Preferences",
+          "onClick": "save_email_preferences",
+          "variant": "solid"
+        },
+        "description": "Button to save email notification preferences."
+      },
+      {
+        "id": "7d061293-a474-4b3f-b8ff-50609c3adf6a",
+        "type_id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
+        "props": {
+          "isOpen": false,
+          "title": "Preferences Saved",
+          "message": "Your email notification preferences have been saved successfully."
+        },
+        "description": "Dialog to confirm that email preferences have been saved."
+      },
+      {
+        "id": "0f8c360e-bedb-4856-b13a-0c1d6ccd786c",
+        "type_id": "4a8bee3e-1327-4d8b-b8d2-e48a4c95c7d3",
+        "props": {
+          "title": "Email Notifications"
+        },
+        "description": "Section for managing email notification preferences."
+      },
+      {
+        "id": "c425f01d-b388-49cb-a216-9fc2239dee13",
+        "type_id": "4a8bee3e-1327-4d8b-b8d2-e48a4c95c7d3",
+        "props": {
+          "title": "SMS Notification Preferences",
+          "preferences": []
+        },
+        "description": "Section for managing SMS notification preferences."
+      },
+      {
+        "id": "8aefc5e5-e3af-46d1-8a9f-0a1191089eca",
+        "type_id": "963ebc2a-5c38-4d46-a8ef-04bdac009c00",
+        "props": {
+          "onChange": "handleSmsToggleChange",
+          "isChecked": false,
+          "label": "Enable SMS Notifications"
+        },
+        "description": "Toggle to enable or disable SMS notifications."
+      },
+      {
+        "id": "e5270537-a6e3-4a98-b65f-d1c5cf5f54b6",
+        "type_id": "27fced0a-955d-410f-bb2a-0175d38912c7",
+        "props": {
+          "onChange": "handlePhoneNumberChange",
+          "value": "",
+          "placeholder": "Enter phone number"
+        },
+        "description": "Input field for the user's phone number for SMS notifications."
+      },
+      {
+        "id": "18320339-20b4-49e7-8d24-5b42a03e1b13",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "handleSaveSmsPreferences",
+          "label": "Save Preferences"
+        },
+        "description": "Button to save updated SMS notification preferences."
+      }
+    ]
+  },
+  {
+    "id": "a18c1df9-e9c0-4f7f-8229-85d7f8cded94",
+    "name": "radar_map_screen",
+    "description": "Displays an interactive real-time weather radar map.",
+    "component_instance_ids": [
+      "8e9d05d0-3899-4098-83d8-312ec454128b",
+      "3228d5b9-9db7-428c-a0de-632f9e5cca57"
+    ],
+    "components": [
+      {
+        "id": "8e9d05d0-3899-4098-83d8-312ec454128b",
+        "type_id": "e01fed9c-bf02-403c-b48d-f02b1dfdf969",
+        "props": {
+          "onInteraction": "handle_map_pan_zoom",
+          "src": "real_time_radar_data_source"
+        },
+        "description": "Interactive component displaying real-time weather radar."
+      },
+      {
+        "id": "3228d5b9-9db7-428c-a0de-632f9e5cca57",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "initiateTimeLapsePlayback",
+          "ariaLabel": "Play Time-lapse",
+          "icon": "play"
+        },
+        "description": "Button to play time-lapse radar data."
+      }
+    ]
+  },
+  {
+    "id": "456e3f9f-abdb-43c3-afbc-06f20d7bae5d",
+    "name": "historical_data_screen",
+    "description": "Displays historical weather data for a selected location.",
+    "component_instance_ids": [
+      "bb433988-151e-4f3a-87a7-2f7a78b140c0",
+      "1c17e21f-dab4-434a-b056-9ffc3b12c060",
+      "10f5a24b-e570-4903-ba9c-4bd64fb4b384",
+      "b23a294c-2592-4929-9b93-8c440270f86a",
+      "d4cca02d-7117-4ee1-b338-7779dc30a16d",
+      "e371c31d-7398-4ba0-873c-0ff3af6d793e",
+      "4a3a3f83-4e98-43f6-9a3f-c0966e15aa05",
+      "215ffc03-bc46-4600-97d6-26a4ccb9037b",
+      "b7057237-ccbc-49c5-b443-d90a2865bfdc"
+    ],
+    "components": [
+      {
+        "id": "bb433988-151e-4f3a-87a7-2f7a78b140c0",
+        "type_id": "924365df-4915-4a1c-89ef-87fd2e2c31b2",
+        "props": {
+          "location": "",
+          "data": []
+        },
+        "description": "Displays historical weather data for the selected location."
+      },
+      {
+        "id": "1c17e21f-dab4-434a-b056-9ffc3b12c060",
+        "type_id": "35698d68-4f66-434d-887d-970ac623f655",
+        "props": {
+          "onChange": "handleStartDateChange",
+          "label": "Start Date"
+        },
+        "description": "Date picker for selecting the start date of historical data."
+      },
+      {
+        "id": "10f5a24b-e570-4903-ba9c-4bd64fb4b384",
+        "type_id": "35698d68-4f66-434d-887d-970ac623f655",
+        "props": {
+          "onChange": "handleEndDateChange",
+          "label": "End Date"
+        },
+        "description": "Date picker for selecting the end date of historical data."
+      },
+      {
+        "id": "b23a294c-2592-4929-9b93-8c440270f86a",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "handleDoneClick",
+          "variant": "solid",
+          "label": "Done"
+        },
+        "description": "Button to confirm the selected date range and update historical data display."
+      },
+      {
+        "id": "d4cca02d-7117-4ee1-b338-7779dc30a16d",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "onClick": "handleCustomizeParametersClick",
+          "label": "Customize Parameters"
+        },
+        "description": "Button to open the meteorological parameter selection interface."
+      },
+      {
+        "id": "e371c31d-7398-4ba0-873c-0ff3af6d793e",
+        "type_id": "78d0068d-3580-42d6-9e65-0877575434f3",
+        "props": {
+          "selectedValues": [],
+          "onChange": "handleParameterChange",
+          "options": [
+            "Temperature",
+            "Humidity",
+            "Wind Speed",
+            "Precipitation"
+          ]
+        },
+        "description": "Multi-select component for choosing meteorological parameters for historical data analysis."
+      },
+      {
+        "id": "4a3a3f83-4e98-43f6-9a3f-c0966e15aa05",
+        "type_id": "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f",
+        "props": {
+          "onAlertClick": "displayAlertDetails",
+          "alerts": []
+        },
+        "description": "Displays a chronological list of past severe weather alerts."
+      },
+      {
+        "id": "215ffc03-bc46-4600-97d6-26a4ccb9037b",
+        "type_id": "d05b0010-686d-49a8-a6ef-a3c9c225f3f3",
+        "props": {
+          "alert": {}
+        },
+        "description": "Displays detailed information for a selected severe weather alert."
+      },
+      {
+        "id": "b7057237-ccbc-49c5-b443-d90a2865bfdc",
+        "type_id": "42b31251-8c08-47ca-9c39-f61f5a250a13",
+        "props": {
+          "defaultIndex": 0.0
+        },
+        "description": "Tabs for navigating between different historical data views."
+      }
+    ]
+  },
+  {
+    "id": "f5b59b07-d853-4970-8924-2f7edb0dfa37",
+    "name": "weather_alerts_screen",
+    "description": "Displays a list of active non-severe weather alerts.",
+    "component_instance_ids": [
+      "2e328b6a-049d-44e4-bab9-4622aac6e11d",
+      "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e"
+    ],
+    "components": [
+      {
+        "id": "2e328b6a-049d-44e4-bab9-4622aac6e11d",
+        "type_id": "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f",
+        "props": {
+          "alerts": []
+        },
+        "description": "List of active non-severe weather alerts."
+      },
+      {
+        "id": "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e",
+        "type_id": "d05b0010-686d-49a8-a6ef-a3c9c225f3f3",
+        "props": {
+          "alert": {}
+        },
+        "description": "Panel to display detailed information for a selected weather alert."
+      }
     ]
   }
-}
+]

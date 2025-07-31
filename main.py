@@ -25,11 +25,13 @@ import csv
 import random
 from langchain_core.messages import AIMessage, HumanMessage
 import os
+import pickle
 from ui_component_creation import box_user_stories_with_llm
 import vectorstores
 from screen_creation import assign_boxes_to_screens_with_llm
 from stories_to_flow import generate_user_flows
 from flow_to_screen_conversion import decompose_flow_with_llm
+from component_code_generation import generate_and_write_all_components, load_component_types
 
 
 load_dotenv()
@@ -364,9 +366,22 @@ def main():
         print(f"Saved screens to {screens_json}")
         print(f"Saved component types to {component_types_json}")
         print(f"Saved component instances to {component_instances_json}")
+        with open(os.path.join(screen_data_folder, "screens.pkl"), "wb") as f:
+            pickle.dump(screens, f)
+        with open(os.path.join(screen_data_folder, "component_types.pkl"), "wb") as f:
+            pickle.dump(component_types, f)
+        with open(os.path.join(screen_data_folder, "component_instances.pkl"), "wb") as f:
+            pickle.dump(component_instances, f)
+        print("Pickled screens, component types, and component instances to .pkl files.")
+
 #endregion
 
+#region: Component Code Generation
+    # Generate React component code from component types
+    component_types_path = "component_types.json"
+    output_folder = "react-ui/src/components"
 
+    generate_and_write_all_components(component_types_path, output_folder, llm)
 
 
 #old method of ui creation going with a different pipeline approach

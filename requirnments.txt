@@ -1,7 +1,21 @@
 langchain
-wikipedia
 langchain-community
 langchain-openai
 langchain-anthropic
+langchain-google-genai
+langchain-xai
+langchain-huggingface
 python-dotenv
 pydantic
+pydantic-settings
+chromadb
+# For document loaders and splitters
+wikipedia
+# For PDF and markdown loading
+PyPDF2
+# For web loading
+requests
+# For logging
+logging
+# For argument parsing
+argparse

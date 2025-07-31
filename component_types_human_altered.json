@@ -1,5 +1,5 @@
-[
-  {
+{
+  "e0b18d25-0d48-4375-8a1b-d3453a1061da": {
     "id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
     "name": "WeatherDisplayCard",
     "description": "A card component to display various weather-related information.",
@@ -46,7 +46,7 @@
       }
     ]
   },
-  {
+  "4b57b921-2360-4479-8e4d-7734bba9d8e6": {
     "id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
     "name": "IconButton",
     "description": "An icon button used to initiate a search.",
@@ -68,7 +68,7 @@
       }
     ]
   },
-  {
+  "27fced0a-955d-410f-bb2a-0175d38912c7": {
     "id": "27fced0a-955d-410f-bb2a-0175d38912c7",
     "name": "TextInput",
     "description": "A text input field for user entry.",
@@ -95,7 +95,7 @@
       }
     ]
   },
-  {
+  "575085bb-28bb-4289-8076-5fc5c34ecaba": {
     "id": "575085bb-28bb-4289-8076-5fc5c34ecaba",
     "name": "LocationList",
     "description": "A list component to display search results.",
@@ -132,7 +132,7 @@
       }
     ]
   },
-  {
+  "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa": {
     "id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
     "name": "TextDisplay",
     "description": "A component to display static or dynamic text.",
@@ -144,7 +144,7 @@
       }
     ]
   },
-  {
+  "a44a8c77-b35a-45cd-a0f9-4aae8cfccf32": {
     "id": "a44a8c77-b35a-45cd-a0f9-4aae8cfccf32",
     "name": "HourlyForecastList",
     "description": "A list component to display hourly weather forecast entries.",
@@ -156,7 +156,7 @@
       }
     ]
   },
-  {
+  "d0482d56-2378-446d-9c11-6c6167674367": {
     "id": "d0482d56-2378-446d-9c11-6c6167674367",
     "name": "DailyForecastList",
     "description": "A list component to display daily weather forecast entries.",
@@ -168,7 +168,7 @@
       }
     ]
   },
-  {
+  "c5eda0a9-cf36-4e86-9ee3-dca8c87ded39": {
     "id": "c5eda0a9-cf36-4e86-9ee3-dca8c87ded39",
     "name": "DailyDetailsPanel",
     "description": "A panel component to display comprehensive weather details for a specific day.",
@@ -200,7 +200,7 @@
       }
     ]
   },
-  {
+  "655662a7-37bc-4ae4-8f5f-115818cfbe45": {
     "id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
     "name": "ConfirmationDialog",
     "description": "A dialog box to confirm user actions.",
@@ -232,7 +232,7 @@
       }
     ]
   },
-  {
+  "148db629-259c-4048-9963-85f185e62ddd": {
     "id": "148db629-259c-4048-9963-85f185e62ddd",
     "name": "Button",
     "description": "A standard clickable button.",
@@ -254,7 +254,7 @@
       }
     ]
   },
-  {
+  "a55d1460-03ab-4d6c-8209-945887e887b0": {
     "id": "a55d1460-03ab-4d6c-8209-945887e887b0",
     "name": "RadioGroup",
     "description": "A group of radio buttons for selecting a single option from a list.",
@@ -281,7 +281,7 @@
       }
     ]
   },
-  {
+  "963ebc2a-5c38-4d46-a8ef-04bdac009c00": {
     "id": "963ebc2a-5c38-4d46-a8ef-04bdac009c00",
     "name": "ToggleSwitch",
     "description": "A switch component to toggle settings on or off.",
@@ -303,7 +303,7 @@
       }
     ]
   },
-  {
+  "e01fed9c-bf02-403c-b48d-f02b1dfdf969": {
     "id": "e01fed9c-bf02-403c-b48d-f02b1dfdf969",
     "name": "InteractiveMap",
     "description": "An interactive map component to display real-time data with pan and zoom capabilities.",
@@ -320,7 +320,7 @@
       }
     ]
   },
-  {
+  "924365df-4915-4a1c-89ef-87fd2e2c31b2": {
     "id": "924365df-4915-4a1c-89ef-87fd2e2c31b2",
     "name": "HistoricalDataPanel",
     "description": "A panel component to display historical weather data for a selected location.",
@@ -337,7 +337,7 @@
       }
     ]
   },
-  {
+  "35698d68-4f66-434d-887d-970ac623f655": {
     "id": "35698d68-4f66-434d-887d-970ac623f655",
     "name": "DatePicker",
     "description": "A component for selecting a single date.",
@@ -359,7 +359,7 @@
       }
     ]
   },
-  {
+  "78d0068d-3580-42d6-9e65-0877575434f3": {
     "id": "78d0068d-3580-42d6-9e65-0877575434f3",
     "name": "MultiSelect",
     "description": "A multi-select component for selecting multiple options from a list.",
@@ -386,7 +386,7 @@
       }
     ]
   },
-  {
+  "42b31251-8c08-47ca-9c39-f61f5a250a13": {
     "id": "42b31251-8c08-47ca-9c39-f61f5a250a13",
     "name": "Tabs",
     "description": "A container component for organizing content into multiple tabbed sections.",
@@ -403,7 +403,7 @@
       }
     ]
   },
-  {
+  "fd59d3fe-9dcb-47da-855f-9d46a012ec24": {
     "id": "fd59d3fe-9dcb-47da-855f-9d46a012ec24",
     "name": "Tab",
     "description": "An individual tab component to be used within a Tabs container.",
@@ -420,7 +420,7 @@
       }
     ]
   },
-  {
+  "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f": {
     "id": "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f",
     "name": "AlertList",
     "description": "A list component to display a chronological list of severe weather alerts.",
@@ -437,7 +437,7 @@
       }
     ]
   },
-  {
+  "d05b0010-686d-49a8-a6ef-a3c9c225f3f3": {
     "id": "d05b0010-686d-49a8-a6ef-a3c9c225f3f3",
     "name": "AlertDetailsPanel",
     "description": "A panel component to display detailed information for a selected severe weather alert.",
@@ -449,7 +449,7 @@
       }
     ]
   },
-  {
+  "4a8bee3e-1327-4d8b-b8d2-e48a4c95c7d3": {
     "id": "4a8bee3e-1327-4d8b-b8d2-e48a4c95c7d3",
     "name": "NotificationPreferenceSection",
     "description": "A section to display and manage various notification preferences, including toggles and selectors.",
@@ -466,4 +466,4 @@
       }
     ]
   }
-]
+}

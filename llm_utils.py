@@ -4,6 +4,7 @@ import re
 from typing import Any, Type, Union
 import logging
 import ast
+import sys
 from pydantic import BaseModel, ValidationError
 from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -95,22 +96,38 @@ def extract_json_from_llm(llm_output, key="output"):
         return extract_json(llm_output)
     return llm_output
 
+import re
+
+def extract_code_block(text: str) -> str:
+    """
+    Extracts the first code block (triple backticks) from a string.
+    Returns the code as a string, or None if not found.
+    Supports optional language specifier after the backticks.
+    """
+    match = re.search(r"```(?:\w+\n)?(.*?)```", text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
 
 def call_agent(llm: Union[ChatOpenAI, ChatAnthropic, ChatXAI, ChatGoogleGenerativeAI], prompt_template: ChatPromptTemplate, input_text: str, tools: list, memory=None, verbose: bool = True) -> str:
     agent = create_tool_calling_agent(llm=llm, tools=tools, prompt=prompt_template)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose, max_iterations=30)  # Increase max_iterations if needed
-    # Properly extract chat history from memory object
-    if memory and hasattr(memory, "load_memory_variables"):
-        messages = memory.load_memory_variables({}).get("chat_history", [])
-    else:
-        messages = memory if memory else []
-    result = agent_executor.invoke({"input": input_text, "chat_history": messages})
-    output = result.get("output", result)
-    if isinstance(output, list) and output and "text" in output[0]:
-        return output[0]["text"]
-    elif isinstance(output, dict) and "text" in output:
-        return output["text"]
-    return str(output)
+    original_stdout = sys.stdout
+    try:
+        sys.stdout = open("llm_verbose.log", "a", encoding="utf-8")
+        agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=verbose, max_iterations=30)
+        if memory and hasattr(memory, "load_memory_variables"):
+            messages = memory.load_memory_variables({}).get("chat_history", [])
+        else:
+            messages = memory if memory else []
+        result = agent_executor.invoke({"input": input_text, "chat_history": messages})
+        output = result.get("output", result)
+        if isinstance(output, list) and output and "text" in output[0]:
+            return output[0]["text"]
+        elif isinstance(output, dict) and "text" in output:
+            return output["text"]
+        return str(output)
+    finally:
+        sys.stdout.close()
+        sys.stdout = original_stdout
 
 
 
@@ -274,7 +291,7 @@ def serialize_screen(screen, component_instances):
                 "id": instance.id,
                 "type_id": instance.type_id,
                 "props": instance.props,
-                "usage_count": instance.usage_count
+                "description": instance.description,        
             }
             for instance_id in screen.component_instance_ids
             if (instance := component_instances.get(instance_id))
@@ -294,7 +311,7 @@ def serialize_component_instance(instance):
         "id": instance.id,
         "type_id": instance.type_id,
         "props": instance.props,
-        "usage_count": instance.usage_count
+        "description": instance.description,
     }
 
 def save_ui_state_to_json(screens, component_types, component_instances):

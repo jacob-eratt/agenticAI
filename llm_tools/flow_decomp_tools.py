@@ -16,7 +16,7 @@ class ComponentType:
         self.id = str(uuid.uuid4())
         self.name = name
         self.description = description
-        self.supported_props = supported_props or []  # e.g., ["label", "icon", "size"]
+        self.supported_props = supported_props or []  # e.g., [{"name": "label", "type": "string", "description": "Text for button"}, ...]
 
     def to_dict(self):
         return {
@@ -27,19 +27,20 @@ class ComponentType:
         }
 
 class ComponentInstance:
-    def __init__(self, type_id, screen_id=None, props=None):
+    def __init__(self, type_id, screen_id=None, props=None, description=None):
         self.id = str(uuid.uuid4())
         self.type_id = type_id  # Reference to ComponentType
         self.screen_id = screen_id  # Reference to Screen ID if applicable
         self.props = props or {}
-        self.usage_count = 0  # Track how often this instance is used
+        self.description = description or ""
+
     def to_dict(self):
         return {
             "id": self.id,
             "type_id": self.type_id,
             "screen_id": self.screen_id,
             "props": self.props,
-            "usage_count": self.usage_count
+            "description": self.description
         }
 
 class Screen:
@@ -196,10 +197,25 @@ def get_component_type_usage(type_id, component_instances):
 # === Component Instance Functions ===
 # ===================================
 
-def add_component_instance(type_id, props, screen_id, component_instances, screens=None, vectorstore_name="pipeline_parts"):
+def add_component_instance(type_id, props, screen_id, component_instances, screens=None, vectorstore_name="pipeline_parts", description=None, component_types=None):
     # Add a new component instance and persist to vectorstore
     props = safe_parse_props(props)
-    new_instance = ComponentInstance(type_id, props=props)
+    # Validate props against component type if available
+    if component_types is not None and type_id in component_types:
+        # supported_props is a list of dicts: {"name": ..., "type": ..., "description": ...}
+        type_supported_prop_names = [p["name"] for p in component_types[type_id].supported_props]
+        extra_props = [p for p in props if p not in type_supported_prop_names]
+        if extra_props:
+            return {
+                "status": "warning",
+                "message": (
+                    f"Props {extra_props} are not defined in component type '{component_types[type_id].name}'. "
+                    "Instance not added. Please update the component type to include these props or use only supported props."
+                ),
+                "extra_props": extra_props,
+                "supported_props": type_supported_prop_names
+            }
+    new_instance = ComponentInstance(type_id, props=props, description=description)
     if new_instance.id in component_instances:
         return {"status": "error", "message": f"Instance '{new_instance.id}' already exists."}
     # Optionally add to screen
@@ -222,12 +238,13 @@ def add_component_instance(type_id, props, screen_id, component_instances, scree
                 vectorstore.add_documents([Document(page_content=doc_text_screen, metadata=metadata_screen)])
     component_instances[new_instance.id] = new_instance
     # Add to vectorstore
-    doc_text = f"Props: {str(props)}"
+    doc_text = f"Props: {str(props)}\nDescription: {new_instance.description}"
     metadata = {
         "id": new_instance.id,
         "type_id": type_id,
         "screen_id": new_instance.screen_id,
-        "props": str(props)
+        "props": str(props),
+        "description": new_instance.description
     }
     vectorstore = vectorstores.manager.get_store(vectorstore_name)
     if vectorstore:
@@ -238,6 +255,7 @@ def add_component_instance(type_id, props, screen_id, component_instances, scree
         "instance_id": new_instance.id,
         "screen_id": screen_id
     }
+
 
 def delete_component_instance(instance_id, component_instances, screens, vectorstore_name="pipeline_parts"):
     """
@@ -275,7 +293,7 @@ def delete_component_instance(instance_id, component_instances, screens, vectors
         "message": f"Component instance '{instance_id}' deleted and removed from all screens."
     }
 
-def edit_component_instance(instance_id, new_props=None, new_screen_id=None, component_instances=None, vectorstore_name="pipeline_parts"):
+def edit_component_instance(instance_id, new_props=None, new_screen_id=None, new_description=None, component_instances=None, vectorstore_name="pipeline_parts"):
     # Edit component instance and update vectorstore
     new_props = safe_parse_props(new_props) if new_props is not None else None
     inst = component_instances.get(instance_id)
@@ -293,14 +311,19 @@ def edit_component_instance(instance_id, new_props=None, new_screen_id=None, com
     if new_screen_id is not None and new_screen_id != inst.screen_id:
         inst.screen_id = new_screen_id
         changes.append("screen_id")
+    # Update description if provided and different
+    if new_description is not None and new_description != inst.description:
+        inst.description = new_description
+        changes.append("description")
     if changes:
         # Update vectorstore
-        doc_text = f"Props: {str(inst.props)}"
+        doc_text = f"Props: {str(inst.props)}\nDescription: {inst.description}"
         metadata = {
             "id": inst.id,
             "type_id": inst.type_id,
             "screen_id": inst.screen_id,
-            "props": str(inst.props)
+            "props": str(inst.props),
+            "description": inst.description  # New: include description
         }
         vectorstore = vectorstores.manager.get_store(vectorstore_name)
         if vectorstore:
@@ -316,6 +339,14 @@ def edit_component_instance(instance_id, new_props=None, new_screen_id=None, com
             "message": f"Component instance '{instance_id}' found, but no changes were made."
         }
 
+# --- Helper Functions ---
+def get_component_instances(component_instances):
+    """
+    Returns a list of all component instances as dictionaries,
+    including id, type_id, screen_id, props, and description.
+    """
+    return [inst.to_dict() for inst in component_instances.values()]
+
 def get_component_instance_details(instance_id, component_instances):
     # Return details for a specific component instance
     inst = component_instances.get(instance_id)
@@ -323,7 +354,7 @@ def get_component_instance_details(instance_id, component_instances):
         return {
             "status": "success",
             "message": f"Component instance '{instance_id}' retrieved.",
-            "component_instance": inst.to_dict()
+            "component_instance": inst.to_dict()  # Now includes description
         }
     else:
         return {
@@ -598,3 +629,9 @@ def semantic_search_tool(query, filter_key=None, filter_value=None, vectorstore_
         "results": [r.metadata for r in results]
     }
 #endregion: Flow to Screen Conversion
+
+
+def ask_human_clarification(question: str) -> str:
+    print("\n--- LLM requests clarification ---")
+    clarification = input(f"LLM needs clarification: {question}\nYour answer: ")
+    return clarification

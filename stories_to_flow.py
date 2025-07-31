@@ -3,16 +3,21 @@ import json
 from llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json_from_llm
 from prompts.ui_componenet_creation_prompts import flow_generation_prompt
 from langchain.memory import ConversationBufferMemory
+import uuid
+import json
+from llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json_from_llm
+from prompts.ui_componenet_creation_prompts import flow_generation_prompt
+from langchain.memory import ConversationBufferMemory
 
 def generate_user_flows(llm, user_stories_front_end, flows_file):
     """
     Iterates over user stories and generates user flows using the LLM.
-    Each flow is saved as a JSON object in the output file.
-    Tracks screen names to add and delete, and passes only the keep set to the LLM for each iteration.
+    Tracks screen names and component names to encourage reuse and consistency.
     """
     user_flows = []
-    screen_names_to_keep = set()   # Only pass these to the agent
-    screen_names_to_delete = set() # Track screens to delete
+    screen_names_to_keep = set()
+    screen_names_to_delete = set()
+    component_names_used = set()  # Track all component names used so far
 
     for idx, story in enumerate(user_stories_front_end):
         print(f"\nGenerating user flow for story {idx}/{len(user_stories_front_end)}: {story['name']}")
@@ -22,16 +27,22 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
             "description": story["description"]
         }, indent=2)
 
-        # Pass only screen_names_to_keep to the LLM
+        # Pass only screen_names_to_keep and component_names_used to the LLM
         screen_names_context = json.dumps(sorted(list(screen_names_to_keep)), indent=2)
+        component_names_context = json.dumps(sorted(list(component_names_used)), indent=2)
         user_input = f"""
         USER STORY:
         {story_context}
 
         EXISTING SCREEN NAMES:
         {screen_names_context}
-        Please reuse existing screen names where possible. Only create a new screen if necessary, and explain why.
+
+        EXISTING COMPONENT NAMES:
+        {component_names_context}
+
+        Please reuse existing screen and component names where possible. Only create a new screen or component if necessary, and explain why.
         """
+        print(f"User input for LLM:\n{user_input}")
 
         memory = ConversationBufferMemory(
             memory_key="chat_history",
@@ -62,7 +73,7 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
             print(f"Failed to extract flow for story: {story['name']}")
             continue
 
-        # Add flows and update screen name sets using only add/delete lists
+        # Add flows and update screen/component name sets using only add/delete lists
         for flow in flows_to_add:
             user_flows.append(flow)
             # Add new screens to keep set
@@ -76,6 +87,16 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
                 screen_names_to_keep -= set(flow["screen_names_to_delete"])
             screen_names_to_keep -= screen_names_to_delete
 
+            # Extract component names from steps and add to set
+            if "steps" in flow and isinstance(flow["steps"], list):
+                for step in flow["steps"]:
+                    if "component_name" in step:
+                        component_names_used.add(step["component_name"])
+
+            if "component_names_to_add" in flow and isinstance(flow["component_names_to_add"], list):
+                for name in flow["component_names_to_add"]:
+                    component_names_used.add(name)
+
         # Save user flows to file (outside the loop)
         with open(flows_file, "w", encoding="utf-8") as f:
             json.dump(user_flows, f, indent=2)
@@ -84,5 +105,5 @@ def generate_user_flows(llm, user_stories_front_end, flows_file):
         # Optionally, save the sets for later use
         with open("screen_names_to_keep.json", "w", encoding="utf-8") as f:
             json.dump(sorted(list(screen_names_to_keep)), f, indent=2)
-        with open("screen_names_to_delete.json", "w", encoding="utf-8") as f:
-            json.dump(sorted(list(screen_names_to_delete)), f, indent=2)
+        with open("component_names_used.json", "w", encoding="utf-8") as f:
+            json.dump(sorted(list(component_names_used)), f, indent=2)
