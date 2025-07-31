@@ -1,5 +1,5 @@
 #region: Tools for Screens
-import vectorstores
+import utils.vectorstores_utils as vectorstores_utils
 class Screen:
     def __init__(self, name, description=""):
         self.name = name
@@ -33,7 +33,7 @@ def get_box_by_id(box_id):
     """
     Retrieve a box by its id from the vectorstore.
     """
-    vectorstore = vectorstores.manager.get_store("pipeline_parts")
+    vectorstore = vectorstores_utils.manager.get_store("pipeline_parts")
     results = vectorstore.get(where={"id": box_id})
     if results and results.get("documents") and results.get("metadatas"):
         metadata = results["metadatas"][0]

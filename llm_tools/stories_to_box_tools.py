@@ -1,7 +1,7 @@
 from langchain.tools import tool, Tool, StructuredTool
 import json
 import uuid
-import vectorstores
+import utils.vectorstores_utils as vectorstores_utils
 
 #region: Tools for RAG info
 class RAGTool:
@@ -86,7 +86,7 @@ def add_story_to_box(story_id, box_name, box_description, container_name, contai
     Add a story to a specific box within the specified container.
     If the box does not exist, it will be created.
     """
-    vectorstore = vectorstores.manager.get_store("pipeline_parts")
+    vectorstore = vectorstores_utils.manager.get_store("pipeline_parts")
     results = vectorstore.get(where={"id": story_id})
 
     story = None
@@ -157,7 +157,7 @@ def move_story_between_boxes(story_id, from_box_name, to_box_name, containers):
     Move a story from one box to another, searching across all containers.
     """
     # Retrieve story from vectorstore by story_id
-    vectorstore = vectorstores.manager.get_store("pipeline_parts")
+    vectorstore = vectorstores_utils.manager.get_store("pipeline_parts")
     results = vectorstore.get(where={"id": story_id})
 
     # Chroma returns a dict with "documents" and "metadatas" as lists

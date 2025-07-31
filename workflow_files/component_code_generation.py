@@ -1,6 +1,6 @@
 import json
 import os
-from llm_utils import call_agent, build_prompt, escape_curly_braces, extract_code_block
+from utils.llm_utils import call_agent, build_prompt, escape_curly_braces, extract_code_block
 from prompts.react_prompts import react_component_generation_system_prompt 
 
 

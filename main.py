@@ -11,11 +11,11 @@ from langchain_core.prompts import MessagesPlaceholder
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.documents import Document
 from collections import defaultdict
-from llm_utils import *
+from utils.llm_utils import *
 from story_creation import *
-from app_queries import *
-from elo_rating_system import *
-from chroma_db import *
+from utils.app_queries import *
+from utils.elo_rating_system import *
+from utils.chroma_db_utils import *
 import uuid
 from typing import List, Dict, Any, Optional, Union
 import logging
@@ -26,12 +26,12 @@ import random
 from langchain_core.messages import AIMessage, HumanMessage
 import os
 import pickle
-from ui_component_creation import box_user_stories_with_llm
-import vectorstores
+from workflow_files.ui_component_creation import box_user_stories_with_llm
+import utils.vectorstores_utils as vectorstores_utils
 from screen_creation import assign_boxes_to_screens_with_llm
 from stories_to_flow import generate_user_flows
-from flow_to_screen_conversion import decompose_flow_with_llm
-from component_code_generation import generate_and_write_all_components, load_component_types
+from workflow_files.flow_to_screen_conversion import decompose_flow_with_llm
+from workflow_files.component_code_generation import generate_and_write_all_components, load_component_types
 
 
 load_dotenv()
@@ -170,7 +170,7 @@ def main():
 
     # Initialize vectorstores with correct args
     print("Initializing vectorstores...")
-    vectorstores.init_vectorstores(args)
+    vectorstores_utils.init_vectorstores(args)
     print("Vectorstores initialized.")
 
     if args.llm == "anthropic":
@@ -193,8 +193,8 @@ def main():
         print("Using LLM: Gemini-2.5-flash (Google)")
 
     # Get retrievers
-    rag_info_retriever = vectorstores.manager.get_retriever("rag_info", search_type="mmr", search_kwargs={"k": config.search_k})
-    pipeline_retriever = vectorstores.manager.get_retriever("pipeline_parts", search_type="mmr", search_kwargs={"k": config.search_k})
+    rag_info_retriever = vectorstores_utils.manager.get_retriever("rag_info", search_type="mmr", search_kwargs={"k": config.search_k})
+    pipeline_retriever = vectorstores_utils.manager.get_retriever("pipeline_parts", search_type="mmr", search_kwargs={"k": config.search_k})
 
     print("RAG DB status:")
     print(f"Story retriever: {'OK' if rag_info_retriever else 'NOT FOUND'}")

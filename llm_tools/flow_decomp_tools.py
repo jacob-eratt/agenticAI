@@ -1,9 +1,9 @@
 from langchain.tools import tool, Tool, StructuredTool
-import vectorstores
+import utils.vectorstores_utils as vectorstores_utils
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.schema import Document
 import uuid
-from llm_utils import safe_parse_props, safe_parse_supported_props
+from utils.llm_utils import safe_parse_props, safe_parse_supported_props
 
 #region: Flow to Screen Conversion
 
@@ -89,7 +89,7 @@ def add_component_type(name, description, supported_props, component_types, vect
         "supported_props": str(supported_props),
         "category": "component_type"
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
     return new_type.id
@@ -128,7 +128,7 @@ def edit_component_type(type_id, new_name=None, new_description=None, new_suppor
         "name": comp_type.name,
         "supported_props": str(comp_type.supported_props)
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete(comp_type.id)
         vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
@@ -154,7 +154,7 @@ def delete_component_type(type_id, component_types, component_instances, vectors
         }
     affected_instances = [iid for iid, inst in component_instances.items() if inst.type_id == type_id]
     del component_types[type_id]
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete([type_id])
     return {
@@ -232,7 +232,7 @@ def add_component_instance(type_id, props, screen_id, component_instances, scree
                 "component_instance_ids": str(screen.component_instance_ids),
                 "category": "screen"
             }
-            vectorstore = vectorstores.manager.get_store(vectorstore_name)
+            vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
             if vectorstore:
                 vectorstore.delete([screen.id])  
                 vectorstore.add_documents([Document(page_content=doc_text_screen, metadata=metadata_screen)])
@@ -246,7 +246,7 @@ def add_component_instance(type_id, props, screen_id, component_instances, scree
         "props": str(props),
         "description": new_instance.description
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
     return {
@@ -279,13 +279,13 @@ def delete_component_instance(instance_id, component_instances, screens, vectors
                 "component_instance_ids": str(screen.component_instance_ids),
                 "category": "screen"
             }
-            vectorstore = vectorstores.manager.get_store(vectorstore_name)
+            vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
             if vectorstore:
                 vectorstore.delete([screen.id])
                 vectorstore.add_documents([Document(page_content=doc_text_screen, metadata=metadata_screen)])
     # Delete the instance itself
     del component_instances[instance_id]
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete([instance_id])
     return {
@@ -325,7 +325,7 @@ def edit_component_instance(instance_id, new_props=None, new_screen_id=None, new
             "props": str(inst.props),
             "description": inst.description  # New: include description
         }
-        vectorstore = vectorstores.manager.get_store(vectorstore_name)
+        vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
         if vectorstore:
             vectorstore.delete([inst.id])
             vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
@@ -404,7 +404,7 @@ def add_screen(name, description, screens, vectorstore_name="pipeline_parts"):
         "component_instance_ids": str(new_screen.component_instance_ids),
         "category": "screen"
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
     return {
@@ -432,7 +432,7 @@ def edit_screen(screen_id, new_name=None, new_description=None, screens=None, ve
         "name": screen.name,
         "component_instance_ids": str(screen.component_instance_ids)
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete([screen.id])
         vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
@@ -468,7 +468,7 @@ def delete_screen(screen_id, screens, component_instances, vectorstore_name="pip
     print(f"Screen found with key: {repr(found_key)}")
     instance_ids = list(screens[found_key].component_instance_ids)
     del screens[found_key]
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete([found_key])
         # Remove screen_id from affected component instances and update vectorstore
@@ -507,7 +507,7 @@ def add_component_instance_to_screen(screen_id, instance_id, screens, component_
             "screen_id": inst.screen_id,
             "props": str(inst.props)
         }
-        vectorstore = vectorstores.manager.get_store(vectorstore_name)
+        vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
         if vectorstore:
             vectorstore.delete([inst.id])
             vectorstore.add_documents([Document(page_content=doc_text_inst, metadata=metadata_inst)])
@@ -519,7 +519,7 @@ def add_component_instance_to_screen(screen_id, instance_id, screens, component_
         "component_instance_ids": str(screen.component_instance_ids),
         "category": "screen"
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete([screen.id])
         vectorstore.add_documents([Document(page_content=doc_text_screen, metadata=metadata_screen)])
@@ -541,7 +541,7 @@ def remove_component_instance_from_screen(screen_id, instance_id, screens, compo
         "component_instance_ids": str(screen.component_instance_ids),
         "category": "screen"
     }
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if vectorstore:
         vectorstore.delete([screen.id])
         vectorstore.add_documents([Document(page_content=doc_text, metadata=metadata)])
@@ -605,7 +605,7 @@ def semantic_search_tool(query, filter_key=None, filter_value=None, vectorstore_
     - filter_value: Value for the filter key.
     - k: Number of results to return.
     """
-    vectorstore = vectorstores.manager.get_store(vectorstore_name)
+    vectorstore = vectorstores_utils.manager.get_store(vectorstore_name)
     if not vectorstore:
         return {"status": "error", "message": f"Vectorstore '{vectorstore_name}' not found.", "results": []}
     
