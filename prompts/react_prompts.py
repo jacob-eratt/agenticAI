@@ -37,8 +37,18 @@ Your primary goal is to generate a complete, production-ready React functional c
 - If the component displays text, use Chakra UI's Text, Heading, or Stat components and apply appropriate font and color props.
 - If the component supports theming, ensure it works seamlessly with Chakra UI's theme context.
 - **If the provided UI metadata or prop definitions are incomplete, ambiguous, or do not make sense, use your best judgment to adjust, infer, or supplement the props and structure as needed to produce a high-quality, functional component.**
+- For every component, add PropTypes (or TypeScript types if using TS) for all props.
+- If the component displays dynamic or live data, add appropriate ARIA attributes (e.g., aria-live, role="alert") for accessibility.
+- For panels or containers that may have long content, use Chakra UI's overflowY="auto" and maxH props to make them scrollable.
 
+## Additional Requirements
+- Add PropTypes (or TypeScript types) for all props to improve type safety.
+- For dynamic alert or notification panels, add ARIA attributes such as aria-live or role="alert" for accessibility.
+- For panels with potentially long content, use Chakra UI's overflowY="auto" and maxH to ensure scrollability.
+
+Output only the code, wrapped in triple backticks.
 ## Example output:
+```jsx
 import React, { useState, useEffect } from 'react';
 import { Box, Button, Text, RadioGroup, Radio } from '@chakra-ui/react';
 
@@ -62,4 +72,5 @@ export default function TemperatureUnitSelector({ unit = 'C', onChange }) {
     </Box>
       );
 }
+```
 """

@@ -12,7 +12,6 @@ from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain_core.documents import Document
 from collections import defaultdict
 from utils.llm_utils import *
-from story_creation import *
 from utils.app_queries import *
 from utils.elo_rating_system import *
 from utils.chroma_db_utils import *
@@ -29,9 +28,10 @@ import pickle
 from workflow_files.ui_component_creation import box_user_stories_with_llm
 import utils.vectorstores_utils as vectorstores_utils
 from screen_creation import assign_boxes_to_screens_with_llm
-from stories_to_flow import generate_user_flows
+from workflow_files.story_creation import *
+from workflow_files.stories_to_flow import generate_user_flows
 from workflow_files.flow_to_screen_conversion import decompose_flow_with_llm
-from workflow_files.component_code_generation import generate_and_write_all_components, load_component_types
+from workflow_files.component_code_generation import generate_and_write_all_components
 
 
 load_dotenv()
@@ -348,12 +348,12 @@ def main():
 #endregion
 
 #region: Screen Generation
-    screen_data_folder = "screen_data"
-    os.makedirs(screen_data_folder, exist_ok=True)
-
+    screen_data_folder = "screen_jsons"
+    type_json_folder = "types_jsons"
+    instance_folder = "instances_json"
     screens_json = os.path.join(screen_data_folder, "screens.json")
-    component_types_json = os.path.join(screen_data_folder, "component_types.json")
-    component_instances_json = os.path.join(screen_data_folder, "component_instances.json")
+    component_types_json = os.path.join(type_json_folder, "component_types.json")
+    component_instances_json = os.path.join(instance_folder, "component_instances.json")
 
     if all(os.path.isfile(f) for f in [screens_json, component_types_json, component_instances_json]):
         print("Screen/component JSON files already exist. Skipping screen/component generation.")
@@ -381,7 +381,13 @@ def main():
     component_types_path = "component_types.json"
     output_folder = "react-ui/src/components"
 
-    generate_and_write_all_components(component_types_path, output_folder, llm)
+   # Example usage:
+    generate_and_write_all_components(
+        types_path="types_jsons/component_types.json",
+        instances_path="instances_json/component_instances.json",
+        output_folder="react-ui/src/components",
+        llm=llm
+    )
 
 
 #old method of ui creation going with a different pipeline approach
