@@ -1,0 +1,128 @@
+---
+# Pipeline Report: main.py Workflow After User Stories
+
+This report explains each step in your pipeline after user stories are created, based on your main.py code.
+
+---
+
+## Summary of Outputs
+
+- user_flows.json: Structured user flows derived from frontend user stories.
+---
+- screen_jsons/screens.json: Definitions of each UI screen, including screen names, purposes, and components.
+- types_jsons/component_types.json: All unique component types used in the app.
+- instances_json/component_instances.json: Every instance of a component used in the app.
+---
+- Files in react-ui/src/components: Generated React component files (.jsx) for each unique component type.
+- Files in detailed_per_screen_info/screen_jsons_per_screen: Individual JSON files for each screen.
+---
+- Files in screen_layouts/: Metadata and layout information for each screen.
+- Files in react-ui/src/pages: Generated React page files (.jsx) for each screen.
+- Refined code/layouts: Updated files after post-generation editing.
+
+---
+#0 User Story JSON: user_stories_gemini_flash.json
+
+## 1. Flow Generation
+
+**Output Documents**
+- user_flows.json
+
+**Process**
+- Converts frontend user stories into user flows.
+- Loads user stories from the relevant JSON file.
+- Filters for stories categorized as "frontend".
+- Generates user flows using the LLM and saves them.
+- Adds flow documents to the vectordb for later querying and reference.
+
+**Rationale**
+- Flows are the blueprint for decomposing user stories into concrete screens and components.
+- By tracking and reusing screen/component names, flows ensure a unified and maintainable UI.
+- Flows enable automated generation of screens, components, and layouts by providing structured, actionable data.
+- Each flow links back to its user story, supporting documentation and future editing.
+- The document "component_names_used.json" is a compilation of all the components created during flow generation and is used in the next stage.
+   These component names are not the final components that are turned into code in later stages.
+
+---
+
+## 2. Screen Generation (multi-agent)
+
+**Output Documents**
+- types_jsons/component_types.json
+- screen_jsons/screens.json
+- instances_json/component_instances.json
+
+**Process**
+- Decomposes user flows into screens and component types/instances.
+- Checks if the main screen/component JSON files exist.
+- If not, uses the LLM to break down flows into screens, component types, and instances.
+- Includes an interactive step where the user can review and modify screens and components via LLM-guided prompts before finalizing.
+- Saves these to JSON and pickle files for reuse.
+
+**Rationale**
+- The pipeline uses a main agent (orchestrates decomposition and editing) and a sub agent (summarizes, analyzes, and validates screens/components).
+- This separation manages LLM context limits and reduces redundancy by delegating focused tasks to the sub agent.
+- Screens, component types, and instances are kept separate for modularity, reusability, and maintainability: screens are views, types are reusable UI blocks, instances are specific uses on screens.
+- Ensures the app’s UI structure is consistent, modular, and directly mapped to user needs as described in the flows.
+
+
+---
+
+## 3. Component Code Generation
+
+**Output Documents**
+- react-ui/src/components
+
+**Process**
+- Generates React component code from the component types and instances.
+- Checks if any .jsx files exist in the components output folder.
+- If not, calls the code generation function to create React component files using the LLM.
+
+**Rationale**
+- Automates the creation of reusable UI components based on structured definitions.
+- Skips generation if components already exist to avoid overwriting manual edits.
+
+---
+
+## 4. React Page Code Generation (multi-agent)
+
+**Output Documents**
+- screen_layouts/: Metadata and layout information for each screen.
+- react-ui/src/pages/: Generated React page files (.jsx) for each screen.
+
+**Process**
+- Generates React page code for each screen.
+- Checks if any .jsx or .js files exist in the pages folder.
+- If not, runs the main agent workflow to generate page code from the screen JSONs.
+
+**Rationale**
+- The main agent coordinates the workflow, delegating layout creation to the layout agent and code generation to the codegen agent.
+- The layout agent specializes in arranging components and producing layout metadata, while the codegen agent focuses on generating React code for each screen.
+- This separation keeps each agent's context focused, reduces errors, and enables scalable, modular UI generation.
+- Skips generation if files already exist.
+
+---
+
+## 5. Post-Generation Editing Loop (In Development)
+
+**Output Documents**
+- Updated/refined code and layouts as needed.
+
+**Process**
+- Allows for further editing or refinement of generated code and layouts.
+- Runs an editing loop on the generated screen JSONs, components, layouts, and page code.
+
+**Rationale**
+- Uses the same agent dynamic as the previous step but is able to take in user input and adjust any file within the react-ui folder.
+- Acts like GitHub Copilot, enabling interactive refinement.
+- Current Flaws: Editing is sporadic and the agent may lose functionality to fulfill requests.
+
+---
+
+**Summary:**  
+After user stories are created, your pipeline automatically generates flows, screens, components, layouts, and React code, skipping steps if files already exist, and finally allows for post-generation editing. Each step produces files that describe or implement parts of your app’s UI, ready for review or further development.
+
+
+In short: After user stories are created, your pipeline automatically generates flows, screens, components, layouts, and React code, skipping steps if files already exist, and finally allows for post-generation editing. Each step produces files that describe or implement parts of your app’s UI, ready for review or further development.
+
+---

@@ -3,7 +3,7 @@ from langchain.memory import ConversationBufferMemory
 from langchain.tools import StructuredTool
 from utils.llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json_from_llm
 from utils.pydantic_models import *
-from prompts.ui_componenet_creation_prompts import screen_assignment_instructions
+from prompts.ui_component_creation_prompts import screen_assignment_instructions
 from llm_tools.box_to_screen_tools import add_box_to_screen, move_box_between_screens, create_screen, delete_screen, edit_screen_description, get_screen_names, get_screen_details
 
 

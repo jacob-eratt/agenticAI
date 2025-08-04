@@ -1,0 +1,133 @@
+{
+  "type": "Flex",
+  "props": {
+    "direction": "column",
+    "gap": 6,
+    "p": 8,
+    "bg": "gray.50",
+    "minH": "100vh"
+  },
+  "children": [
+    {
+      "type": "Flex",
+      "props": {
+        "justifyContent": "flex-start",
+        "mb": 4
+      },
+      "children": [
+        {
+          "type": "Button",
+          "component_instance_id": "d1d95d89-3107-484a-a9a1-e3a6bcaeed88",
+          "notes": "Button to navigate back to the Dashboard."
+        }
+      ]
+    },
+    {
+      "type": "Flex",
+      "props": {
+        "direction": "column",
+        "gap": 8,
+        "maxW": "xl",
+        "mx": "auto",
+        "w": "full",
+        "bg": "white",
+        "p": 6,
+        "borderRadius": "lg",
+        "boxShadow": "md"
+      },
+      "children": [
+        {
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "gap": 4
+          },
+          "children": [
+            {
+              "type": "RadioGroup",
+              "component_instance_id": "07a77a41-53d6-470c-b256-bdca3c34d2bc",
+              "notes": "Radio group for selecting units of measurement (Metric/Imperial)."
+            },
+            {
+              "type": "RadioGroup",
+              "component_instance_id": "5dc25cf0-ed3d-408d-837e-001ce7648085",
+              "notes": "Radio group for selecting application theme (Light/Dark mode)."
+            },
+            {
+              "type": "RadioGroup",
+              "component_instance_id": "b7ffdc81-0c63-4180-bbf4-7d916faa846b",
+              "notes": "Radio group for adjusting application font size."
+            }
+          ]
+        },
+        {
+          "type": "NotificationPreferenceSection",
+          "component_instance_id": "6e913bb4-795d-41e2-b834-265c37211cfb",
+          "notes": "Section to display and manage general notification preferences."
+        },
+        {
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "gap": 4
+          },
+          "children": [
+            {
+              "type": "Button",
+              "component_instance_id": "db2f9be3-b01f-4ee9-b82d-d01720ccbd81",
+              "notes": "Button to expand or navigate to notification customization options."
+            },
+            {
+              "type": "MultiSelect",
+              "component_instance_id": "9e674af7-f136-443a-8173-12f04e492475",
+              "notes": "Multi-select component for choosing notification parameters. This might be conditionally rendered."
+            }
+          ]
+        },
+        {
+          "type": "NotificationPreferenceSection",
+          "component_instance_id": "0f8c360e-bedb-4856-b13a-0c1d6ccd786c",
+          "notes": "Section for managing email notification preferences.",
+          "children": [
+            {
+              "type": "ToggleSwitch",
+              "component_instance_id": "06f3b5a2-3a61-41a1-acb9-5c0e27625c40"
+            },
+            {
+              "type": "TextInput",
+              "component_instance_id": "4fd84463-9ab4-4a1d-b9ad-80b9ccc5d62e"
+            },
+            {
+              "type": "Button",
+              "component_instance_id": "34268053-aca2-4a8e-8173-667120ed5919"
+            }
+          ]
+        },
+        {
+          "type": "NotificationPreferenceSection",
+          "component_instance_id": "c425f01d-b388-49cb-a216-9fc2239dee13",
+          "notes": "Section for managing SMS notification preferences.",
+          "children": [
+            {
+              "type": "ToggleSwitch",
+              "component_instance_id": "8aefc5e5-e3af-46d1-8a9f-0a1191089eca"
+            },
+            {
+              "type": "TextInput",
+              "component_instance_id": "e5270537-a6e3-4a98-b65f-d1c5cf5f54b6"
+            },
+            {
+              "type": "Button",
+              "component_instance_id": "18320339-20b4-49e7-8d24-5b42a03e1b13"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ConfirmationDialog",
+      "component_instance_id": "7d061293-a474-4b3f-b8ff-50609c3adf6a",
+      "notes": "Dialog to confirm that email preferences have been saved. This should be rendered as a modal overlay."
+    }
+  ]
+}

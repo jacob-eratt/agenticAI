@@ -3,7 +3,7 @@ from llm_tools.stories_to_box_tools import *
 from langchain.tools import Tool, StructuredTool
 from functools import partial
 from utils.llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json, extract_json_from_llm
-from prompts.ui_componenet_creation_prompts import story_clustering_instructions
+from prompts.ui_component_creation_prompts import story_clustering_instructions
 import json
 from langchain.memory import ConversationBufferMemory
 from utils.pydantic_models import *

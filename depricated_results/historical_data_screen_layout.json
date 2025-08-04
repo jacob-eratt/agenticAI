@@ -1,0 +1,163 @@
+{
+  "type": "Flex",
+  "props": {
+    "direction": "column",
+    "gap": 6,
+    "bg": "gray.50",
+    "p": 8,
+    "minH": "100vh"
+  },
+  "children": [
+    {
+      "type": "Tabs",
+      "component_instance_id": "b7057237-ccbc-49c5-b443-d90a2865bfdc",
+      "props": {
+        "defaultIndex": 0,
+        "variant": "enclosed"
+      },
+      "children": [
+        {
+          "type": "TabList",
+          "children": [
+            {
+              "type": "Tab",
+              "children": [
+                "Historical Data"
+              ]
+            },
+            {
+              "type": "Tab",
+              "children": [
+                "Severe Weather Alerts"
+              ]
+            }
+          ]
+        },
+        {
+          "type": "TabPanels",
+          "children": [
+            {
+              "type": "TabPanel",
+              "children": [
+                {
+                  "type": "Flex",
+                  "props": {
+                    "direction": "row",
+                    "gap": 4,
+                    "mb": 4,
+                    "align": "flex-start"
+                  },
+                  "children": [
+                    {
+                      "type": "DatePicker",
+                      "component_instance_id": "1c17e21f-dab4-434a-b056-9ffc3b12c060",
+                      "props": {
+                        "label": "Start Date",
+                        "onChange": "handleStartDateChange"
+                      }
+                    },
+                    {
+                      "type": "DatePicker",
+                      "component_instance_id": "10f5a24b-e570-4903-ba9c-4bd64fb4b384",
+                      "props": {
+                        "label": "End Date",
+                        "onChange": "handleEndDateChange"
+                      }
+                    },
+                    {
+                      "type": "Button",
+                      "component_instance_id": "b23a294c-2592-4929-9b93-8c440270f86a",
+                      "props": {
+                        "label": "Done",
+                        "onClick": "handleDoneClick",
+                        "colorScheme": "blue",
+                        "variant": "solid"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "Flex",
+                  "props": {
+                    "direction": "column",
+                    "gap": 4,
+                    "mb": 6
+                  },
+                  "children": [
+                    {
+                      "type": "Button",
+                      "component_instance_id": "d4cca02d-7117-4ee1-b338-7779dc30a16d",
+                      "props": {
+                        "label": "Customize Parameters",
+                        "onClick": "handleCustomizeParametersClick",
+                        "colorScheme": "teal",
+                        "variant": "outline"
+                      }
+                    },
+                    {
+                      "type": "MultiSelect",
+                      "component_instance_id": "e371c31d-7398-4ba0-873c-0ff3af6d793e",
+                      "props": {
+                        "label": "Select Parameters",
+                        "onChange": "handleParameterChange",
+                        "options": [
+                          "Temperature",
+                          "Humidity",
+                          "Wind Speed",
+                          "Precipitation"
+                        ],
+                        "selectedValues": []
+                      },
+                      "notes": "This component should be conditionally rendered based on 'Customize Parameters' button click."
+                    }
+                  ]
+                },
+                {
+                  "type": "HistoricalDataPanel",
+                  "component_instance_id": "bb433988-151e-4f3a-87a7-2f7a78b140c0",
+                  "props": {
+                    "data": [],
+                    "location": ""
+                  },
+                  "notes": "Main display for historical weather data."
+                }
+              ]
+            },
+            {
+              "type": "TabPanel",
+              "children": [
+                {
+                  "type": "Grid",
+                  "props": {
+                    "templateColumns": "1fr 2fr",
+                    "gap": 6,
+                    "minH": "60vh"
+                  },
+                  "children": [
+                    {
+                      "type": "AlertList",
+                      "component_instance_id": "4a3a3f83-4e98-43f6-9a3f-c0966e15aa05",
+                      "props": {
+                        "alerts": [],
+                        "onAlertClick": "displayAlertDetails"
+                      },
+                      "notes": "List of severe weather alerts on the left."
+                    },
+                    {
+                      "type": "AlertDetailsPanel",
+                      "component_instance_id": "215ffc03-bc46-4600-97d6-26a4ccb9037b",
+                      "props": {
+                        "alert": {}
+                      },
+                      "notes": "Details of the selected alert on the right."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

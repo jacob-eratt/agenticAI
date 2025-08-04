@@ -1,12 +1,12 @@
 import uuid
 import json
 from utils.llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json_from_llm
-from prompts.ui_componenet_creation_prompts import flow_generation_prompt
+from prompts.ui_component_creation_prompts import flow_generation_prompt
 from langchain.memory import ConversationBufferMemory
 import uuid
 import json
 from utils.llm_utils import call_agent, build_prompt, escape_curly_braces, extract_json_from_llm
-from prompts.ui_componenet_creation_prompts import flow_generation_prompt
+from prompts.ui_component_creation_prompts import flow_generation_prompt
 from langchain.memory import ConversationBufferMemory
 
 def generate_user_flows(llm, user_stories_front_end, flows_file):

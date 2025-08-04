@@ -1,0 +1,282 @@
+{
+  "Settings Screen": {
+    "SettingsPanel": {
+      "layout": "vertical stack",
+      "size_hint": "large",
+      "components": [
+        {
+          "name": "Persistent Application State",
+          "interaction": "clickable",
+          "tags": "Persistence, State Management, User Experience, Data Retention",
+          "nesting": "SettingsPanel"
+        }
+      ]
+    }
+  },
+  "Manage Locations Screen": {
+    "PromptBanner": {
+      "layout": "vertical stack",
+      "size_hint": "small",
+      "placement_hint": "top",
+      "components": [
+        {
+          "name": "Location Services Guidance Prompt",
+          "interaction": "conditional display, clickable (for action button)",
+          "tags": "Location, Permissions, Guidance, Onboarding, Error Handling"
+        }
+      ]
+    },
+    "MainContent": {
+      "layout": "vertical stack",
+      "size_hint": "large",
+      "placement_hint": "center",
+      "components": [
+        {
+          "name": "Saved Locations List",
+          "interaction": "list management, reorderable, clickable (items), removable (items)",
+          "tags": "Location, Weather, List, Management, Favorites, Reorder, Sort"
+        }
+      ]
+    },
+    "LocationSettingsSection": {
+      "layout": "vertical stack",
+      "size_hint": "medium",
+      "placement_hint": "below_main",
+      "components": [
+        {
+          "name": "Location Permissions Manager",
+          "interaction": "clickable (for action button)",
+          "tags": "Privacy, Permissions, Settings, Location, Control"
+        }
+      ]
+    }
+  },
+  "Weather Details Screen": {
+    "AppHeader": {
+      "layout": "horizontal row",
+      "size_hint": "small",
+      "placement_hint": "top-of-screen, global navigation",
+      "components": [
+        {
+          "name": "Global City Weather Search",
+          "interaction": "search input",
+          "tags": "Search, Location, Weather, Forecast, Input",
+          "notes": "Enables users to search for weather conditions and forecasts in any city worldwide."
+        }
+      ]
+    },
+    "WeatherAlerts": {
+      "layout": "vertical stack",
+      "size_hint": "small",
+      "placement_hint": "below-header, prominent",
+      "components": [
+        {
+          "name": "Weather Alert System",
+          "interaction": "expandable",
+          "tags": "Weather, Alerts, Notifications, Safety, Information, Real-time, Visual Indicator, Warning, UI Element, Details, Source",
+          "notes": "Displays a summary of active alerts, expandable to show full details."
+        }
+      ]
+    },
+    "MainWeatherContent": {
+      "layout": "vertical stack",
+      "size_hint": "large",
+      "components": [
+        {
+          "name": "Location Context Header",
+          "interaction": "static",
+          "tags": "Location, Display, Header, Weather, Context",
+          "notes": "Displays the name of the location for which the current weather or forecast information is being shown."
+        },
+        {
+          "name": "Location Status Banner",
+          "interaction": "static",
+          "tags": "Location, Error, Information, Guidance, User Feedback",
+          "placement_hint": "conditional-display-on-location-failure",
+          "notes": "Informs the user when the application is unable to automatically determine their current location, suggesting alternatives."
+        },
+        {
+          "name": "Weather Data Refresh Button",
+          "interaction": "clickable",
+          "tags": "Refresh, Data Update, Real-time, Automation, Manual Control, Weather, Forecast",
+          "placement_hint": "top-right"
+        },
+        {
+          "name": "Weather Data Freshness Indicator",
+          "interaction": "static",
+          "tags": "Weather, Data, Freshness, Recency, Accuracy, Warning, Refresh, Timestamp, Information, User Feedback",
+          "notes": "Displays last updated timestamp; includes a conditional warning banner if data is outdated."
+        },
+        {
+          "name": "Current Location Weather Display",
+          "interaction": "static",
+          "tags": "Location, Weather, Current, Temperature, Auto-detect, Display, Context, Real-time"
+        },
+        {
+          "name": "Comprehensive Weather Forecast Display",
+          "interaction": "static",
+          "tags": "Alerts, Chart, Current, Daily, Details, Forecast, Hourly, Icon, Metrics, Precipitation, Summary, Visualization, Visual, Weather",
+          "nesting": [
+            {
+              "name": "7-Day Weather Forecast Display",
+              "interaction": "clickable",
+              "tags": "Weather, Forecast, 7-day, Location, Planning, Overview, Interaction, Navigation, Readability, Clarity"
+            },
+            {
+              "name": "Temperature Forecast Details",
+              "interaction": "static",
+              "tags": "Weather, Temperature, Forecast, Daily, Hourly, Feels Like, Metrics"
+            },
+            {
+              "name": "Wind and Pressure Details",
+              "interaction": "static",
+              "tags": "Weather, Wind, Pressure, Metrics, Current, Hourly, Daily, Conditions"
+            },
+            {
+              "name": "Humidity and Dew Point Details",
+              "interaction": "static",
+              "tags": "Weather, Humidity, Dew Point, Metrics, Current, Hourly, Daily, Comfort"
+            },
+            {
+              "name": "Daily Precipitation Details",
+              "interaction": "static",
+              "tags": "Weather, Precipitation, Rain, Snow, Forecast, Details, Metrics",
+              "notes": "Displays overall and hourly chance of precipitation, type, intensity, and accumulation for the selected day."
+            },
+            {
+              "name": "Daylight Hours Display",
+              "interaction": "static",
+              "tags": "Weather, Daylight, Times, Planning, Information, Astronomy"
+            }
+          ]
+        },
+        {
+          "name": "Weather Insights Section",
+          "layout": "vertical stack",
+          "size_hint": "medium",
+          "components": [
+            {
+              "name": "Health and Safety Weather Insights",
+              "interaction": "static",
+              "tags": "Weather, Health, Safety, Insights, Alerts, Advice, Information"
+            },
+            {
+              "name": "Weather-Based Recommendations",
+              "interaction": "static",
+              "tags": "Weather, Recommendations, Activities, Clothing, Planning, Advice, Dynamic"
+            },
+            {
+              "name": "UV Index Display",
+              "interaction": "static",
+              "tags": "Weather, UV, Sun Protection, Health, Safety, Index, Information"
+            }
+          ]
+        },
+        {
+          "name": "Data Fetch Error Display",
+          "interaction": "static",
+          "tags": "Error Handling, Data Retrieval, Reliability, System Feature, Network",
+          "placement_hint": "conditional-overlay-on-error",
+          "notes": "This component represents the user-facing error message and optional retry button, displayed only when data fetch fails for main content."
+        }
+      ]
+    },
+    "DisplayPreferences": {
+      "layout": "vertical stack",
+      "size_hint": "small",
+      "components": [
+        {
+          "name": "Temperature Unit Selector",
+          "interaction": "radio group",
+          "tags": "Settings, Preferences, Units, Temperature, Customization, Measurement"
+        },
+        {
+          "name": "Wind Speed Unit Selector",
+          "interaction": "radio group",
+          "tags": "Settings, Preferences, Units, Wind, Customization, Measurement"
+        },
+        {
+          "name": "Customizable Weather Metrics Selector",
+          "interaction": "static",
+          "tags": "Customization, Settings, Weather, Metrics, Display, Personalization"
+        }
+      ]
+    }
+  },
+  "Daily Forecast View": {
+    "Header": {
+      "layout": "horizontal row",
+      "size_hint": "small",
+      "placement_hint": "top",
+      "components": [
+        {
+          "name": "Back to Forecast Overview Button",
+          "interaction": "clickable",
+          "tags": [
+            "Navigation",
+            "Back",
+            "UI Control"
+          ]
+        },
+        {
+          "name": "Forecast Day Label",
+          "interaction": "static",
+          "tags": [
+            "Weather",
+            "Forecast",
+            "Date",
+            "Label"
+          ]
+        }
+      ]
+    },
+    "MainContent": {
+      "layout": "vertical stack",
+      "size_hint": "large",
+      "placement_hint": "center",
+      "components": [
+        {
+          "name": "Hourly Forecast Scroller",
+          "interaction": "scrollable",
+          "tags": [
+            "Forecast",
+            "Hourly",
+            "Scroll",
+            "Detail"
+          ]
+        },
+        {
+          "name": "Forecast Data Unavailable Message",
+          "interaction": "static",
+          "tags": [
+            "Error",
+            "Data Retrieval",
+            "Information",
+            "Feedback"
+          ],
+          "notes": "Conditionally displayed when forecast data is unavailable."
+        }
+      ]
+    },
+    "DisplayOptions": {
+      "layout": "vertical stack",
+      "size_hint": "small",
+      "placement_hint": "bottom",
+      "components": [
+        {
+          "name": "Time Format Selector",
+          "interaction": "selection",
+          "tags": [
+            "Settings",
+            "Preferences",
+            "Time",
+            "Format",
+            "Customization",
+            "Display"
+          ],
+          "notes": "Allows users to select their preferred time format (12-hour or 24-hour). This setting applies globally."
+        }
+      ]
+    }
+  }
+}

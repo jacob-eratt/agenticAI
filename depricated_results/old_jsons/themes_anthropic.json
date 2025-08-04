@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Reservation Management",
+    "description": "Handles the complete reservation lifecycle including table booking, assignment, and availability tracking for both walk-ins and online bookings. Includes customer-facing booking interface and staff-facing table management tools."
+  },
+  {
+    "name": "Order Processing",
+    "description": "Encompasses all ordering workflows including in-restaurant orders, online orders, menu management, and order status tracking. Manages digital menu customization and real-time order monitoring for both staff and customers."
+  },
+  {
+    "name": "Staff Operations",
+    "description": "Controls all staff-related functions including shift scheduling, role assignments, and workforce management. Provides tools for creating and managing staff schedules while ensuring appropriate coverage for all operational hours."
+  },
+  {
+    "name": "Customer Engagement",
+    "description": "Manages the customer-facing components including the online booking interface, order tracking system, and digital menu access. Ensures a seamless experience for customers interacting with the restaurant through digital channels."
+  },
+  {
+    "name": "Restaurant Administration",
+    "description": "Provides core administrative functions for restaurant management including system configuration, user access control, and operational settings. Serves as the central hub for managing restaurant-wide parameters and policies."
+  }
+]

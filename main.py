@@ -27,7 +27,7 @@ import os
 import pickle
 from workflow_files.ui_component_creation import box_user_stories_with_llm
 import utils.vectorstores_utils as vectorstores_utils
-from screen_creation import assign_boxes_to_screens_with_llm
+from depricated_results.screen_creation import assign_boxes_to_screens_with_llm
 from workflow_files.story_creation import *
 from workflow_files.stories_to_flow import generate_user_flows
 from workflow_files.flow_to_screen_conversion import decompose_flow_with_llm
@@ -403,17 +403,17 @@ def main():
 
     #region: UI Code Creation (agentic)
 
-    screen_jsons_per_screen_folder = "screen_jsons_per_screen"
-    if not os.path.exists(screen_jsons_per_screen_folder):
+    detailed_per_screen_info_folder = "detailed_per_screen_info"
+    if not os.path.exists(detailed_per_screen_info_folder):
         with open("screen_jsons/screens.json") as f:
             screens = json.load(f)
         with open("instances_json/component_instances.json") as f:
             instances = json.load(f)
         with open("types_jsons/component_types.json") as f:
             types = json.load(f)
-        generate_screen_jsons(screens, instances, types, screen_jsons_per_screen_folder)
+        generate_screen_jsons(screens, instances, types, detailed_per_screen_info_folder)
     else:
-        print(f"{screen_jsons_per_screen_folder} already exists. Skipping screen JSON generation.")
+        print(f"{detailed_per_screen_info_folder} already exists. Skipping screen JSON generation.")
 
     
     pages_folder = "react-ui/src/pages"
@@ -424,7 +424,7 @@ def main():
 
     if not jsx_or_js_files_exist:
         run_main_agent_workflow(
-            screen_json_folder="screen_jsons_per_screen",
+            screen_json_folder="detailed_per_screen_info",
             component_folder="react-ui/src/components",
             layout_output_folder="screen_layouts",
             screen_code_output_folder="react-ui/src/pages",
@@ -433,7 +433,7 @@ def main():
         print(f"Page code already exists in {pages_folder}. Skipping screen code generation.")
     
     run_post_generation_editing_loop(
-         screen_json_folder="screen_jsons_per_screen",
+         screen_json_folder="detailed_per_screen_info",
          component_folder="react-ui/src/components",
          layout_output_folder="screen_layouts",
          screen_code_output_folder="react-ui/src/pages"

@@ -17,7 +17,7 @@ from utils.json_utils import (
     save_dict_to_file, load_dict_from_file
 )
 from utils.pydantic_models import *
-from prompts.ui_componenet_creation_prompts import (
+from prompts.ui_component_creation_prompts import (
     trace_instructions_v3, sub_agent_tool_instructions_v3
 )
 from llm_tools.flow_decomp_tools import (
@@ -30,6 +30,9 @@ from llm_tools.flow_decomp_tools import (
     batch_delete_component_instances, increment_instance_usage,
     semantic_search_tool, ask_human_clarification
 )
+
+
+###### NEED TO REFORMAT FILE FOR READABILITY AND ORGANIZATION ######
 
 # --- LLM Setup ---
 LLM_FOR_FLOW_DECOMP = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)

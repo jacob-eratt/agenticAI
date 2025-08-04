@@ -1,0 +1,38 @@
+{
+  "type": "Box",
+  "props": {
+    "position": "relative",
+    "width": "100vw",
+    "height": "100vh",
+    "overflow": "hidden"
+  },
+  "children": [
+    {
+      "type": "InteractiveMap",
+      "component_instance_id": "8e9d05d0-3899-4098-83d8-312ec454128b",
+      "props": {
+        "src": "real_time_radar_data_source",
+        "onInteraction": "handle_map_pan_zoom",
+        "width": "100%",
+        "height": "100%"
+      },
+      "notes": "Main interactive radar map, fills the entire screen."
+    },
+    {
+      "type": "IconButton",
+      "component_instance_id": "3228d5b9-9db7-428c-a0de-632f9e5cca57",
+      "props": {
+        "icon": "play",
+        "onClick": "initiateTimeLapsePlayback",
+        "ariaLabel": "Play Time-lapse",
+        "size": "lg",
+        "colorScheme": "blue",
+        "position": "absolute",
+        "bottom": "4",
+        "right": "4",
+        "zIndex": "1"
+      },
+      "notes": "Play button for time-lapse, positioned at the bottom right corner of the map."
+    }
+  ]
+}
