@@ -1,0 +1,309 @@
+{
+  "type": "Flex",
+  "props": {
+    "direction": "column",
+    "gap": 8,
+    "p": 8,
+    "bg": "gray.50",
+    "minH": "100vh"
+  },
+  "children": [
+    {
+      "type": "Button",
+      "component_instance_id": "d1d95d89-3107-484a-a9a1-e3a6bcaeed88",
+      "props": {
+        "label": "Back to Dashboard",
+        "variant": "ghost",
+        "alignSelf": "flex-start"
+      },
+      "notes": "Button to navigate back to the dashboard."
+    },
+    {
+      "type": "Box",
+      "props": {
+        "p": 6,
+        "shadow": "md",
+        "borderWidth": "1px",
+        "borderRadius": "lg",
+        "bg": "white"
+      },
+      "children": [
+        {
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "gap": 4
+          },
+          "children": [
+            {
+              "type": "Text",
+              "props": {
+                "fontSize": "xl",
+                "fontWeight": "bold",
+                "mb": 4
+              },
+              "notes": "Section title for General Settings",
+              "children": "General Settings"
+            },
+            {
+              "type": "RadioGroup",
+              "component_instance_id": "07a77a41-53d6-470c-b256-bdca3c34d2bc",
+              "props": {
+                "label": "Units of Measurement",
+                "options": [
+                  "Metric",
+                  "Imperial"
+                ],
+                "selectedValue": "Metric"
+              },
+              "notes": "Radio group for selecting units."
+            },
+            {
+              "type": "RadioGroup",
+              "component_instance_id": "5dc25cf0-ed3d-408d-837e-001ce7648085",
+              "props": {
+                "label": "Application Theme",
+                "options": [
+                  {
+                    "label": "Light",
+                    "value": "light"
+                  },
+                  {
+                    "label": "Dark",
+                    "value": "dark"
+                  }
+                ],
+                "value": "light"
+              },
+              "notes": "Radio group for selecting theme."
+            },
+            {
+              "type": "RadioGroup",
+              "component_instance_id": "b7ffdc81-0c63-4180-bbf4-7d916faa846b",
+              "props": {
+                "label": "Font Size",
+                "options": [
+                  {
+                    "label": "Small",
+                    "value": "small"
+                  },
+                  {
+                    "label": "Medium",
+                    "value": "medium"
+                  },
+                  {
+                    "label": "Large",
+                    "value": "large"
+                  }
+                ],
+                "value": "medium"
+              },
+              "notes": "Radio group for adjusting font size."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Box",
+      "props": {
+        "p": 6,
+        "shadow": "md",
+        "borderWidth": "1px",
+        "borderRadius": "lg",
+        "bg": "white"
+      },
+      "children": [
+        {
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "gap": 4
+          },
+          "children": [
+            {
+              "type": "NotificationPreferenceSection",
+              "component_instance_id": "6e913bb4-795d-41e2-b834-265c37211cfb",
+              "props": {
+                "title": "Notification Preferences",
+                "preferences": [
+                  {
+                    "isChecked": true,
+                    "label": "Daily Weather Summary",
+                    "onChange": "handleDailyWeatherSummaryToggle",
+                    "type": "toggle"
+                  },
+                  {
+                    "isChecked": true,
+                    "label": "Severe Weather Alerts",
+                    "onChange": "handleSevereWeatherAlertsToggle",
+                    "type": "toggle"
+                  },
+                  {
+                    "isChecked": false,
+                    "label": "Immediate Weather Alerts",
+                    "onChange": "handleImmediateWeatherAlertsToggle",
+                    "type": "toggle"
+                  },
+                  {
+                    "isChecked": false,
+                    "label": "Precipitation Reminders",
+                    "onChange": "handlePrecipitationRemindersToggle",
+                    "type": "toggle"
+                  },
+                  {
+                    "label": "Alert Type",
+                    "onChange": "handleAlertTypeChange",
+                    "options": [
+                      "Email",
+                      "SMS",
+                      "Push Notification"
+                    ],
+                    "type": "selector",
+                    "value": [
+                      "Push Notification"
+                    ]
+                  }
+                ]
+              },
+              "notes": "Section for general notification preferences."
+            },
+            {
+              "type": "Button",
+              "component_instance_id": "db2f9be3-b01f-4ee9-b82d-d01720ccbd81",
+              "props": {
+                "label": "Customize Parameters"
+              },
+              "notes": "Button to expand/navigate to notification customization."
+            },
+            {
+              "type": "MultiSelect",
+              "component_instance_id": "9e674af7-f136-443a-8173-12f04e492475",
+              "props": {
+                "options": [
+                  "Time",
+                  "Conditions",
+                  "Frequency"
+                ],
+                "selectedValues": [],
+                "label": "Select Notification Parameters"
+              },
+              "notes": "Multi-select for detailed notification parameters. This should be conditionally rendered based on the 'Customize Parameters' button."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Box",
+      "props": {
+        "p": 6,
+        "shadow": "md",
+        "borderWidth": "1px",
+        "borderRadius": "lg",
+        "bg": "white"
+      },
+      "children": [
+        {
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "gap": 4
+          },
+          "children": [
+            {
+              "type": "NotificationPreferenceSection",
+              "component_instance_id": "0f8c360e-bedb-4856-b13a-0c1d6ccd786c",
+              "props": {
+                "title": "Email Notifications"
+              },
+              "notes": "Section title for Email Notifications."
+            },
+            {
+              "type": "ToggleSwitch",
+              "component_instance_id": "06f3b5a2-3a61-41a1-acb9-5c0e27625c40",
+              "props": {
+                "label": "Enable Email Notifications",
+                "isChecked": false
+              },
+              "notes": "Toggle for email notifications."
+            },
+            {
+              "type": "TextInput",
+              "component_instance_id": "4fd84463-9ab4-4a1d-b9ad-80b9ccc5d62e",
+              "props": {
+                "placeholder": "Enter your email",
+                "ariaLabel": "Email address input"
+              },
+              "notes": "Input field for email address."
+            },
+            {
+              "type": "Button",
+              "component_instance_id": "34268053-aca2-4a8e-8173-667120ed5919",
+              "props": {
+                "label": "Save Email Preferences",
+                "variant": "solid"
+              },
+              "notes": "Button to save email preferences."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Box",
+      "props": {
+        "p": 6,
+        "shadow": "md",
+        "borderWidth": "1px",
+        "borderRadius": "lg",
+        "bg": "white"
+      },
+      "children": [
+        {
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "gap": 4
+          },
+          "children": [
+            {
+              "type": "NotificationPreferenceSection",
+              "component_instance_id": "c425f01d-b388-49cb-a216-9fc2239dee13",
+              "props": {
+                "title": "SMS Notification Preferences"
+              },
+              "notes": "Section title for SMS Notifications."
+            },
+            {
+              "type": "ToggleSwitch",
+              "component_instance_id": "8aefc5e5-e3af-46d1-8a9f-0a1191089eca",
+              "props": {
+                "label": "Enable SMS Notifications",
+                "isChecked": false
+              },
+              "notes": "Toggle for SMS notifications."
+            },
+            {
+              "type": "TextInput",
+              "component_instance_id": "e5270537-a6e3-4a98-b65f-d1c5cf5f54b6",
+              "props": {
+                "placeholder": "Enter phone number",
+                "value": ""
+              },
+              "notes": "Input field for phone number."
+            },
+            {
+              "type": "Button",
+              "component_instance_id": "18320339-20b4-49e7-8d24-5b42a03e1b13",
+              "props": {
+                "label": "Save SMS Preferences"
+              },
+              "notes": "Button to save SMS preferences."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,38 +1,58 @@
 import React from 'react';
+import { Tab as ChakraTab } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * The `Tab` component is a conceptual representation of an individual tab item.
- * It is designed to be used as a child within a parent `Tabs` container component
- * (e.g., Chakra UI's `Tabs` or a custom wrapper).
- *
- * This component itself does not render any visible UI elements directly.
- * Instead, it serves as a container for the properties (`label` and `panelContent`)
- * that a parent `Tabs` component would consume to render the actual Chakra UI
- * `Tab` (the clickable button) and `TabPanel` (the content area) components.
- *
- * This pattern allows for a declarative way to define tab items, where the parent
- * component iterates over its `Tab` children to construct the full tab interface.
+ * @typedef {object} TabProps
+ * @property {string} label - Text label for the tab. This will be displayed on the tab button.
+ * @property {React.ReactNode} panelContent - The content to be displayed in the tab panel when this tab is active.
+ *                                            This prop is consumed by a parent `Tabs` component and is not rendered directly by this `Tab` component.
+ * @property {object} [tabProps] - Additional props to pass directly to the underlying Chakra UI `Tab` component,
+ *                                  such as `isDisabled`, `colorScheme`, `variant`, etc.
  */
-const Tab = ({ label, panelContent }) => {
-  // The props 'label' and 'panelContent' are intended to be consumed by a parent
-  // component (e.g., a custom 'TabsContainer' or directly by Chakra UI's Tabs
-  // if structured appropriately) that iterates over its children to construct
-  // the Chakra UI Tabs structure (TabList, TabPanels, Tab, TabPanel).
-  // This component itself does not render any direct UI elements.
-  return null;
-};
+
+/**
+ * An individual tab component designed to be used within a custom `Tabs` container.
+ * This component serves as a declarative way to define a single tab, including its
+ * visible label and the content associated with its panel.
+ *
+ * It renders the clickable tab header using Chakra UI's `Tab` component, displaying
+ * the `label` prop. The `panelContent` prop is intended to be read and rendered
+ * by a parent `Tabs` component (not provided here) to manage the active tab's content.
+ *
+ * @param {TabProps} props
+ * @returns {JSX.Element}
+ */
+function Tab({ label, panelContent, ...tabProps }) {
+  // The panelContent prop is not rendered by this component.
+  // It's a data prop meant to be consumed by a parent Tabs component
+  // to render the corresponding TabPanel.
+  return (
+    <ChakraTab
+      // Chakra UI Tab component handles accessibility attributes automatically.
+      // We pass through any additional props for customization.
+      {...tabProps}
+    >
+      {label}
+    </ChakraTab>
+  );
+}
 
 Tab.propTypes = {
   /**
-   * Text label for the tab. This will typically be displayed on the clickable tab button.
+   * Text label for the tab. This will be displayed on the tab button.
    */
   label: PropTypes.string.isRequired,
   /**
-   * Content to be displayed when this tab is active. This will typically be rendered
-   * within the corresponding `TabPanel`.
+   * The content to be displayed in the tab panel when this tab is active.
+   * This prop is consumed by a parent `Tabs` component and is not rendered directly by this `Tab` component.
    */
   panelContent: PropTypes.node.isRequired,
+  /**
+   * Additional props to pass directly to the underlying Chakra UI `Tab` component,
+   * such as `isDisabled`, `colorScheme`, `variant`, etc.
+   */
+  tabProps: PropTypes.object,
 };
 
-export default Tab;
+export default React.memo(Tab);

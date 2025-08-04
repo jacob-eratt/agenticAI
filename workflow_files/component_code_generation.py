@@ -3,16 +3,12 @@ import os
 from collections import defaultdict
 from utils.llm_utils import call_agent, build_prompt, escape_curly_braces, extract_code_block
 from prompts.react_prompts import react_component_generation_system_prompt
-
+from llm_tools.codegen_tools import get_file_list_structured_tool, write_screen_code_to_file_tool, load_text_file_structured_tool
+import re
 def load_json_list(path):
     with open(path, "r", encoding="utf-8") as f:
         return json.load(f)
 
-def to_snake_case(name):
-    import re
-    name = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
-    name = re.sub('([a-z0-9])([A-Z])', r'\1_\2', name)
-    return name.replace(" ", "_").lower()
 
 def gather_instances_by_type(instances):
     instances_by_type = defaultdict(list)
@@ -42,11 +38,59 @@ def generate_component_code_llm(component_type, instances, llm):
 
 def write_component_to_file(component_type, code, folder_path):
     name = component_type.get("name", "Component")
-    snake_name = to_snake_case(name)
-    filename = os.path.join(folder_path, f"{snake_name}.jsx")
+    filename = os.path.join(folder_path, f"{name}.jsx")
     os.makedirs(folder_path, exist_ok=True)
     with open(filename, "w", encoding="utf-8") as f:
         f.write(code)
+
+index_js_generation_prompt = """
+You are a senior React developer. Your task is to generate an index.js file for a components directory. 
+Given a list of component file names (in PascalCase, without the .jsx extension), output a single index.js file that re-exports each component as a named export using PascalCase.
+
+- For each component, use: export { default as <PascalCaseName> } from './<PascalCaseName>.jsx';
+- Do not include any explanation or comments, only output the code.
+- Wrap the code in triple backticks.
+
+Example input:
+{
+  "component_names": ["weather_card", "navbar", "footer"]
+}
+
+Example output:
+```js
+export { default as weather_card } from './weather_card.jsx';
+export { default as navbar } from './navbar.jsx';
+export { default as footer } from './footer.jsx';
+```
+**Summary:**  
+- All file names, component names, and exports will be in PascalCase.
+- This will keep everything consistent and avoid confusion for the LLM.
+"""
+
+def generate_index_js_for_components(folder_path, llm):
+    # List all .jsx files in the folder
+    component_files = [f for f in os.listdir(folder_path) if f.endswith('.jsx')]
+    # Remove file extension for export names
+    exports = [os.path.splitext(f)[0] for f in component_files]
+    # Prepare prompt for LLM
+    user_prompt = {
+        "component_names": exports
+    }
+    # Call LLM to generate index.js code
+    llm_code = call_agent(
+        llm=llm,
+        prompt_template=build_prompt(escape_curly_braces(index_js_generation_prompt)),
+        input_text=json.dumps(user_prompt, indent=2),
+        tools=[get_file_list_structured_tool, write_screen_code_to_file_tool, load_text_file_structured_tool],
+        memory=None,
+        verbose=False
+    )
+    code = extract_code_block(llm_code)
+    # Write index.js
+    index_path = os.path.join(folder_path, "index.js")
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write(code)
+
 
 def generate_and_write_all_components(types_path, instances_path, output_folder, llm):
     component_types = load_json_list(types_path)
@@ -63,6 +107,8 @@ def generate_and_write_all_components(types_path, instances_path, output_folder,
             write_component_to_file(component_type, code, output_folder)
         else:
             print(f"Warning: No code block found for {component_type.get('name', type_id)}. LLM output:\n{raw_llm_output}")
+    
+    generate_index_js_for_components(output_folder, llm)
 
 # Example usage:
 # generate_and_write_all_components(

@@ -289,3 +289,4 @@ class SemanticSearchInput(BaseModel):
 
 class AskHumanClarificationInput(BaseModel):
     question: str = Field(..., description="The clarification question to ask the human user.")
+

@@ -1,0 +1,78 @@
+{
+  "screen": {
+    "id": "f5b59b07-d853-4970-8924-2f7edb0dfa37",
+    "name": "weather_alerts_screen",
+    "description": "Displays a list of active non-severe weather alerts.",
+    "component_instance_ids": [
+      "2e328b6a-049d-44e4-bab9-4622aac6e11d",
+      "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e"
+    ],
+    "components": [
+      {
+        "id": "2e328b6a-049d-44e4-bab9-4622aac6e11d",
+        "type_id": "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f",
+        "props": {
+          "alerts": []
+        },
+        "description": "List of active non-severe weather alerts."
+      },
+      {
+        "id": "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e",
+        "type_id": "d05b0010-686d-49a8-a6ef-a3c9c225f3f3",
+        "props": {
+          "alert": {}
+        },
+        "description": "Panel to display detailed information for a selected weather alert."
+      }
+    ]
+  },
+  "component_instances": [
+    {
+      "id": "2e328b6a-049d-44e4-bab9-4622aac6e11d",
+      "type_id": "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f",
+      "props": {
+        "alerts": []
+      },
+      "description": "List of active non-severe weather alerts."
+    },
+    {
+      "id": "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e",
+      "type_id": "d05b0010-686d-49a8-a6ef-a3c9c225f3f3",
+      "props": {
+        "alert": {}
+      },
+      "description": "Panel to display detailed information for a selected weather alert."
+    }
+  ],
+  "component_types": [
+    {
+      "id": "2574a8ae-b49d-4527-a4a9-d7b76bfe2c3f",
+      "name": "AlertList",
+      "description": "A list component to display a chronological list of severe weather alerts.",
+      "supported_props": [
+        {
+          "description": "Array of alert objects, each containing alert details.",
+          "type": "array",
+          "name": "alerts"
+        },
+        {
+          "description": "Callback function when an alert item is clicked.",
+          "type": "function",
+          "name": "onAlertClick"
+        }
+      ]
+    },
+    {
+      "id": "d05b0010-686d-49a8-a6ef-a3c9c225f3f3",
+      "name": "AlertDetailsPanel",
+      "description": "A panel component to display detailed information for a selected severe weather alert.",
+      "supported_props": [
+        {
+          "description": "The alert object containing details to display.",
+          "type": "object",
+          "name": "alert"
+        }
+      ]
+    }
+  ]
+}

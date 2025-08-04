@@ -32,6 +32,8 @@ from workflow_files.story_creation import *
 from workflow_files.stories_to_flow import generate_user_flows
 from workflow_files.flow_to_screen_conversion import decompose_flow_with_llm
 from workflow_files.component_code_generation import generate_and_write_all_components
+from utils.json_utils import save_ui_state_to_json, generate_screen_jsons
+from codegen_agentic_flow.main_codegen_agent import run_main_agent_workflow, run_post_generation_editing_loop
 
 
 load_dotenv()
@@ -347,7 +349,7 @@ def main():
         print("No frontend user stories found.")
 #endregion
 
-#region: Screen Generation
+#region: Screen Generation (agentic)
     screen_data_folder = "screen_jsons"
     type_json_folder = "types_jsons"
     instance_folder = "instances_json"
@@ -360,8 +362,8 @@ def main():
     else:
         print("Generating screens and components from user flows...")
         # You should have 'flows', 'app_query', and 'llm' defined earlier in your pipeline
-        screens, component_types, component_instances = decompose_flow_with_llm(flows, app_query)
-        # Save to JSON files
+        screens, component_types, component_instances = decompose_flow_with_llm(flows, app_query) #function that creates the screens
+        # Save to JSON files so I can use in multiple runs 
         save_ui_state_to_json(screens, component_types, component_instances)
         print(f"Saved screens to {screens_json}")
         print(f"Saved component types to {component_types_json}")
@@ -378,56 +380,66 @@ def main():
 
 #region: Component Code Generation
     # Generate React component code from component types
-    component_types_path = "component_types.json"
+    component_types_path = "types_jsons/component_types.json"
     output_folder = "react-ui/src/components"
 
-   # Example usage:
-    generate_and_write_all_components(
-        types_path="types_jsons/component_types.json",
-        instances_path="instances_json/component_instances.json",
-        output_folder="react-ui/src/components",
-        llm=llm
+    # Skip component code generation if any .jsx file exists in output_folder
+    jsx_files_exist = any(
+        fname.endswith(".jsx") for fname in os.listdir(output_folder)
+    ) if os.path.isdir(output_folder) else False
+
+    if jsx_files_exist:
+        print(f"Component code already exists in {output_folder}. Skipping component code generation.")
+    else:
+        #generates componenet files from component types and instances
+        generate_and_write_all_components(
+            types_path="types_jsons/component_types.json",
+            instances_path="instances_json/component_instances.json",
+            output_folder="react-ui/src/components",
+            llm=llm
+        )
+
+#endregion: Component Code Generation
+
+    #region: UI Code Creation (agentic)
+
+    screen_jsons_per_screen_folder = "screen_jsons_per_screen"
+    if not os.path.exists(screen_jsons_per_screen_folder):
+        with open("screen_jsons/screens.json") as f:
+            screens = json.load(f)
+        with open("instances_json/component_instances.json") as f:
+            instances = json.load(f)
+        with open("types_jsons/component_types.json") as f:
+            types = json.load(f)
+        generate_screen_jsons(screens, instances, types, screen_jsons_per_screen_folder)
+    else:
+        print(f"{screen_jsons_per_screen_folder} already exists. Skipping screen JSON generation.")
+
+    
+    pages_folder = "react-ui/src/pages"
+    jsx_or_js_files_exist = any(
+        fname.endswith(".jsx") or fname.endswith(".js")
+        for fname in os.listdir(pages_folder)
+    ) if os.path.isdir(pages_folder) else False
+
+    if not jsx_or_js_files_exist:
+        run_main_agent_workflow(
+            screen_json_folder="screen_jsons_per_screen",
+            component_folder="react-ui/src/components",
+            layout_output_folder="screen_layouts",
+            screen_code_output_folder="react-ui/src/pages",
+        )
+    else:
+        print(f"Page code already exists in {pages_folder}. Skipping screen code generation.")
+    
+    run_post_generation_editing_loop(
+         screen_json_folder="screen_jsons_per_screen",
+         component_folder="react-ui/src/components",
+         layout_output_folder="screen_layouts",
+         screen_code_output_folder="react-ui/src/pages"
     )
 
 
-#old method of ui creation going with a different pipeline approach
-#region: Story Clustering
-#     containers_folder = "containers"
-#     required_files = {"frontend.json", "backend.json", "shared.json", "infrastructure.json"}
-#     skip_boxing = False
-
-#     if os.path.isdir(containers_folder):
-#         existing_files = set(os.listdir(containers_folder))
-#         if required_files.issubset(existing_files):
-#             print("All container files exist. Skipping boxing of user stories.")
-#             skip_boxing = True
-
-#     if not skip_boxing:
-#         with open(user_stories_file, "r") as f:
-#             stories = json.load(f)
-#         boxed_stories = box_user_stories_with_llm(llm, stories)
-#         save_containers_to_files(boxed_stories)
-    
-#     boxes = load_boxes_from_jsons(containers_folder)
-#     print(f"Loaded {len(boxes)} boxes from {containers_folder}")
-#     add_boxes_to_vectordb(boxes, pipeline_retriever.vectorstore)
-#     print("Boxes added to pipeline retriever.")
-# #endregion: Story Clustering
-
-#     #region: Screen Creation
-#     screens_json = "screens.json"
-#     frontend_boxes = get_frontend_boxes(containers_folder)
-#     if not os.path.isfile(screens_json):
-#         # Run screen assignment and save
-#         screens = assign_boxes_to_screens_with_llm(llm, frontend_boxes, app_query)
-#         save_screens_to_json(screens, screens_json)
-
-#     # Always load screens from JSON
-#     screens = load_screens_from_json(screens_json)
-
-#     # Add screens to vector DB
-#     add_screens_to_vectordb(screens, pipeline_retriever.vectorstore)
-#     #endregion: Screen Creation
 
 if __name__ == "__main__":
     main()
