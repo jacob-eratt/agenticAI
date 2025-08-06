@@ -1,0 +1,450 @@
+{
+  "screen": {
+    "id": "6ff7dca6-b3cf-4af6-8c79-12067feec76b",
+    "name": "dashboard_screen",
+    "description": "Main dashboard displaying current weather information and quick access to other features.",
+    "component_instance_ids": [
+      "6f9656e5-20da-468f-8c0e-9a8519eb9277",
+      "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
+      "6bab2bca-1b7e-4439-96cf-465044f3f93f",
+      "eea844ca-ade3-4f4f-8671-2437baa4ad73",
+      "6adcc0cc-1467-401d-8e56-2999aa961730",
+      "214bfa35-6839-44d5-8b83-d76f83311dce",
+      "40655ae8-bab4-48f6-9d86-a94ccf666958",
+      "786e7325-19cd-42f0-bd95-ea5b10f462c0",
+      "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+      "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
+      "ae7a42a9-b7e5-4000-8ccb-648439ec67c7",
+      "f2b7e60a-c29f-4ce6-a9a9-a550f7e411c9",
+      "84fab98b-aba8-4fd7-89d6-41eefc00f282",
+      "29cc1d4e-36e8-4651-bdb3-a21591361b2c"
+    ],
+    "components": [
+      {
+        "id": "6f9656e5-20da-468f-8c0e-9a8519eb9277",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "value": "27",
+          "unit": "\u00b0C",
+          "label": "Feels Like"
+        },
+        "description": "Displays the 'feels like' temperature."
+      },
+      {
+        "id": "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "value": "75",
+          "unit": "%",
+          "label": "Humidity"
+        },
+        "description": "Displays the current humidity."
+      },
+      {
+        "id": "6bab2bca-1b7e-4439-96cf-465044f3f93f",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "description": "NW",
+          "value": "15",
+          "unit": "km/h",
+          "label": "Wind"
+        },
+        "description": "Displays the current wind speed and direction."
+      },
+      {
+        "id": "eea844ca-ade3-4f4f-8671-2437baa4ad73",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "description": "Current precipitation type and intensity",
+          "icon": "precipitation_icon",
+          "label": "Precipitation",
+          "value": "N/A",
+          "onClick": "navigate_to_hourly_forecast_screen"
+        },
+        "description": "Displays current precipitation type and intensity."
+      },
+      {
+        "id": "6adcc0cc-1467-401d-8e56-2999aa961730",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "Last updated: {timestamp}"
+        },
+        "description": "Displays the timestamp of the last weather data update."
+      },
+      {
+        "id": "214bfa35-6839-44d5-8b83-d76f83311dce",
+        "type_id": "d0482d56-2378-446d-9c11-6c6167674367",
+        "props": {
+          "forecastItems": []
+        },
+        "description": "Displays a summary of the daily weather forecast for the next several days."
+      },
+      {
+        "id": "40655ae8-bab4-48f6-9d86-a94ccf666958",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "navigateToLocationManagement",
+          "ariaLabel": "Manage Locations",
+          "icon": "location"
+        },
+        "description": "Button to navigate to the location management screen to view and manage saved locations."
+      },
+      {
+        "id": "786e7325-19cd-42f0-bd95-ea5b10f462c0",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "Location access denied. Location-based features are unavailable."
+        },
+        "description": "Prominent message informing the user about denied location permission and its impact on features."
+      },
+      {
+        "id": "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+        "type_id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
+        "props": {
+          "isOpen": true,
+          "title": "Location Detection Failed",
+          "message": "Unable to detect your current location. Please try again or manage your locations.",
+          "onClose": "handleManageLocationsNavigation",
+          "onConfirm": "handleTryAgain"
+        },
+        "description": "Dialog to inform user of location detection failure with options to retry or manage locations."
+      },
+      {
+        "id": "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "navigate_to_settings_screen",
+          "ariaLabel": "Settings",
+          "icon": "settings"
+        },
+        "description": "Button to navigate to the settings screen."
+      },
+      {
+        "id": "ae7a42a9-b7e5-4000-8ccb-648439ec67c7",
+        "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+        "props": {
+          "onClick": "navigate_to_radar_map_screen",
+          "ariaLabel": "View Radar Map",
+          "icon": "map_icon"
+        },
+        "description": "Button to navigate to the Radar Map screen."
+      },
+      {
+        "id": "f2b7e60a-c29f-4ce6-a9a9-a550f7e411c9",
+        "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+        "props": {
+          "label": "View Historical Data",
+          "onClick": "navigateToHistoricalDataScreen"
+        },
+        "description": "Button to navigate to the Location Management Screen to select a location for historical data."
+      },
+      {
+        "id": "84fab98b-aba8-4fd7-89d6-41eefc00f282",
+        "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+        "props": {
+          "onClick": "navigate_to_weather_alerts_screen",
+          "value": "5",
+          "description": "Non-severe",
+          "label": "Active Alerts"
+        },
+        "description": "Summary card displaying active non-severe weather alerts on the dashboard."
+      },
+      {
+        "id": "29cc1d4e-36e8-4651-bdb3-a21591361b2c",
+        "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+        "props": {
+          "text": "Current Location: New York, NY"
+        },
+        "description": "Displays the user's current detected or selected location."
+      }
+    ]
+  },
+  "component_instances": [
+    {
+      "id": "6f9656e5-20da-468f-8c0e-9a8519eb9277",
+      "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+      "props": {
+        "value": "27",
+        "unit": "\u00b0C",
+        "label": "Feels Like"
+      },
+      "description": "Displays the 'feels like' temperature."
+    },
+    {
+      "id": "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
+      "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+      "props": {
+        "value": "75",
+        "unit": "%",
+        "label": "Humidity"
+      },
+      "description": "Displays the current humidity."
+    },
+    {
+      "id": "6bab2bca-1b7e-4439-96cf-465044f3f93f",
+      "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+      "props": {
+        "description": "NW",
+        "value": "15",
+        "unit": "km/h",
+        "label": "Wind"
+      },
+      "description": "Displays the current wind speed and direction."
+    },
+    {
+      "id": "eea844ca-ade3-4f4f-8671-2437baa4ad73",
+      "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+      "props": {
+        "description": "Current precipitation type and intensity",
+        "icon": "precipitation_icon",
+        "label": "Precipitation",
+        "value": "N/A",
+        "onClick": "navigate_to_hourly_forecast_screen"
+      },
+      "description": "Displays current precipitation type and intensity."
+    },
+    {
+      "id": "6adcc0cc-1467-401d-8e56-2999aa961730",
+      "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+      "props": {
+        "text": "Last updated: {timestamp}"
+      },
+      "description": "Displays the timestamp of the last weather data update."
+    },
+    {
+      "id": "214bfa35-6839-44d5-8b83-d76f83311dce",
+      "type_id": "d0482d56-2378-446d-9c11-6c6167674367",
+      "props": {
+        "forecastItems": []
+      },
+      "description": "Displays a summary of the daily weather forecast for the next several days."
+    },
+    {
+      "id": "40655ae8-bab4-48f6-9d86-a94ccf666958",
+      "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+      "props": {
+        "onClick": "navigateToLocationManagement",
+        "ariaLabel": "Manage Locations",
+        "icon": "location"
+      },
+      "description": "Button to navigate to the location management screen to view and manage saved locations."
+    },
+    {
+      "id": "786e7325-19cd-42f0-bd95-ea5b10f462c0",
+      "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+      "props": {
+        "text": "Location access denied. Location-based features are unavailable."
+      },
+      "description": "Prominent message informing the user about denied location permission and its impact on features."
+    },
+    {
+      "id": "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+      "type_id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
+      "props": {
+        "isOpen": true,
+        "title": "Location Detection Failed",
+        "message": "Unable to detect your current location. Please try again or manage your locations.",
+        "onClose": "handleManageLocationsNavigation",
+        "onConfirm": "handleTryAgain"
+      },
+      "description": "Dialog to inform user of location detection failure with options to retry or manage locations."
+    },
+    {
+      "id": "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
+      "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+      "props": {
+        "onClick": "navigate_to_settings_screen",
+        "ariaLabel": "Settings",
+        "icon": "settings"
+      },
+      "description": "Button to navigate to the settings screen."
+    },
+    {
+      "id": "ae7a42a9-b7e5-4000-8ccb-648439ec67c7",
+      "type_id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+      "props": {
+        "onClick": "navigate_to_radar_map_screen",
+        "ariaLabel": "View Radar Map",
+        "icon": "map_icon"
+      },
+      "description": "Button to navigate to the Radar Map screen."
+    },
+    {
+      "id": "f2b7e60a-c29f-4ce6-a9a9-a550f7e411c9",
+      "type_id": "148db629-259c-4048-9963-85f185e62ddd",
+      "props": {
+        "label": "View Historical Data",
+        "onClick": "navigateToHistoricalDataScreen"
+      },
+      "description": "Button to navigate to the Location Management Screen to select a location for historical data."
+    },
+    {
+      "id": "84fab98b-aba8-4fd7-89d6-41eefc00f282",
+      "type_id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+      "props": {
+        "onClick": "navigate_to_weather_alerts_screen",
+        "value": "5",
+        "description": "Non-severe",
+        "label": "Active Alerts"
+      },
+      "description": "Summary card displaying active non-severe weather alerts on the dashboard."
+    },
+    {
+      "id": "29cc1d4e-36e8-4651-bdb3-a21591361b2c",
+      "type_id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+      "props": {
+        "text": "Current Location: New York, NY"
+      },
+      "description": "Displays the user's current detected or selected location."
+    }
+  ],
+  "component_types": [
+    {
+      "id": "148db629-259c-4048-9963-85f185e62ddd",
+      "name": "Button",
+      "description": "A standard clickable button.",
+      "supported_props": [
+        {
+          "description": "Text displayed on the button.",
+          "type": "string",
+          "name": "label"
+        },
+        {
+          "description": "Callback function when the button is clicked.",
+          "type": "function",
+          "name": "onClick"
+        },
+        {
+          "description": "Visual style of the button (e.g., solid, outline, ghost).",
+          "type": "string",
+          "name": "variant"
+        }
+      ]
+    },
+    {
+      "id": "655662a7-37bc-4ae4-8f5f-115818cfbe45",
+      "name": "ConfirmationDialog",
+      "description": "A dialog box to confirm user actions.",
+      "supported_props": [
+        {
+          "description": "Controls the visibility of the dialog.",
+          "type": "boolean",
+          "name": "isOpen"
+        },
+        {
+          "description": "Callback function when the dialog is closed.",
+          "type": "function",
+          "name": "onClose"
+        },
+        {
+          "description": "Callback function when the confirm button is clicked.",
+          "type": "function",
+          "name": "onConfirm"
+        },
+        {
+          "description": "Title of the confirmation dialog.",
+          "type": "string",
+          "name": "title"
+        },
+        {
+          "description": "Message content of the confirmation dialog.",
+          "type": "string",
+          "name": "message"
+        }
+      ]
+    },
+    {
+      "id": "4b57b921-2360-4479-8e4d-7734bba9d8e6",
+      "name": "IconButton",
+      "description": "An icon button used to initiate a search.",
+      "supported_props": [
+        {
+          "name": "icon",
+          "type": "string",
+          "description": "Name of the icon to display."
+        },
+        {
+          "name": "onClick",
+          "type": "function",
+          "description": "Callback function when the button is clicked."
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "description": "Accessibility label for the button."
+        }
+      ]
+    },
+    {
+      "id": "d0482d56-2378-446d-9c11-6c6167674367",
+      "name": "DailyForecastList",
+      "description": "A list component to display daily weather forecast entries.",
+      "supported_props": [
+        {
+          "description": "Array of daily forecast data, each item containing date, high/low temperature, and weather conditions.",
+          "type": "array",
+          "name": "forecastItems"
+        }
+      ]
+    },
+    {
+      "id": "e0b18d25-0d48-4375-8a1b-d3453a1061da",
+      "name": "WeatherDisplayCard",
+      "description": "A card component to display various weather-related information.",
+      "supported_props": [
+        {
+          "description": "Name of the location for the weather display.",
+          "type": "string",
+          "name": "locationName"
+        },
+        {
+          "description": "Current temperature.",
+          "type": "string",
+          "name": "temperature"
+        },
+        {
+          "description": "Current weather condition (e.g., Sunny, Cloudy).",
+          "type": "string",
+          "name": "condition"
+        },
+        {
+          "description": "Icon representing the current weather condition.",
+          "type": "string",
+          "name": "icon"
+        },
+        {
+          "description": "Precipitation information.",
+          "type": "string",
+          "name": "precipitation"
+        },
+        {
+          "description": "Humidity percentage.",
+          "type": "string",
+          "name": "humidity"
+        },
+        {
+          "description": "Wind speed and direction.",
+          "type": "string",
+          "name": "windSpeed"
+        },
+        {
+          "description": "Callback function when the card is clicked.",
+          "type": "function",
+          "name": "onClick"
+        }
+      ]
+    },
+    {
+      "id": "7b6ad42c-4abc-4cc4-91fe-f181104c9eaa",
+      "name": "TextDisplay",
+      "description": "A component to display static or dynamic text.",
+      "supported_props": [
+        {
+          "description": "The text content to display.",
+          "type": "string",
+          "name": "text"
+        }
+      ]
+    }
+  ]
+}

@@ -1,197 +1,312 @@
 {
-  "type": "Flex",
-  "props": {
-    "direction": "column",
-    "gap": 6,
-    "bg": "gray.50",
-    "p": 6,
-    "minH": "100vh"
-  },
   "children": [
     {
-      "type": "Flex",
-      "props": {
-        "justify": "space-between",
-        "align": "center",
-        "mb": 4
-      },
       "children": [
         {
-          "type": "TextDisplay",
-          "component_instance_id": "29cc1d4e-36e8-4651-bdb3-a21591361b2c",
+          "component_instance_id": "40655ae8-bab4-48f6-9d86-a94ccf666958",
+          "notes": "Button to navigate to the location management screen.",
           "props": {
-            "text": "Current Location: New York, NY",
-            "fontSize": "2xl",
-            "fontWeight": "bold"
+            "ariaLabel": "Manage Locations",
+            "colorScheme": "blue",
+            "icon": "location",
+            "onClick": "navigateToLocationManagement",
+            "variant": "ghost"
           },
-          "notes": "Displays the current detected or selected location."
+          "type": "Button"
         },
         {
-          "type": "Flex",
+          "component_instance_id": "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
+          "notes": "Button to navigate to the settings screen.",
           "props": {
-            "gap": 2
+            "ariaLabel": "Settings",
+            "colorScheme": "gray",
+            "icon": "settings",
+            "onClick": "navigate_to_settings_screen",
+            "variant": "ghost"
           },
-          "children": [
-            {
-              "type": "IconButton",
-              "component_instance_id": "40655ae8-bab4-48f6-9d86-a94ccf666958",
-              "props": {
-                "ariaLabel": "Manage Locations",
-                "icon": "location",
-                "onClick": "navigateToLocationManagement"
-              },
-              "notes": "Button to navigate to location management."
-            },
-            {
-              "type": "IconButton",
-              "component_instance_id": "0f3a8b09-bb7d-49e4-9a29-7340aceaf8dd",
-              "props": {
-                "ariaLabel": "Settings",
-                "icon": "settings",
-                "onClick": "navigate_to_settings_screen"
-              },
-              "notes": "Button to navigate to settings."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "TextDisplay",
-      "component_instance_id": "786e7325-19cd-42f0-bd95-ea5b10f462c0",
-      "props": {
-        "text": "Location access denied. Location-based features are unavailable.",
-        "color": "red.500",
-        "textAlign": "center",
-        "mb": 4
-      },
-      "notes": "Prominent message for denied location permission. Only visible when applicable."
-    },
-    {
-      "type": "Grid",
-      "props": {
-        "templateColumns": "repeat(auto-fit, minmax(180px, 1fr))",
-        "gap": 4,
-        "mb": 6
-      },
-      "children": [
-        {
-          "type": "WeatherDisplayCard",
-          "component_instance_id": "6f9656e5-20da-468f-8c0e-9a8519eb9277",
-          "props": {
-            "label": "Feels Like",
-            "unit": "\u00b0C",
-            "value": "27"
-          },
-          "notes": "Displays the 'feels like' temperature in a dedicated card."
+          "type": "Button"
         },
         {
-          "type": "WeatherDisplayCard",
-          "component_instance_id": "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
-          "props": {
-            "label": "Humidity",
-            "unit": "%",
-            "value": "75"
-          },
-          "notes": "Displays the current humidity in a dedicated card."
-        },
-        {
-          "type": "WeatherDisplayCard",
-          "component_instance_id": "6bab2bca-1b7e-4439-96cf-465044f3f93f",
-          "props": {
-            "description": "NW",
-            "label": "Wind",
-            "unit": "km/h",
-            "value": "15"
-          },
-          "notes": "Displays the current wind speed and direction in a dedicated card."
-        },
-        {
-          "type": "WeatherDisplayCard",
-          "component_instance_id": "eea844ca-ade3-4f4f-8671-2437baa4ad73",
-          "props": {
-            "description": "Current precipitation type and intensity",
-            "icon": "precipitation_icon",
-            "label": "Precipitation",
-            "onClick": "navigate_to_hourly_forecast_screen",
-            "value": "N/A"
-          },
-          "notes": "Displays current precipitation in a dedicated card, clickable for more details."
-        },
-        {
-          "type": "WeatherDisplayCard",
-          "component_instance_id": "84fab98b-aba8-4fd7-89d6-41eefc00f282",
-          "props": {
-            "description": "Non-severe",
-            "label": "Active Alerts",
-            "onClick": "navigate_to_weather_alerts_screen",
-            "value": "5"
-          },
-          "notes": "Summary card for active weather alerts, clickable to view alerts screen."
-        }
-      ]
-    },
-    {
-      "type": "TextDisplay",
-      "component_instance_id": "6adcc0cc-1467-401d-8e56-2999aa961730",
-      "props": {
-        "text": "Last updated: {timestamp}",
-        "fontSize": "sm",
-        "color": "gray.600",
-        "textAlign": "right",
-        "mb": 6
-      },
-      "notes": "Displays the timestamp of the last weather data update."
-    },
-    {
-      "type": "DailyForecastList",
-      "component_instance_id": "214bfa35-6839-44d5-8b83-d76f83311dce",
-      "props": {
-        "forecastItems": []
-      },
-      "notes": "Displays a summary of the daily weather forecast."
-    },
-    {
-      "type": "Flex",
-      "props": {
-        "justify": "center",
-        "gap": 4,
-        "mt": 6
-      },
-      "children": [
-        {
-          "type": "IconButton",
           "component_instance_id": "ae7a42a9-b7e5-4000-8ccb-648439ec67c7",
+          "notes": "Button to navigate to the Radar Map screen.",
           "props": {
             "ariaLabel": "View Radar Map",
+            "colorScheme": "teal",
             "icon": "map_icon",
-            "onClick": "navigate_to_radar_map_screen"
+            "onClick": "navigate_to_radar_map_screen",
+            "variant": "ghost"
           },
-          "notes": "Button to navigate to the Radar Map screen."
+          "type": "Button"
         },
         {
-          "type": "Button",
           "component_instance_id": "f2b7e60a-c29f-4ce6-a9a9-a550f7e411c9",
+          "notes": "Button to navigate to the Location Management Screen for historical data.",
           "props": {
+            "colorScheme": "purple",
             "label": "View Historical Data",
             "onClick": "navigateToHistoricalDataScreen",
             "variant": "outline"
           },
-          "notes": "Button to navigate to the Historical Data screen."
+          "type": "Button"
         }
-      ]
+      ],
+      "props": {
+        "alignItems": "center",
+        "gap": 4,
+        "justifyContent": "flex-end",
+        "notes": "Container for top-level navigation buttons, aligned to the right.",
+        "py": 4,
+        "width": "100%"
+      },
+      "type": "Flex"
     },
     {
-      "type": "ConfirmationDialog",
-      "component_instance_id": "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+      "children": [
+        {
+          "component_instance_id": "786e7325-19cd-42f0-bd95-ea5b10f462c0",
+          "notes": "Prominent message informing the user about denied location permission.",
+          "props": {
+            "bg": "red.50",
+            "borderRadius": "md",
+            "color": "red.600",
+            "fontWeight": "semibold",
+            "p": 4,
+            "text": "Location access denied. Location-based features are unavailable.",
+            "textAlign": "center",
+            "width": "100%"
+          },
+          "type": "Text"
+        },
+        {
+          "component_instance_id": "29cc1d4e-36e8-4651-bdb3-a21591361b2c",
+          "notes": "Displays the user's current detected or selected location.",
+          "props": {
+            "fontSize": {
+              "base": "lg",
+              "md": "xl"
+            },
+            "fontWeight": "bold",
+            "py": 2,
+            "text": "Current Location: New York, NY",
+            "textAlign": "center",
+            "width": "100%"
+          },
+          "type": "Text"
+        },
+        {
+          "children": [
+            {
+              "children": [
+                {
+                  "children": [
+                    {
+                      "component_instance_id": "6f9656e5-20da-468f-8c0e-9a8519eb9277",
+                      "notes": "Displays the 'feels like' temperature.",
+                      "props": {
+                        "fontSize": {
+                          "base": "xl",
+                          "md": "2xl"
+                        },
+                        "fontWeight": "bold",
+                        "label": "Feels Like",
+                        "textAlign": "center",
+                        "unit": "\u00b0C",
+                        "value": "27"
+                      },
+                      "type": "Text"
+                    },
+                    {
+                      "component_instance_id": "030fa3e7-879b-4517-bca1-ba8de7d3bd89",
+                      "notes": "Displays the current humidity.",
+                      "props": {
+                        "fontSize": {
+                          "base": "lg",
+                          "md": "xl"
+                        },
+                        "label": "Humidity",
+                        "textAlign": "center",
+                        "unit": "%",
+                        "value": "75"
+                      },
+                      "type": "Text"
+                    },
+                    {
+                      "component_instance_id": "6bab2bca-1b7e-4439-96cf-465044f3f93f",
+                      "notes": "Displays the current wind speed and direction.",
+                      "props": {
+                        "description": "NW",
+                        "fontSize": {
+                          "base": "lg",
+                          "md": "xl"
+                        },
+                        "label": "Wind",
+                        "textAlign": "center",
+                        "unit": "km/h",
+                        "value": "15"
+                      },
+                      "type": "Text"
+                    },
+                    {
+                      "component_instance_id": "eea844ca-ade3-4f4f-8671-2437baa4ad73",
+                      "notes": "Displays current precipitation type and intensity.",
+                      "props": {
+                        "description": "Current precipitation type and intensity",
+                        "fontSize": {
+                          "base": "lg",
+                          "md": "xl"
+                        },
+                        "icon": "precipitation_icon",
+                        "label": "Precipitation",
+                        "onClick": "navigate_to_hourly_forecast_screen",
+                        "textAlign": "center",
+                        "value": "N/A"
+                      },
+                      "type": "Text"
+                    }
+                  ],
+                  "props": {
+                    "columns": {
+                      "base": 1,
+                      "sm": 2
+                    },
+                    "notes": "Grid for displaying key weather metrics.",
+                    "spacing": 4
+                  },
+                  "type": "SimpleGrid"
+                },
+                {
+                  "component_instance_id": "6adcc0cc-1467-401d-8e56-2999aa961730",
+                  "notes": "Displays the timestamp of the last weather data update.",
+                  "props": {
+                    "color": "gray.500",
+                    "fontSize": "sm",
+                    "text": "Last updated: {timestamp}",
+                    "textAlign": "right"
+                  },
+                  "type": "Text"
+                }
+              ],
+              "props": {
+                "bg": "white",
+                "borderRadius": "lg",
+                "boxShadow": "xl",
+                "display": "flex",
+                "flex": 1,
+                "flexDirection": "column",
+                "gap": 4,
+                "minW": "300px",
+                "notes": "Container for current weather details, acting as a main card on the dashboard.",
+                "p": 6
+              },
+              "type": "Box"
+            },
+            {
+              "children": [
+                {
+                  "props": {
+                    "fontSize": "xl",
+                    "fontWeight": "bold",
+                    "text": "Active Alerts",
+                    "textAlign": "center"
+                  },
+                  "type": "Text"
+                },
+                {
+                  "props": {
+                    "color": "gray.500",
+                    "text": "No active alerts.",
+                    "textAlign": "center"
+                  },
+                  "type": "Text"
+                }
+              ],
+              "component_instance_id": "84fab98b-aba8-4fd7-89d6-41eefc00f282",
+              "props": {
+                "bg": "white",
+                "borderRadius": "lg",
+                "boxShadow": "xl",
+                "display": "flex",
+                "flex": 1,
+                "flexDirection": "column",
+                "gap": 4,
+                "minW": "300px",
+                "notes": "Summary card displaying active non-severe weather alerts on the dashboard.",
+                "p": 6
+              },
+              "type": "Box"
+            }
+          ],
+          "props": {
+            "alignItems": "flex-start",
+            "direction": {
+              "base": "column",
+              "md": "row"
+            },
+            "gap": 6,
+            "notes": "Container for current weather details and active alerts, arranged side-by-side on larger screens.",
+            "width": "100%"
+          },
+          "type": "Flex"
+        },
+        {
+          "children": [
+            {
+              "component_instance_id": "214bfa35-6839-44d5-8b83-d76f83311dce",
+              "notes": "Displays a summary of the daily weather forecast for the next several days.",
+              "props": {
+                "forecastItems": []
+              },
+              "type": "DailyForecastSummary"
+            }
+          ],
+          "props": {
+            "bg": "white",
+            "borderRadius": "lg",
+            "boxShadow": "xl",
+            "notes": "Container for the daily weather forecast summary.",
+            "p": 6,
+            "width": "100%"
+          },
+          "type": "Box"
+        }
+      ],
       "props": {
-        "isOpen": true,
+        "direction": "column",
+        "flex": 1,
+        "gap": 6,
+        "notes": "Main content area for the dashboard, spanning full width.",
+        "width": "100%"
+      },
+      "type": "Flex"
+    },
+    {
+      "component_instance_id": "224b6d34-b6e9-483b-9cfc-71eb4e2f8a1c",
+      "notes": "Dialog to inform user of location detection failure. Its visibility should be controlled by state in the React component.",
+      "props": {
         "message": "Unable to detect your current location. Please try again or manage your locations.",
         "onClose": "handleManageLocationsNavigation",
         "onConfirm": "handleTryAgain",
         "title": "Location Detection Failed"
       },
-      "notes": "Dialog for location detection failure. Only visible when isOpen is true."
+      "type": "Dialog"
     }
-  ]
+  ],
+  "props": {
+    "bg": "gray.50",
+    "direction": "column",
+    "gap": 6,
+    "minH": "100vh",
+    "notes": "Root container for the Dashboard screen, taking up the full viewport height and width.",
+    "px": {
+      "base": 4,
+      "lg": 12,
+      "md": 8
+    },
+    "py": {
+      "base": 4,
+      "md": 8
+    },
+    "width": "100%"
+  },
+  "type": "Flex"
 }

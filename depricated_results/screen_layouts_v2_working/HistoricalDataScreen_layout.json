@@ -1,0 +1,162 @@
+{
+  "type": "Flex",
+  "props": {
+    "direction": "column",
+    "align": "center",
+    "justify": "flex-start",
+    "minH": "100vh",
+    "p": {
+      "base": 4,
+      "md": 8
+    },
+    "bg": "gray.50",
+    "width": "100%"
+  },
+  "children": [
+    {
+      "type": "Flex",
+      "props": {
+        "direction": {
+          "base": "column",
+          "md": "row"
+        },
+        "gap": 4,
+        "justify": "center",
+        "align": "center",
+        "mb": 8,
+        "width": {
+          "base": "100%",
+          "md": "auto"
+        }
+      },
+      "children": [
+        {
+          "type": "DatePicker",
+          "component_instance_id": "1c17e21f-dab4-434a-87a7-2f7a78b140c0",
+          "props": {
+            "label": "Start Date",
+            "onChange": "handleStartDateChange",
+            "width": {
+              "base": "100%",
+              "md": "200px"
+            }
+          },
+          "notes": "Date picker for selecting the start date of historical data. Placed in a horizontal flex container for date range selection."
+        },
+        {
+          "type": "DatePicker",
+          "component_instance_id": "10f5a24b-e570-4903-ba9c-4bd64fb4b384",
+          "props": {
+            "label": "End Date",
+            "onChange": "handleEndDateChange",
+            "width": {
+              "base": "100%",
+              "md": "200px"
+            }
+          },
+          "notes": "Date picker for selecting the end date of historical data. Placed alongside the start date picker in the date range selection container."
+        },
+        {
+          "type": "Button",
+          "component_instance_id": "b23a294c-2592-4929-9b93-8c440270f86a",
+          "props": {
+            "label": "Done",
+            "onClick": "handleDoneClick",
+            "variant": "solid",
+            "width": {
+              "base": "100%",
+              "md": "auto"
+            }
+          },
+          "notes": "Button to confirm the selected date range and update historical data display. Placed within the date range selection container."
+        }
+      ],
+      "notes": "Container for date range selection components (Start Date, End Date, Done button)."
+    },
+    {
+      "type": "Button",
+      "component_instance_id": "d4cca02d-7117-4ee1-b338-7779dc30a16d",
+      "props": {
+        "label": "Customize Parameters",
+        "mb": 8,
+        "mt": 4,
+        "onClick": "handleCustomizeParametersClick",
+        "width": {
+          "base": "100%",
+          "md": "250px"
+        }
+      },
+      "notes": "Button to open the meteorological parameter selection interface. Placed below the date range selection and above the historical data display."
+    },
+    {
+      "type": "Tabs",
+      "component_instance_id": "b7057237-ccbc-49c5-b443-d90a2865bfdc",
+      "props": {
+        "defaultIndex": 0,
+        "width": "100%",
+        "colorScheme": "blue",
+        "variant": "enclosed"
+      },
+      "notes": "Tabs for navigating between different historical data views. Placed above the main historical data display to allow users to switch content views."
+    },
+    {
+      "type": "Flex",
+      "props": {
+        "direction": {
+          "base": "column",
+          "md": "row"
+        },
+        "gap": 8,
+        "justify": "center",
+        "align": "flex-start",
+        "width": "100%"
+      },
+      "children": [
+        {
+          "type": "HistoricalDataPanel",
+          "component_instance_id": "bb433988-151e-4f3a-87a7-2f7a78b140c0",
+          "props": {
+            "colorScheme": "blue",
+            "data": [],
+            "location": "Selected Location",
+            "maxW": {
+              "base": "100%",
+              "md": "xl",
+              "lg": "2xl"
+            },
+            "size": "lg",
+            "variant": "elevated",
+            "width": "100%"
+          },
+          "notes": "Main panel displaying historical weather data. Centered on the screen and responsive to different viewports. Placeholder data is used initially."
+        },
+        {
+          "type": "AlertList",
+          "component_instance_id": "4a3a3f83-4e98-43f6-9a3f-c0966e15aa05",
+          "props": {
+            "alerts": [],
+            "onAlertClick": "displayAlertDetails",
+            "width": {
+              "base": "100%",
+              "md": "400px"
+            }
+          },
+          "notes": "Displays a chronological list of past severe weather alerts. Placed alongside the HistoricalDataPanel on larger screens and below it on smaller screens."
+        },
+        {
+          "type": "AlertDetailsPanel",
+          "component_instance_id": "215ffc03-bc46-4600-97d6-26a4ccb9037b",
+          "props": {
+            "alert": {},
+            "width": {
+              "base": "100%",
+              "md": "400px"
+            }
+          },
+          "notes": "Displays detailed information for a selected severe weather alert. Placed alongside the AlertList and HistoricalDataPanel. This component should be conditionally rendered based on whether an alert is selected from the AlertList."
+        }
+      ],
+      "notes": "Container for the main historical data display, the severe weather alerts list, and the alert details panel."
+    }
+  ]
+}

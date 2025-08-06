@@ -2,25 +2,56 @@
   "type": "Flex",
   "props": {
     "direction": "column",
-    "align": "center",
-    "justify": "center",
-    "minH": "100vh",
     "bg": "gray.50",
-    "p": 8
+    "minH": "100vh",
+    "width": "100%",
+    "px": {
+      "base": 4,
+      "md": 8,
+      "lg": 12
+    },
+    "py": {
+      "base": 6,
+      "md": 10,
+      "lg": 14
+    },
+    "gap": {
+      "base": 6,
+      "md": 8
+    }
   },
   "children": [
     {
-      "type": "DailyDetailsPanel",
-      "component_instance_id": "82455772-5477-4a9d-8915-8afea7c3d08f",
+      "type": "Box",
       "props": {
-        "date": "2023-10-27",
-        "temperature": "25\u00b0C",
-        "humidity": "60%",
-        "wind": "15 km/h NE",
-        "precipitation": "10%",
-        "width": "90%"
+        "width": "100%",
+        "maxW": "800px",
+        "mx": "auto",
+        "p": {
+          "base": 4,
+          "md": 6
+        },
+        "bg": "white",
+        "boxShadow": "lg",
+        "borderRadius": "lg"
       },
-      "notes": "Main panel displaying daily forecast details, centered on the screen and taking up more width."
+      "children": [
+        {
+          "type": "DailyWeatherDetailsPanel",
+          "component_instance_id": "82455772-5477-4a9d-8915-8afea7c3d08f",
+          "props": {
+            "humidity": "60%",
+            "date": "2023-10-27",
+            "temperature": "25\u00b0C",
+            "precipitation": "10%",
+            "wind": "15 km/h NE",
+            "width": "100%"
+          },
+          "notes": "Panel displaying comprehensive daily weather details, filling its parent container."
+        }
+      ],
+      "notes": "Container for the daily weather details panel, centered and with a max width for better readability on large screens."
     }
-  ]
+  ],
+  "notes": "Root container for the Daily Forecast Details Screen, providing full viewport coverage with responsive padding and gap."
 }

@@ -3,266 +3,295 @@ import {
   Box,
   Heading,
   Stack,
-  FormControl,
-  FormLabel,
   Switch,
+  Text,
   Select,
   CheckboxGroup,
   Checkbox,
-  Text,
   useToast,
+  FormControl,
+  FormLabel,
+  Divider
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * @typedef {object} TogglePreference
- * @property {string} [id] - Unique identifier for the preference. If not provided, one will be generated.
- * @property {string} label - The display label for the preference.
- * @property {'toggle'} type - The type of preference control, 'toggle'.
- * @property {boolean} isChecked - The initial checked state for the toggle.
- * @property {(newValue: boolean) => void} [onChange] - Callback function when the toggle state changes.
- */
-
-/**
- * @typedef {object} SelectorPreference
- * @property {string} [id] - Unique identifier for the preference. If not provided, one will be generated.
- * @property {string} label - The display label for the preference.
- * @property {'selector'} type - The type of preference control, 'selector'.
- * @property {string[]} options - An array of string options for the selector.
- * @property {string | string[]} value - The initial selected value(s) for the selector. If an array, it will render a multi-select checkbox group.
- * @property {(newValue: string | string[]) => void} [onChange] - Callback function when the selector value changes.
- */
-
-/**
- * @typedef {TogglePreference | SelectorPreference} Preference
- */
-
-/**
- * @typedef {object} NotificationPreferenceSectionProps
- * @property {string} title - The title of the notification section.
- * @property {Preference[]} [preferences=[]] - An array of notification preference objects.
- */
-
-// Define PropTypes for the preference objects
-const preferencePropTypes = PropTypes.shape({
-  id: PropTypes.string,
-  label: PropTypes.string.isRequired,
-  type: PropTypes.oneOf(['toggle', 'selector']).isRequired,
-  // For 'toggle' type
-  isChecked: PropTypes.bool,
-  // For 'selector' type
-  options: PropTypes.arrayOf(PropTypes.string),
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
-  onChange: PropTypes.func,
-});
-
-/**
  * NotificationPreferenceSection component displays and manages various notification preferences.
- * It supports toggle switches and selectors (single or multi-select).
+ * It supports toggles (Switch) and selectors (Select for single, CheckboxGroup for multi-select).
  *
- * @param {NotificationPreferenceSectionProps} props - The props for the component.
- * @returns {JSX.Element} The rendered NotificationPreferenceSection component.
+ * @param {object} props - The component props.
+ * @param {string} props.title - The title of the notification section.
+ * @param {Array<object>} [props.preferences=[]] - An array of notification preference objects.
+ *   Each object can be:
+ *   - { label: string, type: 'toggle', isChecked: boolean, onChange: function | string }
+ *   - { label: string, type: 'selector', options: Array<string>, value: string | Array<string>, onChange: function | string }
+ * @param {string} [props.colorScheme='blue'] - The color scheme for interactive elements.
+ * @param {string} [props.variant='outline'] - The variant for the container. Can be 'outline' or 'elevated'.
+ * @param {string} [props.size='md'] - The size for interactive elements (e.g., 'sm', 'md', 'lg').
+ * @param {string} [props.borderRadius='md'] - The border radius for the container.
+ * @param {string} [props.background='white'] - The background color for the container.
+ * @param {string | number | object} [props.padding='6'] - The padding for the container.
+ * @param {string | number | object} [props.margin='4'] - The margin for the container.
+ * @param {string | number | object} [props.maxW='lg'] - The maximum width for the container.
+ * @param {string} [props.overflowY='auto'] - Overflow-y behavior for scrollable content.
+ * @param {string | number | object} [props.maxH='auto'] - Maximum height for scrollable content.
  */
-export default function NotificationPreferenceSection({ title, preferences = [] }) {
+function NotificationPreferenceSection({
+  title,
+  preferences = [],
+  colorScheme = 'blue',
+  variant = 'outline',
+  size = 'md',
+  borderRadius = 'md',
+  background = 'white',
+  padding = '6',
+  margin = '4',
+  maxW = 'lg',
+  overflowY = 'auto',
+  maxH = 'auto',
+  ...rest
+}) {
   const toast = useToast();
 
-  // Internal state to manage the current values of preferences
-  // We use a Map for efficient lookups and updates by ID
-  const [preferenceStates, setPreferenceStates] = useState(() => {
-    const initialState = new Map();
-    preferences.forEach((pref, index) => {
-      const id = pref.id || `pref-${index}-${pref.label.replace(/\s/g, '-')}`;
+  // Internal state to manage preferences for demonstration.
+  // In a real application, these would typically be managed by the parent component
+  // and passed down as props, with onChange handlers updating the parent's state.
+  const [internalPreferences, setInternalPreferences] = useState(() => {
+    return preferences.map(pref => {
       if (pref.type === 'toggle') {
-        initialState.set(id, { ...pref, id, value: pref.isChecked });
+        return { ...pref, isChecked: pref.isChecked || false };
       } else if (pref.type === 'selector') {
-        initialState.set(id, { ...pref, id, value: pref.value });
+        // Initialize value for selector: empty string for single, empty array for multi-select
+        const initialValue = Array.isArray(pref.value) ? pref.value : (pref.value || '');
+        return { ...pref, value: initialValue };
       }
+      return pref;
     });
-    return initialState;
   });
 
-  // Effect to update internal state if preferences prop changes externally
-  // This ensures that if the parent passes a new set of preferences,
-  // the component's internal state is updated, while preserving existing user selections.
+  // Update internal state if the preferences prop changes from parent
   useEffect(() => {
-    setPreferenceStates((currentStates) => {
-      const newStates = new Map();
-      preferences.forEach((pref, index) => {
-        const id = pref.id || `pref-${index}-${pref.label.replace(/\s/g, '-')}`;
-        // If the preference already exists in state by ID, keep its current value.
-        // Otherwise, initialize it from the props.
-        if (currentStates.has(id)) {
-          newStates.set(id, { ...pref, id, value: currentStates.get(id).value });
-        } else {
-          if (pref.type === 'toggle') {
-            newStates.set(id, { ...pref, id, value: pref.isChecked });
-          } else if (pref.type === 'selector') {
-            newStates.set(id, { ...pref, id, value: pref.value });
-          }
-        }
-      });
-      return newStates;
-    });
-  }, [preferences]); // Re-run if the preferences array reference changes
+    setInternalPreferences(preferences.map(pref => {
+      if (pref.type === 'toggle') {
+        return { ...pref, isChecked: pref.isChecked || false };
+      } else if (pref.type === 'selector') {
+        const initialValue = Array.isArray(pref.value) ? pref.value : (pref.value || '');
+        return { ...pref, value: initialValue };
+      }
+      return pref;
+    }));
+  }, [preferences]);
 
   /**
    * Handles the change event for a toggle preference.
-   * @param {string} id - The ID of the preference that changed.
-   * @param {boolean} newValue - The new checked state.
+   * @param {number} index - The index of the preference in the array.
+   * @param {boolean} newCheckedState - The new checked state of the toggle.
+   * @param {function | string} originalOnChange - The original onChange handler provided in props.
    */
-  const handleToggleChange = useCallback((id, newValue) => {
-    setPreferenceStates((prevStates) => {
-      const newState = new Map(prevStates);
-      const pref = newState.get(id);
-      if (pref) {
-        newState.set(id, { ...pref, value: newValue });
-        // Call the original onChange handler if provided by the parent
-        if (pref.onChange) {
-          pref.onChange(newValue);
-        }
-      }
-      return newState;
+  const handleToggleChange = useCallback((index, newCheckedState, originalOnChange) => {
+    setInternalPreferences(prevPrefs => {
+      const newPrefs = [...prevPrefs];
+      newPrefs[index] = { ...newPrefs[index], isChecked: newCheckedState };
+      return newPrefs;
     });
-  }, []);
+
+    if (typeof originalOnChange === 'function') {
+      originalOnChange(newCheckedState);
+    } else if (typeof originalOnChange === 'string') {
+      // For demonstration, if onChange is a string, show a toast.
+      toast({
+        title: `Toggle for "${preferences[index].label}" changed.`,
+        description: `New state: ${newCheckedState}. (Handler: ${originalOnChange})`,
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  }, [toast, preferences]);
 
   /**
-   * Handles the change event for a selector preference (single or multi-select).
-   * @param {string} id - The ID of the preference that changed.
-   * @param {string | string[]} newValue - The new selected value(s).
+   * Handles the change event for a selector preference.
+   * @param {number} index - The index of the preference in the array.
+   * @param {string | Array<string>} newValue - The new value(s) selected.
+   * @param {function | string} originalOnChange - The original onChange handler provided in props.
    */
-  const handleSelectorChange = useCallback((id, newValue) => {
-    setPreferenceStates((prevStates) => {
-      const newState = new Map(prevStates);
-      const pref = newState.get(id);
-      if (pref) {
-        newState.set(id, { ...pref, value: newValue });
-        // Call the original onChange handler if provided by the parent
-        if (pref.onChange) {
-          pref.onChange(newValue);
-        }
-      }
-      return newState;
+  const handleSelectorChange = useCallback((index, newValue, originalOnChange) => {
+    setInternalPreferences(prevPrefs => {
+      const newPrefs = [...prevPrefs];
+      newPrefs[index] = { ...newPrefs[index], value: newValue };
+      return newPrefs;
     });
-  }, []);
 
-  // Runtime validation for required 'title' prop
+    if (typeof originalOnChange === 'function') {
+      originalOnChange(newValue);
+    } else if (typeof originalOnChange === 'string') {
+      // For demonstration, if onChange is a string, show a toast.
+      toast({
+        title: `Selector for "${preferences[index].label}" changed.`,
+        description: `New value: ${Array.isArray(newValue) ? newValue.join(', ') : newValue}. (Handler: ${originalOnChange})`,
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+      });
+    }
+  }, [toast, preferences]);
+
   if (!title) {
-    toast({
-      title: "Missing Prop",
-      description: "The 'title' prop is required for NotificationPreferenceSection.",
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-      position: "top-right",
-    });
-    return null; // Render nothing or a fallback UI if critical prop is missing
+    console.warn("NotificationPreferenceSection: 'title' prop is required.");
+    return (
+      <Box p={4} borderWidth={1} borderColor="red.300" borderRadius="md" bg="red.50">
+        <Text color="red.700" fontWeight="bold">Error: Title is missing for NotificationPreferenceSection.</Text>
+      </Box>
+    );
   }
 
   return (
     <Box
-      p={{ base: 4, md: 6 }}
-      borderWidth="1px"
-      borderRadius="lg"
-      boxShadow="md"
-      bg="white"
-      _dark={{ bg: "gray.700", borderColor: "gray.600" }}
-      maxW="xl"
-      mx="auto"
+      p={padding}
+      m={margin}
+      borderWidth={variant === 'outline' ? '1px' : '0'}
+      borderRadius={borderRadius}
+      bg={background}
+      maxW={maxW}
+      overflowY={overflowY}
+      maxH={maxH}
+      borderColor={variant === 'outline' ? `${colorScheme}.200` : 'transparent'}
+      boxShadow={variant === 'elevated' ? 'md' : 'none'}
+      {...rest}
     >
-      <Heading as="h2" size="lg" mb={6} color="gray.800" _dark={{ color: "white" }}>
+      <Heading as="h2" size="lg" mb={4} color={`${colorScheme}.700`}>
         {title}
       </Heading>
 
-      <Stack spacing={5}>
-        {Array.from(preferenceStates.values()).map((pref) => {
-          if (pref.type === 'toggle') {
-            return (
-              <FormControl display="flex" alignItems="center" key={pref.id}>
-                <FormLabel htmlFor={`toggle-${pref.id}`} mb="0" flex="1" cursor="pointer">
-                  <Text fontSize="md" color="gray.700" _dark={{ color: "gray.200" }}>
-                    {pref.label}
-                  </Text>
-                </FormLabel>
-                <Switch
-                  id={`toggle-${pref.id}`}
-                  isChecked={pref.value}
-                  onChange={(e) => handleToggleChange(pref.id, e.target.checked)}
-                  colorScheme="teal"
-                  size="lg"
-                  aria-label={`Toggle ${pref.label}`}
-                />
-              </FormControl>
-            );
-          } else if (pref.type === 'selector') {
-            // Determine if it's a multi-select based on the initial value type
-            const isMultiSelect = Array.isArray(pref.value);
+      {internalPreferences.length === 0 ? (
+        <Text color="gray.500">No notification preferences available.</Text>
+      ) : (
+        <Stack spacing={4}>
+          {internalPreferences.map((pref, index) => (
+            <React.Fragment key={index}>
+              {pref.type === 'toggle' && (
+                <FormControl display="flex" alignItems="center" justifyContent="space-between">
+                  <FormLabel htmlFor={`notification-toggle-${index}`} mb="0" flex="1" mr={4} cursor="pointer">
+                    <Text fontSize="md" fontWeight="medium" color="gray.700">{pref.label}</Text>
+                  </FormLabel>
+                  <Switch
+                    id={`notification-toggle-${index}`}
+                    isChecked={pref.isChecked}
+                    onChange={(e) => handleToggleChange(index, e.target.checked, pref.onChange)}
+                    colorScheme={colorScheme}
+                    size={size}
+                  />
+                </FormControl>
+              )}
 
-            return (
-              <FormControl key={pref.id}>
-                <FormLabel htmlFor={`selector-${pref.id}`} mb="2">
-                  <Text fontSize="md" color="gray.700" _dark={{ color: "gray.200" }}>
-                    {pref.label}
-                  </Text>
-                </FormLabel>
-                {isMultiSelect ? (
-                  <CheckboxGroup
-                    colorScheme="teal"
-                    value={pref.value}
-                    onChange={(newValues) => handleSelectorChange(pref.id, newValues)}
-                  >
-                    <Stack direction={{ base: "column", sm: "row" }} spacing={4} wrap="wrap">
-                      {pref.options && pref.options.map((option) => (
-                        <Checkbox key={option} value={option} size="md">
+              {pref.type === 'selector' && (
+                <FormControl>
+                  <FormLabel htmlFor={`notification-selector-${index}`}>
+                    <Text fontSize="md" fontWeight="medium" color="gray.700">{pref.label}</Text>
+                  </FormLabel>
+                  {Array.isArray(pref.value) ? ( // Multi-select using CheckboxGroup
+                    <CheckboxGroup
+                      colorScheme={colorScheme}
+                      value={pref.value}
+                      onChange={(newValues) => handleSelectorChange(index, newValues, pref.onChange)}
+                    >
+                      <Stack direction={{ base: 'column', sm: 'row' }} spacing={3} wrap="wrap">
+                        {pref.options && pref.options.map((option, optIndex) => (
+                          <Checkbox key={optIndex} value={option} size={size}>
+                            {option}
+                          </Checkbox>
+                        ))}
+                      </Stack>
+                    </CheckboxGroup>
+                  ) : ( // Single-select using Select
+                    <Select
+                      id={`notification-selector-${index}`}
+                      value={pref.value}
+                      onChange={(e) => handleSelectorChange(index, e.target.value, pref.onChange)}
+                      placeholder="Select an option"
+                      colorScheme={colorScheme}
+                      size={size}
+                    >
+                      {pref.options && pref.options.map((option, optIndex) => (
+                        <option key={optIndex} value={option}>
                           {option}
-                        </Checkbox>
+                        </option>
                       ))}
-                    </Stack>
-                  </CheckboxGroup>
-                ) : (
-                  <Select
-                    id={`selector-${pref.id}`}
-                    value={pref.value}
-                    onChange={(e) => handleSelectorChange(pref.id, e.target.value)}
-                    placeholder="Select an option"
-                    size="md"
-                    variant="filled"
-                    colorScheme="teal"
-                    _dark={{ bg: "gray.600", borderColor: "gray.500", color: "white" }}
-                  >
-                    {pref.options && pref.options.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </Select>
-                )}
-              </FormControl>
-            );
-          }
-          return null; // Fallback for unknown preference types
-        })}
-        {preferences.length === 0 && (
-          <Text color="gray.500" _dark={{ color: "gray.400" }} textAlign="center" py={4}>
-            No notification preferences available.
-          </Text>
-        )}
-      </Stack>
+                    </Select>
+                  )}
+                </FormControl>
+              )}
+              {/* Add a divider between preferences, but not after the last one */}
+              {index < internalPreferences.length - 1 && <Divider />}
+            </React.Fragment>
+          ))}
+        </Stack>
+      )}
     </Box>
   );
 }
 
 NotificationPreferenceSection.propTypes = {
   /**
-   * The title of the notification section.
+   * Title of the notification section.
    */
   title: PropTypes.string.isRequired,
   /**
-   * An array of notification preference objects.
-   * Each object defines a toggle or selector preference.
+   * Array of notification preference objects, each defining a toggle or selector.
+   * Each object can be:
+   * - { label: string, type: 'toggle', isChecked: boolean, onChange: function | string }
+   * - { label: string, type: 'selector', options: Array<string>, value: string | Array<string>, onChange: function | string }
    */
-  preferences: PropTypes.arrayOf(preferencePropTypes),
+  preferences: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      type: PropTypes.oneOf(['toggle', 'selector']).isRequired,
+      isChecked: PropTypes.bool, // For type 'toggle'
+      options: PropTypes.arrayOf(PropTypes.string), // For type 'selector'
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]), // For type 'selector'
+      onChange: PropTypes.oneOfType([PropTypes.func, PropTypes.string]), // Can be a function or a string (for example purposes)
+    })
+  ),
+  /**
+   * The color scheme for interactive elements.
+   */
+  colorScheme: PropTypes.string,
+  /**
+   * The variant for the container. Can be 'outline' or 'elevated'.
+   */
+  variant: PropTypes.string,
+  /**
+   * The size for interactive elements (e.g., 'sm', 'md', 'lg').
+   */
+  size: PropTypes.string,
+  /**
+   * The border radius for the container.
+   */
+  borderRadius: PropTypes.string,
+  /**
+   * The background color for the container.
+   */
+  background: PropTypes.string,
+  /**
+   * The padding for the container.
+   */
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * The margin for the container.
+   */
+  margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * The maximum width for the container.
+   */
+  maxW: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Overflow-y behavior for scrollable content.
+   */
+  overflowY: PropTypes.string,
+  /**
+   * Maximum height for scrollable content.
+   */
+  maxH: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
 };
 
-NotificationPreferenceSection.defaultProps = {
-  preferences: [],
-};
+export default NotificationPreferenceSection;

@@ -1,239 +1,289 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Box,
+  Text,
+  Button,
+  IconButton,
   List,
   ListItem,
-  Text,
-  IconButton,
   Flex,
   Spacer,
-  useToast,
-  Icon,
-  useColorModeValue,
+  useToast
 } from '@chakra-ui/react';
-import { DragHandleIcon, CheckIcon } from '@chakra-ui/icons';
+import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import PropTypes from 'prop-types';
 
 /**
- * @typedef {object} LocationItem
- * @property {string | number} id - Unique identifier for the item.
- * @property {string} name - The primary text to display for the item.
- * @property {string} [description] - Optional secondary text for the item.
- * @property {any} [data] - Any additional data associated with the item.
- */
-
-/**
- * LocationList component displays a list of items, supporting selection and optional reordering.
+ * A list component to display search results or saved items, with optional reordering capabilities.
+ * It is designed to be visually appealing, highly customizable, and accessible using Chakra UI.
  *
  * @param {object} props - The component props.
- * @param {LocationItem[]} props.items - Array of items to display in the list. Each item should ideally have an 'id' and 'name' property.
- * @param {function(LocationItem): void} [props.onSelect] - Callback function when an item is selected. Receives the selected item.
- * @param {string} [props.itemKey='id'] - Key to uniquely identify list items. Defaults to 'id'.
- * @param {string} props.ariaLabel - Accessibility label for the list. Required for screen readers.
- * @param {boolean} [props.isReorderable=false] - If true, items in the list can be reordered via drag-and-drop.
- * @param {function(LocationItem[]): void} [props.onReorder] - Callback function when items are reordered. Provides the new order of items.
+ * @param {Array<object>} props.items - Array of items to display in the list. Each item should ideally have a unique identifier.
+ * @param {function} [props.onSelect] - Callback function when an item is selected. Receives the selected item as an argument.
+ * @param {string} [props.itemKey='id'] - Key to uniquely identify list items. If not found, falls back to 'name' or index.
+ * @param {string} [props.ariaLabel='List of items'] - Accessibility label for the list.
+ * @param {boolean} [props.isReorderable=false] - If true, items in the list can be reordered using up/down buttons.
+ * @param {function} [props.onReorder] - Callback function when items are reordered. Provides the new order of items as an array.
+ * @param {string} [props.colorScheme='blue'] - The color scheme for interactive elements (buttons, icons).
+ * @param {string} [props.variant='outline'] - The variant for the select button.
+ * @param {string} [props.size='md'] - The size for interactive elements (buttons, icons).
+ * @param {string} [props.borderRadius='md'] - Border radius for the main container.
+ * @param {string} [props.fontSize='md'] - Font size for list item text.
+ * @param {string} [props.fontWeight='normal'] - Font weight for list item text.
+ * @param {string} [props.background='white'] - Background color for the main container.
+ * @param {string} [props.maxH='400px'] - Maximum height for the list, enabling vertical scrolling.
+ * @param {string} [props.overflowY='auto'] - Overflow behavior for the Y-axis, typically 'auto' for scrollable content.
  */
 export default function LocationList({
   items = [],
   onSelect,
   itemKey = 'id',
-  ariaLabel,
+  ariaLabel = 'List of items',
   isReorderable = false,
   onReorder,
+  colorScheme = 'blue',
+  variant = 'outline',
+  size = 'md',
+  borderRadius = 'md',
+  fontSize = 'md',
+  fontWeight = 'normal',
+  background = 'white',
+  maxH = '400px',
+  overflowY = 'auto',
+  ...rest
 }) {
   const [orderedItems, setOrderedItems] = useState(items);
   const toast = useToast();
 
-  // Refs for drag and drop
-  const dragItem = useRef(null); // Index of the item being dragged
-  const dragOverItem = useRef(null); // Index of the item being dragged over
-
-  // Colors for drag feedback
-  const dragBgColor = useColorModeValue('blue.50', 'blue.700');
-  const hoverBgColor = useColorModeValue('gray.50', 'gray.700');
-  const borderColor = useColorModeValue('gray.200', 'gray.600');
-  const itemBgColor = useColorModeValue('white', 'gray.700');
-  const textColor = useColorModeValue('gray.800', 'white');
-  const descriptionColor = useColorModeValue('gray.500', 'gray.400');
-  const emptyStateColor = useColorModeValue('gray.500', 'gray.400');
-
+  // Update internal state if the 'items' prop changes from the parent
   useEffect(() => {
     setOrderedItems(items);
   }, [items]);
 
-  const handleDragStart = useCallback((e, index) => {
-    dragItem.current = index;
-    e.dataTransfer.effectAllowed = 'move';
-    // Add a class to the dragged item for visual feedback
-    e.currentTarget.classList.add('dragging');
-  }, []);
-
-  const handleDragEnter = useCallback((e, index) => {
-    dragOverItem.current = index;
-    // Add a class to the item being dragged over for visual feedback
-    e.currentTarget.classList.add('drag-over');
-  }, []);
-
-  const handleDragLeave = useCallback((e) => {
-    // Remove the class when leaving an item
-    e.currentTarget.classList.remove('drag-over');
-  }, []);
-
-  const handleDragOver = useCallback((e) => {
-    e.preventDefault(); // Necessary to allow dropping
-  }, []);
-
-  const handleDrop = useCallback(() => {
-    if (dragItem.current === null || dragOverItem.current === null) return;
-
-    const newOrderedItems = [...orderedItems];
-    const [draggedItem] = newOrderedItems.splice(dragItem.current, 1);
-    newOrderedItems.splice(dragOverItem.current, 0, draggedItem);
-
-    setOrderedItems(newOrderedItems);
-    if (onReorder) {
-      onReorder(newOrderedItems);
+  /**
+   * Generates a unique key for a list item.
+   * Prioritizes item[itemKey], then item.id, then item.name, then the item's index.
+   * @param {object} item - The item object.
+   * @param {number} index - The index of the item in the list.
+   * @returns {string|number} A unique key for the React list item.
+   */
+  const getItemUniqueKey = useCallback((item, index) => {
+    if (item && item[itemKey] !== undefined) {
+      return item[itemKey];
     }
+    if (item && item.id !== undefined) {
+      return item.id;
+    }
+    if (item && item.name !== undefined) {
+      return item.name;
+    }
+    return index; // Fallback to index if no suitable key property is found
+  }, [itemKey]);
 
-    // Reset refs
-    dragItem.current = null;
-    dragOverItem.current = null;
-  }, [orderedItems, onReorder]);
-
-  const handleDragEnd = useCallback((e) => {
-    // Remove all drag feedback classes
-    const itemsElements = document.querySelectorAll('.dragging, .drag-over');
-    itemsElements.forEach(el => el.classList.remove('dragging', 'drag-over'));
-    dragItem.current = null;
-    dragOverItem.current = null;
+  /**
+   * Determines the display text for a list item.
+   * Prioritizes item.name, then item.label, then a stringified version of the item.
+   * @param {object} item - The item object.
+   * @returns {string} The text to display for the item.
+   */
+  const getItemDisplayText = useCallback((item) => {
+    if (item && item.name) {
+      return item.name;
+    }
+    if (item && item.label) {
+      return item.label;
+    }
+    // Fallback for complex objects or items without 'name' or 'label'
+    try {
+      return JSON.stringify(item);
+    } catch (e) {
+      return 'Unnamed Item';
+    }
   }, []);
 
-  const handleItemClick = useCallback((item) => {
+  /**
+   * Handles the selection of an item. Calls the onSelect callback if provided,
+   * otherwise shows a toast notification.
+   * @param {object} item - The selected item.
+   */
+  const handleSelectItem = useCallback((item) => {
     if (onSelect) {
       onSelect(item);
+    } else {
+      toast({
+        title: 'Item Selected',
+        description: `Selected: ${getItemDisplayText(item)}`,
+        status: 'info',
+        duration: 2000,
+        isClosable: true,
+      });
     }
-  }, [onSelect]);
+  }, [onSelect, toast, getItemDisplayText]);
 
-  if (!ariaLabel) {
-    console.warn('LocationList: "ariaLabel" prop is required for accessibility.');
-  }
+  /**
+   * Moves an item up or down in the list. Updates the internal state and calls
+   * the onReorder callback if provided.
+   * @param {number} index - The current index of the item to move.
+   * @param {number} direction - -1 to move up, 1 to move down.
+   */
+  const moveItem = useCallback((index, direction) => {
+    const newIndex = index + direction;
+    // Ensure the new index is within valid bounds
+    if (newIndex >= 0 && newIndex < orderedItems.length) {
+      const newOrderedItems = [...orderedItems];
+      const [movedItem] = newOrderedItems.splice(index, 1); // Remove item from current position
+      newOrderedItems.splice(newIndex, 0, movedItem); // Insert item at new position
+      setOrderedItems(newOrderedItems); // Update internal state
 
-  if (!items || items.length === 0) {
-    return (
-      <Box
-        p={4}
-        borderWidth={1}
-        borderRadius="md"
-        borderColor={borderColor}
-        bg={useColorModeValue('white', 'gray.800')}
-        textAlign="center"
-      >
-        <Text color={emptyStateColor}>No locations to display.</Text>
-      </Box>
-    );
-  }
+      if (onReorder) {
+        onReorder(newOrderedItems); // Notify parent of the new order
+      } else {
+        toast({
+          title: 'Reorder Action',
+          description: 'Item reordered, but no onReorder callback provided.',
+          status: 'warning',
+          duration: 2000,
+          isClosable: true,
+        });
+      }
+    }
+  }, [orderedItems, onReorder, toast]);
 
   return (
-    <List
-      spacing={2}
-      aria-label={ariaLabel}
+    <Box
       borderWidth={1}
-      borderRadius="md"
-      borderColor={borderColor}
-      bg={useColorModeValue('white', 'gray.800')}
-      p={2}
-      sx={{
-        '.dragging': {
-          opacity: 0.5,
-          backgroundColor: dragBgColor,
-          boxShadow: 'lg',
-        },
-        '.drag-over': {
-          border: '2px dashed',
-          borderColor: 'blue.400',
-        },
-      }}
+      borderRadius={borderRadius}
+      bg={background}
+      p={4}
+      maxH={maxH}
+      overflowY={overflowY}
+      aria-label={ariaLabel}
+      {...rest}
     >
-      {orderedItems.map((item, index) => (
-        <ListItem
-          key={item[itemKey] || `item-${index}`} // Fallback to index if itemKey is not found
-          p={3}
-          borderWidth={1}
-          borderRadius="md"
-          borderColor={borderColor}
-          bg={itemBgColor}
-          _hover={{ bg: hoverBgColor }}
-          display="flex"
-          alignItems="center"
-          cursor={isReorderable ? 'grab' : (onSelect ? 'pointer' : 'default')}
-          draggable={isReorderable}
-          onDragStart={isReorderable ? (e) => handleDragStart(e, index) : undefined}
-          onDragEnter={isReorderable ? (e) => handleDragEnter(e, index) : undefined}
-          onDragLeave={isReorderable ? handleDragLeave : undefined}
-          onDragOver={isReorderable ? handleDragOver : undefined}
-          onDrop={isReorderable ? handleDrop : undefined}
-          onDragEnd={isReorderable ? handleDragEnd : undefined}
-          onClick={onSelect ? () => handleItemClick(item) : undefined}
-          role="option"
-          aria-selected={false} // Can be dynamic if there's a concept of selected item
-          tabIndex={0} // Make list items focusable for keyboard navigation
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              handleItemClick(item);
-            }
-          }}
-        >
-          {isReorderable && (
-            <Icon
-              as={DragHandleIcon}
-              mr={3}
-              color="gray.500"
-              cursor="grab"
-              aria-label="Drag handle to reorder item"
-            />
-          )}
-          <Flex direction="column" flex="1" minW={0}>
-            <Text fontSize="md" fontWeight="medium" color={textColor} noOfLines={1}>
-              {item.name || item.label || `Item ${index + 1}`} {/* Fallback for display */}
-            </Text>
-            {item.description && (
-              <Text fontSize="sm" color={descriptionColor} noOfLines={1}>
-                {item.description}
+      {orderedItems.length === 0 ? (
+        <Text color="gray.500" textAlign="center" py={4}>
+          No items to display.
+        </Text>
+      ) : (
+        <List spacing={2}>
+          {orderedItems.map((item, index) => (
+            <ListItem
+              key={getItemUniqueKey(item, index)}
+              p={2}
+              borderWidth={1}
+              borderRadius="md"
+              borderColor="gray.200"
+              _hover={{ bg: 'gray.50' }}
+              display="flex"
+              alignItems="center"
+              flexWrap="wrap" // Allows content and buttons to wrap on smaller screens
+            >
+              <Text flex="1" fontSize={fontSize} fontWeight={fontWeight} mr={2}>
+                {getItemDisplayText(item)}
               </Text>
-            )}
-          </Flex>
-          <Spacer />
-          {onSelect && (
-            <IconButton
-              icon={<CheckIcon />}
-              aria-label={`Select ${item.name || `Item ${index + 1}`}`}
-              size="sm"
-              variant="ghost"
-              colorScheme="blue"
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent ListItem's onClick from firing
-                handleItemClick(item);
-              }}
-            />
-          )}
-        </ListItem>
-      ))}
-    </List>
+              <Spacer />
+              <Flex gap={2} mt={{ base: 2, md: 0 }}> {/* Responsive margin-top for buttons */}
+                {isReorderable && (
+                  <>
+                    <IconButton
+                      icon={<ChevronUpIcon />}
+                      onClick={() => moveItem(index, -1)}
+                      isDisabled={index === 0} // Disable 'up' button for the first item
+                      aria-label={`Move ${getItemDisplayText(item)} up`}
+                      size={size}
+                      colorScheme={colorScheme}
+                      variant="ghost"
+                    />
+                    <IconButton
+                      icon={<ChevronDownIcon />}
+                      onClick={() => moveItem(index, 1)}
+                      isDisabled={index === orderedItems.length - 1} // Disable 'down' button for the last item
+                      aria-label={`Move ${getItemDisplayText(item)} down`}
+                      size={size}
+                      colorScheme={colorScheme}
+                      variant="ghost"
+                    />
+                  </>
+                )}
+                {onSelect && (
+                  <Button
+                    onClick={() => handleSelectItem(item)}
+                    size={size}
+                    colorScheme={colorScheme}
+                    variant={variant}
+                    aria-label={`Select ${getItemDisplayText(item)}`}
+                  >
+                    Select
+                  </Button>
+                )}
+              </Flex>
+            </ListItem>
+          ))}
+        </List>
+      )}
+    </Box>
   );
 }
 
 LocationList.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      name: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      data: PropTypes.any,
-    })
-  ),
+  /**
+   * Array of items to display in the list. Each item should ideally have a unique identifier.
+   */
+  items: PropTypes.arrayOf(PropTypes.object),
+  /**
+   * Callback function when an item is selected. Receives the selected item as an argument.
+   */
   onSelect: PropTypes.func,
+  /**
+   * Key to uniquely identify list items. If not found, falls back to 'name' or index.
+   */
   itemKey: PropTypes.string,
-  ariaLabel: PropTypes.string.isRequired,
+  /**
+   * Accessibility label for the list.
+   */
+  ariaLabel: PropTypes.string,
+  /**
+   * If true, items in the list can be reordered using up/down buttons.
+   */
   isReorderable: PropTypes.bool,
+  /**
+   * Callback function when items are reordered. Provides the new order of items as an array.
+   */
   onReorder: PropTypes.func,
+  /**
+   * The color scheme for interactive elements (buttons, icons).
+   */
+  colorScheme: PropTypes.string,
+  /**
+   * The variant for the select button.
+   */
+  variant: PropTypes.string,
+  /**
+   * The size for interactive elements (buttons, icons).
+   */
+  size: PropTypes.string,
+  /**
+   * Border radius for the main container.
+   */
+  borderRadius: PropTypes.string,
+  /**
+   * Font size for list item text.
+   */
+  fontSize: PropTypes.string,
+  /**
+   * Font weight for list item text.
+   */
+  fontWeight: PropTypes.string,
+  /**
+   * Background color for the main container.
+   */
+  background: PropTypes.string,
+  /**
+   * Maximum height for the list, enabling vertical scrolling.
+   */
+  maxH: PropTypes.string,
+  /**
+   * Overflow behavior for the Y-axis, typically 'auto' for scrollable content.
+   */
+  overflowY: PropTypes.string,
 };

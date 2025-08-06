@@ -1,43 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import {
-  Box,
-  Flex,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
-  useToast
-} from '@chakra-ui/react';
+import React, { useState, useCallback } from 'react';
+import { Box, Flex, Heading, useToast } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-
-import { DatePicker, Button, MultiSelect, HistoricalDataPanel, AlertList, AlertDetailsPanel } from '../components';
-
+import DatePicker from '../components/DatePicker';
+import Button from '../components/Button';
+import MultiSelect from '../components/MultiSelect';
+import Tabs from '../components/Tabs';
+import HistoricalDataPanel from '../components/HistoricalDataPanel';
+import AlertList from '../components/AlertList';
+import AlertDetailsPanel from '../components/AlertDetailsPanel';
 
 /**
- * @typedef {Object} HistoricalDataScreenProps
- */
-
-/**
- * HistoricalDataScreen component displays historical weather data and weather alerts.
- * It allows users to select a date range, customize parameters, and view alert details.
- * @param {HistoricalDataScreenProps} props - Props for the HistoricalDataScreen component.
- * @returns {JSX.Element} The rendered HistoricalDataScreen component.
+ * HistoricalDataScreen component displays historical weather data and alerts.
+ * It allows users to select a date range, customize meteorological parameters,
+ * and view historical data or severe weather alerts in a tabbed interface.
  */
 export default function HistoricalDataScreen() {
-  const toast = useToast();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [selectedParameters, setSelectedParameters] = useState([]);
   const [historicalData, setHistoricalData] = useState([]);
   const [alerts, setAlerts] = useState([]);
   const [selectedAlert, setSelectedAlert] = useState(null);
-  const [showParameterSelection, setShowParameterSelection] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState("Selected Location"); // Placeholder for actual location
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const toast = useToast();
 
   /**
    * Handles the change event for the start date picker.
-   * @param {string} date - The new start date.
+   * @param {string} date - The selected start date.
    */
   const handleStartDateChange = useCallback((date) => {
     setStartDate(date);
@@ -45,167 +34,234 @@ export default function HistoricalDataScreen() {
 
   /**
    * Handles the change event for the end date picker.
-   * @param {string} date - The new end date.
+   * @param {string} date - The selected end date.
    */
   const handleEndDateChange = useCallback((date) => {
     setEndDate(date);
   }, []);
 
   /**
-   * Handles the click event for the "Done" button.
-   * Fetches historical data based on the selected date range and parameters.
+   * Handles the click event for the 'Done' button.
+   * This function would typically trigger data fetching based on the selected dates and parameters.
    */
   const handleDoneClick = useCallback(() => {
     if (!startDate || !endDate) {
       toast({
-        title: "Date selection required",
-        description: "Please select both start and end dates.",
-        status: "warning",
+        title: 'Date Range Required',
+        description: 'Please select both a start and an end date.',
+        status: 'warning',
         duration: 3000,
         isClosable: true,
       });
       return;
     }
-    // Simulate fetching historical data
-    console.log("Fetching historical data for:", { startDate, endDate, selectedParameters });
-    setHistoricalData([
-      { date: "2023-01-01", temperature: 10, humidity: 70, windSpeed: 5, precipitation: 0 },
-      { date: "2023-01-02", temperature: 12, humidity: 65, windSpeed: 7, precipitation: 2 },
-    ]);
+    // Placeholder for fetching historical data and alerts
+    console.log('Fetching data for:', { startDate, endDate, selectedParameters });
+    // Simulate data fetch
+    setHistoricalData([{ date: '2023-01-01', temperature: 25, humidity: 60 }]);
+    setAlerts([{ id: '1', title: 'Severe Thunderstorm Warning', date: '2023-01-05', description: 'Heavy rain and strong winds expected.' }]);
     toast({
-      title: "Data Updated",
-      description: "Historical data has been updated.",
-      status: "success",
+      title: 'Data Updated',
+      description: 'Historical data and alerts have been refreshed.',
+      status: 'success',
       duration: 3000,
       isClosable: true,
     });
   }, [startDate, endDate, selectedParameters, toast]);
 
   /**
-   * Handles the click event for the "Customize Parameters" button.
-   * Toggles the visibility of the MultiSelect component.
+   * Handles the click event for the 'Customize Parameters' button.
+   * This function could open a modal or navigate to a different section for parameter customization.
    */
   const handleCustomizeParametersClick = useCallback(() => {
-    setShowParameterSelection((prev) => !prev);
-  }, []);
+    toast({
+      title: 'Customize Parameters',
+      description: 'This feature is under development.',
+      status: 'info',
+      duration: 3000,
+      isClosable: true,
+    });
+  }, [toast]);
 
   /**
    * Handles the change event for the MultiSelect component.
-   * @param {string[]} values - The newly selected parameters.
+   * @param {string[]} values - An array of selected meteorological parameters.
    */
   const handleParameterChange = useCallback((values) => {
     setSelectedParameters(values);
   }, []);
 
   /**
-   * Handles the click event on an alert item in the AlertList.
-   * Sets the selected alert to display its details.
-   * @param {Object} alert - The alert object that was clicked.
+   * Displays details of a selected alert.
+   * @param {object} alert - The alert object to display.
    */
   const displayAlertDetails = useCallback((alert) => {
     setSelectedAlert(alert);
   }, []);
 
-  useEffect(() => {
-    // Simulate fetching initial alerts
-    setAlerts([
-      { id: "alert1", title: "Severe Thunderstorm Warning", date: "2023-07-15", description: "Strong winds and heavy rain expected." },
-      { id: "alert2", title: "Flash Flood Watch", date: "2023-07-14", description: "Potential for rapid onset flooding." },
-    ]);
+  /**
+   * Handles the change event for the Tabs component.
+   * @param {number} index - The index of the newly selected tab.
+   */
+  const handleTabChange = useCallback((index) => {
+    setActiveTabIndex(index);
   }, []);
 
   return (
     <Flex
       direction="column"
-      gap={6}
-      p={8}
-      bg="white"
+      gap={4}
+      minH="100vh"
+      px={{ base: 2, md: 4, lg: 8 }}
+      py={{ base: 2, md: 4, lg: 8 }}
       width="100%"
-      height="100vh"
-      aria-label="Historical Data and Weather Alerts Screen"
+      bg="gray.50"
     >
-      <Tabs defaultIndex={0} variant="enclosed" colorScheme="blue" flex="1">
-        <TabList>
-          <Tab>Historical Data</Tab>
-          <Tab>Weather Alerts</Tab>
-        </TabList>
+      {/* Full-width top header bar for screen title. */}
+      <Box
+        width="100%"
+        bg="white"
+        py={6}
+        px={{ base: 3, md: 6 }}
+        borderBottom="1px solid"
+        borderColor="gray.200"
+        boxShadow="sm"
+      >
+        {/* Screen title, full width header with padding. */}
+        <Heading
+          as="h1"
+          size={{ base: 'xl', md: '2xl' }}
+          color="gray.800"
+          textAlign="center"
+        >
+          Historical Data
+        </Heading>
+      </Box>
 
-        <TabPanels flex="1" overflowY="auto">
-          <TabPanel>
-            <Flex direction="column" gap={4} mb={4}>
-              <Flex align="flex-end" direction={{ base: "column", md: "row" }} gap={4} mb={4} wrap="wrap">
-                <DatePicker
-                  label="Start Date"
-                  value={startDate}
-                  onChange={handleStartDateChange}
-                  aria-label="Select start date"
-                />
-                <DatePicker
-                  label="End Date"
-                  value={endDate}
-                  onChange={handleEndDateChange}
-                  aria-label="Select end date"
-                />
-                <Button
-                  label="Done"
-                  onClick={handleDoneClick}
-                  colorScheme="blue"
-                  variant="solid"
-                  aria-label="Confirm date range"
-                />
-              </Flex>
+      {/* Container for date range selection, 'Done' button, and 'Customize Parameters' button. */}
+      <Flex
+        width="100%"
+        p={4}
+        bg="white"
+        borderRadius="md"
+        boxShadow="sm"
+        direction={{ base: 'column', md: 'row' }}
+        gap={4}
+        alignItems={{ base: 'stretch', md: 'flex-end' }}
+      >
+        {/* Date picker for selecting the start date of historical data. */}
+        <DatePicker
+          label="Start Date"
+          onChange={handleStartDateChange}
+          value={startDate}
+          flex={1}
+          width="100%"
+        />
+        {/* Date picker for selecting the end date of historical data. */}
+        <DatePicker
+          label="End Date"
+          onChange={handleEndDateChange}
+          value={endDate}
+          flex={1}
+          width="100%"
+        />
+        {/* Button to confirm the selected date range. */}
+        <Button
+          label="Done"
+          onClick={handleDoneClick}
+          variant="solid"
+          width={{ base: '100%', md: 'auto' }}
+          colorScheme="blue"
+          size="md"
+        />
+        {/* Button to open the meteorological parameter selection interface. */}
+        <Button
+          label="Customize Parameters"
+          onClick={handleCustomizeParametersClick}
+          width={{ base: '100%', md: 'auto' }}
+          colorScheme="teal"
+          variant="outline"
+          size="md"
+        />
+      </Flex>
 
-              <Flex direction="column" gap={4} mb={4}>
-                <Button
-                  label="Customize Parameters"
-                  onClick={handleCustomizeParametersClick}
-                  colorScheme="gray"
-                  variant="outline"
-                  aria-expanded={showParameterSelection}
-                  aria-controls="parameter-selection"
-                />
-                {showParameterSelection && (
-                  <Box id="parameter-selection" p={4} borderWidth="1px" borderRadius="md" borderColor="gray.200">
-                    <MultiSelect
-                      label="Select Parameters"
-                      options={["Temperature", "Humidity", "Wind Speed", "Precipitation"]}
-                      selectedValues={selectedParameters}
-                      onChange={handleParameterChange}
-                      aria-label="Select meteorological parameters"
-                    />
-                  </Box>
-                )}
-              </Flex>
+      {/* Container for the Multi-select component. */}
+      <Box
+        width="100%"
+        p={4}
+        bg="white"
+        borderRadius="md"
+        boxShadow="sm"
+      >
+        {/* Multi-select component for choosing meteorological parameters. */}
+        <MultiSelect
+          options={[
+            { label: 'Temperature', value: 'Temperature' },
+            { label: 'Humidity', value: 'Humidity' },
+            { label: 'Wind Speed', value: 'Wind Speed' },
+            { label: 'Precipitation', value: 'Precipitation' },
+          ]}
+          selectedValues={selectedParameters}
+          onChange={handleParameterChange}
+          width="100%"
+          label="Select Parameters"
+        />
+      </Box>
 
-              <HistoricalDataPanel
-                data={historicalData}
-                location={currentLocation}
-                aria-live="polite"
-                aria-atomic="true"
-              />
-            </Flex>
-          </TabPanel>
-
-          <TabPanel>
-            <Flex direction="column" gap={4} flex="1" overflowY="auto">
+      {/* Tabs for navigating between different historical data views. */}
+      <Tabs
+        defaultIndex={0}
+        onChange={handleTabChange}
+        width="100%"
+        p={4}
+        bg="white"
+        borderRadius="md"
+        boxShadow="sm"
+        tabs={[
+          { title: 'Historical Data', content: (
+            <HistoricalDataPanel
+              data={historicalData}
+              location="Selected Location" // This should be dynamic based on user input or context
+              width="100%"
+              minH="300px"
+              p={{ base: 4, md: 6 }}
+              bg="white"
+              borderRadius="md"
+              boxShadow="md"
+              flex={1}
+            />
+          )},
+          { title: 'Alerts', content: (
+            <Flex direction="column" gap={4} width="100%" flex={1}>
               <AlertList
                 alerts={alerts}
                 onAlertClick={displayAlertDetails}
-                aria-label="List of past weather alerts"
+                width="100%"
+                minH="300px"
+                p={{ base: 4, md: 6 }}
+                bg="white"
+                borderRadius="md"
+                boxShadow="md"
+                flex={1}
               />
-              {selectedAlert && (
-                <AlertDetailsPanel
-                  alert={selectedAlert}
-                  aria-live="polite"
-                  aria-atomic="true"
-                />
-              )}
+              <AlertDetailsPanel
+                alert={selectedAlert}
+                width="100%"
+                minH="200px"
+                p={{ base: 4, md: 6 }}
+                bg="white"
+                borderRadius="md"
+                boxShadow="md"
+                flex={1}
+              />
             </Flex>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+          )},
+        ]}
+      />
     </Flex>
   );
 }
 
-HistoricalDataScreen.propTypes = {};
+HistoricalDataScreen.propTypes = {
+  // No direct props for the screen component, state is managed internally.
+};

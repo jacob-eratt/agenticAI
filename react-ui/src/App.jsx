@@ -1,3 +1,4 @@
+// react-ui/src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import DailyForecastDetailsScreen from './pages/DailyForecastDetailsScreen';
@@ -8,10 +9,6 @@ import RadarMapScreen from './pages/RadarMapScreen';
 import SettingsScreen from './pages/SettingsScreen';
 import WeatherAlertsScreen from './pages/WeatherAlertsScreen';
 
-/**
- * App component for routing and navigation.
- * @returns {JSX.Element} The App component.
- */
 function App() {
   return (
     <Router>

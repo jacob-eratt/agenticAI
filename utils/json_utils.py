@@ -1,5 +1,6 @@
 import os
 import json
+import re
 
 def serialize_container(container_dict):
     return {
@@ -175,6 +176,12 @@ def load_dict_from_file(filename):
             return json.load(f)
     return {}
 
+
+
+def to_pascal_case(name):
+    # Split on non-alphanumeric, capitalize each part, and join
+    return ''.join(word.capitalize() for word in re.split(r'[^a-zA-Z0-9]', name) if word)
+
 def generate_screen_jsons(screens, instances, types, output_folder):
     os.makedirs(output_folder, exist_ok=True)
     instance_map = {inst["id"]: inst for inst in instances}
@@ -182,6 +189,7 @@ def generate_screen_jsons(screens, instances, types, output_folder):
 
     for screen in screens:
         screen_name = screen["name"]
+        pascal_screen_name = to_pascal_case(screen_name)
         screen_instance_ids = screen.get("component_instance_ids", [])
         screen_instances = [instance_map[iid] for iid in screen_instance_ids if iid in instance_map]
         type_ids = set(inst["type_id"] for inst in screen_instances)
@@ -191,7 +199,7 @@ def generate_screen_jsons(screens, instances, types, output_folder):
             "component_instances": screen_instances,
             "component_types": screen_types
         }
-        filename = os.path.join(output_folder, f"{screen_name}.json")
+        filename = os.path.join(output_folder, f"{pascal_screen_name}.json")
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(screen_json, f, indent=2)
         print(f"Wrote {filename}")

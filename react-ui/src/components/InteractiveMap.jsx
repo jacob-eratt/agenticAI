@@ -1,195 +1,262 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { Box, Text, useToast } from '@chakra-ui/react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Box, Text, Button, Stack, useToast } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * @typedef {object} InteractiveMapProps
- * @property {string} [src] - Source URL for the map's background image. This acts as the base layer.
- * @property {(interactionData: { scale: number; offsetX: number; offsetY: number; }) => void} [onInteraction] - Callback function for user interactions like pan and zoom.
+ * @typedef {object} MapInteractionData
+ * @property {number} zoomLevel - The current zoom level of the map.
+ * @property {object} center - The current center coordinates of the map.
+ * @property {number} center.lat - Latitude of the map center.
+ * @property {number} center.lng - Longitude of the map center.
+ * @property {string} action - The type of interaction (e.g., 'zoomIn', 'zoomOut', 'pan').
  */
 
 /**
- * InteractiveMap component to display a map-like interface with basic pan and zoom capabilities.
- * This component simulates map functionality using CSS transforms on a background image
- * and is designed to be a container for more advanced map libraries or custom overlays if needed.
+ * InteractiveMap component displays a conceptual interactive map with simulated pan and zoom capabilities.
+ * It leverages Chakra UI for styling and provides callbacks for user interactions.
  *
- * @param {InteractiveMapProps} props - The props for the InteractiveMap component.
+ * Note: This component provides a conceptual representation of an interactive map.
+ * For a fully functional map, integration with a dedicated map library (e.g., Leaflet, Mapbox GL JS, Google Maps API)
+ * would be required, which is beyond the scope of this Chakra UI primitive-focused component.
+ *
+ * @param {object} props - The component props.
+ * @param {string} props.src - Source URL or data identifier for the map content (e.g., 'real_time_radar_data_source').
+ * @param {function(MapInteractionData): void} [props.onInteraction] - Callback function for user interactions like pan and zoom.
+ *   It receives an object with `zoomLevel`, `center`, and `action` properties.
+ * @param {string} [props.colorScheme='blue'] - The color scheme for interactive elements.
+ * @param {string} [props.variant='solid'] - The variant for interactive elements.
+ * @param {string} [props.size='md'] - The size of interactive elements.
+ * @param {string | number | object} [props.padding=4] - Padding around the map container.
+ * @param {string | number | object} [props.margin=0] - Margin around the map container.
+ * @param {string | number} [props.borderRadius='md'] - Border radius of the map container.
+ * @param {string} [props.background='gray.50'] - Background color of the map container.
+ * @param {string | number | object} [props.minH='300px'] - Minimum height of the map container.
+ * @param {string | number | object} [props.maxH='500px'] - Maximum height of the map container, enabling scroll if content exceeds.
+ * @param {string} [props.overflowY='auto'] - Overflow behavior for the Y-axis.
  */
-export default function InteractiveMap({ src, onInteraction }) {
-  const mapRef = useRef(null);
-  const [scale, setScale] = useState(1);
-  const [offsetX, setOffsetX] = useState(0);
-  const [offsetY, setOffsetY] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startDragX, setStartDragX] = useState(0);
-  const [startDragY, setStartDragY] = useState(0);
+function InteractiveMap({
+  src,
+  onInteraction,
+  colorScheme = 'blue',
+  variant = 'solid',
+  size = 'md',
+  padding = 4,
+  margin = 0,
+  borderRadius = 'md',
+  background = 'gray.50',
+  minH = { base: '250px', md: '350px', lg: '450px' },
+  maxH = '500px',
+  overflowY = 'auto'
+}) {
   const toast = useToast();
+  const [zoomLevel, setZoomLevel] = useState(10); // Simulated zoom level
+  const [centerCoords, setCenterCoords] = useState({ lat: 34.0522, lng: -118.2437 }); // Simulated center (Los Angeles)
 
-  // Warn if src is missing, as it's crucial for visual representation
-  useEffect(() => {
-    if (!src) {
+  /**
+   * Calls the onInteraction prop with current map state.
+   * @param {string} action - The action performed (e.g., 'zoomIn', 'zoomOut', 'pan').
+   */
+  const triggerInteraction = useCallback((action) => {
+    if (onInteraction) {
+      onInteraction({
+        zoomLevel: zoomLevel,
+        center: centerCoords,
+        action: action
+      });
+    } else {
       toast({
-        title: "Map Source Missing",
-        description: "The 'src' prop is recommended for InteractiveMap to display content.",
-        status: "warning",
-        duration: 5000,
+        title: 'Interaction detected',
+        description: `Map ${action}. Zoom: ${zoomLevel}, Center: ${centerCoords.lat}, ${centerCoords.lng}`,
+        status: 'info',
+        duration: 2000,
         isClosable: true,
-        position: "top-right",
+        position: 'bottom-right'
       });
     }
-  }, [src, toast]);
+  }, [onInteraction, zoomLevel, centerCoords, toast]);
 
-  // Callback for interaction changes
+  /**
+   * Simulates zooming in on the map.
+   */
+  const handleZoomIn = useCallback(() => {
+    setZoomLevel((prevZoom) => Math.min(prevZoom + 1, 20)); // Max zoom 20
+    triggerInteraction('zoomIn');
+  }, [triggerInteraction]);
+
+  /**
+   * Simulates zooming out on the map.
+   */
+  const handleZoomOut = useCallback(() => {
+    setZoomLevel((prevZoom) => Math.max(prevZoom - 1, 1)); // Min zoom 1
+    triggerInteraction('zoomOut');
+  }, [triggerInteraction]);
+
+  /**
+   * Simulates panning the map.
+   */
+  const handlePan = useCallback(() => {
+    // Simulate a slight pan
+    setCenterCoords((prevCenter) => ({
+      lat: prevCenter.lat + (Math.random() - 0.5) * 0.1,
+      lng: prevCenter.lng + (Math.random() - 0.5) * 0.1
+    }));
+    triggerInteraction('pan');
+  }, [triggerInteraction]);
+
   useEffect(() => {
-    if (onInteraction) {
-      onInteraction({ scale, offsetX, offsetY });
+    if (!src) {
+      console.warn('InteractiveMap: The "src" prop is highly recommended for map content.');
     }
-  }, [scale, offsetX, offsetY, onInteraction]);
-
-  /**
-   * Handles the mouse down event to start dragging.
-   * @param {React.MouseEvent} e - The mouse event.
-   */
-  const handleMouseDown = useCallback((e) => {
-    setIsDragging(true);
-    setStartDragX(e.clientX - offsetX);
-    setStartDragY(e.clientY - offsetY);
-    e.preventDefault(); // Prevent default drag behavior (e.g., image dragging)
-  }, [offsetX, offsetY]);
-
-  /**
-   * Handles the mouse move event for panning.
-   * @param {React.MouseEvent} e - The mouse event.
-   */
-  const handleMouseMove = useCallback((e) => {
-    if (!isDragging) return;
-    setOffsetX(e.clientX - startDragX);
-    setOffsetY(e.clientY - startDragY);
-  }, [isDragging, startDragX, startDragY]);
-
-  /**
-   * Handles the mouse up event to stop dragging.
-   */
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  /**
-   * Handles the mouse leave event to stop dragging if the cursor leaves the map area.
-   */
-  const handleMouseLeave = useCallback(() => {
-    if (isDragging) {
-      setIsDragging(false);
-    }
-  }, [isDragging]);
-
-  /**
-   * Handles the mouse wheel event for zooming.
-   * @param {React.WheelEvent} e - The wheel event.
-   */
-  const handleWheel = useCallback((e) => {
-    e.preventDefault(); // Prevent page scrolling
-    const scaleAmount = 0.1;
-    const newScale = e.deltaY < 0 ? scale * (1 + scaleAmount) : scale / (1 + scaleAmount);
-
-    // Clamp scale to reasonable limits to prevent extreme zoom
-    const clampedScale = Math.max(0.5, Math.min(5, newScale));
-
-    // Calculate zoom point relative to mouse cursor
-    if (mapRef.current) {
-      const rect = mapRef.current.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-
-      // Adjust offset to zoom towards the mouse cursor
-      const newOffsetX = offsetX - (mouseX / scale) * (clampedScale - scale);
-      const newOffsetY = offsetY - (mouseY / scale) * (clampedScale - scale);
-
-      setOffsetX(newOffsetX);
-      setOffsetY(newOffsetY);
-    }
-    setScale(clampedScale);
-  }, [scale, offsetX, offsetY]);
+  }, [src]);
 
   return (
     <Box
-      ref={mapRef}
-      position="relative"
-      width="100%"
-      height={{ base: "300px", md: "500px", lg: "600px" }} // Responsive height
-      overflow="hidden"
+      p={padding}
+      m={margin}
       borderWidth="1px"
-      borderRadius="md"
-      boxShadow="lg"
-      bg="gray.100"
-      cursor={isDragging ? 'grabbing' : 'grab'}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-      onWheel={handleWheel}
-      aria-label="Interactive Map with Pan and Zoom"
-      role="img" // Role 'img' for a static image with interaction, 'application' for complex interactive controls
+      borderRadius={borderRadius}
+      bg={background}
+      minH={minH}
+      maxH={maxH}
+      overflowY={overflowY}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      justifyContent="center"
+      position="relative"
+      aria-label="Interactive Map Container"
+      role="region"
     >
-      {src ? (
+      <Text
+        fontSize="xl"
+        fontWeight="bold"
+        mb={4}
+        color="gray.700"
+        textAlign="center"
+      >
+        Interactive Map
+      </Text>
+      <Text fontSize="md" color="gray.600" mb={4} textAlign="center">
+        Displaying: {src || 'No source provided'}
+      </Text>
+      <Text fontSize="sm" color="gray.500" mb={6} textAlign="center">
+        Current Zoom: {zoomLevel} | Center: ({centerCoords.lat.toFixed(4)}, {centerCoords.lng.toFixed(4)})
+      </Text>
+
+      <Box
+        width="100%"
+        height="200px"
+        bg="gray.200"
+        borderRadius="md"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        mb={6}
+        position="relative"
+        overflow="hidden"
+        aria-label="Map View Area"
+      >
+        <Text fontSize="lg" color="gray.500" fontStyle="italic">
+          Map Content Placeholder
+        </Text>
+        {/* This is where a real map library would render its content */}
         <Box
           position="absolute"
           top="0"
           left="0"
           width="100%"
           height="100%"
-          bgImage={`url(${src})`}
-          bgSize="cover" // Adjust as needed: 'contain', '100% 100%', etc.
-          bgRepeat="no-repeat"
-          bgPosition="center"
-          transform={`translate(${offsetX}px, ${offsetY}px) scale(${scale})`}
-          transformOrigin="0 0" // Important for correct pan/zoom behavior
-          transition="transform 0.05s ease-out" // Smooth transition for pan/zoom
-          willChange="transform" // Optimize for animation
-          aria-hidden="true" // Content is visual, interactions are on parent
+          bg="transparent"
+          cursor="grab"
+          _active={{ cursor: 'grabbing' }}
+          onMouseDown={handlePan} // Simulate pan on click/drag
+          aria-label="Map interaction overlay"
         />
-      ) : (
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          height="100%"
-          color="gray.500"
-          fontSize="xl"
-          fontWeight="semibold"
-          textAlign="center"
-          p={4}
+      </Box>
+
+      <Stack direction={{ base: 'column', md: 'row' }} spacing={4} mt={4}>
+        <Button
+          onClick={handleZoomIn}
+          colorScheme={colorScheme}
+          variant={variant}
+          size={size}
+          aria-label="Zoom In"
         >
-          <Text>No map source provided. Pan and zoom still active on this placeholder area.</Text>
-        </Box>
-      )}
-      {/* This is where real-time data overlays or more complex map layers could be rendered.
-          For example, using SVG, Canvas, or a dedicated map library component.
-          These overlays would typically have `pointerEvents="none"` to allow mouse events
-          to pass through to the underlying map container for pan/zoom. */}
-      {/* <Box
-        position="absolute"
-        top="0"
-        left="0"
-        width="100%"
-        height="100%"
-        pointerEvents="none"
-      >
-        <Text color="red.500" fontSize="sm" p={2}>Simulated Real-time Data Overlay</Text>
-      </Box> */}
+          Zoom In
+        </Button>
+        <Button
+          onClick={handleZoomOut}
+          colorScheme={colorScheme}
+          variant={variant}
+          size={size}
+          aria-label="Zoom Out"
+        >
+          Zoom Out
+        </Button>
+        <Button
+          onClick={handlePan}
+          colorScheme={colorScheme}
+          variant={variant}
+          size={size}
+          aria-label="Pan Map"
+        >
+          Pan Map
+        </Button>
+      </Stack>
     </Box>
   );
 }
 
 InteractiveMap.propTypes = {
   /**
-   * Source URL for the map's background image. This acts as the base layer.
-   * If not provided, a placeholder message will be displayed.
+   * Source URL or data identifier for the map content (e.g., 'real_time_radar_data_source').
    */
-  src: PropTypes.string,
+  src: PropTypes.string.isRequired,
   /**
    * Callback function for user interactions like pan and zoom.
-   * Receives an object with current `scale`, `offsetX`, and `offsetY`.
+   * It receives an object with `zoomLevel`, `center`, and `action` properties.
    */
   onInteraction: PropTypes.func,
+  /**
+   * The color scheme for interactive elements.
+   */
+  colorScheme: PropTypes.string,
+  /**
+   * The variant for interactive elements.
+   */
+  variant: PropTypes.string,
+  /**
+   * The size of interactive elements.
+   */
+  size: PropTypes.string,
+  /**
+   * Padding around the map container.
+   */
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Margin around the map container.
+   */
+  margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Border radius of the map container.
+   */
+  borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Background color of the map container.
+   */
+  background: PropTypes.string,
+  /**
+   * Minimum height of the map container. Supports responsive values.
+   */
+  minH: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Maximum height of the map container, enabling scroll if content exceeds.
+   */
+  maxH: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Overflow behavior for the Y-axis.
+   */
+  overflowY: PropTypes.string
 };
+
+export default React.memo(InteractiveMap);

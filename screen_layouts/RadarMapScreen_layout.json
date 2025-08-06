@@ -1,38 +1,83 @@
 {
-  "type": "Box",
+  "type": "Flex",
   "props": {
-    "position": "relative",
-    "width": "100vw",
-    "height": "100vh",
-    "overflow": "hidden"
+    "direction": "column",
+    "bg": "gray.50",
+    "minH": "100vh",
+    "width": "100%",
+    "px": {
+      "base": 0
+    },
+    "py": {
+      "base": 0
+    },
+    "gap": 0
   },
   "children": [
     {
-      "type": "InteractiveMap",
-      "component_instance_id": "8e9d05d0-3899-4098-83d8-312ec454128b",
+      "type": "Box",
       "props": {
-        "src": "real_time_radar_data_source",
-        "onInteraction": "handle_map_pan_zoom",
+        "position": "relative",
         "width": "100%",
-        "height": "100%"
+        "height": "100vh",
+        "flex": 1,
+        "overflow": "hidden"
       },
-      "notes": "Main interactive radar map, filling the entire screen."
-    },
-    {
-      "type": "IconButton",
-      "component_instance_id": "3228d5b9-9db7-428c-a0de-632f9e5cca57",
-      "props": {
-        "icon": "play",
-        "onClick": "initiateTimeLapsePlayback",
-        "ariaLabel": "Play Time-lapse",
-        "position": "absolute",
-        "bottom": "4",
-        "right": "4",
-        "zIndex": "10",
-        "size": "lg",
-        "colorScheme": "blue"
-      },
-      "notes": "Play button for time-lapse radar, positioned at the bottom right corner for easy access."
+      "children": [
+        {
+          "type": "InteractiveMap",
+          "component_instance_id": "8e9d05d0-3899-4098-83d8-312ec454128b",
+          "props": {
+            "width": "100%",
+            "height": "100%",
+            "onInteraction": "handle_map_pan_zoom",
+            "src": "real_time_radar_data_source"
+          },
+          "notes": "Main interactive radar map, fills the entire available screen space within its parent container."
+        },
+        {
+          "type": "Box",
+          "props": {
+            "position": "absolute",
+            "bottom": {
+              "base": "4",
+              "md": "8"
+            },
+            "right": {
+              "base": "4",
+              "md": "8"
+            },
+            "zIndex": 10,
+            "p": {
+              "base": 2,
+              "md": 4
+            },
+            "bg": "whiteAlpha.800",
+            "borderRadius": "md",
+            "boxShadow": "lg"
+          },
+          "children": [
+            {
+              "type": "Button",
+              "component_instance_id": "3228d5b9-9db7-428c-a0de-632f9e5cca57",
+              "props": {
+                "onClick": "initiateTimeLapsePlayback",
+                "ariaLabel": "Play Time-lapse",
+                "icon": "play",
+                "colorScheme": "blue",
+                "size": {
+                  "base": "md",
+                  "md": "lg"
+                }
+              },
+              "notes": "Button to play time-lapse radar data, positioned in the bottom-right corner of the map."
+            }
+          ],
+          "notes": "Container for the time-lapse play button, absolutely positioned over the map for easy access."
+        }
+      ],
+      "notes": "Main content area for the radar map, acting as a relative container for overlaid controls."
     }
-  ]
+  ],
+  "notes": "Root container for the Radar Map screen, ensuring full viewport coverage and a column layout."
 }

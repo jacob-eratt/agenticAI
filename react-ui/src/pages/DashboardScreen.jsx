@@ -1,157 +1,268 @@
-import React from 'react';
-import { Box, Flex, Grid, Text } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Box, Flex, Text, SimpleGrid } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import {
-  WeatherDisplayCard,
-  DailyForecastList,
-  TextDisplay,
-  IconButton,
-  Button,
-  ConfirmationDialog
-} from '../components';
+import { useNavigate } from 'react-router-dom';
+
+import Button from '../components/Button';
+import IconButton from '../components/IconButton';
+import WeatherDisplayCard from '../components/WeatherDisplayCard';
+import DailyForecastList from '../components/DailyForecastList';
+import ConfirmationDialog from '../components/ConfirmationDialog';
 
 /**
- * @typedef {object} DashboardScreenProps
+ * DashboardScreen component displays current weather information and provides quick access to other features.
+ * It includes navigation buttons, current location display, weather details, daily forecast, and a location error dialog.
  */
+const DashboardScreen = () => {
+  const navigate = useNavigate();
+  const [isLocationErrorDialogOpen, setIsLocationErrorDialogOpen] = useState(true); // Initialized to true based on layout JSON
+  const [lastUpdatedTimestamp, setLastUpdatedTimestamp] = useState('');
 
-/**
- * Main dashboard displaying current weather information and quick access to other features.
- * @param {DashboardScreenProps} props - The props for the DashboardScreen component.
- * @returns {React.Element} The rendered DashboardScreen component.
- */
-export default function DashboardScreen() {
-  // Placeholder functions for navigation and dialog actions
+  useEffect(() => {
+    setLastUpdatedTimestamp(new Date().toLocaleString());
+  }, []);
+
+  /**
+   * Navigates to the location management screen.
+   */
   const navigateToLocationManagement = () => {
-    console.log('Navigate to Location Management');
+    navigate('/location-management');
   };
 
+  /**
+   * Navigates to the settings screen.
+   */
   const navigate_to_settings_screen = () => {
-    console.log('Navigate to Settings Screen');
+    navigate('/settings');
   };
 
-  const navigate_to_hourly_forecast_screen = () => {
-    console.log('Navigate to Hourly Forecast Screen');
-  };
-
-  const navigate_to_weather_alerts_screen = () => {
-    console.log('Navigate to Weather Alerts Screen');
-  };
-
-  const navigateToHistoricalDataScreen = () => {
-    console.log('Navigate to Historical Data Screen');
-  };
-
+  /**
+   * Navigates to the radar map screen.
+   */
   const navigate_to_radar_map_screen = () => {
-    console.log('Navigate to Radar Map Screen');
+    navigate('/radar-map');
   };
 
+  /**
+   * Navigates to the historical data screen.
+   */
+  const navigateToHistoricalDataScreen = () => {
+    navigate('/historical-data');
+  };
+
+  /**
+   * Navigates to the hourly forecast screen.
+   */
+  const navigate_to_hourly_forecast_screen = () => {
+    navigate('/hourly-forecast');
+  };
+
+  /**
+   * Handles navigation to the location management screen from the dialog.
+   */
   const handleManageLocationsNavigation = () => {
-    console.log('Handle Manage Locations Navigation from dialog');
+    setIsLocationErrorDialogOpen(false);
+    navigateToLocationManagement();
   };
 
+  /**
+   * Handles the "Try Again" action from the location error dialog.
+   */
   const handleTryAgain = () => {
-    console.log('Handle Try Again from dialog');
+    setIsLocationErrorDialogOpen(false);
+    // Placeholder for actual logic to retry location detection
+    console.log('Retrying location detection...');
   };
 
-  // Placeholder for timestamp
-  const lastUpdatedTimestamp = new Date().toLocaleString();
+  /**
+   * Navigates to the weather alerts screen.
+   */
+  const navigate_to_weather_alerts_screen = () => {
+    navigate('/weather-alerts');
+  };
 
   return (
-    <Flex bg="gray.50" direction="column" gap={6} minH="100vh" p={6}>
-      {/* Header Section */}
-      <Flex alignItems="center" justifyContent="space-between" mb={4}>
-        <TextDisplay
-          text="Current Location: New York, NY"
-          fontSize="xl"
-          fontWeight="bold"
-        />
-        <Flex gap={2}>
-          <IconButton
-            ariaLabel="Manage Locations"
-            icon="location"
-            onClick={navigateToLocationManagement}
-            colorScheme="gray"
-            variant="ghost"
-          />
-          <IconButton
-            ariaLabel="Settings"
-            icon="settings"
-            onClick={navigate_to_settings_screen}
-            colorScheme="gray"
-            variant="ghost"
-          />
-        </Flex>
-      </Flex>
-
-      {/* Weather Display Cards Grid */}
-      <Grid gap={4} mb={6} templateColumns="repeat(auto-fit, minmax(150px, 1fr))">
-        <WeatherDisplayCard
-          condition="Feels Like"
-          temperature="27°C"
-        />
-        <WeatherDisplayCard
-          condition="Humidity"
-          humidity="75%"
-        />
-        <WeatherDisplayCard
-          condition="Wind"
-          windSpeed="15 km/h NW"
-        />
-        <WeatherDisplayCard
-          condition="Precipitation"
-          icon="precipitation_icon"
-          onClick={navigate_to_hourly_forecast_screen}
-          precipitation="N/A"
-        />
-        <WeatherDisplayCard
-          locationName="Active Alerts"
-          temperature="5"
-          condition="Non-severe"
-          onClick={navigate_to_weather_alerts_screen}
-        />
-      </Grid>
-
-      {/* Daily Forecast List */}
-      <DailyForecastList
-        forecastItems={[]}
-        bg="white"
-        borderRadius="md"
-        boxShadow="sm"
-        p={4}
-      />
-
-      {/* Footer Section */}
-      <Flex alignItems="center" justifyContent="space-between" mt={6}>
-        <Button
-          label="View Historical Data"
-          onClick={navigateToHistoricalDataScreen}
+    <Flex
+      direction="column"
+      gap={6}
+      minH="100vh"
+      px={{ base: 4, lg: 12, md: 8 }}
+      py={{ base: 4, md: 8 }}
+      width="100%"
+      bg="gray.50"
+    >
+      {/* Top-level navigation buttons */}
+      <Flex
+        alignItems="center"
+        gap={4}
+        justifyContent="flex-end"
+        py={4}
+        width="100%"
+      >
+        <IconButton
+          ariaLabel="Manage Locations"
           colorScheme="blue"
-          variant="outline"
+          icon="location"
+          onClick={navigateToLocationManagement}
+          variant="ghost"
+        />
+        <IconButton
+          ariaLabel="Settings"
+          colorScheme="gray"
+          icon="settings"
+          onClick={navigate_to_settings_screen}
+          variant="ghost"
         />
         <IconButton
           ariaLabel="View Radar Map"
+          colorScheme="teal"
           icon="map_icon"
           onClick={navigate_to_radar_map_screen}
-          colorScheme="blue"
-          variant="solid"
+          variant="ghost"
+        />
+        <Button
+          colorScheme="purple"
+          label="View Historical Data"
+          onClick={navigateToHistoricalDataScreen}
+          variant="outline"
         />
       </Flex>
 
-      {/* Last Updated Timestamp */}
-      <TextDisplay
-        text={`Last updated: ${lastUpdatedTimestamp}`}
-        color="gray.500"
-        fontSize="sm"
-        mt={4}
-        textAlign="right"
-      />
+      {/* Main content area */}
+      <Flex
+        direction="column"
+        flex={1}
+        gap={6}
+        width="100%"
+      >
+        <Text
+          bg="red.50"
+          borderRadius="md"
+          color="red.600"
+          fontWeight="semibold"
+          p={4}
+          text="Location access denied. Location-based features are unavailable."
+          textAlign="center"
+          width="100%"
+        >
+          Location access denied. Location-based features are unavailable.
+        </Text>
+        <Text
+          fontSize={{ base: 'lg', md: 'xl' }}
+          fontWeight="bold"
+          py={2}
+          text="Current Location: New York, NY"
+          textAlign="center"
+          width="100%"
+        >
+          Current Location: New York, NY
+        </Text>
 
-      {/* Conditional Components (example, not directly in layout but in screen JSON) */}
-      {/* <TextDisplay
-        text="Location access denied. Location-based features are unavailable."
-      /> */}
+        {/* Container for current weather details and active alerts */}
+        <Flex
+          alignItems="flex-start"
+          direction={{ base: 'column', md: 'row' }}
+          gap={6}
+          width="100%"
+        >
+          {/* Container for current weather details */}
+          <Box
+            bg="white"
+            borderRadius="lg"
+            boxShadow="xl"
+            display="flex"
+            flexDirection="column"
+            gap={4}
+            minW="300px"
+            p={6}
+            flex={1}
+          >
+            <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={4}>
+              <WeatherDisplayCard
+                fontSize={{ base: 'xl', md: '2xl' }}
+                fontWeight="bold"
+                label="Feels Like"
+                textAlign="center"
+                unit="°C"
+                value="27"
+              />
+              <WeatherDisplayCard
+                fontSize={{ base: 'lg', md: 'xl' }}
+                label="Humidity"
+                textAlign="center"
+                unit="%"
+                value="75"
+              />
+              <WeatherDisplayCard
+                description="NW"
+                fontSize={{ base: 'lg', md: 'xl' }}
+                label="Wind"
+                textAlign="center"
+                unit="km/h"
+                value="15"
+              />
+              <WeatherDisplayCard
+                description="Current precipitation type and intensity"
+                fontSize={{ base: 'lg', md: 'xl' }}
+                icon="precipitation_icon"
+                label="Precipitation"
+                onClick={navigate_to_hourly_forecast_screen}
+                textAlign="center"
+                value="N/A"
+              />
+            </SimpleGrid>
+            <Text
+              color="gray.500"
+              fontSize="sm"
+              textAlign="right"
+            >
+              Last updated: {lastUpdatedTimestamp}
+            </Text>
+          </Box>
+
+          {/* Summary card displaying active non-severe weather alerts */}
+          <Box
+            bg="white"
+            borderRadius="lg"
+            boxShadow="xl"
+            display="flex"
+            flexDirection="column"
+            gap={4}
+            minW="300px"
+            p={6}
+            flex={1}
+          >
+            <Text fontSize="xl" fontWeight="bold" textAlign="center">
+              Active Alerts
+            </Text>
+            {/* Using WeatherDisplayCard for active alerts as per screen JSON */}
+            <WeatherDisplayCard
+              description="Non-severe"
+              label="Active Alerts"
+              onClick={navigate_to_weather_alerts_screen}
+              value="5"
+            />
+            <Text color="gray.500" textAlign="center">
+              No active alerts.
+            </Text>
+          </Box>
+        </Flex>
+
+        {/* Container for the daily weather forecast summary */}
+        <Box
+          bg="white"
+          borderRadius="lg"
+          boxShadow="xl"
+          p={6}
+          width="100%"
+        >
+          <DailyForecastList forecastItems={[]} />
+        </Box>
+      </Flex>
+
+      {/* Dialog for location detection failure */}
       <ConfirmationDialog
-        isOpen={false} // Set to true to test, or manage with state
+        isOpen={isLocationErrorDialogOpen}
         message="Unable to detect your current location. Please try again or manage your locations."
         onClose={handleManageLocationsNavigation}
         onConfirm={handleTryAgain}
@@ -159,8 +270,10 @@ export default function DashboardScreen() {
       />
     </Flex>
   );
-}
+};
 
 DashboardScreen.propTypes = {
-  // No props defined for the screen itself based on the provided JSONs
+  // No props for the screen itself, as per the layout and screen JSONs.
 };
+
+export default DashboardScreen;

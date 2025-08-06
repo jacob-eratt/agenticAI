@@ -3,56 +3,45 @@ import { Tab as ChakraTab } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * @typedef {object} TabProps
- * @property {string} label - Text label for the tab. This will be displayed on the tab button.
- * @property {React.ReactNode} panelContent - The content to be displayed in the tab panel when this tab is active.
- *                                            This prop is consumed by a parent `Tabs` component and is not rendered directly by this `Tab` component.
- * @property {object} [tabProps] - Additional props to pass directly to the underlying Chakra UI `Tab` component,
- *                                  such as `isDisabled`, `colorScheme`, `variant`, etc.
- */
-
-/**
- * An individual tab component designed to be used within a custom `Tabs` container.
- * This component serves as a declarative way to define a single tab, including its
- * visible label and the content associated with its panel.
+ * An individual tab component to be used within a Tabs container.
+ * This component renders the clickable tab button and serves as a data carrier
+ * for its associated panel content. The `panelContent` prop is intended to be
+ * consumed and rendered by a parent Tabs component (e.g., Chakra UI's TabPanels)
+ * when this tab is active.
  *
- * It renders the clickable tab header using Chakra UI's `Tab` component, displaying
- * the `label` prop. The `panelContent` prop is intended to be read and rendered
- * by a parent `Tabs` component (not provided here) to manage the active tab's content.
- *
- * @param {TabProps} props
- * @returns {JSX.Element}
+ * @param {object} props - The component props.
+ * @param {string} props.label - Text label for the tab. This will be displayed on the tab button.
+ * @param {React.ReactNode} props.panelContent - Content to be displayed when this tab is active.
+ *   Note: This content is NOT rendered by the `Tab` component itself. It is a conceptual prop
+ *   that a parent `Tabs` component should read and render within a `TabPanel` when this tab is selected.
+ * @param {string} [props.colorScheme] - The color scheme for the tab. Inherits from Chakra UI theme if not specified.
+ * @param {string} [props.variant] - The variant of the tab. Inherits from Chakra UI theme if not specified.
+ * @param {string} [props.size] - The size of the tab. Inherits from Chakra UI theme if not specified.
+ * @param {object} [props.sx] - The style props for the tab, allowing direct access to Chakra UI's `sx` prop.
+ * @param {object} [props.rest] - Additional Chakra UI `Tab` props to be spread onto the underlying component.
  */
-function Tab({ label, panelContent, ...tabProps }) {
-  // The panelContent prop is not rendered by this component.
-  // It's a data prop meant to be consumed by a parent Tabs component
-  // to render the corresponding TabPanel.
+function Tab({ label, panelContent, ...rest }) {
+  // The `panelContent` prop is not rendered by this component.
+  // It's a conceptual prop meant for a parent component to consume
+  // and render within a `TabPanel` when this tab is active.
+  // The `label` is rendered as the children of the ChakraTab component.
   return (
-    <ChakraTab
-      // Chakra UI Tab component handles accessibility attributes automatically.
-      // We pass through any additional props for customization.
-      {...tabProps}
-    >
+    <ChakraTab {...rest}>
       {label}
     </ChakraTab>
   );
 }
 
 Tab.propTypes = {
-  /**
-   * Text label for the tab. This will be displayed on the tab button.
-   */
   label: PropTypes.string.isRequired,
-  /**
-   * The content to be displayed in the tab panel when this tab is active.
-   * This prop is consumed by a parent `Tabs` component and is not rendered directly by this `Tab` component.
-   */
   panelContent: PropTypes.node.isRequired,
-  /**
-   * Additional props to pass directly to the underlying Chakra UI `Tab` component,
-   * such as `isDisabled`, `colorScheme`, `variant`, etc.
-   */
-  tabProps: PropTypes.object,
+  // Chakra UI Tab appearance props
+  colorScheme: PropTypes.string,
+  variant: PropTypes.string,
+  size: PropTypes.string,
+  sx: PropTypes.object,
+  // All other props are passed through to the Chakra UI Tab component
+  // For example, `isDisabled`, `isSelected`, `id`, `aria-controls`, etc.
 };
 
-export default React.memo(Tab);
+export default Tab;

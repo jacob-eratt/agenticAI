@@ -1,63 +1,64 @@
 import React from 'react';
-import { FormControl, FormLabel, Input, Box, useId } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
  * DatePicker component for selecting a single date.
- * It leverages Chakra UI's FormControl, FormLabel, and Input components
- * to provide a customizable and accessible date input field.
+ * It leverages Chakra UI's FormControl and Input components to provide a styled and accessible date input.
  *
  * @param {object} props - The component props.
- * @param {string} [props.value=''] - The currently selected date in 'YYYY-MM-DD' format.
- *   This value is passed directly to the HTML input's `value` attribute.
- * @param {function} [props.onChange=(date) => {}] - Callback function invoked when the date changes.
- *   It receives the new date string in 'YYYY-MM-DD' format as its argument.
- * @param {string} [props.label=''] - The text label displayed above the date input.
- *   If an empty string, no label will be rendered.
- * @param {string} [props.id] - An optional ID for the form control and input element.
- *   If not provided, a unique ID will be generated automatically for accessibility.
- * @param {object} [props.inputProps={}] - An object containing additional props to pass directly
- *   to the Chakra UI `Input` component (e.g., `size`, `variant`, `placeholder`).
- * @param {object} [props.formControlProps={}] - An object containing additional props to pass directly
- *   to the Chakra UI `FormControl` component (e.g., `isInvalid`, `isDisabled`, `isRequired`).
+ * @param {string} [props.value=''] - The currently selected date. This can be an ISO 8601 string (e.g., "2023-10-27T10:00:00.000Z") or a YYYY-MM-DD string. It will be formatted to YYYY-MM-DD for the native date input.
+ * @param {function} [props.onChange] - Callback function when the date changes. It receives the new date string in YYYY-MM-DD format as its argument.
+ * @param {string} [props.label] - Label for the date picker, e.g., "Start Date". If provided, a FormLabel will be rendered.
+ * @param {string} [props.colorScheme='blue'] - The color scheme to use for the input's focus border.
+ * @param {string} [props.size='md'] - The size of the input field (e.g., 'sm', 'md', 'lg').
+ * @param {object} [props.sx] - Chakra UI `sx` prop for custom styles applied to the `FormControl`.
+ * @param {object} [props.rest] - Additional Chakra UI props passed directly to the `FormControl` component (e.g., `mb`, `width`).
  */
-export default function DatePicker({
-  value = '',
-  onChange = () => {},
-  label = '',
-  id,
-  inputProps = {},
-  formControlProps = {},
+function DatePicker({
+  value,
+  onChange,
+  label,
+  colorScheme,
+  size,
+  sx,
+  ...rest
 }) {
-  const generatedId = useId();
-  const inputId = id || `date-picker-${generatedId}`;
+  /**
+   * Formats the input value to YYYY-MM-DD for the HTML date input.
+   * If the value is an ISO string, it converts it. Otherwise, it uses the value directly
+   * or defaults to an empty string if no value is provided.
+   */
+  const formattedValue = value
+    ? new Date(value).toISOString().split('T')[0]
+    : '';
 
+  /**
+   * Handles the change event from the native date input.
+   * Calls the `onChange` prop with the new date value in YYYY-MM-DD format.
+   * @param {React.ChangeEvent<HTMLInputElement>} event - The change event object.
+   */
   const handleChange = (event) => {
-    onChange(event.target.value);
+    if (onChange) {
+      onChange(event.target.value);
+    }
   };
 
   return (
-    <Box>
-      <FormControl id={inputId} {...formControlProps}>
-        {label && (
-          <FormLabel htmlFor={inputId} mb={1} fontWeight="medium" color="gray.700">
-            {label}
-          </FormLabel>
-        )}
-        <Input
-          type="date"
-          value={value}
-          onChange={handleChange}
-          size="md"
-          variant="outline"
-          focusBorderColor="blue.500"
-          borderRadius="md"
-          _hover={{ borderColor: 'gray.400' }}
-          _focus={{ boxShadow: 'outline' }}
-          {...inputProps}
-        />
-      </FormControl>
-    </Box>
+    <FormControl sx={sx} {...rest}>
+      {label && <FormLabel>{label}</FormLabel>}
+      <Input
+        type="date"
+        value={formattedValue}
+        onChange={handleChange}
+        size={size}
+        focusBorderColor={`${colorScheme}.500`}
+      />
+    </FormControl>
   );
 }
 
@@ -65,7 +66,18 @@ DatePicker.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
-  id: PropTypes.string,
-  inputProps: PropTypes.object,
-  formControlProps: PropTypes.object,
+  colorScheme: PropTypes.string,
+  size: PropTypes.string,
+  sx: PropTypes.object,
 };
+
+DatePicker.defaultProps = {
+  value: '',
+  onChange: () => {},
+  label: '',
+  colorScheme: 'blue',
+  size: 'md',
+  sx: {},
+};
+
+export default DatePicker;

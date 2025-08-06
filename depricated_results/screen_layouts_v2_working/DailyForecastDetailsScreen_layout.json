@@ -1,0 +1,40 @@
+{
+  "type": "Flex",
+  "props": {
+    "direction": "column",
+    "gap": 6,
+    "bg": "gray.50",
+    "p": {
+      "base": 4,
+      "md": 8
+    },
+    "width": "100vw",
+    "minHeight": "100vh",
+    "alignItems": "center"
+  },
+  "children": [
+    {
+      "type": "DailyDetailsPanel",
+      "component_instance_id": "82455772-5477-4a9d-8915-8afea7c3d08f",
+      "props": {
+        "humidity": "60%",
+        "date": "2023-10-27",
+        "temperature": "25\u00b0C",
+        "precipitation": "10%",
+        "wind": "15 km/h NE",
+        "colorScheme": "blue",
+        "variant": "elevated",
+        "size": "lg",
+        "borderRadius": "xl",
+        "width": {
+          "base": "100%",
+          "md": "80%",
+          "lg": "60%"
+        },
+        "maxWidth": "900px",
+        "alignSelf": "center"
+      },
+      "notes": "Main panel displaying comprehensive daily weather details. Placed at the top of the screen, centered, and responsive to different screen sizes. This serves as the primary information display for the selected day."
+    }
+  ]
+}

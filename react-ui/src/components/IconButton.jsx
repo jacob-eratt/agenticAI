@@ -1,110 +1,90 @@
 import React from 'react';
-import { IconButton as ChakraIconButton, useToast } from '@chakra-ui/react';
+import { IconButton as ChakraIconButton } from '@chakra-ui/react';
 import {
-  SearchIcon,
-  CheckIcon,
-  DeleteIcon,
-  SettingsIcon,
-  QuestionOutlineIcon,
-  ExternalLinkIcon, // Can be used for general links/locations
-  ArrowForwardIcon,
-  StarIcon, // Could be used for save/favorite
-} from '@chakra-ui/icons';
+  FaSave,
+  FaTrash,
+  FaMapMarkerAlt,
+  FaCog,
+  FaMap,
+  FaPlay,
+  FaSearch,
+  FaQuestionCircle // Default icon for unknown names
+} from 'react-icons/fa';
 import PropTypes from 'prop-types';
 
 /**
  * @typedef {object} IconButtonProps
- * @property {string} icon - The name of the icon to display. Supported names: 'search', 'save', 'trash', 'location', 'settings', 'map_icon', 'play'.
+ * @property {string} icon - The string name of the icon to display. Supported names include 'save', 'trash', 'location', 'settings', 'map_icon', 'play', 'search'.
  * @property {function} [onClick] - Callback function when the button is clicked.
- * @property {string} ariaLabel - Accessibility label for the button. This is crucial for screen readers.
+ * @property {string} ariaLabel - Accessibility label for the button. This is required for accessibility.
  * @property {string} [colorScheme='gray'] - The color scheme of the button.
  * @property {string} [variant='ghost'] - The variant of the button.
  * @property {string} [size='md'] - The size of the button.
  * @property {boolean} [isLoading=false] - If true, the button will show a spinner.
  * @property {boolean} [isDisabled=false] - If true, the button will be disabled.
+ * @property {string} [borderRadius='md'] - The border radius of the button.
+ * @property {string} [fontSize='lg'] - The font size of the icon.
  */
 
-// Map string icon names to Chakra UI icon components
+/**
+ * A mapping of string icon names to React-icons components.
+ * @type {Object.<string, React.ComponentType>}
+ */
 const IconMap = {
-  search: SearchIcon,
-  save: CheckIcon, // Using CheckIcon as a generic 'save' icon. Could be StarIcon or a custom one.
-  trash: DeleteIcon,
-  location: ExternalLinkIcon, // Using ExternalLinkIcon as a generic 'location' icon.
-  settings: SettingsIcon,
-  map_icon: ExternalLinkIcon, // Using ExternalLinkIcon for map.
-  play: ArrowForwardIcon, // Using ArrowForwardIcon as a generic 'play' icon.
-  // Add more mappings as needed
+  save: FaSave,
+  trash: FaTrash,
+  location: FaMapMarkerAlt,
+  settings: FaCog,
+  map_icon: FaMap,
+  play: FaPlay,
+  search: FaSearch,
 };
 
 /**
- * A customizable icon button component using Chakra UI.
- * It supports various icons, click handlers, and accessibility features.
+ * IconButton component used to initiate actions with a visual icon.
+ * It leverages Chakra UI's IconButton for styling and accessibility.
  *
  * @param {IconButtonProps} props - The props for the IconButton component.
- * @returns {JSX.Element} The IconButton component.
+ * @returns {JSX.Element} A Chakra UI IconButton component.
  */
-export default function IconButton({
+function IconButton({
   icon,
-  onClick = () => {},
+  onClick,
   ariaLabel,
   colorScheme = 'gray',
   variant = 'ghost',
   size = 'md',
   isLoading = false,
   isDisabled = false,
+  borderRadius = 'md',
+  fontSize = 'lg',
   ...rest
 }) {
-  const toast = useToast();
+  const IconComponent = IconMap[icon] || FaQuestionCircle;
 
-  // Get the icon component based on the provided string name
-  const IconComponent = IconMap[icon];
-
-  // Validate required props
   if (!ariaLabel) {
     console.warn('IconButton: "ariaLabel" prop is required for accessibility.');
-    toast({
-      title: 'Accessibility Warning',
-      description: 'IconButton is missing "ariaLabel" prop. Please provide it for screen readers.',
-      status: 'warning',
-      duration: 5000,
-      isClosable: true,
-      position: 'bottom-left',
-    });
   }
-
-  if (!icon) {
-    console.warn('IconButton: "icon" prop is required.');
-    toast({
-      title: 'Component Warning',
-      description: 'IconButton is missing "icon" prop. Please provide an icon name.',
-      status: 'warning',
-      duration: 5000,
-      isClosable: true,
-      position: 'bottom-left',
-    });
-  }
-
-  // Use a fallback icon if the provided icon name is not found in the map
-  const RenderIcon = IconComponent || QuestionOutlineIcon;
 
   return (
     <ChakraIconButton
-      icon={<RenderIcon />}
+      icon={<IconComponent fontSize={fontSize} />}
       onClick={onClick}
-      aria-label={ariaLabel || 'Action button'} // Fallback aria-label for safety, but warning is already issued
+      aria-label={ariaLabel}
       colorScheme={colorScheme}
       variant={variant}
       size={size}
       isLoading={isLoading}
-      isDisabled={isDisabled || !ariaLabel || !icon} // Disable if critical props are missing
-      {...rest} // Allows passing any other Chakra UI IconButton props
+      isDisabled={isDisabled}
+      borderRadius={borderRadius}
+      {...rest}
     />
   );
 }
 
 IconButton.propTypes = {
   /**
-   * The name of the icon to display. Supported names: 'search', 'save', 'trash', 'location', 'settings', 'map_icon', 'play'.
+   * The string name of the icon to display. Supported names include 'save', 'trash', 'location', 'settings', 'map_icon', 'play', 'search'.
    */
   icon: PropTypes.string.isRequired,
   /**
@@ -112,7 +92,7 @@ IconButton.propTypes = {
    */
   onClick: PropTypes.func,
   /**
-   * Accessibility label for the button. This is crucial for screen readers.
+   * Accessibility label for the button. This is required for accessibility.
    */
   ariaLabel: PropTypes.string.isRequired,
   /**
@@ -135,4 +115,14 @@ IconButton.propTypes = {
    * If true, the button will be disabled.
    */
   isDisabled: PropTypes.bool,
+  /**
+   * The border radius of the button.
+   */
+  borderRadius: PropTypes.string,
+  /**
+   * The font size of the icon.
+   */
+  fontSize: PropTypes.string,
 };
+
+export default IconButton;

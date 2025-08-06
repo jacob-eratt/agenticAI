@@ -1,199 +1,205 @@
 import React from 'react';
 import {
   Box,
-  VStack,
   Text,
-  Heading,
-  Stack,
-  useColorModeValue,
+  VStack,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
   Icon,
-  Flex,
-  Card,
-  CardBody,
-  CardHeader,
-  CardFooter,
-  Button
+  useColorModeValue,
+  Heading,
+  List,
+  ListItem,
+  Button,
+  Flex
 } from '@chakra-ui/react';
+import {
+  FaExclamationTriangle,
+  FaInfoCircle,
+  FaCloudSun, // Example icon, not directly used for severity but good to have
+  FaBolt, // Example icon
+  FaWater, // Example icon
+  FaWind // Example icon
+} from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { FaExclamationTriangle, FaInfoCircle, FaCloudSunRain, FaBolt } from 'react-icons/fa';
 
 /**
- * Helper function to format a timestamp into a localized string.
- * @param {string} timestamp - The timestamp string (e.g., ISO 8601).
- * @returns {string} The formatted date and time string, or 'N/A' if invalid.
+ * Helper function to format a date string into a localized date and time string.
+ * @param {string} dateString - The date string to format (e.g., ISO 8601).
+ * @returns {string} The formatted date string, or 'N/A' if invalid.
  */
-const formatTimestamp = (timestamp) => {
-  if (!timestamp) return 'N/A';
+const formatDate = (dateString) => {
+  if (!dateString) return 'N/A';
   try {
-    const date = new Date(timestamp);
-    // Example: "1/1/2023, 10:30:00 AM"
-    return date.toLocaleString(undefined, {
+    const date = new Date(dateString);
+    // Options for a more readable format
+    const options = {
       year: 'numeric',
-      month: 'numeric',
+      month: 'short',
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      second: '2-digit'
-    });
+      hour12: true
+    };
+    return date.toLocaleString(undefined, options);
   } catch (e) {
-    console.error("Error formatting timestamp:", e);
+    console.error("Error formatting date:", e);
     return 'Invalid Date';
   }
 };
 
 /**
- * Helper function to get an appropriate icon based on alert severity or type.
- * @param {'info' | 'warning' | 'error' | 'success'} severity - The severity level of the alert.
- * @param {string} type - The type of weather event.
- * @returns {React.ElementType} The React icon component.
+ * Helper function to map alert severity levels to Chakra UI color schemes and icons.
+ * @param {string} severity - The severity level of the alert (e.g., "Extreme", "Severe", "Moderate", "Minor").
+ * @returns {{colorScheme: string, icon: React.ComponentType}} An object containing the Chakra UI color scheme and a React icon component.
  */
-const getAlertIcon = (severity, type) => {
-  switch (severity) {
-    case 'error':
-      return FaExclamationTriangle; // Critical alert
-    case 'warning':
-      return FaBolt; // Warning, like severe weather
-    case 'info':
-      return FaInfoCircle; // General information
+const getSeverityProps = (severity) => {
+  switch (severity?.toLowerCase()) {
+    case 'extreme':
+      return { colorScheme: 'red', icon: FaExclamationTriangle };
+    case 'severe':
+      return { colorScheme: 'orange', icon: FaExclamationTriangle };
+    case 'moderate':
+      return { colorScheme: 'yellow', icon: FaInfoCircle };
+    case 'minor':
+      return { colorScheme: 'blue', icon: FaInfoCircle };
     default:
-      return FaCloudSunRain; // Default weather icon
+      return { colorScheme: 'gray', icon: FaInfoCircle };
   }
 };
 
 /**
- * @typedef {object} Alert
- * @property {string | number} id - Unique identifier for the alert.
- * @property {string} title - The main title of the alert.
- * @property {string} [description] - A brief description of the alert.
- * @property {string} timestamp - ISO string or similar, representing when the alert was issued/updated.
- * @property {'info' | 'warning' | 'error' | 'success'} [severity='info'] - The severity level of the alert.
- * @property {string} [type] - The type of weather event (e.g., "Severe Thunderstorm", "Flood Warning").
- */
-
-/**
  * AlertList component displays a chronological list of severe weather alerts.
- * Each alert item is clickable to show more details.
+ * Each alert item is clickable to show more details, leveraging Chakra UI for styling and responsiveness.
  *
  * @param {object} props - The component props.
- * @param {Alert[]} props.alerts - Array of alert objects, each containing alert details.
- * @param {(alert: Alert) => void} [props.onAlertClick] - Callback function when an alert item is clicked.
+ * @param {Array<object>} props.alerts - An array of alert objects, each containing alert details.
+ *   Each alert object should ideally have:
+ *   - `id`: string | number (unique identifier, required)
+ *   - `headline`: string (main title of the alert)
+ *   - `description`: string (detailed description)
+ *   - `severity`: string (e.g., "Minor", "Moderate", "Severe", "Extreme")
+ *   - `issuedAt`: string (ISO date string, for chronological sorting)
+ * @param {function} props.onAlertClick - Callback function when an alert item is clicked.
+ *   Receives the clicked alert object as an argument.
  */
-export default function AlertList({ alerts = [], onAlertClick = () => {} }) {
+function AlertList({ alerts = [], onAlertClick = () => {} }) {
+  // Chakra UI hooks for color mode values
   const cardBg = useColorModeValue('white', 'gray.700');
-  const cardBorderColor = useColorModeValue('gray.200', 'gray.600');
-  const hoverBg = useColorModeValue('gray.50', 'gray.600');
+  const cardHoverBg = useColorModeValue('gray.50', 'gray.600');
+  const borderColor = useColorModeValue('gray.200', 'gray.600');
 
-  // Sort alerts by timestamp in descending order (most recent first)
-  const sortedAlerts = React.useMemo(() => {
-    return [...alerts].sort((a, b) => {
-      const dateA = new Date(a.timestamp);
-      const dateB = new Date(b.timestamp);
-      return dateB.getTime() - dateA.getTime();
-    });
-  }, [alerts]);
-
-  if (sortedAlerts.length === 0) {
+  // Display a message if no alerts are available
+  if (!Array.isArray(alerts) || alerts.length === 0) {
     return (
       <Box
-        p={6}
-        borderWidth="1px"
-        borderRadius="lg"
-        borderColor={cardBorderColor}
+        p={4}
+        borderWidth={1}
+        borderRadius="md"
         bg={cardBg}
+        borderColor={borderColor}
         textAlign="center"
-        color="gray.500"
-        fontSize="lg"
-        minH="150px"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
+        maxW="lg"
+        mx="auto"
         boxShadow="sm"
       >
-        <Text>No alerts to display.</Text>
+        <Text fontSize="md" color="gray.500">No alerts to display.</Text>
       </Box>
     );
   }
 
-  return (
-    <VStack spacing={4} align="stretch" maxH="600px" overflowY="auto" pr={2}>
-      {sortedAlerts.map((alert) => {
-        const IconComponent = getAlertIcon(alert.severity, alert.type);
-        const severityColor = {
-          'error': 'red.500',
-          'warning': 'orange.500',
-          'info': 'blue.500',
-          'success': 'green.500'
-        }[alert.severity || 'info'];
+  // Sort alerts by 'issuedAt' in descending order (most recent first)
+  const sortedAlerts = [...alerts].sort((a, b) => {
+    const dateA = new Date(a.issuedAt);
+    const dateB = new Date(b.issuedAt);
+    return dateB - dateA;
+  });
 
-        return (
-          <Card
-            key={alert.id}
-            direction={{ base: 'column', sm: 'row' }}
-            overflow="hidden"
-            variant="outline"
-            borderColor={cardBorderColor}
-            bg={cardBg}
-            _hover={{ bg: hoverBg, cursor: 'pointer' }}
-            onClick={() => onAlertClick(alert)}
-            role="button"
-            tabIndex={0}
-            aria-label={`View details for alert: ${alert.title}. Issued on ${formatTimestamp(alert.timestamp)}.`}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                onAlertClick(alert);
-              }
-            }}
-            boxShadow="sm"
-          >
-            <CardHeader pb={{ base: 0, sm: 4 }}>
-              <Flex align="center">
-                <Icon as={IconComponent} boxSize={6} color={severityColor} mr={3} />
-                <Heading size="md" flex="1">{alert.title}</Heading>
-              </Flex>
-            </CardHeader>
-            <CardBody pt={{ base: 0, sm: 4 }}>
-              <Stack spacing={1}>
-                {alert.type && (
-                  <Text fontSize="sm" color="gray.500">
-                    Type: <Text as="span" fontWeight="medium" color="gray.600">{alert.type}</Text>
-                  </Text>
-                )}
-                <Text fontSize="sm" color="gray.500">
-                  Issued: <Text as="span" fontWeight="medium" color="gray.600">{formatTimestamp(alert.timestamp)}</Text>
-                </Text>
-                {alert.description && (
+  return (
+    <Box
+      p={4}
+      borderWidth={1}
+      borderRadius="lg"
+      bg={cardBg}
+      borderColor={borderColor}
+      maxW="lg"
+      mx="auto"
+      boxShadow="md"
+      overflowY="auto" // Enable vertical scrolling
+      maxH={{ base: "400px", md: "500px", lg: "600px" }} // Responsive max height for scrollability
+    >
+      <Heading as="h2" size="lg" mb={4} textAlign="center" color="teal.500">
+        Weather Alerts
+      </Heading>
+      <List spacing={3}>
+        {sortedAlerts.map((alert) => {
+          const { colorScheme, icon: SeverityIcon } = getSeverityProps(alert.severity);
+          return (
+            <ListItem key={alert.id}>
+              <Button
+                as={Flex} // Use Flex for layout inside the button to leverage Chakra's layout props
+                width="100%"
+                p={4}
+                borderWidth={1}
+                borderRadius="md"
+                borderColor={borderColor}
+                bg={cardBg}
+                _hover={{ bg: cardHoverBg, transform: 'translateY(-2px)', boxShadow: 'lg' }}
+                _active={{ bg: cardHoverBg }}
+                onClick={() => onAlertClick(alert)}
+                justifyContent="space-between"
+                alignItems="center"
+                flexDirection={{ base: "column", md: "row" }} // Stack vertically on small screens, row on larger
+                textAlign="left"
+                transition="all 0.2s ease-in-out" // Smooth transition for hover effects
+                aria-label={`View details for alert: ${alert.headline || 'No Headline'}`}
+              >
+                <VStack align="start" spacing={1} flex="1" pr={{ base: 0, md: 4 }}>
+                  <Flex alignItems="center" mb={1}>
+                    <Tag size="sm" colorScheme={colorScheme} borderRadius="full" mr={2}>
+                      {SeverityIcon && <TagLeftIcon as={SeverityIcon} />}
+                      <TagLabel>{alert.severity || 'Unknown'}</TagLabel>
+                    </Tag>
+                    <Text fontSize="sm" color="gray.500">
+                      {formatDate(alert.issuedAt)}
+                    </Text>
+                  </Flex>
+                  <Heading as="h3" size="md" noOfLines={1} color="gray.800">
+                    {alert.headline || 'No Headline'}
+                  </Heading>
                   <Text fontSize="sm" noOfLines={2} color="gray.600">
-                    {alert.description}
+                    {alert.description || 'No description available.'}
                   </Text>
-                )}
-              </Stack>
-            </CardBody>
-            <CardFooter display="flex" alignItems="center" justifyContent="flex-end">
-              <Button variant="link" colorScheme="blue" size="sm">
-                View Details
+                </VStack>
+                {/* Info icon on the right, hidden on small screens if space is tight */}
+                <Icon as={FaInfoCircle} color="gray.400" boxSize={5} ml={{ base: 0, md: 4 }} mt={{ base: 2, md: 0 }} />
               </Button>
-            </CardFooter>
-          </Card>
-        );
-      })}
-    </VStack>
+            </ListItem>
+          );
+        })}
+      </List>
+    </Box>
   );
 }
 
 AlertList.propTypes = {
   /**
    * Array of alert objects, each containing alert details.
-   * Each alert object should have at least `id`, `title`, `timestamp`.
-   * Optional: `description`, `severity` ('info' | 'warning' | 'error' | 'success'), `type`.
+   * Each alert object should ideally have:
+   * - `id`: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired (unique identifier)
+   * - `headline`: PropTypes.string (main title of the alert)
+   * - `description`: PropTypes.string (detailed description)
+   * - `severity`: PropTypes.string (e.g., "Minor", "Moderate", "Severe", "Extreme")
+   * - `issuedAt`: PropTypes.string (ISO date string, for chronological sorting)
    */
   alerts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-      title: PropTypes.string.isRequired,
+      headline: PropTypes.string,
       description: PropTypes.string,
-      timestamp: PropTypes.string.isRequired,
-      severity: PropTypes.oneOf(['info', 'warning', 'error', 'success']),
-      type: PropTypes.string,
+      severity: PropTypes.string,
+      issuedAt: PropTypes.string,
     })
   ),
   /**
@@ -202,3 +208,5 @@ AlertList.propTypes = {
    */
   onAlertClick: PropTypes.func,
 };
+
+export default React.memo(AlertList);

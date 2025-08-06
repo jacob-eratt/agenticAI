@@ -15,7 +15,6 @@ export { default as NotificationPreferenceSection } from './NotificationPreferen
 export { default as RadioGroup } from './RadioGroup.jsx';
 export { default as Tab } from './Tab.jsx';
 export { default as Tabs } from './Tabs.jsx';
-export { default as TextDisplay } from './TextDisplay.jsx';
 export { default as TextInput } from './TextInput.jsx';
 export { default as ToggleSwitch } from './ToggleSwitch.jsx';
 export { default as WeatherDisplayCard } from './WeatherDisplayCard.jsx';

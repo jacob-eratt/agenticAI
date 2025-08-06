@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from langchain.tools import StructuredTool
 from utils.llm_utils import call_agent, extract_code_block, build_prompt, escape_curly_braces
 from langchain_google_genai import ChatGoogleGenerativeAI
-from prompts.react_prompts import codegen_agent_prompt
+from prompts.react_prompts import codegen_agent_prompt, codegen_edit_agent_prompt
 from llm_tools.codegen_tools import get_file_list_structured_tool, write_screen_code_to_file_tool,load_text_file_structured_tool
 
 
@@ -56,3 +56,43 @@ def codegen_sub_agent(
     # The agent should use its write_screen_code_to_file_tool to write the code itself.
     # No need to extract code or write the file here; just return the agent's response.
     return codegen_response
+
+
+
+
+
+###codegen edit agent...just a prompt change. Created two functions for coding simplicity... not best pratices
+
+def codegen_edit_sub_agent(
+    instructions,
+    layout_json_path,
+    component_folder,
+    screen_json_path,
+    file_to_edit
+):
+    """
+    Orchestrates React code generation for a screen.
+    Passes only file/folder paths to the LLM; the agent uses its tools to open/read files and directories as needed.
+    The agent is responsible for opening files, extracting the screen name, and writing the code using its tools.
+    """
+    # Prepare prompt context with only file/folder paths
+    codegen_prompt = {
+        "instructions": instructions,
+        "layout_json_path": layout_json_path,
+        "component_folder": component_folder,
+        "file_to_edit": file_to_edit,
+        "screen_json_path": screen_json_path
+    }
+    print(f"\n[Codegen Agent Context]: {codegen_prompt}")
+    # Call the LLM agent, which will use its tools to open/read files and write code as needed
+    codegen_response = call_agent(
+        llm=CODEGEN_LLM,
+        prompt_template=build_prompt(escape_curly_braces(codegen_edit_agent_prompt)),
+        input_text=codegen_prompt,
+        tools=structuredTools,
+        memory=None,
+        verbose=True
+    )
+
+    # The agent should use its write_screen_code_to_file_tool to write the code itself.
+    # No need to extract code or write the file h

@@ -1,29 +1,99 @@
 {
   "type": "Flex",
   "props": {
-    "direction": "row",
-    "gap": 4,
-    "p": 4,
+    "direction": "column",
+    "bg": "gray.50",
+    "minH": "100vh",
     "width": "100%",
-    "height": "100vh"
+    "px": {
+      "base": 2,
+      "md": 4,
+      "lg": 8
+    },
+    "py": {
+      "base": 2,
+      "md": 4,
+      "lg": 8
+    },
+    "gap": 4
   },
   "children": [
     {
-      "type": "AlertList",
-      "component_instance_id": "2e328b6a-049d-44e4-bab9-4622aac6e11d",
+      "type": "Flex",
       "props": {
-        "alerts": [],
-        "onAlertClick": "handleAlertClick"
+        "direction": {
+          "base": "column",
+          "md": "row"
+        },
+        "flex": 1,
+        "width": "100%",
+        "maxW": {
+          "base": "100%",
+          "lg": "1200px"
+        },
+        "mx": "auto",
+        "gap": {
+          "base": 4,
+          "md": 8
+        },
+        "alignItems": "stretch",
+        "px": 0,
+        "py": {
+          "base": 2,
+          "md": 4
+        }
       },
-      "notes": "List of weather alerts on the left side. onAlertClick will update the selected alert in AlertDetailsPanel."
-    },
-    {
-      "type": "AlertDetailsPanel",
-      "component_instance_id": "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e",
-      "props": {
-        "alert": {}
-      },
-      "notes": "Details of the selected alert on the right side."
+      "children": [
+        {
+          "type": "Box",
+          "props": {
+            "flex": 1,
+            "p": {
+              "base": 4,
+              "md": 6
+            },
+            "bg": "white",
+            "boxShadow": "md",
+            "display": "flex",
+            "flexDirection": "column",
+            "gap": 4,
+            "width": "100%",
+            "borderRadius": "md"
+          },
+          "children": [],
+          "notes": "Placeholder for the WeatherAlertList component. This container will hold the list of active non-severe weather alerts."
+        },
+        {
+          "type": "Box",
+          "props": {
+            "flex": 1,
+            "p": {
+              "base": 4,
+              "md": 6
+            },
+            "bg": "white",
+            "boxShadow": "md",
+            "display": "flex",
+            "flexDirection": "column",
+            "gap": 4,
+            "width": "100%",
+            "borderRadius": "md"
+          },
+          "children": [
+            {
+              "type": "WeatherAlertDetailPanel",
+              "component_instance_id": "e6e91d56-f10b-4f34-8d7b-7e46cd8d8e4e",
+              "props": {
+                "alert": {}
+              },
+              "notes": "Panel to display detailed information for a selected weather alert. Occupies flexible width within its parent container."
+            }
+          ],
+          "notes": "Container for the WeatherAlertDetailPanel component. This flexible container will display the details of a selected alert."
+        }
+      ],
+      "notes": "Main content area for weather alerts, horizontally split on larger screens and stacked on mobile. Centered with a max width on large screens."
     }
-  ]
+  ],
+  "notes": "Root container for the Weather Alerts Screen. Provides full viewport height and width with responsive padding and a column layout."
 }

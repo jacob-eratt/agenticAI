@@ -1,75 +1,58 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
   Box,
-  Checkbox,
-  CheckboxGroup,
-  Stack,
-  FormLabel,
-  useTheme,
-  useMultiStyleConfig,
-  useFormControlProps,
   Text,
+  CheckboxGroup,
+  Checkbox,
+  VStack,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * @typedef {object} MultiSelectOption
- * @property {string} label - The human-readable label for the option.
- * @property {string | number} value - The unique value associated with the option.
- */
-
-/**
- * MultiSelect component for selecting multiple options from a list.
- * It supports both simple string arrays and object arrays for options.
+ * A multi-select component for selecting multiple options from a list.
+ * It supports both string arrays and object arrays for options, and is fully
+ * controlled by the `value` and `onChange` props.
  *
  * @param {object} props - The component props.
- * @param {(string | MultiSelectOption)[]} props.options - Array of options. Each option can be a string (where label and value are the same) or an object with `label` and `value` properties.
- * @param {(string | number)[]} [props.value=[]] - Array of currently selected values.
- * @param {(selectedValues: (string | number)[]) => void} [props.onChange] - Callback function when the selected values change.
- * @param {string} [props.label] - Overall label for the multi-select component.
- * @param {string} [props.name] - The name attribute for the checkbox group, useful for form submission.
- * @param {boolean} [props.isDisabled=false] - If true, the multi-select is disabled.
- * @param {boolean} [props.isReadOnly=false] - If true, the multi-select is read-only.
- * @param {boolean} [props.isInvalid=false] - If true, the multi-select is marked as invalid.
- * @param {string} [props.spacing="4"] - Spacing between checkboxes. Can be a Chakra UI spacing token or a responsive array.
- * @param {string | string[]} [props.direction="column"] - The direction of the stack containing the checkboxes. Can be "row" or "column" or a responsive array.
- * @param {object} [props.containerProps] - Props to pass to the main container Box.
- * @param {object} [props.labelProps] - Props to pass to the FormLabel component.
- * @param {object} [props.checkboxGroupProps] - Props to pass to the CheckboxGroup component.
- * @param {object} [props.checkboxProps] - Props to pass to individual Checkbox components.
+ * @param {Array<object|string>} props.options - Array of options. Each option can be a string (e.g., "Option A") or an object with `label` and `value` properties (e.g., `{ label: "Option A", value: "a" }`).
+ * @param {Array<any>} [props.value=[]] - Array of currently selected values. This makes the component controlled.
+ * @param {function} props.onChange - Callback function when the selected values change. Receives an array of selected values as its argument. This prop is required for controlled components.
+ * @param {string} [props.label] - Overall label for the multi-select component, displayed above the options.
+ * @param {string} [props.colorScheme='blue'] - The color scheme for the checkboxes (e.g., 'blue', 'green', 'purple').
+ * @param {string} [props.size='md'] - The size of the checkboxes ('sm', 'md', 'lg').
+ * @param {string|number|Array<string|number>} [props.spacing='4'] - The spacing between individual checkboxes. Can be a string (e.g., '4px'), number (e.g., 4), or responsive array.
+ * @param {string|number|Array<string|number>} [props.padding='4'] - Padding around the entire component box. Can be a string (e.g., '16px'), number (e.g., 4), or responsive array.
+ * @param {string|number|Array<string|number>} [props.margin='0'] - Margin around the entire component box. Can be a string (e.g., '8px'), number (e.g., 2), or responsive array.
+ * @param {string} [props.borderRadius='md'] - Border radius for the component box (e.g., 'sm', 'md', 'lg', 'full').
+ * @param {string|number|Array<string|number>} [props.fontSize='md'] - Font size for the label. Can be a string (e.g., 'lg'), number (e.g., 16), or responsive array.
+ * @param {string|number} [props.fontWeight='bold'] - Font weight for the label (e.g., 'normal', 'bold', '500').
+ * @param {string} [props.background='white'] - Background color for the component box.
+ * @param {string|number|Array<string|number>} [props.maxH] - Maximum height for the scrollable content area. Can be a string (e.g., '200px'), number (e.g., '200'), or responsive array.
+ * @param {string} [props.overflowY='auto'] - Overflow behavior for the content area, typically 'auto' for scrollable content.
+ * @param {object} [props.sx] - The Chakra UI `sx` prop for custom styles.
  */
-export default function MultiSelect({
+function MultiSelect({
   options,
   value = [],
   onChange,
   label,
-  name,
-  isDisabled = false,
-  isReadOnly = false,
-  isInvalid = false,
+  colorScheme = 'blue',
+  size = 'md',
   spacing = '4',
-  direction = 'column',
-  containerProps,
-  labelProps,
-  checkboxGroupProps,
-  checkboxProps,
+  padding = '4',
+  margin = '0',
+  borderRadius = 'md',
+  fontSize = 'md',
+  fontWeight = 'bold',
+  background = 'white',
+  maxH,
+  overflowY = 'auto',
   ...rest
 }) {
-  const theme = useTheme();
-  const styles = useMultiStyleConfig('MultiSelect', { ...rest });
-
-  // Use Chakra's form control props for consistent styling and accessibility
-  const formControlProps = useFormControlProps({
-    isDisabled,
-    isReadOnly,
-    isInvalid,
-    ...rest,
-  });
-
-  // Normalize options to { label, value } format
-  const normalizedOptions = useMemo(() => {
+  // Process options to ensure they are in { label, value } format
+  const processedOptions = useMemo(() => {
     if (!Array.isArray(options)) {
-      console.warn('MultiSelect: options prop must be an array.');
+      console.warn("MultiSelect: 'options' prop must be an array.");
       return [];
     }
     return options.map(option => {
@@ -79,94 +62,139 @@ export default function MultiSelect({
       if (typeof option === 'object' && option !== null && 'label' in option && 'value' in option) {
         return option;
       }
-      console.warn('MultiSelect: Invalid option format. Expected string or { label: string, value: any }.', option);
-      return null;
-    }).filter(Boolean); // Filter out any nulls from invalid options
+      console.warn("MultiSelect: Each option in 'options' prop should be a string or an object with 'label' and 'value' properties.", option);
+      return null; // Filter out invalid options later
+    }).filter(Boolean); // Remove any nulls resulting from invalid options
   }, [options]);
 
-  const handleChange = useCallback((selectedValues) => {
+  // Internal state for selected values, controlled by the 'value' prop
+  const [selectedValues, setSelectedValues] = useState(value);
+
+  // Update internal state when external 'value' prop changes
+  useEffect(() => {
+    setSelectedValues(value);
+  }, [value]);
+
+  // Handle change event from CheckboxGroup
+  const handleChange = useCallback((newValues) => {
+    setSelectedValues(newValues);
     if (onChange) {
-      onChange(selectedValues);
+      onChange(newValues);
+    } else {
+      // Provide a runtime warning if onChange is missing for a controlled component
+      console.warn("MultiSelect: 'onChange' prop is missing. The component is controlled but has no way to communicate changes back to the parent. Please provide an 'onChange' function.");
     }
   }, [onChange]);
 
   return (
     <Box
-      __css={styles.container}
-      {...formControlProps}
-      {...containerProps}
-      {...rest}
+      p={padding}
+      m={margin}
+      borderWidth={1}
+      borderRadius={borderRadius}
+      bg={background}
+      maxH={maxH}
+      overflowY={overflowY}
+      {...rest} // Allows passing additional Chakra UI Box props like width, height, etc.
     >
       {label && (
-        <FormLabel
-          htmlFor={name}
-          __css={styles.label}
-          {...labelProps}
-        >
+        <Text fontSize={fontSize} mb={2} fontWeight={fontWeight} color="gray.700">
           {label}
-        </FormLabel>
+        </Text>
       )}
 
-      <CheckboxGroup
-        value={value}
-        onChange={handleChange}
-        name={name}
-        isDisabled={formControlProps.isDisabled}
-        isReadOnly={formControlProps.isReadOnly}
-        isInvalid={formControlProps.isInvalid}
-        __css={styles.checkboxGroup}
-        {...checkboxGroupProps}
-      >
-        <Stack
-          direction={direction}
-          spacing={spacing}
-          __css={styles.stack}
-        >
-          {normalizedOptions.length > 0 ? (
-            normalizedOptions.map((option) => (
-              <Checkbox
-                key={option.value}
-                value={option.value}
-                colorScheme="blue" // Default color scheme
-                size="md" // Default size
-                __css={styles.checkbox}
-                {...checkboxProps}
-              >
+      <CheckboxGroup colorScheme={colorScheme} value={selectedValues} onChange={handleChange}>
+        <VStack align="stretch" spacing={spacing}>
+          {processedOptions.length > 0 ? (
+            processedOptions.map((option) => (
+              <Checkbox key={option.value} value={option.value} size={size}>
                 {option.label}
               </Checkbox>
             ))
           ) : (
-            <Text color="gray.500" fontSize="sm" __css={styles.noOptionsText}>
-              No options available.
-            </Text>
+            <Text color="gray.500" fontStyle="italic">No options available.</Text>
           )}
-        </Stack>
+        </VStack>
       </CheckboxGroup>
     </Box>
   );
 }
 
 MultiSelect.propTypes = {
+  /**
+   * Array of options. Each option can be a string (which will be converted to { label: string, value: string })
+   * or an object with `label` and `value` properties.
+   */
   options: PropTypes.arrayOf(
     PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({
         label: PropTypes.string.isRequired,
-        value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+        value: PropTypes.any.isRequired,
       }),
     ])
   ).isRequired,
-  value: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  onChange: PropTypes.func,
+  /**
+   * Array of currently selected values. This makes the component controlled.
+   */
+  value: PropTypes.array,
+  /**
+   * Callback function when the selected values change. Receives an array of selected values.
+   * This prop is required for controlled components.
+   */
+  onChange: PropTypes.func.isRequired,
+  /**
+   * Overall label for the multi-select component.
+   */
   label: PropTypes.string,
-  name: PropTypes.string,
-  isDisabled: PropTypes.bool,
-  isReadOnly: PropTypes.bool,
-  isInvalid: PropTypes.bool,
+  /**
+   * The color scheme for the checkboxes.
+   */
+  colorScheme: PropTypes.string,
+  /**
+   * The size of the checkboxes ('sm', 'md', 'lg').
+   */
+  size: PropTypes.string,
+  /**
+   * The spacing between checkboxes. Can be a string, number, or responsive array.
+   */
   spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
-  direction: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  containerProps: PropTypes.object,
-  labelProps: PropTypes.object,
-  checkboxGroupProps: PropTypes.object,
-  checkboxProps: PropTypes.object,
+  /**
+   * Padding around the entire component box. Can be a string, number, or responsive array.
+   */
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
+  /**
+   * Margin around the entire component box. Can be a string, number, or responsive array.
+   */
+  margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
+  /**
+   * Border radius for the component box.
+   */
+  borderRadius: PropTypes.string,
+  /**
+   * Font size for the label. Can be a string, number, or responsive array.
+   */
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
+  /**
+   * Font weight for the label.
+   */
+  fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Background color for the component box.
+   */
+  background: PropTypes.string,
+  /**
+   * Maximum height for the scrollable content area. Can be a string, number, or responsive array.
+   */
+  maxH: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array]),
+  /**
+   * Overflow behavior for the content area.
+   */
+  overflowY: PropTypes.string,
+  /**
+   * The Chakra UI `sx` prop for custom styles.
+   */
+  sx: PropTypes.object,
 };
+
+export default MultiSelect;

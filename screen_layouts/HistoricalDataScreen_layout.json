@@ -2,155 +2,249 @@
   "type": "Flex",
   "props": {
     "direction": "column",
-    "gap": 6,
-    "bg": "white",
-    "p": 8,
+    "bg": "gray.50",
+    "minH": "100vh",
     "width": "100%",
-    "height": "100vh"
+    "px": {
+      "base": 2,
+      "md": 4,
+      "lg": 8
+    },
+    "py": {
+      "base": 2,
+      "md": 4,
+      "lg": 8
+    },
+    "gap": 4
   },
   "children": [
+    {
+      "type": "Box",
+      "props": {
+        "width": "100%",
+        "bg": "white",
+        "px": {
+          "base": 3,
+          "md": 6
+        },
+        "py": 6,
+        "boxShadow": "sm",
+        "borderBottom": "1px solid",
+        "borderColor": "gray.200"
+      },
+      "children": [
+        {
+          "type": "Heading",
+          "props": {
+            "as": "h1",
+            "size": {
+              "base": "xl",
+              "md": "2xl"
+            },
+            "color": "gray.800",
+            "textAlign": "center"
+          },
+          "notes": "Screen title, full width header with padding."
+        }
+      ],
+      "notes": "Full-width top header bar for screen title."
+    },
+    {
+      "type": "Flex",
+      "props": {
+        "direction": {
+          "base": "column",
+          "md": "row"
+        },
+        "gap": 4,
+        "p": 4,
+        "bg": "white",
+        "borderRadius": "md",
+        "boxShadow": "sm",
+        "width": "100%",
+        "alignItems": {
+          "base": "stretch",
+          "md": "flex-end"
+        }
+      },
+      "children": [
+        {
+          "type": "DatePicker",
+          "component_instance_id": "1c17e21f-dab4-434a-b056-9ffc3b12c060",
+          "props": {
+            "label": "Start Date",
+            "onChange": "handleStartDateChange",
+            "width": "100%",
+            "flex": 1
+          },
+          "notes": "Date picker for selecting the start date of historical data. Occupies full width on mobile, flexible on desktop."
+        },
+        {
+          "type": "DatePicker",
+          "component_instance_id": "10f5a24b-e570-4903-ba9c-4bd64fb4b384",
+          "props": {
+            "label": "End Date",
+            "onChange": "handleEndDateChange",
+            "width": "100%",
+            "flex": 1
+          },
+          "notes": "Date picker for selecting the end date of historical data. Occupies full width on mobile, flexible on desktop."
+        },
+        {
+          "type": "Button",
+          "component_instance_id": "b23a294c-2592-4929-9b93-8c440270f86a",
+          "props": {
+            "label": "Done",
+            "onClick": "handleDoneClick",
+            "variant": "solid",
+            "width": {
+              "base": "100%",
+              "md": "auto"
+            }
+          },
+          "notes": "Button to confirm the selected date range. Full width on mobile, auto width on desktop, aligned to the end."
+        },
+        {
+          "type": "Button",
+          "component_instance_id": "d4cca02d-7117-4ee1-b338-7779dc30a16d",
+          "props": {
+            "label": "Customize Parameters",
+            "onClick": "handleCustomizeParametersClick",
+            "width": {
+              "base": "100%",
+              "md": "auto"
+            }
+          },
+          "notes": "Button to open the meteorological parameter selection interface. Placed alongside date controls for related actions."
+        }
+      ],
+      "notes": "Container for date range selection, 'Done' button, and 'Customize Parameters' button. Stacks on mobile, aligns horizontally on desktop with buttons at the end."
+    },
+    {
+      "type": "Box",
+      "props": {
+        "width": "100%",
+        "p": 4,
+        "bg": "white",
+        "borderRadius": "md",
+        "boxShadow": "sm"
+      },
+      "children": [
+        {
+          "type": "MultiSelect",
+          "component_instance_id": "e371c31d-7398-4ba0-873c-0ff3af6d793e",
+          "props": {
+            "options": [
+              "Temperature",
+              "Humidity",
+              "Wind Speed",
+              "Precipitation"
+            ],
+            "selectedValues": [],
+            "onChange": "handleParameterChange",
+            "width": "100%"
+          },
+          "notes": "Multi-select component for choosing meteorological parameters for historical data analysis. Occupies full width."
+        }
+      ],
+      "notes": "Container for the Multi-select component, providing consistent styling and spacing."
+    },
     {
       "type": "Tabs",
       "component_instance_id": "b7057237-ccbc-49c5-b443-d90a2865bfdc",
       "props": {
-        "defaultIndex": 0
+        "defaultIndex": 0,
+        "width": "100%",
+        "bg": "white",
+        "borderRadius": "md",
+        "boxShadow": "sm",
+        "p": 4
+      },
+      "notes": "Tabs for navigating between different historical data views. Placed above the main data display area, spanning full width."
+    },
+    {
+      "type": "Flex",
+      "props": {
+        "direction": {
+          "base": "column",
+          "md": "row"
+        },
+        "flex": 1,
+        "width": "100%",
+        "gap": 4,
+        "alignItems": "stretch"
       },
       "children": [
         {
-          "type": "TabList",
-          "children": [
-            {
-              "type": "Tab",
-              "children": "Historical Data"
+          "type": "HistoricalDataDisplay",
+          "component_instance_id": "bb433988-151e-4f3a-87a7-2f7a78b140c0",
+          "props": {
+            "location": "",
+            "data": [],
+            "width": "100%",
+            "minH": "300px",
+            "p": {
+              "base": 4,
+              "md": 6
             },
-            {
-              "type": "Tab",
-              "children": "Weather Alerts"
-            }
-          ]
+            "bg": "white",
+            "borderRadius": "md",
+            "boxShadow": "md",
+            "flex": 1
+          },
+          "notes": "Displays historical weather data. Occupies full width of its parent container and has a minimum height, flexible within its section."
         },
         {
-          "type": "TabPanels",
+          "type": "Flex",
+          "props": {
+            "direction": "column",
+            "flex": 1,
+            "gap": 4,
+            "width": "100%"
+          },
           "children": [
             {
-              "type": "TabPanel",
-              "children": [
-                {
-                  "type": "Flex",
-                  "props": {
-                    "direction": "row",
-                    "gap": 4,
-                    "align": "flex-end",
-                    "mb": 4,
-                    "wrap": "wrap"
-                  },
-                  "children": [
-                    {
-                      "type": "DatePicker",
-                      "component_instance_id": "1c17e21f-dab4-434a-b056-9ffc3b12c060",
-                      "props": {
-                        "label": "Start Date"
-                      },
-                      "notes": "Date picker for selecting the start date."
-                    },
-                    {
-                      "type": "DatePicker",
-                      "component_instance_id": "10f5a24b-e570-4903-ba9c-4bd64fb4b384",
-                      "props": {
-                        "label": "End Date"
-                      },
-                      "notes": "Date picker for selecting the end date."
-                    },
-                    {
-                      "type": "Button",
-                      "component_instance_id": "b23a294c-2592-4929-9b93-8c440270f86a",
-                      "props": {
-                        "label": "Done",
-                        "variant": "solid",
-                        "colorScheme": "blue"
-                      },
-                      "notes": "Button to confirm date range."
-                    }
-                  ]
+              "type": "AlertList",
+              "component_instance_id": "4a3a3f83-4e98-43f6-9a3f-c0966e15aa05",
+              "props": {
+                "alerts": [],
+                "onAlertClick": "displayAlertDetails",
+                "width": "100%",
+                "minH": "300px",
+                "p": {
+                  "base": 4,
+                  "md": 6
                 },
-                {
-                  "type": "Flex",
-                  "props": {
-                    "direction": "column",
-                    "gap": 4,
-                    "mb": 4
-                  },
-                  "children": [
-                    {
-                      "type": "Button",
-                      "component_instance_id": "d4cca02d-7117-4ee1-b338-7779dc30a16d",
-                      "props": {
-                        "label": "Customize Parameters",
-                        "variant": "outline",
-                        "colorScheme": "gray"
-                      },
-                      "notes": "Button to toggle parameter selection."
-                    },
-                    {
-                      "type": "MultiSelect",
-                      "component_instance_id": "e371c31d-7398-4ba0-873c-0ff3af6d793e",
-                      "props": {
-                        "options": [
-                          "Temperature",
-                          "Humidity",
-                          "Wind Speed",
-                          "Precipitation"
-                        ],
-                        "label": "Select Parameters"
-                      },
-                      "notes": "Multi-select for meteorological parameters. Can be conditionally rendered."
-                    }
-                  ]
-                },
-                {
-                  "type": "HistoricalDataPanel",
-                  "component_instance_id": "bb433988-151e-4f3a-87a7-2f7a78b140c0",
-                  "props": {
-                    "data": [],
-                    "location": "Selected Location"
-                  },
-                  "notes": "Main panel displaying historical weather data."
-                }
-              ]
+                "bg": "white",
+                "borderRadius": "md",
+                "boxShadow": "md",
+                "flex": 1
+              },
+              "notes": "Displays a chronological list of past severe weather alerts. Occupies full width within its container."
             },
             {
-              "type": "TabPanel",
-              "children": [
-                {
-                  "type": "Flex",
-                  "props": {
-                    "direction": "column",
-                    "gap": 4
-                  },
-                  "children": [
-                    {
-                      "type": "AlertList",
-                      "component_instance_id": "4a3a3f83-4e98-43f6-9a3f-c0966e15aa05",
-                      "props": {
-                        "alerts": []
-                      },
-                      "notes": "List of past severe weather alerts."
-                    },
-                    {
-                      "type": "AlertDetailsPanel",
-                      "component_instance_id": "215ffc03-bc46-4600-97d6-26a4ccb9037b",
-                      "props": {
-                        "alert": {}
-                      },
-                      "notes": "Panel to display details of a selected alert. Can be conditionally rendered or in a side panel."
-                    }
-                  ]
-                }
-              ]
+              "type": "AlertDetails",
+              "component_instance_id": "215ffc03-bc46-4600-97d6-26a4ccb9037b",
+              "props": {
+                "alert": {},
+                "width": "100%",
+                "minH": "200px",
+                "p": {
+                  "base": 4,
+                  "md": 6
+                },
+                "bg": "white",
+                "borderRadius": "md",
+                "boxShadow": "md",
+                "flex": 1
+              },
+              "notes": "Displays detailed information for a selected severe weather alert. Appears below the AlertList, taking full width."
             }
-          ]
+          ],
+          "notes": "Container for the AlertList and AlertDetails, stacking them vertically. This section is a sibling to the HistoricalDataDisplay."
         }
-      ]
+      ],
+      "notes": "Main content area for historical data and alerts. Stacks vertically on mobile, displays side-by-side on larger screens."
     }
   ]
 }

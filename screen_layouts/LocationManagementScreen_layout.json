@@ -2,109 +2,176 @@
   "type": "Flex",
   "props": {
     "direction": "column",
-    "gap": 6,
-    "p": 4,
+    "bg": "gray.50",
+    "minH": "100vh",
     "width": "100%",
-    "height": "100vh"
+    "px": {
+      "base": 2,
+      "md": 4,
+      "lg": 8
+    },
+    "py": {
+      "base": 2,
+      "md": 4,
+      "lg": 8
+    },
+    "gap": 4,
+    "alignItems": "center",
+    "justifyContent": "center"
   },
   "children": [
     {
-      "type": "TextInput",
-      "component_instance_id": "1f97a286-f0b5-4f50-89af-cea84887009e",
+      "type": "Box",
       "props": {
-        "placeholder": "Search for a location...",
-        "ariaLabel": "Location search input"
+        "bg": "red.100",
+        "borderRadius": "md",
+        "boxShadow": "md",
+        "color": "red.700",
+        "p": {
+          "base": 4,
+          "md": 6
+        },
+        "textAlign": "center",
+        "width": {
+          "base": "100%",
+          "md": "75%",
+          "lg": "50%"
+        }
       },
-      "notes": "Input field for searching locations."
-    },
-    {
-      "type": "LocationList",
-      "component_instance_id": "84577fdb-cd0c-4d03-bec0-479df00ff393",
-      "props": {
-        "ariaLabel": "Location search results",
-        "itemKey": "id",
-        "items": [],
-        "onSelect": "handleSearchResultSelect"
-      },
-      "notes": "List to display location search results. This should be conditionally rendered based on search input."
-    },
-    {
-      "type": "TextDisplay",
-      "component_instance_id": "5c2ac363-5d8c-49c6-b2f4-906c556502f6",
-      "props": {
-        "text": "No results found"
-      },
-      "notes": "Message displayed when no search results are found. Conditionally rendered."
-    },
-    {
-      "type": "TextDisplay",
-      "component_instance_id": "5692e1e7-6adc-40b1-8be3-95aff14d636b",
-      "props": {
-        "text": "An error occurred during location addition."
-      },
-      "notes": "Displays an error message when location addition fails. Conditionally rendered."
+      "children": [
+        {
+          "type": "Message",
+          "component_instance_id": "5692e1e7-6adc-40b1-8be3-95aff14d636b",
+          "props": {
+            "text": "An error occurred during location addition."
+          },
+          "notes": "Error message displayed when location addition fails, centered within a red-themed box."
+        }
+      ],
+      "notes": "Container for the error message, providing visual emphasis and centering it on the screen. Responsive width to prevent it from being too wide on large screens."
     },
     {
       "type": "Flex",
       "props": {
-        "justifyContent": "space-around",
-        "gap": 4,
-        "mt": 4
+        "direction": {
+          "base": "column",
+          "md": "row"
+        },
+        "flex": 1,
+        "width": "100%",
+        "maxW": {
+          "base": "100%",
+          "lg": "1200px"
+        },
+        "mx": "auto",
+        "gap": {
+          "base": 4,
+          "md": 8
+        },
+        "alignItems": "stretch",
+        "px": 0,
+        "py": {
+          "base": 2,
+          "md": 4
+        }
       },
       "children": [
         {
-          "type": "Button",
-          "component_instance_id": "5737c072-0fd8-4780-a1f9-c3e36fddb77a",
+          "type": "Box",
           "props": {
-            "label": "Save Location",
-            "onClick": "handleSaveLocation",
-            "variant": "solid"
+            "flex": 1,
+            "p": {
+              "base": 4,
+              "md": 6
+            },
+            "bg": "white",
+            "boxShadow": "md",
+            "display": "flex",
+            "flexDirection": "column",
+            "gap": 4,
+            "width": "100%",
+            "borderRadius": "md"
           },
-          "notes": "Button to save the selected location."
+          "children": [
+            {
+              "type": "LocationList",
+              "component_instance_id": "84577fdb-cd0c-4d03-bec0-479df00ff393",
+              "props": {
+                "ariaLabel": "Location search results",
+                "itemKey": "id",
+                "items": [],
+                "maxH": "300px",
+                "onSelect": "handleSearchResultSelect",
+                "overflowY": "auto",
+                "width": "100%"
+              },
+              "notes": "List to display location search results, scrollable if content overflows."
+            },
+            {
+              "type": "Button",
+              "component_instance_id": "5737c072-0fd8-4780-a1f9-c3e36fddb77a",
+              "props": {
+                "label": "Save Location",
+                "onClick": "handleSaveLocation",
+                "variant": "solid",
+                "width": "100%"
+              },
+              "notes": "Button to save the selected location, placed below the search results list."
+            }
+          ],
+          "notes": "Container for search-related components, including the search input (to be added) and search results list, and the save location button. Occupies flexible width within the main content area."
         },
         {
-          "type": "Button",
-          "component_instance_id": "d5958e7e-02a3-4b5c-8c62-d8f2376d4064",
+          "type": "Box",
           "props": {
-            "label": "Set as Default",
-            "onClick": "setAsDefaultLocation",
-            "variant": "solid"
+            "flex": 1,
+            "p": {
+              "base": 4,
+              "md": 6
+            },
+            "bg": "white",
+            "boxShadow": "md",
+            "display": "flex",
+            "flexDirection": "column",
+            "gap": 4,
+            "width": "100%",
+            "borderRadius": "md"
           },
-          "notes": "Button to set the selected location as default."
+          "children": [
+            {
+              "type": "Button",
+              "component_instance_id": "d5958e7e-02a3-4b5c-8c62-d8f2376d4064",
+              "props": {
+                "label": "Set as Default",
+                "onClick": "setAsDefaultLocation",
+                "variant": "solid",
+                "width": "100%"
+              },
+              "notes": "Button to set the selected location as default, placed within the saved locations management section."
+            }
+          ],
+          "notes": "Container for saved locations management, including the 'Set as Default' button and future saved locations list. Occupies flexible width within the main content area."
         }
       ],
-      "notes": "Container for location action buttons."
-    },
-    {
-      "type": "LocationList",
-      "component_instance_id": "7ab227d3-97a1-4e21-883e-0554e63cb6d3",
-      "props": {
-        "ariaLabel": "List of saved locations",
-        "isReorderable": true,
-        "itemKey": "id",
-        "items": [],
-        "onReorder": "handleLocationReorder",
-        "onSelect": "handleLocationSelect"
-      },
-      "notes": "List to display saved locations. The delete button (13ec8c90-4684-42ed-82d2-42c57e3ac531) will be rendered within each item of this list."
+      "notes": "Main content area, horizontally split on larger screens and stacked on mobile. Centered with a max width for readability."
     },
     {
       "type": "Flex",
       "props": {
         "justifyContent": "flex-end",
-        "gap": 4,
-        "mt": "auto"
+        "maxW": {
+          "base": "100%",
+          "lg": "1200px"
+        },
+        "mx": "auto",
+        "px": 0,
+        "py": {
+          "base": 2,
+          "md": 4
+        },
+        "width": "100%"
       },
       "children": [
-        {
-          "type": "Button",
-          "component_instance_id": "3455074d-0f4e-4a51-be20-dcf6c772ef68",
-          "props": {
-            "label": "Done",
-            "onClick": "saveLocationOrderAndNavigateToDashboard"
-          },
-          "notes": "Button to save the new order of locations and navigate back to the Dashboard."
-        },
         {
           "type": "Button",
           "component_instance_id": "76a9178f-5dc2-415c-9eaa-681860a6bb2b",
@@ -113,22 +180,22 @@
             "onClick": "navigateToDashboard",
             "variant": "outline"
           },
-          "notes": "Button to navigate back to the Dashboard Screen."
+          "notes": "Button to navigate back to the Dashboard Screen, aligned to the right within its container."
         }
       ],
-      "notes": "Container for navigation/save buttons at the bottom."
+      "notes": "Container for the 'Done' button, ensuring it's full width and aligned to the right within the main content area's max width."
     },
     {
       "type": "ConfirmationDialog",
       "component_instance_id": "8485358f-872e-43cc-8b88-1f5b526f3ca9",
       "props": {
         "isOpen": false,
+        "title": "Confirm Deletion",
         "message": "Are you sure you want to delete this location?",
         "onClose": "handleCloseDeleteConfirmation",
-        "onConfirm": "confirmDeleteLocation",
-        "title": "Confirm Deletion"
+        "onConfirm": "confirmDeleteLocation"
       },
-      "notes": "Confirmation dialog for deleting a saved location. This is a modal and will overlay the screen."
+      "notes": "Confirmation dialog for deleting a saved location. Positioned at the root level to overlay content when active."
     }
   ]
 }

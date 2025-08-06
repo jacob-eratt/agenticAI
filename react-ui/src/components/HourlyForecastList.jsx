@@ -1,120 +1,78 @@
 import React from 'react';
+import { Box, Text, Stack, HStack, Divider } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import { Box, Text, VStack, HStack, List, ListItem, Icon } from '@chakra-ui/react';
-import { FaSun, FaCloud, FaCloudRain, FaSnowflake, FaBolt, FaSmog, FaQuestionCircle } from 'react-icons/fa';
-
-/**
- * A mapping of common weather condition keywords to React-Icons components.
- * This allows for dynamic display of weather icons based on the 'icon' string provided in forecast data.
- */
-const weatherIconMap = {
-  sun: FaSun,
-  clear: FaSun, // Clear sky
-  cloud: FaCloud,
-  clouds: FaCloud, // General clouds
-  'partly-cloudy': FaCloud,
-  rain: FaCloudRain,
-  drizzle: FaCloudRain, // Light rain
-  snow: FaSnowflake,
-  thunderstorm: FaBolt,
-  fog: FaSmog,
-  mist: FaSmog,
-  haze: FaSmog,
-  // Default icon for unknown conditions
-  unknown: FaQuestionCircle,
-};
 
 /**
  * HourlyForecastList component displays a list of hourly weather forecast entries.
- * Each entry includes time, temperature, weather condition, and an associated icon.
+ * Each entry includes time, temperature, and weather conditions.
  *
  * @param {object} props - The component props.
- * @param {Array<object>} props.forecastItems - An array of hourly forecast data objects.
- *   Each object should ideally contain:
- *   - time: string (e.g., "10:00 AM") - Required.
- *   - temperature: number (e.g., 25) - Required.
- *   - unit: string (e.g., "°C" or "°F") - Optional, defaults to an empty string if not provided.
- *   - condition: string (e.g., "Partly Cloudy") - Required.
- *   - icon: string (a keyword from `weatherIconMap`, e.g., "sun", "cloud", "rain") - Optional.
+ * @param {Array<object>} props.forecastItems - An array of hourly forecast data.
+ *   Each item should be an object with `time` (string), `temperature` (string),
+ *   and `description` (string) properties.
+ * @param {string} [props.colorScheme='blue'] - The color scheme for the component, influencing text colors.
+ * @param {string} [props.variant='outline'] - The visual variant of the container. 'outline' adds a border.
+ * @param {string} [props.size='md'] - The general size of the component, influencing internal text sizes.
+ * @param {string|number} [props.spacing='4'] - The spacing between individual forecast items in the list.
+ * @param {string|number} [props.padding='4'] - The padding around the entire list container.
+ * @param {string|number} [props.margin='0'] - The margin around the entire list container.
+ * @param {string|number} [props.borderRadius='md'] - The border radius of the container.
+ * @param {string} [props.background='white'] - The background color of the container.
+ * @param {string|number} [props.maxH='300px'] - The maximum height of the list, enabling vertical scrolling if content exceeds this height.
+ * @param {string} [props.emptyMessage='No hourly forecast data available.'] - Message to display when no forecast items are present.
  */
-export default function HourlyForecastList({ forecastItems = [] }) {
+function HourlyForecastList({
+  forecastItems = [],
+  colorScheme = 'blue',
+  variant = 'outline',
+  size = 'md',
+  spacing = '4',
+  padding = '4',
+  margin = '0',
+  borderRadius = 'md',
+  background = 'white',
+  maxH = '300px',
+  emptyMessage = 'No hourly forecast data available.',
+  ...rest
+}) {
+  // Determine font sizes based on the 'size' prop
+  const itemFontSize = { base: 'sm', md: size === 'lg' ? 'md' : 'sm' };
+  const itemTempFontSize = { base: 'md', md: size === 'lg' ? 'lg' : 'md' };
+
   return (
     <Box
-      p={4}
-      borderWidth="1px"
-      borderRadius="lg"
-      boxShadow="md"
-      bg="white"
-      maxW={{ base: "100%", sm: "md", md: "lg" }}
-      mx="auto"
-      overflowY="auto" // Enable vertical scrolling for long lists
-      maxH="450px" // Set a maximum height before scrolling
-      aria-label="Hourly Weather Forecast"
+      borderWidth={variant === 'outline' ? '1px' : '0'}
+      borderColor={variant === 'outline' ? `${colorScheme}.200` : 'transparent'}
+      borderRadius={borderRadius}
+      p={padding}
+      m={margin}
+      bg={background}
+      overflowY="auto"
+      maxH={maxH}
+      boxShadow="sm"
+      aria-live="polite" // Announce changes to screen readers if content updates
+      {...rest}
     >
-      <Text fontSize="xl" fontWeight="bold" mb={4} color="gray.700">
-        Hourly Forecast
-      </Text>
-
       {forecastItems.length === 0 ? (
         <Text color="gray.500" textAlign="center" py={4}>
-          No hourly forecast data available.
+          {emptyMessage}
         </Text>
       ) : (
-        <List spacing={3}>
-          {forecastItems.map((item, index) => {
-            // Validate required props for each item
-            if (!item.time || typeof item.temperature === 'undefined' || !item.condition) {
-              console.warn(`HourlyForecastList: Missing required data for item at index ${index}. Item:`, item);
-              return null; // Skip rendering incomplete items
-            }
-
-            // Determine the icon to display, defaulting to a question mark if not found
-            const iconKey = item.icon ? item.icon.toLowerCase() : 'unknown';
-            const WeatherIcon = weatherIconMap[iconKey] || FaQuestionCircle;
-
-            return (
-              <ListItem
-                key={index} // Using index as key is acceptable for static lists where items don't change order or get added/removed frequently.
-                p={3}
-                borderRadius="md"
-                _hover={{ bg: "gray.50" }}
-                transition="background-color 0.2s"
-                aria-label={`Forecast for ${item.time}: ${item.temperature}${item.unit || ''}, ${item.condition}`}
-              >
-                <HStack justifyContent="space-between" alignItems="center" flexWrap="wrap">
-                  {/* Time */}
-                  <Text
-                    minW={{ base: "60px", md: "80px" }}
-                    fontWeight="medium"
-                    color="gray.800"
-                    fontSize={{ base: "md", md: "lg" }}
-                  >
-                    {item.time}
-                  </Text>
-
-                  {/* Icon and Condition */}
-                  <HStack spacing={2} alignItems="center" flexGrow={1} justifyContent={{ base: "flex-start", md: "center" }}>
-                    <Icon as={WeatherIcon} boxSize={{ base: 4, md: 5 }} color="blue.500" />
-                    <Text color="gray.700" fontSize={{ base: "sm", md: "md" }}>
-                      {item.condition}
-                    </Text>
-                  </HStack>
-
-                  {/* Temperature */}
-                  <Text
-                    minW={{ base: "50px", md: "60px" }}
-                    textAlign="right"
-                    fontWeight="bold"
-                    color="blue.600"
-                    fontSize={{ base: "md", md: "lg" }}
-                  >
-                    {item.temperature}{item.unit || ''}
-                  </Text>
-                </HStack>
-              </ListItem>
-            );
-          })}
-        </List>
+        <Stack spacing={spacing} divider={<Divider borderColor="gray.200" />}>
+          {forecastItems.map((item, index) => (
+            <HStack key={index} justifyContent="space-between" alignItems="center" py={1}>
+              <Text flex="1" fontWeight="semibold" fontSize={itemFontSize} color="gray.700">
+                {item.time}
+              </Text>
+              <Text flex="1" textAlign="center" fontWeight="bold" fontSize={itemTempFontSize} color={`${colorScheme}.600`}>
+                {item.temperature}
+              </Text>
+              <Text flex="1" textAlign="right" fontSize={itemFontSize} color="gray.600">
+                {item.description}
+              </Text>
+            </HStack>
+          ))}
+        </Stack>
       )}
     </Box>
   );
@@ -122,20 +80,56 @@ export default function HourlyForecastList({ forecastItems = [] }) {
 
 HourlyForecastList.propTypes = {
   /**
-   * Array of hourly forecast data. Each item should contain:
-   * - `time`: string (e.g., "10:00 AM") - Required.
-   * - `temperature`: number (e.g., 25) - Required.
-   * - `unit`: string (e.g., "°C" or "°F") - Optional.
-   * - `condition`: string (e.g., "Partly Cloudy") - Required.
-   * - `icon`: string (a keyword from `weatherIconMap`, e.g., "sun", "cloud", "rain") - Optional.
+   * An array of hourly forecast data. Each item should be an object with `time` (string),
+   * `temperature` (string), and `description` (string) properties.
    */
   forecastItems: PropTypes.arrayOf(
     PropTypes.shape({
       time: PropTypes.string.isRequired,
-      temperature: PropTypes.number.isRequired,
-      unit: PropTypes.string,
-      condition: PropTypes.string.isRequired,
-      icon: PropTypes.string,
+      temperature: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
     })
   ),
+  /**
+   * The color scheme for the component, influencing text colors.
+   */
+  colorScheme: PropTypes.string,
+  /**
+   * The visual variant of the container. 'outline' adds a border.
+   */
+  variant: PropTypes.string,
+  /**
+   * The general size of the component, influencing internal text sizes.
+   */
+  size: PropTypes.string,
+  /**
+   * The spacing between individual forecast items in the list.
+   */
+  spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * The padding around the entire list container.
+   */
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * The margin around the entire list container.
+   */
+  margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * The border radius of the container.
+   */
+  borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * The background color of the container.
+   */
+  background: PropTypes.string,
+  /**
+   * The maximum height of the list, enabling vertical scrolling if content exceeds this height.
+   */
+  maxH: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Message to display when no forecast items are present.
+   */
+  emptyMessage: PropTypes.string,
 };
+
+export default HourlyForecastList;

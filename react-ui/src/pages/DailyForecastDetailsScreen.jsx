@@ -1,27 +1,54 @@
 import React from 'react';
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
+import DailyDetailsPanel from '../components/DailyDetailsPanel';
 import PropTypes from 'prop-types';
-import { DailyDetailsPanel } from '../components';
 
 /**
- * DailyForecastDetailsScreen component displays comprehensive weather details for a selected day.
- * It uses the DailyDetailsPanel to show temperature, precipitation, wind, humidity, and date.
+ * DailyForecastDetailsScreen component displays comprehensive weather details and hourly breakdown for a selected day.
+ * @param {object} props - The component props.
+ * @param {string} props.date - The date for which the forecast details are displayed.
+ * @param {string} props.temperature - The temperature for the day.
+ * @param {string} props.precipitation - The precipitation for the day.
+ * @param {string} props.wind - The wind speed and direction for the day.
+ * @param {string} props.humidity - The humidity for the day.
  */
-export default function DailyForecastDetailsScreen() {
+export default function DailyForecastDetailsScreen({ date, temperature, precipitation, wind, humidity }) {
   return (
-    <Box p={8} maxW="xl" mx="auto" borderWidth={1} borderRadius="lg" boxShadow="lg" bg="white">
-      <Heading as="h1" size="xl" mb={6} textAlign="center" color="gray.700">Daily Forecast Details</Heading>
-      <DailyDetailsPanel
-        temperature="25°C"
-        precipitation="10%"
-        wind="15 km/h NE"
-        humidity="60%"
-        date="2023-10-27"
-      />
-    </Box>
+    <Flex
+      width="100%"
+      minH="100vh"
+      bg="gray.50"
+      direction="column"
+      px={{ base: 4, md: 8, lg: 12 }}
+      py={{ base: 6, md: 10, lg: 14 }}
+      gap={{ base: 6, md: 8 }}
+    >
+      <Box
+        width="100%"
+        maxW="800px"
+        mx="auto"
+        bg="white"
+        borderRadius="lg"
+        boxShadow="lg"
+        p={{ base: 4, md: 6 }}
+      >
+        <DailyDetailsPanel
+          date={date}
+          temperature={temperature}
+          precipitation={precipitation}
+          wind={wind}
+          humidity={humidity}
+          width="100%"
+        />
+      </Box>
+    </Flex>
   );
 }
 
 DailyForecastDetailsScreen.propTypes = {
-  // No props for this screen as per the provided JSON, but can be extended if needed.
+  date: PropTypes.string,
+  temperature: PropTypes.string,
+  precipitation: PropTypes.string,
+  wind: PropTypes.string,
+  humidity: PropTypes.string,
 };

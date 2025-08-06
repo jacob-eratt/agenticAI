@@ -1,27 +1,21 @@
 import React from 'react';
-import { Box, Text, Image, Stack, Flex, Heading } from '@chakra-ui/react';
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  Heading,
+  Text,
+  Image,
+  Stack,
+  Flex,
+} from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * @typedef {object} WeatherDisplayCardProps
- * @property {string} [locationName] - Name of the location for the weather display.
- * @property {string} [temperature] - Current temperature (e.g., "25°C").
- * @property {string} [condition] - Current weather condition (e.g., "Sunny", "Cloudy").
- * @property {string} [icon] - URL or path to the icon representing the current weather condition.
- * @property {string} [precipitation] - Precipitation information (e.g., "10% chance").
- * @property {string} [humidity] - Humidity percentage (e.g., "75%").
- * @property {string} [windSpeed] - Wind speed and direction (e.g., "15 km/h NW").
- * @property {function} [onClick] - Callback function when the card is clicked.
+ * WeatherDisplayCard component displays various weather-related information in a card format.
+ * It is designed to be visually appealing, highly customizable, and accessible.
  */
-
-/**
- * WeatherDisplayCard component to display various weather-related information.
- * It provides a visually appealing and customizable card layout for weather data.
- *
- * @param {WeatherDisplayCardProps} props - The props for the component.
- * @returns {JSX.Element} The rendered WeatherDisplayCard component.
- */
-export default function WeatherDisplayCard({
+function WeatherDisplayCard({
   locationName,
   temperature,
   condition,
@@ -30,102 +24,109 @@ export default function WeatherDisplayCard({
   humidity,
   windSpeed,
   onClick,
+  // Chakra UI appearance props
+  colorScheme,
+  variant,
+  size,
+  spacing,
+  padding,
+  margin,
+  borderRadius,
+  fontSize, // General font size for detailed info
+  fontWeight, // General font weight for detailed info
+  background,
+  maxH, // Maximum height for scrollable content
+  ...rest // Allows passing through any other Chakra UI props
 }) {
-  const isClickable = typeof onClick === 'function';
+  const cardProps = onClick ? {
+    as: 'button', // Render as a button for accessibility
+    onClick: onClick,
+    cursor: 'pointer',
+    _hover: {
+      transform: 'translateY(-2px)',
+      boxShadow: 'lg',
+    },
+    transition: 'all 0.2s ease-in-out',
+    role: 'button',
+    tabIndex: 0,
+  } : {};
 
   return (
-    <Box
-      p={6}
-      borderWidth="1px"
-      borderRadius="lg"
-      bg="white"
+    <Card
+      maxW={{ base: 'sm', md: 'md', lg: 'lg' }}
+      minW={{ base: 'xs', md: 'sm' }}
+      p={padding || 4}
+      m={margin || 2}
+      borderRadius={borderRadius || 'lg'}
       boxShadow="md"
-      maxW={{ base: "95%", sm: "md", lg: "lg" }}
-      mx="auto"
-      textAlign="center"
-      transition="all 0.2s ease-in-out"
-      {...(isClickable && {
-        cursor: 'pointer',
-        _hover: {
-          boxShadow: 'lg',
-          transform: 'translateY(-2px)',
-        },
-        onClick: onClick,
-        role: 'button',
-        tabIndex: 0,
-        onKeyPress: (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            onClick();
-          }
-        },
-      })}
+      bg={background || 'white'}
+      colorScheme={colorScheme}
+      variant={variant || 'elevated'}
+      size={size}
+      overflowY="auto" // Enables vertical scrolling if content exceeds maxH
+      maxH={maxH} // Applies maximum height if provided
+      {...cardProps}
+      {...rest} // Pass any additional Chakra UI props to the Card component
     >
-      <Flex
-        direction={{ base: "column", md: "row" }}
-        align="center"
-        justify="space-between"
-        mb={4}
-      >
-        <Box flex="1" textAlign={{ base: "center", md: "left" }}>
-          {locationName && (
-            <Heading as="h2" size="lg" mb={1} color="gray.800">
-              {locationName}
-            </Heading>
-          )}
-          {condition && (
-            <Text fontSize="md" color="gray.600">
-              {condition}
-            </Text>
-          )}
-        </Box>
+      <CardHeader pb={0}>
+        <Heading
+          size="lg"
+          color="gray.800"
+          fontSize={{ base: 'xl', md: '2xl' }} // Specific font size for the location name
+          fontWeight="bold" // Specific font weight for the location name
+        >
+          {locationName}
+        </Heading>
+      </CardHeader>
 
-        <Flex align="center" justify="center" mt={{ base: 4, md: 0 }} ml={{ md: 4 }}>
-          {icon && (
-            <Image
-              src={icon}
-              alt={condition ? `${condition} weather icon` : "Weather icon"}
-              boxSize={{ base: "60px", md: "80px" }}
-              objectFit="contain"
-              mr={temperature ? 4 : 0}
-            />
-          )}
-          {temperature && (
-            <Text fontSize={{ base: "4xl", md: "5xl" }} fontWeight="bold" color="blue.600">
+      <CardBody pt={2}>
+        <Flex
+          alignItems="center"
+          justifyContent="space-between"
+          flexDirection={{ base: 'column', md: 'row' }}
+          gap={spacing || 4}
+        >
+          <Flex alignItems="center" gap={2}>
+            {icon && (
+              <Image
+                src={icon}
+                alt={condition ? `${condition} icon` : 'Weather icon'}
+                boxSize={{ base: '60px', md: '80px' }}
+                objectFit="contain"
+              />
+            )}
+            <Text
+              fontSize={{ base: '5xl', md: '6xl' }} // Specific font size for the temperature
+              fontWeight="bold" // Specific font weight for the temperature
+              color="blue.600"
+            >
               {temperature}
             </Text>
-          )}
-        </Flex>
-      </Flex>
+          </Flex>
 
-      <Stack
-        direction={{ base: "column", sm: "row" }}
-        spacing={{ base: 2, sm: 4 }}
-        justify="space-around"
-        mt={4}
-        pt={4}
-        borderTop="1px solid"
-        borderColor="gray.200"
-      >
-        {precipitation && (
-          <Flex align="center" justify="center" direction="column">
-            <Text fontSize="sm" color="gray.500">Precipitation</Text>
-            <Text fontSize="md" fontWeight="medium" color="gray.700">{precipitation}</Text>
-          </Flex>
-        )}
-        {humidity && (
-          <Flex align="center" justify="center" direction="column">
-            <Text fontSize="sm" color="gray.500">Humidity</Text>
-            <Text fontSize="md" fontWeight="medium" color="gray.700">{humidity}</Text>
-          </Flex>
-        )}
-        {windSpeed && (
-          <Flex align="center" justify="center" direction="column">
-            <Text fontSize="sm" color="gray.500">Wind</Text>
-            <Text fontSize="md" fontWeight="medium" color="gray.700">{windSpeed}</Text>
-          </Flex>
-        )}
-      </Stack>
-    </Box>
+          <Stack spacing={spacing || 1} textAlign={{ base: 'center', md: 'right' }}>
+            <Text fontSize={fontSize || { base: 'lg', md: 'xl' }} fontWeight={fontWeight || 'normal'} color="gray.700">
+              {condition}
+            </Text>
+            {precipitation && (
+              <Text fontSize={fontSize || { base: 'md', md: 'lg' }} fontWeight={fontWeight || 'normal'} color="gray.600">
+                Precipitation: {precipitation}
+              </Text>
+            )}
+            {humidity && (
+              <Text fontSize={fontSize || { base: 'md', md: 'lg' }} fontWeight={fontWeight || 'normal'} color="gray.600">
+                Humidity: {humidity}
+              </Text>
+            )}
+            {windSpeed && (
+              <Text fontSize={fontSize || { base: 'md', md: 'lg' }} fontWeight={fontWeight || 'normal'} color="gray.600">
+                Wind: {windSpeed}
+              </Text>
+            )}
+          </Stack>
+        </Flex>
+      </CardBody>
+    </Card>
   );
 }
 
@@ -133,33 +134,99 @@ WeatherDisplayCard.propTypes = {
   /**
    * Name of the location for the weather display.
    */
-  locationName: PropTypes.string,
+  locationName: PropTypes.string.isRequired,
   /**
-   * Current temperature (e.g., "25°C").
+   * Current temperature.
    */
-  temperature: PropTypes.string,
+  temperature: PropTypes.string.isRequired,
   /**
-   * Current weather condition (e.g., "Sunny", "Cloudy").
+   * Current weather condition (e.g., Sunny, Cloudy).
    */
   condition: PropTypes.string,
   /**
-   * URL or path to the icon representing the current weather condition.
+   * Icon representing the current weather condition (URL).
    */
   icon: PropTypes.string,
   /**
-   * Precipitation information (e.g., "10% chance").
+   * Precipitation information.
    */
   precipitation: PropTypes.string,
   /**
-   * Humidity percentage (e.g., "75%").
+   * Humidity percentage.
    */
   humidity: PropTypes.string,
   /**
-   * Wind speed and direction (e.g., "15 km/h NW").
+   * Wind speed and direction.
    */
   windSpeed: PropTypes.string,
   /**
    * Callback function when the card is clicked.
    */
   onClick: PropTypes.func,
+  /**
+   * Chakra UI color scheme.
+   */
+  colorScheme: PropTypes.string,
+  /**
+   * Chakra UI variant.
+   */
+  variant: PropTypes.string,
+  /**
+   * Chakra UI size.
+   */
+  size: PropTypes.string,
+  /**
+   * Spacing between elements within the card.
+   */
+  spacing: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Padding of the card.
+   */
+  padding: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Margin of the card.
+   */
+  margin: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Border radius of the card.
+   */
+  borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * General font size for detailed information text (condition, precipitation, humidity, wind).
+   */
+  fontSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * General font weight for detailed information text (condition, precipitation, humidity, wind).
+   */
+  fontWeight: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
+  /**
+   * Background color of the card.
+   */
+  background: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  /**
+   * Maximum height of the card, enabling scrolling if content exceeds.
+   */
+  maxH: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
 };
+
+WeatherDisplayCard.defaultProps = {
+  condition: '',
+  icon: '',
+  precipitation: '',
+  humidity: '',
+  windSpeed: '',
+  onClick: undefined,
+  colorScheme: 'blue',
+  variant: 'elevated',
+  size: 'md',
+  spacing: 4,
+  padding: 4,
+  margin: 2,
+  borderRadius: 'lg',
+  fontSize: { base: 'md', md: 'lg' }, // Default for general text
+  fontWeight: 'normal', // Default for general text
+  background: 'white',
+  maxH: undefined, // No default maximum height
+};
+
+export default WeatherDisplayCard;

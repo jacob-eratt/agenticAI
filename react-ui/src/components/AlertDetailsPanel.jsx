@@ -1,50 +1,38 @@
 import React from 'react';
 import {
   Box,
-  Text,
   Heading,
-  VStack,
-  HStack,
-  Badge,
+  Text,
+  Stack,
+  Tag,
   Divider,
-  Spinner,
-  Center,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  AlertTitle
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 /**
- * Formats a date string into a more readable local date and time format.
- * @param {string | null | undefined} dateString - The date string to format.
- * @returns {string} Formatted date string or "N/A" if invalid or null.
+ * Helper function to format ISO date strings into a localized date and time string.
+ * @param {string} isoString - The ISO date string to format.
+ * @returns {string} The formatted date string, or 'N/A' if invalid.
  */
-const formatAlertDate = (dateString) => {
-  if (!dateString) return 'N/A';
+const formatDate = (isoString) => {
+  if (!isoString) return 'N/A';
   try {
-    const date = new Date(dateString);
-    // Check if the date is valid
-    if (isNaN(date.getTime())) {
-      return 'Invalid Date';
-    }
-    return date.toLocaleString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZoneName: 'short',
-    });
-  } catch (error) {
-    console.error("Error formatting date:", error);
+    return new Date(isoString).toLocaleString();
+  } catch (e) {
     return 'Invalid Date';
   }
 };
 
 /**
- * Determines the Chakra UI color scheme for the severity badge based on the severity level.
- * @param {string | null | undefined} severity - The severity level (e.g., "Extreme", "Severe", "Moderate", "Minor", "Unknown").
- * @returns {string} Chakra UI color scheme name (e.g., "red", "orange", "yellow", "blue", "gray").
+ * Helper function to determine the Chakra UI color scheme for a severity tag.
+ * @param {string} severity - The severity level (e.g., "Extreme", "Severe", "Moderate", "Minor").
+ * @returns {string} The Chakra UI color scheme name.
  */
-const getSeverityColorScheme = (severity) => {
+const getSeverityColor = (severity) => {
   switch (severity?.toLowerCase()) {
     case 'extreme':
       return 'red';
@@ -54,7 +42,6 @@ const getSeverityColorScheme = (severity) => {
       return 'yellow';
     case 'minor':
       return 'blue';
-    case 'unknown':
     default:
       return 'gray';
   }
@@ -62,191 +49,143 @@ const getSeverityColorScheme = (severity) => {
 
 /**
  * A panel component to display detailed information for a selected severe weather alert.
- * It provides a clear, structured view of alert properties, including headline,
- * severity, timing, affected areas, and detailed descriptions/instructions.
+ * It provides a clear, structured view of alert details, including event type,
+ * description, effective and expiration times, severity, and instructions.
  *
  * @param {object} props - The component props.
- * @param {object | null} props.alert - The alert object containing details to display.
- *                                      Expected properties include:
- *                                      - `id`: Unique identifier for the alert.
- *                                      - `event`: The type of event (e.g., "Tornado Warning").
- *                                      - `headline`: A brief summary of the alert.
- *                                      - `description`: Detailed explanation of the alert.
- *                                      - `instruction`: Recommended actions for the public.
- *                                      - `severity`: The severity level (e.g., "Extreme", "Severe").
- *                                      - `urgency`: How quickly action is needed (e.g., "Immediate", "Expected").
- *                                      - `certainty`: The certainty of the event (e.g., "Observed", "Likely").
- *                                      - `effective`: The start time of the alert (ISO string).
- *                                      - `expires`: The end time of the alert (ISO string).
- *                                      - `senderName`: The issuing agency.
- *                                      - `areaDesc`: Description of affected geographical areas.
- *                                      - `status`: The status of the alert (e.g., "Actual", "Test").
- *                                      - `messageType`: The type of message (e.g., "Alert", "Update").
+ * @param {object} props.alert - The alert object containing details to display.
+ *   If `null` or `undefined`, a "No Alert Selected" message is shown.
+ *   Expected properties within the `alert` object include:
+ *   - `event` (string): The type of alert (e.g., "Severe Thunderstorm Warning").
+ *   - `headline` (string): A brief summary or headline for the alert.
+ *   - `description` (string): Detailed description of the alert.
+ *   - `effective` (string): ISO string of when the alert becomes effective.
+ *   - `expires` (string): ISO string of when the alert expires.
+ *   - `severity` (string): The severity level (e.g., "Extreme", "Severe", "Moderate", "Minor").
+ *   - `urgency` (string): The urgency level (e.g., "Immediate", "Expected").
+ *   - `certainty` (string): The certainty level (e.g., "Observed", "Likely").
+ *   - `areaDesc` (string): Description of the affected geographical areas.
+ *   - `instruction` (string): Recommended actions or instructions for the public.
  */
 export default function AlertDetailsPanel({ alert }) {
+  // Display a message if no alert is selected
   if (!alert) {
     return (
-      <Center
+      <Box
         p={6}
-        borderWidth="1px"
+        borderWidth={1}
         borderRadius="lg"
+        borderColor="gray.200"
         bg="white"
-        boxShadow="md"
-        minH={{ base: "200px", md: "300px" }}
-        flexDirection="column"
+        shadow="md"
+        maxW="xl"
+        mx="auto"
+        minH="300px" // Ensures a minimum height for the panel
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
         textAlign="center"
-        color="gray.500"
-        aria-live="polite"
-        aria-atomic="true"
       >
-        <Spinner size="xl" mb={4} color="blue.500" />
-        <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="semibold">
-          Select an alert to view details
-        </Text>
-        <Text fontSize={{ base: "sm", md: "md" }}>
-          Detailed information will appear here.
-        </Text>
-      </Center>
+        <Alert
+          status="info"
+          variant="subtle"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          height="200px"
+          borderRadius="md"
+        >
+          <AlertIcon boxSize="40px" mr={0} />
+          <AlertTitle mt={4} mb={1} fontSize="lg">
+            No Alert Selected
+          </AlertTitle>
+          <AlertDescription maxWidth="sm">
+            Please select an alert from the list to view its details here.
+          </AlertDescription>
+        </Alert>
+      </Box>
     );
   }
 
   return (
     <Box
-      p={6}
-      borderWidth="1px"
+      p={{ base: 4, md: 6 }} // Responsive padding
+      borderWidth={1}
       borderRadius="lg"
+      borderColor="gray.200"
       bg="white"
-      boxShadow="md"
-      maxH={{ base: "calc(100vh - 100px)", md: "calc(100vh - 120px)" }} // Responsive max height
-      overflowY="auto"
-      display="flex"
-      flexDirection="column"
-      aria-labelledby="alert-headline"
+      shadow="md"
+      maxW="xl" // Maximum width for the panel
+      mx="auto" // Center the panel horizontally
+      overflowY="auto" // Enable vertical scrolling if content overflows
+      maxH={{ base: "calc(100vh - 100px)", md: "700px" }} // Responsive max height
     >
-      <VStack align="stretch" spacing={4}>
-        <Heading as="h2" size="lg" color="blue.700" id="alert-headline">
-          {alert.event || alert.headline || 'Weather Alert Details'}
-        </Heading>
+      <Heading as="h2" size="lg" mb={4} color="red.600">
+        {alert.event || 'Unknown Alert Event'}
+      </Heading>
 
-        <HStack wrap="wrap" spacing={2}>
-          {alert.severity && (
-            <Badge
-              colorScheme={getSeverityColorScheme(alert.severity)}
-              px={3}
-              py={1}
-              borderRadius="full"
-              fontSize="sm"
-              textTransform="capitalize"
-              aria-label={`Severity: ${alert.severity}`}
-            >
-              Severity: {alert.severity}
-            </Badge>
-          )}
-          {alert.urgency && (
-            <Badge
-              colorScheme="purple"
-              px={3}
-              py={1}
-              borderRadius="full"
-              fontSize="sm"
-              textTransform="capitalize"
-              aria-label={`Urgency: ${alert.urgency}`}
-            >
-              Urgency: {alert.urgency}
-            </Badge>
-          )}
-          {alert.certainty && (
-            <Badge
-              colorScheme="teal"
-              px={3}
-              py={1}
-              borderRadius="full"
-              fontSize="sm"
-              textTransform="capitalize"
-              aria-label={`Certainty: ${alert.certainty}`}
-            >
-              Certainty: {alert.certainty}
-            </Badge>
-          )}
-        </HStack>
+      {alert.headline && (
+        <Text fontSize="md" fontWeight="semibold" mb={3} color="gray.700">
+          {alert.headline}
+        </Text>
+      )}
 
-        <Divider />
+      <Divider mb={4} />
 
-        <VStack align="stretch" spacing={2}>
-          <Text fontSize="md" fontWeight="semibold" color="gray.600">
-            Effective:{' '}
-            <Text as="span" fontWeight="normal">
-              {formatAlertDate(alert.effective)}
-            </Text>
+      <Stack spacing={3} mb={4}>
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontWeight="bold">Severity:</Text>{' '}
+          <Tag size="md" variant="solid" colorScheme={getSeverityColor(alert.severity)}>
+            {alert.severity || 'N/A'}
+          </Tag>
+        </Text>
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontWeight="bold">Urgency:</Text>{' '}
+          <Tag size="md" variant="outline" colorScheme="purple">
+            {alert.urgency || 'N/A'}
+          </Tag>
+        </Text>
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontWeight="bold">Certainty:</Text>{' '}
+          <Tag size="md" variant="outline" colorScheme="teal">
+            {alert.certainty || 'N/A'}
+          </Tag>
+        </Text>
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontWeight="bold">Effective:</Text>{' '}
+          {formatDate(alert.effective)}
+        </Text>
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontWeight="bold">Expires:</Text>{' '}
+          {formatDate(alert.expires)}
+        </Text>
+        <Text fontSize="sm" color="gray.600">
+          <Text as="span" fontWeight="bold">Affected Areas:</Text>{' '}
+          {alert.areaDesc || 'N/A'}
+        </Text>
+      </Stack>
+
+      {alert.description && (
+        <>
+          <Heading as="h3" size="md" mb={2} color="gray.700">
+            Details
+          </Heading>
+          <Text fontSize="md" mb={4} whiteSpace="pre-wrap" color="gray.800">
+            {alert.description}
           </Text>
-          <Text fontSize="md" fontWeight="semibold" color="gray.600">
-            Expires:{' '}
-            <Text as="span" fontWeight="normal">
-              {formatAlertDate(alert.expires)}
-            </Text>
+        </>
+      )}
+
+      {alert.instruction && (
+        <>
+          <Heading as="h3" size="md" mb={2} color="gray.700">
+            Instructions
+          </Heading>
+          <Text fontSize="md" mb={4} whiteSpace="pre-wrap" color="gray.800" fontWeight="medium">
+            {alert.instruction}
           </Text>
-          {alert.senderName && (
-            <Text fontSize="md" fontWeight="semibold" color="gray.600">
-              Issued By:{' '}
-              <Text as="span" fontWeight="normal">
-                {alert.senderName}
-              </Text>
-            </Text>
-          )}
-          {alert.areaDesc && (
-            <Text fontSize="md" fontWeight="semibold" color="gray.600">
-              Affected Areas:{' '}
-              <Text as="span" fontWeight="normal">
-                {alert.areaDesc}
-              </Text>
-            </Text>
-          )}
-          {alert.status && (
-            <Text fontSize="md" fontWeight="semibold" color="gray.600">
-              Status:{' '}
-              <Text as="span" fontWeight="normal">
-                {alert.status}
-              </Text>
-            </Text>
-          )}
-          {alert.messageType && (
-            <Text fontSize="md" fontWeight="semibold" color="gray.600">
-              Message Type:{' '}
-              <Text as="span" fontWeight="normal">
-                {alert.messageType}
-              </Text>
-            </Text>
-          )}
-        </VStack>
-
-        {alert.description && (
-          <>
-            <Divider />
-            <Box>
-              <Heading as="h3" size="md" mb={2} color="blue.600">
-                Description
-              </Heading>
-              <Text fontSize="md" color="gray.700" whiteSpace="pre-wrap">
-                {alert.description}
-              </Text>
-            </Box>
-          </>
-        )}
-
-        {alert.instruction && (
-          <>
-            <Divider />
-            <Box>
-              <Heading as="h3" size="md" mb={2} color="blue.600">
-                Instructions
-              </Heading>
-              <Text fontSize="md" color="gray.700" whiteSpace="pre-wrap">
-                {alert.instruction}
-              </Text>
-            </Box>
-          </>
-        )}
-      </VStack>
+        </>
+      )}
     </Box>
   );
 }
@@ -254,28 +193,28 @@ export default function AlertDetailsPanel({ alert }) {
 AlertDetailsPanel.propTypes = {
   /**
    * The alert object containing details to display.
-   * Expected properties: id, event, headline, description, instruction, severity,
-   * urgency, certainty, effective, expires, senderName, areaDesc, status, messageType.
-   * All properties are optional within the shape, as the component handles their absence.
+   * Expected properties include:
+   * - `event`: The type of alert (e.g., "Severe Thunderstorm Warning").
+   * - `headline`: A brief summary of the alert.
+   * - `description`: Detailed description of the alert.
+   * - `effective`: ISO string of when the alert becomes effective.
+   * - `expires`: ISO string of when the alert expires.
+   * - `severity`: The severity level (e.g., "Extreme", "Severe", "Moderate", "Minor").
+   * - `urgency`: The urgency level (e.g., "Immediate", "Expected").
+   * - `certainty`: The certainty level (e.g., "Observed", "Likely").
+   * - `areaDesc`: Description of the affected areas.
+   * - `instruction`: Recommended actions for the public.
    */
   alert: PropTypes.shape({
-    id: PropTypes.string,
     event: PropTypes.string,
     headline: PropTypes.string,
     description: PropTypes.string,
-    instruction: PropTypes.string,
+    effective: PropTypes.string,
+    expires: PropTypes.string,
     severity: PropTypes.string,
     urgency: PropTypes.string,
     certainty: PropTypes.string,
-    effective: PropTypes.string,
-    expires: PropTypes.string,
-    senderName: PropTypes.string,
     areaDesc: PropTypes.string,
-    status: PropTypes.string,
-    messageType: PropTypes.string,
+    instruction: PropTypes.string,
   }),
-};
-
-AlertDetailsPanel.defaultProps = {
-  alert: null,
 };
